@@ -1,18 +1,18 @@
 package it.unicam.cs.ids.c3.model;
 
-public abstract class User {
+public abstract class Utente {
     private int ID;
     private String username;
     private String password;
     private String email;
-    private String telephone;
+    private String telefono;
 
-    public User(int ID, String username, String password, String email, String telephone) {
+    public Utente(int ID, String username, String password, String email, String telefono) {
         this.ID = ID;
         this.username = username;
         this.password = password;
         this.email = email;
-        this.telephone = telephone;
+        this.telefono = telefono;
     }
 
     public int getID() {
@@ -47,11 +47,11 @@ public abstract class User {
         this.email = email;
     }
 
-    public String getTelephone() {
-        return telephone;
+    public String getTelefono() {
+        return telefono;
     }
 
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 }

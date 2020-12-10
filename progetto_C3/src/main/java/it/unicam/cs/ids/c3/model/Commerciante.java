@@ -2,16 +2,16 @@ package it.unicam.cs.ids.c3.model;
 
 import java.util.List;
 
-public class Dealer extends User {
+public class Commerciante extends Utente {
     private String ragioneSociale;
     private String indirizzo;
-    private List<ProductCategory> categoryList;
+    private List<CategoriaProdotto> listaCategorie;
 
-    public Dealer(int ID, String username, String password, String email, String telephone, String ragioneSociale, String indirizzo, List<ProductCategory> categoryList) {
+    public Commerciante(int ID, String username, String password, String email, String telephone, String ragioneSociale, String indirizzo, List<CategoriaProdotto> listaCategorie) {
         super(ID, username, password, email, telephone);
         this.ragioneSociale = ragioneSociale;
         this.indirizzo = indirizzo;
-        this.categoryList = categoryList;
+        this.listaCategorie = listaCategorie;
     }
 
     public String getRagioneSociale() {
@@ -30,11 +30,11 @@ public class Dealer extends User {
         this.indirizzo = indirizzo;
     }
 
-    public List<ProductCategory> getCategoryList() {
-        return categoryList;
+    public List<CategoriaProdotto> getListaCategorie() {
+        return listaCategorie;
     }
 
-    public void setCategoryList(List<ProductCategory> categoryList) {
-        this.categoryList = categoryList;
+    public void setListaCategorie(List<CategoriaProdotto> listaCategorie) {
+        this.listaCategorie = listaCategorie;
     }
 }

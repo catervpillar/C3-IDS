@@ -3,13 +3,13 @@
  */
 package it.unicam.cs.ids.c3;
 
-import it.unicam.cs.ids.c3.model.Customer;
-import it.unicam.cs.ids.c3.model.User;
+import it.unicam.cs.ids.c3.model.Cliente;
+import it.unicam.cs.ids.c3.model.Utente;
 
 public class App {
 
     public static void main(String[] args) {
-        User nuovoUtente = new Customer(1, "goku", "password",
+        Utente nuovoUtente = new Cliente(1, "goku", "password",
                 "goku99@gmail.com",
                 "3336663331",
                 "Son",
