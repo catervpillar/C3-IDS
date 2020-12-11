@@ -1,5 +1,7 @@
 package it.unicam.cs.ids.c3.model;
 
+import java.util.Objects;
+
 public abstract class Utente {
     private int ID;
     private String username;
@@ -53,5 +55,20 @@ public abstract class Utente {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Utente)) return false;
+        Utente utente = (Utente) o;
+        return ID == utente.ID &&
+                username.equals(utente.username) &&
+                email.equals(utente.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ID, username, email);
     }
 }

@@ -5,11 +5,13 @@ import java.util.Objects;
 
 public class Prodotto {
     private int ID;
+    private String nome;
     private List<Commerciante> listaCommercianti;
     private List<CategoriaProdotto> listaCategorie;
 
-    public Prodotto(int ID, List<Commerciante> listaCommercianti, List<CategoriaProdotto> listaCategorie) {
+    public Prodotto(int ID, String nome, List<Commerciante> listaCommercianti, List<CategoriaProdotto> listaCategorie) {
         this.ID = ID;
+        this.nome = nome;
         this.listaCommercianti = listaCommercianti;
         this.listaCategorie = listaCategorie;
     }
@@ -21,6 +23,10 @@ public class Prodotto {
     public void setID(int ID) {
         this.ID = ID;
     }
+
+    public String getNome() { return nome; }
+
+    public void setNome(String nome) {  this.nome = nome; }
 
     public List<Commerciante> getListaCommercianti() {
         return listaCommercianti;
@@ -38,20 +44,17 @@ public class Prodotto {
         this.listaCategorie = listaCategorie;
     }
 
-    public void addCategoria(CategoriaProdotto categoriaProdotto){
-        if(Objects.isNull(categoriaProdotto))
-            throw new NullPointerException("categoria nulla");
-        if(listaCategorie.contains(categoriaProdotto))
-            throw new IllegalArgumentException("categoria gia' inserita");
-        listaCategorie.add(categoriaProdotto);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Prodotto)) return false;
+        Prodotto prodotto = (Prodotto) o;
+        return ID == prodotto.ID;
     }
 
-    public void addCommerciante(Commerciante commerciante){
-        if(Objects.isNull(commerciante))
-            throw new NullPointerException("commerciante nullo");
-        if(listaCategorie.contains(commerciante))
-            throw new IllegalArgumentException("commerciante gia' inserito");
-        listaCommercianti.add(commerciante);
+    @Override
+    public int hashCode() {
+        return Objects.hash(ID);
     }
 
 }

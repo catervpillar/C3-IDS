@@ -70,15 +70,16 @@ public class Promozione {
         this.dataScadenza = dataScadenza;
     }
 
-    public void addCommerciante(Commerciante commerciante) {
-        if (Objects.isNull(commerciante))
-            throw new NullPointerException("il commerciante e' nullo");
-        if (listaCommercianti.contains(commerciante))
-            throw new IllegalArgumentException("Commerciante gia' inserito");
-
-        listaCommercianti.add(commerciante);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Promozione)) return false;
+        Promozione that = (Promozione) o;
+        return ID == that.ID;
     }
 
-
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(ID);
+    }
 }

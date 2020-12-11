@@ -1,5 +1,7 @@
 package it.unicam.cs.ids.c3.model;
 
+import java.util.Objects;
+
 public class CategoriaProdotto {
     private int ID;
     private String nome;
@@ -33,5 +35,19 @@ public class CategoriaProdotto {
 
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CategoriaProdotto)) return false;
+        CategoriaProdotto that = (CategoriaProdotto) o;
+        return ID == that.ID &&
+                nome.equals(that.nome);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ID, nome);
     }
 }

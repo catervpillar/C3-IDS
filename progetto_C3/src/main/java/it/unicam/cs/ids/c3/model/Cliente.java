@@ -1,5 +1,7 @@
 package it.unicam.cs.ids.c3.model;
 
+import java.util.Objects;
+
 public class Cliente extends Utente {
     private String nome;
     private String cognome;
@@ -35,4 +37,6 @@ public class Cliente extends Utente {
     public void setIndirizzo(String indirizzo) {
         this.indirizzo = indirizzo;
     }
+
+
 }

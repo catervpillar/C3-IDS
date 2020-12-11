@@ -37,4 +37,6 @@ public class Commerciante extends Utente {
     public void setListaCategorie(List<CategoriaProdotto> listaCategorie) {
         this.listaCategorie = listaCategorie;
     }
+
+
 }

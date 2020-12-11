@@ -12,7 +12,10 @@ public class Ritiro {
     private Cliente cliente;
     private Corriere corriere;
     private String destinazione;
-    private CodiceRitiro codiceRitiro;
+    private String codiceRitiro;
+    private Tracking tracking;
+    private GregorianCalendar dataConsegna;
+    private boolean ritirato;
 
     public Ritiro(int ID, List<Prodotto> listaProdotti, Commerciante commerciante, Cliente cliente, Corriere corriere, String destinazione) {
         this.ID = ID;
@@ -21,6 +24,23 @@ public class Ritiro {
         this.cliente = cliente;
         this.corriere = corriere;
         this.destinazione = destinazione;
+        this.ritirato = false;
+    }
+
+    public GregorianCalendar getDataConsegna() {
+        return dataConsegna;
+    }
+
+    public void setDataConsegna(GregorianCalendar dataConsegna) {
+        this.dataConsegna = dataConsegna;
+    }
+
+    public boolean isRitirato() {
+        return ritirato;
+    }
+
+    public void setRitirato(boolean ritirato) {
+        this.ritirato = ritirato;
     }
 
     public int getID() {
@@ -79,20 +99,33 @@ public class Ritiro {
         this.destinazione = destinazione;
     }
 
-    public CodiceRitiro getCodiceRitiro() {
+    public String getCodiceRitiro() {
         return codiceRitiro;
     }
 
-    public void setCodiceRitiro(CodiceRitiro codiceRitiro) {
+    public void setCodiceRitiro(String codiceRitiro) {
         this.codiceRitiro = codiceRitiro;
     }
 
-    public void addProdotto(Prodotto prodotto){
-        if(Objects.isNull(prodotto))
-            throw new NullPointerException("Prodotto nullo");
-        if(listaProdotti.contains(prodotto))
-            throw new IllegalArgumentException("Prodotto gia' inserito");
-        listaProdotti.add(prodotto);
+    public Tracking getTracking() {
+        return tracking;
     }
 
+    public void setTracking(Tracking tracking) {
+        this.tracking = tracking;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Ritiro)) return false;
+        Ritiro ritiro = (Ritiro) o;
+        return ID == ritiro.ID &&
+                codiceRitiro.equals(ritiro.codiceRitiro);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ID, codiceRitiro);
+    }
 }
