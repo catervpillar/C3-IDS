@@ -2,7 +2,7 @@ package it.unicam.cs.ids.c3.model;
 
 import java.util.Objects;
 
-public class CategoriaPromozione {
+public class CategoriaPromozione implements HasID{
     private int ID;
     private String descrizione, nome;
 
@@ -18,6 +18,23 @@ public class CategoriaPromozione {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    @Override
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public String getDescrizione() {
+        return descrizione;
+    }
+
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
     }
 
     @Override

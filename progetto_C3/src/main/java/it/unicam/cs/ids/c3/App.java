@@ -6,14 +6,14 @@ package it.unicam.cs.ids.c3;
 import it.unicam.cs.ids.c3.model.Cliente;
 import it.unicam.cs.ids.c3.model.Utente;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 public class App {
 
     public static void main(String[] args) {
-        Utente nuovoUtente = new Cliente(1, "goku", "password",
-                "goku99@gmail.com",
-                "3336663331",
-                "Son",
-                "Goku",
-                "Via dei pini");
+        GregorianCalendar gregorianCalendar = new GregorianCalendar();
+        System.out.println((gregorianCalendar.get(Calendar.DAY_OF_MONTH) +"/"+ (gregorianCalendar.get(Calendar.MONTH)+1)) +"/"+ (gregorianCalendar.get(Calendar.YEAR)));
+        System.out.println(gregorianCalendar.get(Calendar.HOUR_OF_DAY) +":"+ gregorianCalendar.get(Calendar.MINUTE));
     }
 }

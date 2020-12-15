@@ -1,10 +1,12 @@
 package it.unicam.cs.ids.c3.model;
 
+import java.sql.Date;
+import java.time.Instant;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Objects;
 
-public class Ritiro {
+public class Ritiro implements HasID{
     private int ID;
     private GregorianCalendar data;
     private List<Prodotto> listaProdotti;
@@ -16,8 +18,9 @@ public class Ritiro {
     private Tracking tracking;
     private GregorianCalendar dataConsegna;
     private boolean ritirato;
+    private TipoConsegna tipoConsegna;
 
-    public Ritiro(int ID, List<Prodotto> listaProdotti, Commerciante commerciante, Cliente cliente, Corriere corriere, String destinazione) {
+    public Ritiro(int ID, List<Prodotto> listaProdotti, Commerciante commerciante, Cliente cliente, Corriere corriere, String destinazione, TipoConsegna tipoConsegna) {
         this.ID = ID;
         this.listaProdotti = listaProdotti;
         this.commerciante = commerciante;
@@ -25,6 +28,17 @@ public class Ritiro {
         this.corriere = corriere;
         this.destinazione = destinazione;
         this.ritirato = false;
+        this.data = new GregorianCalendar();
+        this.codiceRitiro = CodiciRitiroGenerator.getInstance().generaCodice();
+        this.tipoConsegna = tipoConsegna;
+    }
+
+    public TipoConsegna getTipoConsegna() {
+        return tipoConsegna;
+    }
+
+    public void setTipoConsegna(TipoConsegna tipoConsegna) {
+        this.tipoConsegna = tipoConsegna;
     }
 
     public GregorianCalendar getDataConsegna() {

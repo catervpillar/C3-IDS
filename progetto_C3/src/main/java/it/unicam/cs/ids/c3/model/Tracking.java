@@ -2,7 +2,7 @@ package it.unicam.cs.ids.c3.model;
 
 import java.util.Objects;
 
-public class Tracking {
+public class Tracking implements HasID{
     private int ID;
     private StatoTracking stato;
     private Ritiro ritiro;

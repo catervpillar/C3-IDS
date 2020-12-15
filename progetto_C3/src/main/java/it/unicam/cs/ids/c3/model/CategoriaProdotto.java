@@ -2,7 +2,7 @@ package it.unicam.cs.ids.c3.model;
 
 import java.util.Objects;
 
-public class CategoriaProdotto {
+public class CategoriaProdotto implements HasID{
     private int ID;
     private String nome;
     private String descrizione;

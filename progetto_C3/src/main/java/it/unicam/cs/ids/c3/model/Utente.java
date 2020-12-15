@@ -2,7 +2,7 @@ package it.unicam.cs.ids.c3.model;
 
 import java.util.Objects;
 
-public abstract class Utente {
+public abstract class Utente implements HasID{
     private int ID;
     private String username;
     private String password;

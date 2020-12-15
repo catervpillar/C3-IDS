@@ -3,7 +3,7 @@ package it.unicam.cs.ids.c3.model;
 import java.util.List;
 import java.util.Objects;
 
-public class Prodotto {
+public class Prodotto implements HasID{
     private int ID;
     private String nome;
     private List<Commerciante> listaCommercianti;
