@@ -7,19 +7,21 @@ import java.util.Objects;
 public class Promozione implements HasID{
 
     private int ID;
+    private String nome;
     private List<Commerciante> listaCommercianti;
+    private List<Prodotto> listaProdotti;
     private String descrizione;
-    private CategoriaPromozione categoria;
     private GregorianCalendar dataInizio;
     private GregorianCalendar dataScadenza;
 
-    public Promozione(int ID, List<Commerciante> listaCommercianti, String descrizione, CategoriaPromozione categoria, GregorianCalendar dataInizio, GregorianCalendar dataScadenza) {
+    public Promozione(int ID, String nome, List<Commerciante> listaCommercianti, List<Prodotto> listaProdotti, String descrizione, GregorianCalendar dataInizio, GregorianCalendar dataScadenza) {
         this.ID = ID;
+        this.listaProdotti = listaProdotti;
         this.listaCommercianti = listaCommercianti;
         this.descrizione = descrizione;
-        this.categoria = categoria;
         this.dataInizio = dataInizio;
         this.dataScadenza = dataScadenza;
+        this.nome = nome;
     }
 
     public int getID() {
@@ -46,12 +48,20 @@ public class Promozione implements HasID{
         this.descrizione = descrizione;
     }
 
-    public CategoriaPromozione getCategoria() {
-        return categoria;
+    public List<Prodotto> getListaProdotti() {
+        return listaProdotti;
     }
 
-    public void setCategoria(CategoriaPromozione categoria) {
-        this.categoria = categoria;
+    public void setListaProdotti(List<Prodotto> listaProdotti) {
+        this.listaProdotti = listaProdotti;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public GregorianCalendar getDataInizio() {

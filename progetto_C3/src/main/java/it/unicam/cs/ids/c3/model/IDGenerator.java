@@ -41,6 +41,7 @@ public final class IDGenerator {
     public int generateIDProdotto(){
         return IDProdotto++;
     }
+
     public int generateIDCorriere(){
         return IDCorriere++;
     }
@@ -94,8 +95,6 @@ public final class IDGenerator {
         IDTracking = getFixedID(appList.getTrackings());
         IDRitiro = getFixedID(appList.getRitiri());
         IDCategoriaProdotto = getFixedID(appList.getCategorieProdotti());
-        IDCategoriaPromozione = getFixedID(appList.getCategoriePromozione());
     }
-
 
 }
