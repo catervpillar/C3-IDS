@@ -17,10 +17,9 @@ public class ControllerCommerciante {
         appList.getRitiri().add(ritiro);
     }
 
-    public void creaPromozione(List<Commerciante> commercianti, String descrizione, CategoriaPromozione categoriaPromozione, GregorianCalendar dataInizio, GregorianCalendar dataScadenza){
-        Promozione promozione = new Promozione(IDGenerator.getInstance().generateIDPromozione(), commercianti, descrizione, categoriaPromozione, dataInizio, dataScadenza);
+    public void creaPromozione(List<Commerciante> commercianti, String nome, String descrizione, List<Prodotto> listaProdotti, GregorianCalendar dataInizio, GregorianCalendar dataScadenza){
+        Promozione promozione = new Promozione(IDGenerator.getInstance().generateIDPromozione(), nome, commercianti, listaProdotti, descrizione, dataInizio, dataScadenza);
         appList.getPromozioni().add(promozione);
     }
-
 
 }

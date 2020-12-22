@@ -6,14 +6,17 @@ import java.util.Objects;
 public class Prodotto implements HasID{
     private int ID;
     private String nome;
-    private List<Commerciante> listaCommercianti;
+    private Commerciante commerciante;
     private List<CategoriaProdotto> listaCategorie;
+    private double prezzo;
 
-    public Prodotto(int ID, String nome, List<Commerciante> listaCommercianti, List<CategoriaProdotto> listaCategorie) {
+
+    public Prodotto(int ID, String nome, Commerciante commerciante, List<CategoriaProdotto> listaCategorie, double prezzo) {
         this.ID = ID;
         this.nome = nome;
-        this.listaCommercianti = listaCommercianti;
+        this.commerciante = commerciante;
         this.listaCategorie = listaCategorie;
+        this.prezzo = prezzo;
     }
 
     public int getID() {
@@ -24,16 +27,24 @@ public class Prodotto implements HasID{
         this.ID = ID;
     }
 
+    public double getPrezzo() {
+        return prezzo;
+    }
+
+    public void setPrezzo(double prezzo) {
+        this.prezzo = prezzo;
+    }
+
     public String getNome() { return nome; }
 
     public void setNome(String nome) {  this.nome = nome; }
 
-    public List<Commerciante> getListaCommercianti() {
-        return listaCommercianti;
+    public Commerciante getCommerciante() {
+        return commerciante;
     }
 
-    public void setListaCommercianti(List<Commerciante> listaCommercianti) {
-        this.listaCommercianti = listaCommercianti;
+    public void setCommerciante(Commerciante commerciante) {
+        this.commerciante = commerciante;
     }
 
     public List<CategoriaProdotto> getListaCategorie() {

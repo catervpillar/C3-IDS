@@ -10,7 +10,6 @@ public final class AppList {
     List<Prodotto> prodotti;
     List<Commerciante> commercianti;
     List<CategoriaProdotto> categorieProdotti;
-    List<CategoriaPromozione> categoriePromozione;
     List<Cliente> clienti;
     List<PuntoRitiro> puntiDiRitiro;
     List<Corriere> corrieri;
@@ -42,13 +41,6 @@ public final class AppList {
         this.categorieProdotti = categorieProdotti;
     }
 
-    public List<CategoriaPromozione> getCategoriePromozione() {
-        return categoriePromozione;
-    }
-
-    public void setCategoriePromozione(List<CategoriaPromozione> categoriePromozione) {
-        this.categoriePromozione = categoriePromozione;
-    }
 
     public List<Cliente> getClienti() {
         return clienti;
