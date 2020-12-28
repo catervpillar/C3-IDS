@@ -5,14 +5,20 @@ import it.unicam.cs.ids.c3.model.Commerciante;
 import it.unicam.cs.ids.c3.model.Prodotto;
 import it.unicam.cs.ids.c3.model.PuntoRitiro;
 import it.unicam.cs.ids.c3.utilities.AppList;
-
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class GestoreRicerche {
+public final class GestoreRicerche {
 
     private AppList appList;
+    private static GestoreRicerche instance;
+
+    public static GestoreRicerche getInstance(){
+        if (instance==null)
+            instance = new GestoreRicerche();
+        return instance;
+    }
 
     List<Prodotto> cercaProdotto(List<CategoriaProdotto> categorieProdotti, String nome){
         if(nome == null)
