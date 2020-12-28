@@ -26,45 +26,30 @@ public final class IDGenerator {
         return idGenerator;
     }
 
-    public int generateIDCommerciante(){
-        return IDCommerciante++;
+    public void generateIDCommerciante(HasID hasID){ hasID.setID(IDCommerciante++);
     }
 
-    public int generateIDPuntoRitiro(){
-        return IDPuntoRitiro++;
+    public void generateIDPuntoRitiro(HasID hasID){
+        hasID.setID(IDPuntoRitiro++);
     }
 
-    public int generateIDCliente(){
-        return IDCliente++;
+    public void generateIDCliente(HasID hasID){
+        hasID.setID(IDCliente++);
     }
 
-    public int generateIDProdotto(){
-        return IDProdotto++;
-    }
+    public void generateIDProdotto(HasID hasID){ hasID.setID(IDProdotto++);}
 
-    public int generateIDCorriere(){
-        return IDCorriere++;
-    }
+    public void generateIDCorriere(HasID hasID){ hasID.setID(IDCorriere++);}
 
-    public int generateIDPromozione(){
-        return IDPromozione++;
-    }
+    public void generateIDPromozione(HasID hasID){ hasID.setID(IDPromozione++);}
 
-    public int generateIDTracking(){
-        return IDTracking++;
-    }
+    public void generateIDTracking(HasID hasID){ hasID.setID(IDTracking++);}
 
-    public int generateIDRitiro(){
-        return IDRitiro++;
-    }
+    public void generateIDRitiro(HasID hasID){ hasID.setID(IDRitiro++);}
 
-    public int generateIDCategoriaProdotto(){
-        return IDCategoriaProdotto++;
-    }
+    public void generateIDCategoriaProdotto(HasID hasID){ hasID.setID(IDCategoriaProdotto++);}
 
-    public int generateIDCategoriaPromozione(){
-        return IDCategoriaPromozione++;
-    }
+    public void generateIDCategoriaPromozione(HasID hasID){ hasID.setID(IDCategoriaPromozione++);}
 
     public void resetAll(){
          IDCliente  = 1;

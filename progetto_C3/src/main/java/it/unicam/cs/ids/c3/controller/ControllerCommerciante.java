@@ -8,18 +8,15 @@ import java.util.List;
 
 public class ControllerCommerciante {
 
-    private AppList appList;
 
-
-    public void prenotaRitiro(Cliente cliente, String destinazione, List<Prodotto> prodotti, Commerciante commerciante, Corriere corriere, TipoConsegna tipoConsegna){
-
-        Ritiro ritiro = new Ritiro(IDGenerator.getInstance().generateIDRitiro(), prodotti, commerciante, cliente, corriere, destinazione, tipoConsegna);
-        appList.getRitiri().add(ritiro);
+    public void prenotaRitiro(String destinazione, List<Prodotto> prodotti, Commerciante commerciante, Cliente cliente, Corriere corriere, TipoConsegna tipoConsegna){
+        GestoreRitiri.getInstance().creaRitiro(prodotti, commerciante, cliente, corriere, destinazione, tipoConsegna);
     }
 
     public void creaPromozione(List<Commerciante> commercianti, String nome, String descrizione, List<Prodotto> listaProdotti, GregorianCalendar dataInizio, GregorianCalendar dataScadenza){
-        Promozione promozione = new Promozione(IDGenerator.getInstance().generateIDPromozione(), nome, commercianti, listaProdotti, descrizione, dataInizio, dataScadenza);
-        appList.getPromozioni().add(promozione);
+        GestorePromozioni.getInstance().creaPromozione(nome, commercianti, listaProdotti, descrizione, dataInizio, dataScadenza);
     }
+
+    
 
 }

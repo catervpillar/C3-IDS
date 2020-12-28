@@ -3,16 +3,23 @@ package it.unicam.cs.ids.c3.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BachecaPromozioni {
+public final class BachecaPromozioni {
 
 
-    private List<Promozione> bacheca = new ArrayList<>();
+    private List<Promozione> promozioniAttive = new ArrayList<>();
+    private static BachecaPromozioni instace;
 
-    public List<Promozione> getBacheca() {
-        return bacheca;
+    public static BachecaPromozioni getInstance(){
+        if (instace == null)
+            instace = new BachecaPromozioni();
+        return instace;
     }
 
-    public void setBacheca(List<Promozione> bacheca) {
-        this.bacheca = bacheca;
+    public List<Promozione> getPromozioniAttive() {
+        return promozioniAttive;
+    }
+
+    public void setPromozioniAttive(List<Promozione> promozioniAttive) {
+        this.promozioniAttive = promozioniAttive;
     }
 }

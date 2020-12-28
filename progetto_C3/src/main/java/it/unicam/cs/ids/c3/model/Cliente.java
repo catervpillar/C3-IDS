@@ -38,5 +38,4 @@ public class Cliente extends Utente {
         this.indirizzo = indirizzo;
     }
 
-
 }
