@@ -3,21 +3,21 @@ package it.unicam.cs.ids.c3.model;
 import java.util.Objects;
 
 public class CategoriaProdotto implements HasID{
-    private int ID;
+    private String ID;
     private String nome;
     private String descrizione;
 
-    public CategoriaProdotto(int ID, String nome, String descrizione) {
-        this.ID = ID;
+    public CategoriaProdotto(String nome, String descrizione) {
+        IDGenerator.generateID(this);
         this.nome = nome;
         this.descrizione = descrizione;
     }
 
-    public int getID() {
+    public String getID() {
         return ID;
     }
 
-    public void setID(int ID) {
+    public void setID(String ID) {
         this.ID = ID;
     }
 
@@ -40,10 +40,9 @@ public class CategoriaProdotto implements HasID{
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof CategoriaProdotto)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         CategoriaProdotto that = (CategoriaProdotto) o;
-        return ID == that.ID &&
-                nome.equals(that.nome);
+        return ID.equals(that.ID) && nome.equals(that.nome);
     }
 
     @Override

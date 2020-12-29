@@ -5,39 +5,38 @@ import java.util.List;
 import java.util.Objects;
 
 public class Promozione implements HasID{
-
-    private int ID;
+    private String ID;
     private String nome;
-    private List<Commerciante> listaCommercianti;
-    private List<Prodotto> listaProdotti;
+    private List<String> listaIDCommercianti;
+    private List<String> listaIDProdotti;
     private String descrizione;
     private GregorianCalendar dataInizio;
     private GregorianCalendar dataScadenza;
 
-    public Promozione(int ID, String nome, List<Commerciante> listaCommercianti, List<Prodotto> listaProdotti, String descrizione, GregorianCalendar dataInizio, GregorianCalendar dataScadenza) {
-        this.ID = ID;
-        this.listaProdotti = listaProdotti;
-        this.listaCommercianti = listaCommercianti;
+    public Promozione(String nome, List<String> listaIDCommercianti, List<String> listaIDProdotti, String descrizione, GregorianCalendar dataInizio, GregorianCalendar dataScadenza) {
+        IDGenerator.generateID(this);
+        this.listaIDProdotti = listaIDProdotti;
+        this.listaIDCommercianti = listaIDCommercianti;
         this.descrizione = descrizione;
         this.dataInizio = dataInizio;
         this.dataScadenza = dataScadenza;
         this.nome = nome;
     }
 
-    public int getID() {
+    public String getID() {
         return ID;
     }
 
-    public void setID(int ID) {
+    public void setID(String ID) {
         this.ID = ID;
     }
 
-    public List<Commerciante> getListaCommercianti() {
-        return listaCommercianti;
+    public List<String> getListaIDCommercianti() {
+        return listaIDCommercianti;
     }
 
-    public void setListaCommercianti(List<Commerciante> listaCommercianti) {
-        this.listaCommercianti = listaCommercianti;
+    public void setListaIDCommercianti(List<String> listaIDCommercianti) {
+        this.listaIDCommercianti = listaIDCommercianti;
     }
 
     public String getDescrizione() {
@@ -48,12 +47,12 @@ public class Promozione implements HasID{
         this.descrizione = descrizione;
     }
 
-    public List<Prodotto> getListaProdotti() {
-        return listaProdotti;
+    public List<String> getListaIDProdotti() {
+        return listaIDProdotti;
     }
 
-    public void setListaProdotti(List<Prodotto> listaProdotti) {
-        this.listaProdotti = listaProdotti;
+    public void setListaIDProdotti(List<String> listaIDProdotti) {
+        this.listaIDProdotti = listaIDProdotti;
     }
 
     public String getNome() {
@@ -83,9 +82,9 @@ public class Promozione implements HasID{
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Promozione)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Promozione that = (Promozione) o;
-        return ID == that.ID;
+        return ID.equals(that.ID);
     }
 
     @Override

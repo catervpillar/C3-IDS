@@ -3,25 +3,25 @@ package it.unicam.cs.ids.c3.model;
 import java.util.Objects;
 
 public abstract class Utente implements HasID{
-    private int ID;
+    private String ID;
     private String username;
     private String password;
     private String email;
     private String telefono;
 
-    public Utente(int ID, String username, String password, String email, String telefono) {
-        this.ID = ID;
+    public Utente(String username, String password, String email, String telefono) {
+        IDGenerator.generateID(this);
         this.username = username;
         this.password = password;
         this.email = email;
         this.telefono = telefono;
     }
 
-    public int getID() {
+    public String getID() {
         return ID;
     }
 
-    public void setID(int ID) {
+    public void setID(String ID) {
         this.ID = ID;
     }
 
@@ -60,11 +60,9 @@ public abstract class Utente implements HasID{
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Utente)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Utente utente = (Utente) o;
-        return ID == utente.ID &&
-                username.equals(utente.username) &&
-                email.equals(utente.email);
+        return ID.equals(utente.ID) && username.equals(utente.username) && email.equals(utente.email);
     }
 
     @Override

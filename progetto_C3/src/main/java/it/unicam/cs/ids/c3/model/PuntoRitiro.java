@@ -4,8 +4,8 @@ public class PuntoRitiro extends Utente {
     private String ragioneSociale;
     private String indirizzo;
 
-    public PuntoRitiro(int ID, String username, String password, String email, String telephone, String ragioneSocial, String address) {
-        super(ID, username, password, email, telephone);
+    public PuntoRitiro(String username, String password, String email, String telephone, String ragioneSocial, String address) {
+        super(username, password, email, telephone);
         this.ragioneSociale = ragioneSocial;
         this.indirizzo = address;
     }

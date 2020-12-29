@@ -7,8 +7,8 @@ public class Commerciante extends Utente {
     private String indirizzo;
     private List<CategoriaProdotto> listaCategorie;
 
-    public Commerciante(int ID, String username, String password, String email, String telephone, String ragioneSociale, String indirizzo, List<CategoriaProdotto> listaCategorie) {
-        super(ID, username, password, email, telephone);
+    public Commerciante(String username, String password, String email, String telephone, String ragioneSociale, String indirizzo, List<CategoriaProdotto> listaCategorie) {
+        super(username, password, email, telephone);
         this.ragioneSociale = ragioneSociale;
         this.indirizzo = indirizzo;
         this.listaCategorie = listaCategorie;
@@ -37,6 +37,4 @@ public class Commerciante extends Utente {
     public void setListaCategorie(List<CategoriaProdotto> listaCategorie) {
         this.listaCategorie = listaCategorie;
     }
-
-
 }

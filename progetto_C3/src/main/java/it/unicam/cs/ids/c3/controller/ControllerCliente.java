@@ -25,8 +25,4 @@ public class ControllerCliente {
     public List<Prodotto> cercaProdotto(List<CategoriaProdotto> categorieProdotti, String nome){
         return GestoreRicerche.getInstance().cercaProdotto(categorieProdotti, nome);
     }
-
-
-
-
 }

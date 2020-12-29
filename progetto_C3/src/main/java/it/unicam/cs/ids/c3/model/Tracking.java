@@ -3,21 +3,21 @@ package it.unicam.cs.ids.c3.model;
 import java.util.Objects;
 
 public class Tracking implements HasID{
-    private int ID;
+    private String ID;
     private StatoTracking stato;
-    private Ritiro ritiro;
+    private String IDRitiro;
 
-    public Tracking(int ID, Ritiro ritiro) {
-        this.ID = ID;
-        this.ritiro = ritiro;
+    public Tracking(String IDRitiro) {
+        IDGenerator.generateID(this);
+        this.IDRitiro = IDRitiro;
         this.stato = StatoTracking.IN_ELABORAZIONE;
     }
 
-    public int getID() {
+    public String getID() {
         return ID;
     }
 
-    public void setID(int ID) {
+    public void setID(String ID) {
         this.ID = ID;
     }
 
@@ -29,20 +29,20 @@ public class Tracking implements HasID{
         this.stato = stato;
     }
 
-    public Ritiro getRitiro() {
-        return ritiro;
+    public String getIDRitiro() {
+        return IDRitiro;
     }
 
-    public void setRitiro(Ritiro ritiro) {
-        this.ritiro = ritiro;
+    public void setIDRitiro(String IDritiro) {
+        this.IDRitiro = IDritiro;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Tracking)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Tracking tracking = (Tracking) o;
-        return ID == tracking.ID;
+        return ID.equals(tracking.ID);
     }
 
     @Override

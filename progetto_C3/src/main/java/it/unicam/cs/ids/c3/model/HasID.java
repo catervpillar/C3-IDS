@@ -1,6 +1,9 @@
 package it.unicam.cs.ids.c3.model;
 
 public interface HasID {
-    int getID();
-    void setID(int ID);
+    String getID();
+    void setID(String ID);
+    default String generaID(){
+        return "ciao";
+    }
 }

@@ -4,26 +4,26 @@ import java.util.List;
 import java.util.Objects;
 
 public class Prodotto implements HasID{
-    private int ID;
+    private String ID;
     private String nome;
-    private Commerciante commerciante;
+    private String IDCommerciante;
     private List<CategoriaProdotto> listaCategorie;
     private double prezzo;
 
 
-    public Prodotto(int ID, String nome, Commerciante commerciante, List<CategoriaProdotto> listaCategorie, double prezzo) {
-        this.ID = ID;
+    public Prodotto(String nome, String IDCommerciante, List<CategoriaProdotto> listaCategorie, double prezzo) {
+        IDGenerator.generateID(this);
         this.nome = nome;
-        this.commerciante = commerciante;
+        this.IDCommerciante = IDCommerciante;
         this.listaCategorie = listaCategorie;
         this.prezzo = prezzo;
     }
 
-    public int getID() {
+    public String getID() {
         return ID;
     }
 
-    public void setID(int ID) {
+    public void setID(String ID) {
         this.ID = ID;
     }
 
@@ -39,12 +39,12 @@ public class Prodotto implements HasID{
 
     public void setNome(String nome) {  this.nome = nome; }
 
-    public Commerciante getCommerciante() {
-        return commerciante;
+    public String getIDCommerciante() {
+        return IDCommerciante;
     }
 
-    public void setCommerciante(Commerciante commerciante) {
-        this.commerciante = commerciante;
+    public void setIDCommerciante(String IDCommerciante) {
+        this.IDCommerciante = IDCommerciante;
     }
 
     public List<CategoriaProdotto> getListaCategorie() {
@@ -58,14 +58,13 @@ public class Prodotto implements HasID{
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Prodotto)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Prodotto prodotto = (Prodotto) o;
-        return ID == prodotto.ID;
+        return ID.equals(prodotto.ID);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(ID);
     }
-
 }

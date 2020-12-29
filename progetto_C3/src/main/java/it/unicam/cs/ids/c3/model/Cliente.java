@@ -7,11 +7,12 @@ public class Cliente extends Utente {
     private String cognome;
     private String indirizzo;
 
-    public Cliente(int ID, String username, String password, String email, String telephone, String name, String cognome, String indirizzo) {
-        super(ID, username, password, email, telephone);
+    public Cliente(String username, String password, String email, String telephone, String name, String cognome, String indirizzo) {
+        super(username, password, email, telephone);
         this.nome = name;
         this.cognome = cognome;
         this.indirizzo = indirizzo;
+        this.nome=generaID();
     }
 
     public String getNome() {
@@ -37,5 +38,4 @@ public class Cliente extends Utente {
     public void setIndirizzo(String indirizzo) {
         this.indirizzo = indirizzo;
     }
-
 }

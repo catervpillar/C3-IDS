@@ -4,8 +4,8 @@ public class Corriere extends Utente {
     private String ragioneSociale;
     private StatoCorriere stato;
 
-    public Corriere(int ID, String username, String password, String email, String telephone, String ragioneSociale) {
-        super(ID, username, password, email, telephone);
+    public Corriere(String username, String password, String email, String telephone, String ragioneSociale) {
+        super(username, password, email, telephone);
         this.ragioneSociale = ragioneSociale;
         this.stato = StatoCorriere.NON_DISPONIBILE;
     }
