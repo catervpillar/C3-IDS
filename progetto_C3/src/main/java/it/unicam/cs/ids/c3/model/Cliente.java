@@ -12,7 +12,6 @@ public class Cliente extends Utente {
         this.nome = name;
         this.cognome = cognome;
         this.indirizzo = indirizzo;
-        this.nome=generaID();
     }
 
     public String getNome() {

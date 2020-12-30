@@ -8,15 +8,15 @@ import java.util.List;
 
 public final class AppList {
     //stringa connessiona al db
+    //TODO: sposta le liste nei rispettivi controller (?)
     private final List<Prodotto> prodotti = new ArrayList<>();
-    private final List<Commerciante> commercianti = new ArrayList<>();
     private final List<CategoriaProdotto> categorieProdotti = new ArrayList<>();
+
+    private final List<Commerciante> commercianti = new ArrayList<>();
     private final List<Cliente> clienti = new ArrayList<>();
     private final List<PuntoRitiro> puntiDiRitiro = new ArrayList<>();
     private final List<Corriere> corrieri = new ArrayList<>();
-    private final List<Ritiro> ritiri = new ArrayList<>();
-    private final List<Promozione> promozioni = new ArrayList<>();
-    private final List<Tracking> trackings = new ArrayList<>();
+
     private static AppList instance;
 
     public static AppList getInstance() {
@@ -47,17 +47,5 @@ public final class AppList {
 
     public List<Corriere> getCorrieri() {
         return corrieri;
-    }
-
-    public List<Ritiro> getRitiri() {
-        return ritiri;
-    }
-
-    public List<Promozione> getPromozioni() {
-        return promozioni;
-    }
-
-    public List<Tracking> getTrackings() {
-        return trackings;
     }
 }

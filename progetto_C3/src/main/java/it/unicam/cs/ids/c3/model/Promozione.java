@@ -7,9 +7,9 @@ import java.util.Objects;
 public class Promozione implements HasID{
     private String ID;
     private String nome;
+    private String descrizione;
     private List<String> listaIDCommercianti;
     private List<String> listaIDProdotti;
-    private String descrizione;
     private GregorianCalendar dataInizio;
     private GregorianCalendar dataScadenza;
 

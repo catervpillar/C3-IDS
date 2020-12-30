@@ -10,7 +10,6 @@ public class Prodotto implements HasID{
     private List<CategoriaProdotto> listaCategorie;
     private double prezzo;
 
-
     public Prodotto(String nome, String IDCommerciante, List<CategoriaProdotto> listaCategorie, double prezzo) {
         IDGenerator.generateID(this);
         this.nome = nome;

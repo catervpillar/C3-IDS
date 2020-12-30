@@ -6,7 +6,6 @@ import java.util.Objects;
 
 public class Ritiro implements HasID{
     private String ID;
-    private GregorianCalendar data;
     private List<String> listaIDProdotti;
     private String IDCommerciante;
     private String IDCliente;
@@ -14,12 +13,12 @@ public class Ritiro implements HasID{
     private String destinazione;
     private String codiceRitiro;
     private String IDTracking;
+    private GregorianCalendar dataPrenotazione;
     private GregorianCalendar dataConsegna;
     private boolean ritirato;
     private TipoConsegna tipoConsegna;
 
     public Ritiro(List<String> listaIDProdotti, String IDCommerciante, String IDCliente, String IDCorriere, String destinazione, TipoConsegna tipoConsegna) {
-        IDGenerator.generateID(this);
         IDGenerator.generateID(this);
         this.listaIDProdotti = listaIDProdotti;
         this.IDCommerciante = IDCommerciante;
@@ -27,7 +26,7 @@ public class Ritiro implements HasID{
         this.IDCorriere = IDCorriere;
         this.destinazione = destinazione;
         this.ritirato = false;
-        this.data = new GregorianCalendar();
+        this.dataPrenotazione = new GregorianCalendar();
         this.codiceRitiro = CodiciRitiroGenerator.getInstance().generaCodice();
         this.tipoConsegna = tipoConsegna;
     }
@@ -64,12 +63,12 @@ public class Ritiro implements HasID{
         this.ID = ID;
     }
 
-    public GregorianCalendar getData() {
-        return data;
+    public GregorianCalendar getDataPrenotazione() {
+        return dataPrenotazione;
     }
 
-    public void setData(GregorianCalendar data) {
-        this.data = data;
+    public void setDataPrenotazione(GregorianCalendar dataPrenotazione) {
+        this.dataPrenotazione = dataPrenotazione;
     }
 
     public List<String> getListaIDProdotti() {
