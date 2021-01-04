@@ -6,6 +6,7 @@ import it.unicam.cs.ids.c3.model.Tracking;
 import it.unicam.cs.ids.c3.utilities.AppList;
 
 public class ControllerCorriere {
+
     public void aggiornaTracking(Tracking tracking, StatoTracking statoTracking) {
         tracking.setStato(statoTracking);
 

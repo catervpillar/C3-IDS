@@ -12,6 +12,7 @@ public class Commerciante extends Utente {
         this.ragioneSociale = ragioneSociale;
         this.indirizzo = indirizzo;
         this.listaCategorie = listaCategorie;
+        this.indirizzo = indirizzo;
     }
 
     public String getRagioneSociale() {
@@ -37,4 +38,6 @@ public class Commerciante extends Utente {
     public void setListaCategorie(List<CategoriaProdotto> listaCategorie) {
         this.listaCategorie = listaCategorie;
     }
+
+
 }
