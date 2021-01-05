@@ -7,7 +7,7 @@ import it.unicam.cs.ids.c3.utilities.AppList;
 
 public class ControllerCorriere {
 
-    public void aggiornaTracking(Tracking tracking, StatoTracking statoTracking) {
+    /*public void aggiornaTracking(Tracking tracking, StatoTracking statoTracking) {
         tracking.setStato(statoTracking);
 
         if (statoTracking.equals(StatoTracking.CONSEGNATO))
@@ -17,5 +17,5 @@ public class ControllerCorriere {
                         AppList.getInstance().getRitiri().get(i).setRitirato(true);
                 }
             }
-    }
+    }*/
 }

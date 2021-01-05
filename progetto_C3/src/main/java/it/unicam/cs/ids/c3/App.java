@@ -3,11 +3,15 @@
  */
 package it.unicam.cs.ids.c3;
 
+import it.unicam.cs.ids.c3.model.Recensione;
+
 import java.util.UUID;
 
 public class App {
     public static void main(String[] args) {
-        String ID = UUID.randomUUID().toString().substring(0, 8);
-        System.out.println("\n" + ID);
+        Recensione recensione = new Recensione("tutto ok");
+        System.out.print(recensione.getID());
+        System.out.print("ifyegfiuefvewufvw");
+
     }
 }
