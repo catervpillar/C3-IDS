@@ -25,4 +25,12 @@ public class GestoreTracking {
     public List<Tracking> getListaTracking() {
         return listaTracking;
     }
+
+    public Tracking getTracking(String IDTracking){
+        for (Tracking tracking : listaTracking) {
+            if (tracking.getID().equals(IDTracking))
+                return tracking;
+        }
+        return null;
+    }
 }

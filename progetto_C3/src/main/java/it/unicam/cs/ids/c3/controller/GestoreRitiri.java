@@ -1,7 +1,6 @@
 package it.unicam.cs.ids.c3.controller;
 
 import it.unicam.cs.ids.c3.model.*;
-import it.unicam.cs.ids.c3.utilities.AppList;
 
 import java.util.ArrayList;
 import java.util.List;
