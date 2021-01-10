@@ -1,5 +1,6 @@
 package it.unicam.cs.ids.c3.controller;
 
+import it.unicam.cs.ids.c3.model.Promozione;
 import it.unicam.cs.ids.c3.model.Recensione;
 import it.unicam.cs.ids.c3.model.VotoRecensioni;
 
@@ -22,29 +23,20 @@ public final class GestoreRecensioni {
         this.listaRecensioni.add(recensione);
     }
 
-    public void modificaRecensione(String titolo, String testo, String IDRecensione, VotoRecensioni votoRecensioni){
-        int index = -1;
-        for (int i=0; i<listaRecensioni.size(); i++) {
-            if (IDRecensione.equals(listaRecensioni.get(i).getID()))
-                index = i;
-        }
-        if (index!=-1) {
-            if (titolo != null)
-                listaRecensioni.get(index).setTitolo(titolo);
-            if (testo != null)
-                listaRecensioni.get(index).setTesto(testo);
-            if (votoRecensioni != null)
-                listaRecensioni.get(index).setVotoRecensioni(votoRecensioni);
+    public void modificaRecensione(String titolo, String testo, VotoRecensioni votoRecensioni, String IDRecensione){
+        for (Recensione recensione : listaRecensioni) {
+            if (recensione.getID().equals(IDRecensione)) {
+                if (titolo != null)
+                    recensione.setTitolo(titolo);
+                if (testo != null)
+                    recensione.setTesto(testo);
+                if (votoRecensioni != null)
+                    recensione.setVotoRecensioni(votoRecensioni);
+            }
         }
     }
 
     public void rimuoviRecensione(String IDRecensione){
-        int index = -1;
-        for (int i=0; i<listaRecensioni.size(); i++){
-            if (listaRecensioni.get(i).getID().equals(IDRecensione))
-                index = i;
-        }
-        if (index>=0)
-            listaRecensioni.remove(index);
+        listaRecensioni.removeIf(recensione -> recensione.getID().equals(IDRecensione));
     }
 }
