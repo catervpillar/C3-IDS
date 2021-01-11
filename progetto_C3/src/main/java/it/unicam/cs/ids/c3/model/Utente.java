@@ -2,7 +2,7 @@ package it.unicam.cs.ids.c3.model;
 
 import java.util.Objects;
 
-public abstract class Utente implements HasID{
+public abstract class Utente implements HasID {
     private String ID;
     private String username;
     private String password;
@@ -22,6 +22,9 @@ public abstract class Utente implements HasID{
     }
 
     public void setID(String ID) {
+        if (Objects.isNull(ID))
+            throw new NullPointerException(ID_NULLO);
+
         this.ID = ID;
     }
 
@@ -30,6 +33,10 @@ public abstract class Utente implements HasID{
     }
 
     public void setUsername(String username) {
+        if (Objects.isNull(username))
+            throw new NullPointerException("L'username dell'utente e' nullo");
+        if (username.equals(""))
+            throw new IllegalArgumentException("L'username dell'utente non e' valido");
         this.username = username;
     }
 
@@ -38,6 +45,10 @@ public abstract class Utente implements HasID{
     }
 
     public void setPassword(String password) {
+        if (Objects.isNull(password))
+            throw new NullPointerException("La password dell'utente e' nulla");
+        if (password.equals(""))
+            throw new IllegalArgumentException("La password dell'utente non e' valida");
         this.password = password;
     }
 
@@ -46,6 +57,10 @@ public abstract class Utente implements HasID{
     }
 
     public void setEmail(String email) {
+        if (Objects.isNull(email))
+            throw new NullPointerException("La email dell'utente e' nulla");
+        if (email.equals(""))
+            throw new IllegalArgumentException("La email dell'utente non e' valida");
         this.email = email;
     }
 
@@ -54,6 +69,10 @@ public abstract class Utente implements HasID{
     }
 
     public void setTelefono(String telefono) {
+        if (Objects.isNull(telefono))
+            throw new NullPointerException("Il telefono dell'utente e' nullo");
+        if (telefono.equals(""))
+            throw new IllegalArgumentException("Il telefono dell'utente non e' valido");
         this.telefono = telefono;
     }
 

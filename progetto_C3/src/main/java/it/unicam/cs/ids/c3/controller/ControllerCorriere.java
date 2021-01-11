@@ -10,12 +10,12 @@ public class ControllerCorriere {
     public void aggiornaTracking(Tracking tracking, StatoTracking statoTracking) {
         tracking.setStato(statoTracking);
 
-        if (statoTracking.equals(StatoTracking.CONSEGNATO))
-            for (int i = 0; i < AppList.getInstance().getRitiri().size(); i++) {
-                if (AppList.getInstance().getRitiri().get(i).getID().equals(tracking.getIDRitiro())) {
-                    if (AppList.getInstance().getRitiri().get(i).getTipoConsegna().equals(TipoConsegna.CONSEGNA_A_DOMICILIO))
-                        AppList.getInstance().getRitiri().get(i).setRitirato(true);
-                }
-            }
+//        if (statoTracking.equals(StatoTracking.CONSEGNATO))
+//            for (int i = 0; i < AppList.getInstance().getRitiri().size(); i++) {
+//                if (AppList.getInstance().getRitiri().get(i).getID().equals(tracking.getIDRitiro())) {
+//                    if (AppList.getInstance().getRitiri().get(i).getTipoConsegna().equals(TipoConsegna.CONSEGNA_A_DOMICILIO))
+//                        AppList.getInstance().getRitiri().get(i).setRitirato(true);
+//                }
+//            }
     }
 }

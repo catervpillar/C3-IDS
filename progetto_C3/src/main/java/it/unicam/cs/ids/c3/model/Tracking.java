@@ -18,6 +18,8 @@ public class Tracking implements HasID {
     }
 
     public void setID(String ID) {
+        if (Objects.isNull(ID))
+            throw new NullPointerException(ID_NULLO);
         this.ID = ID;
     }
 
@@ -26,6 +28,8 @@ public class Tracking implements HasID {
     }
 
     public void setStato(StatoTracking stato) {
+        if (Objects.isNull(stato))
+            throw new NullPointerException("Lo stato del tracking e' nullo");
         this.stato = stato;
     }
 
@@ -33,8 +37,10 @@ public class Tracking implements HasID {
         return IDRitiro;
     }
 
-    public void setIDRitiro(String IDritiro) {
-        this.IDRitiro = IDritiro;
+    public void setIDRitiro(String IDRitiro) {
+        if (Objects.isNull(IDRitiro))
+            throw new NullPointerException("L'ID del ritiro del tracking e' nullo");
+        this.IDRitiro = IDRitiro;
     }
 
     @Override

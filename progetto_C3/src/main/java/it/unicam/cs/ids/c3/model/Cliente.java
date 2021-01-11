@@ -9,9 +9,15 @@ public class Cliente extends Utente {
 
     public Cliente(String username, String password, String email, String telephone, String name, String cognome, String indirizzo) {
         super(username, password, email, telephone);
-        this.nome = name;
-        this.cognome = cognome;
+        this.nome = control(name);
+        this.cognome = control(cognome);
         this.indirizzo = indirizzo;
+    }
+
+    private String control(String s) {
+        if (s == null)
+            throw new NullPointerException("sas");
+        return s;
     }
 
     public String getNome() {

@@ -3,8 +3,7 @@ package it.unicam.cs.ids.c3.model;
 import java.util.GregorianCalendar;
 import java.util.Objects;
 
-public class Recensione implements HasID{
-
+public class Recensione implements HasID {
     private String ID;
     private String titolo;
     private String testo;
@@ -14,7 +13,7 @@ public class Recensione implements HasID{
     private VotoRecensioni votoRecensioni;
     private GregorianCalendar data;
 
-    public Recensione(String titolo, String testo, String IDCliente, String IDCommerciante, String IDProdotto, VotoRecensioni votoRecensioni){
+    public Recensione(String titolo, String testo, String IDCliente, String IDCommerciante, String IDProdotto, VotoRecensioni votoRecensioni) {
         IDGenerator.generateID(this);
         this.titolo = titolo;
         this.testo = testo;
@@ -31,6 +30,8 @@ public class Recensione implements HasID{
     }
 
     public void setID(String ID) {
+        if (Objects.isNull(ID))
+            throw new NullPointerException(ID_NULLO);
         this.ID = ID;
     }
 
@@ -39,6 +40,10 @@ public class Recensione implements HasID{
     }
 
     public void setTitolo(String titolo) {
+        if (Objects.isNull(titolo))
+            throw new NullPointerException("Il titolo e' nullo");
+        if (titolo.equals(""))
+            throw new NullPointerException("Il titolo non e' valido");
         this.titolo = titolo;
     }
 
@@ -47,6 +52,8 @@ public class Recensione implements HasID{
     }
 
     public void setTesto(String testo) {
+        if (Objects.isNull(testo))
+            throw new NullPointerException("Il testo e' nullo");
         this.testo = testo;
     }
 
@@ -55,6 +62,8 @@ public class Recensione implements HasID{
     }
 
     public void setIDCliente(String IDCliente) {
+        if (Objects.isNull(IDCliente))
+            throw new NullPointerException(ID_NULLO);
         this.IDCliente = IDCliente;
     }
 
@@ -63,6 +72,8 @@ public class Recensione implements HasID{
     }
 
     public void setIDCommerciante(String IDCommerciante) {
+        if (Objects.isNull(IDCommerciante))
+            throw new NullPointerException(ID_NULLO);
         this.IDCommerciante = IDCommerciante;
     }
 
@@ -71,6 +82,8 @@ public class Recensione implements HasID{
     }
 
     public void setIDProdotto(String IDProdotto) {
+        if (Objects.isNull(IDProdotto))
+            throw new NullPointerException(ID_NULLO);
         this.IDProdotto = IDProdotto;
     }
 
@@ -79,6 +92,10 @@ public class Recensione implements HasID{
     }
 
     public void setData(GregorianCalendar data) {
+        if (Objects.isNull(data))
+            throw new NullPointerException("La data e' nulla");
+        if (data.compareTo(new GregorianCalendar()) < 0)
+            throw new IllegalArgumentException("La data non e' valida");
         this.data = data;
     }
 
@@ -87,6 +104,8 @@ public class Recensione implements HasID{
     }
 
     public void setVotoRecensioni(VotoRecensioni votoRecensioni) {
+        if (Objects.isNull(votoRecensioni))
+            throw new NullPointerException("Il voto e' nullo");
         this.votoRecensioni = votoRecensioni;
     }
 

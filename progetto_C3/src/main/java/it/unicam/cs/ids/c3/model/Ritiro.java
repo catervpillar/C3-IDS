@@ -4,7 +4,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Objects;
 
-public class Ritiro implements HasID{
+public class Ritiro implements HasID {
     private String ID;
     private List<String> listaIDProdotti;
     private String IDCommerciante;
@@ -36,6 +36,8 @@ public class Ritiro implements HasID{
     }
 
     public void setTipoConsegna(TipoConsegna tipoConsegna) {
+        if (Objects.isNull(tipoConsegna))
+            throw new NullPointerException("Il tipo della consegna e' nullo");
         this.tipoConsegna = tipoConsegna;
     }
 
@@ -44,6 +46,10 @@ public class Ritiro implements HasID{
     }
 
     public void setDataConsegna(GregorianCalendar dataConsegna) {
+        if (Objects.isNull(dataConsegna))
+            throw new NullPointerException("La data di consegna e' nulla");
+        if (dataConsegna.compareTo(new GregorianCalendar()) < 0)
+            throw new IllegalArgumentException("La data di consegna non e' valida");
         this.dataConsegna = dataConsegna;
     }
 
@@ -60,6 +66,8 @@ public class Ritiro implements HasID{
     }
 
     public void setID(String ID) {
+        if (Objects.isNull(ID))
+            throw new NullPointerException(ID_NULLO);
         this.ID = ID;
     }
 
@@ -68,6 +76,10 @@ public class Ritiro implements HasID{
     }
 
     public void setDataPrenotazione(GregorianCalendar dataPrenotazione) {
+        if (Objects.isNull(dataPrenotazione))
+            throw new NullPointerException("La data di prenotazione e' nulla");
+        if (dataPrenotazione.compareTo(new GregorianCalendar()) < 0)
+            throw new IllegalArgumentException("La data di prenotazione non e' valida");
         this.dataPrenotazione = dataPrenotazione;
     }
 
@@ -76,6 +88,10 @@ public class Ritiro implements HasID{
     }
 
     public void setListaIDProdotti(List<String> listaIDProdotti) {
+        if (Objects.isNull(listaIDProdotti))
+            throw new NullPointerException("La lista dei prodotti e' nulla");
+        if (listaIDProdotti.isEmpty())
+            throw new IllegalArgumentException("La lista dei prodotti e' vuota");
         this.listaIDProdotti = listaIDProdotti;
     }
 
@@ -84,6 +100,8 @@ public class Ritiro implements HasID{
     }
 
     public void setIDCommerciante(String IDCommerciante) {
+        if (Objects.isNull(IDCommerciante))
+            throw new NullPointerException(ID_NULLO);
         this.IDCommerciante = IDCommerciante;
     }
 
@@ -92,6 +110,8 @@ public class Ritiro implements HasID{
     }
 
     public void setIDCliente(String IDCliente) {
+        if (Objects.isNull(IDCliente))
+            throw new NullPointerException(ID_NULLO);
         this.IDCliente = IDCliente;
     }
 
@@ -100,6 +120,8 @@ public class Ritiro implements HasID{
     }
 
     public void setIDCorriere(String IDCorriere) {
+        if (Objects.isNull(IDCorriere))
+            throw new NullPointerException(ID_NULLO);
         this.IDCorriere = IDCorriere;
     }
 
@@ -108,6 +130,10 @@ public class Ritiro implements HasID{
     }
 
     public void setDestinazione(String destinazione) {
+        if (Objects.isNull(destinazione))
+            throw new NullPointerException("La destinazione e' nulla");
+        if (destinazione.equals(""))
+            throw new NullPointerException("La destinazione non e' valida");
         this.destinazione = destinazione;
     }
 
@@ -116,6 +142,10 @@ public class Ritiro implements HasID{
     }
 
     public void setCodiceRitiro(String codiceRitiro) {
+        if (Objects.isNull(codiceRitiro))
+            throw new NullPointerException("Il codice di ritiro e' nullo");
+        if (codiceRitiro.length() != 6)
+            throw new IllegalArgumentException("Il codice di ritiro non e' valido");
         this.codiceRitiro = codiceRitiro;
     }
 
@@ -124,6 +154,8 @@ public class Ritiro implements HasID{
     }
 
     public void setIDTracking(String IDTracking) {
+        if (Objects.isNull(IDTracking))
+            throw new NullPointerException(ID_NULLO);
         this.IDTracking = IDTracking;
     }
 
