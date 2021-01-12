@@ -1,5 +1,7 @@
 package it.unicam.cs.ids.c3.model;
 
+import it.unicam.cs.ids.c3.utilities.Controllore;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -23,8 +25,7 @@ public class Prodotto implements HasID {
     }
 
     public void setID(String ID) {
-        if (Objects.isNull(ID))
-            throw new NullPointerException("L'ID del prodotto e' nullo");
+        Controllore.getInstance().controllaID(ID);
         this.ID = ID;
     }
 
@@ -43,10 +44,7 @@ public class Prodotto implements HasID {
     }
 
     public void setNome(String nome) {
-        if (Objects.isNull(nome))
-            throw new NullPointerException("Il nome del prodotto e' nullo");
-        if (nome.equals(""))
-            throw new IllegalArgumentException("Il nome del prodotto e' nullo");
+        Controllore.getInstance().controllaStringa(nome);
         this.nome = nome;
     }
 
@@ -55,8 +53,7 @@ public class Prodotto implements HasID {
     }
 
     public void setIDCommerciante(String IDCommerciante) {
-        if (Objects.isNull(IDCommerciante))
-            throw new NullPointerException("L'ID del commerciante del prodotto e' nullo");
+        Controllore.getInstance().controllaID(IDCommerciante);
         this.IDCommerciante = IDCommerciante;
     }
 
@@ -65,10 +62,7 @@ public class Prodotto implements HasID {
     }
 
     public void setListaCategorie(List<CategoriaProdotto> listaCategorie) {
-        if (Objects.isNull(listaCategorie))
-            throw new NullPointerException("La lista delle categorie del prodotto e' nulla");
-        if (listaCategorie.isEmpty())
-            throw new IllegalArgumentException("La lista delle categorie del prodotto e' vuota");
+        Controllore.getInstance().controllaLista(listaCategorie);
         this.listaCategorie = listaCategorie;
     }
 

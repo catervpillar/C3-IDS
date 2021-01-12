@@ -1,5 +1,7 @@
 package it.unicam.cs.ids.c3.model;
 
+import it.unicam.cs.ids.c3.utilities.Controllore;
+
 import java.util.Objects;
 
 public abstract class Utente implements HasID {
@@ -22,9 +24,7 @@ public abstract class Utente implements HasID {
     }
 
     public void setID(String ID) {
-        if (Objects.isNull(ID))
-            throw new NullPointerException(ID_NULLO);
-
+        Controllore.getInstance().controllaID(ID);
         this.ID = ID;
     }
 
@@ -33,10 +33,7 @@ public abstract class Utente implements HasID {
     }
 
     public void setUsername(String username) {
-        if (Objects.isNull(username))
-            throw new NullPointerException("L'username dell'utente e' nullo");
-        if (username.equals(""))
-            throw new IllegalArgumentException("L'username dell'utente non e' valido");
+        Controllore.getInstance().controllaUsername(username);
         this.username = username;
     }
 
@@ -57,10 +54,7 @@ public abstract class Utente implements HasID {
     }
 
     public void setEmail(String email) {
-        if (Objects.isNull(email))
-            throw new NullPointerException("La email dell'utente e' nulla");
-        if (email.equals(""))
-            throw new IllegalArgumentException("La email dell'utente non e' valida");
+        Controllore.getInstance().controllaEmail(email);
         this.email = email;
     }
 
@@ -69,10 +63,7 @@ public abstract class Utente implements HasID {
     }
 
     public void setTelefono(String telefono) {
-        if (Objects.isNull(telefono))
-            throw new NullPointerException("Il telefono dell'utente e' nullo");
-        if (telefono.equals(""))
-            throw new IllegalArgumentException("Il telefono dell'utente non e' valido");
+        Controllore.getInstance().controllaTelefono(telefono);
         this.telefono = telefono;
     }
 

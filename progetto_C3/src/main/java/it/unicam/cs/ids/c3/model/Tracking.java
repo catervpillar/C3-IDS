@@ -1,5 +1,7 @@
 package it.unicam.cs.ids.c3.model;
 
+import it.unicam.cs.ids.c3.utilities.Controllore;
+
 import java.util.Objects;
 
 public class Tracking implements HasID {
@@ -18,8 +20,7 @@ public class Tracking implements HasID {
     }
 
     public void setID(String ID) {
-        if (Objects.isNull(ID))
-            throw new NullPointerException(ID_NULLO);
+        Controllore.getInstance().controllaID(ID);
         this.ID = ID;
     }
 
@@ -38,8 +39,7 @@ public class Tracking implements HasID {
     }
 
     public void setIDRitiro(String IDRitiro) {
-        if (Objects.isNull(IDRitiro))
-            throw new NullPointerException("L'ID del ritiro del tracking e' nullo");
+        Controllore.getInstance().controllaID(IDRitiro);
         this.IDRitiro = IDRitiro;
     }
 

@@ -1,6 +1,13 @@
 package it.unicam.cs.ids.c3.utilities;
 
+import it.unicam.cs.ids.c3.model.HasID;
+import org.apache.commons.validator.routines.EmailValidator;
+
+import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public final class Controllore {
     private static Controllore instance;
@@ -18,6 +25,8 @@ public final class Controllore {
 
     public void controllaStringa(String stringa) {
         if (stringa.length() == 0) throw new IllegalArgumentException(STRINGA_VUOTA);
+        if (Objects.isNull(stringa))
+            throw new NullPointerException();
 
         boolean ok = false;
         for (int i = 0; i < stringa.length(); i++) {
@@ -42,7 +51,6 @@ public final class Controllore {
 
     public void controllaUsername(String username) {
         controllaStringa(username);
-
         for (int i = 0; i < username.length(); i++) {
             if (!Character.isLetterOrDigit(username.charAt(i))) {
                 if (username.charAt(i) != '.' || username.charAt(i) != '_' || username.charAt(i) != '-')
@@ -53,7 +61,50 @@ public final class Controllore {
 
     public void controllaEmail(String email) {
         controllaStringa(email);
-        //TODO
-        if (email.endsWith("@gmail.com")) throw new IllegalArgumentException();
+        if (!(EmailValidator.getInstance().isValid(email)))
+            throw new IllegalArgumentException();
+    }
+
+    public void controllaTelefono(String telefono){
+        controllaStringa(telefono);
+        if (telefono.length() != 10) throw new IllegalArgumentException();
+        for (int i=0; i<telefono.length(); i++){
+            if(!(Character.isDigit(telefono.charAt(i))))
+                throw new IllegalArgumentException();
+        }
+    }
+
+    public void controllaNome(String nome){
+        controllaStringa(nome);
+        for (int i=0; i<nome.length(); i++){
+            if (!(Character.isLetter(nome.charAt(i)))) {
+                    if((nome.charAt(i) != ' '))
+                        throw new IllegalArgumentException();
+            }
+        }
+    }
+
+    public void controllaIndirizzo(String indirizzo){
+        controllaStringa(indirizzo);
+        for (int i = 0; i < indirizzo.length(); i++) {
+            if (!Character.isLetterOrDigit(indirizzo.charAt(i))) {
+                throw new IllegalArgumentException(ID_NON_VALIDO);
+            }
+        }
+    }
+
+    public void controllaLista(List<?> listaCategorie){
+        if (Objects.isNull(listaCategorie))
+            throw new NullPointerException("La lista delle categorie del prodotto e' nulla");
+        if (listaCategorie.isEmpty())
+            throw new IllegalArgumentException("La lista delle categorie del prodotto e' vuota");
+    }
+
+    public void controllaData(GregorianCalendar data){
+        if (Objects.isNull(data))
+            throw new NullPointerException();
+        if (data.compareTo(new GregorianCalendar()) < 0)
+            throw new IllegalArgumentException();
+
     }
 }

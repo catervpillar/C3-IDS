@@ -1,6 +1,10 @@
 package it.unicam.cs.ids.c3.model;
 
+import it.unicam.cs.ids.c3.utilities.Controllore;
+
+import javax.naming.ldap.Control;
 import java.util.List;
+import java.util.Objects;
 
 public class Commerciante extends Utente {
     private String ragioneSociale;
@@ -20,6 +24,7 @@ public class Commerciante extends Utente {
     }
 
     public void setRagioneSociale(String ragioneSociale) {
+        Controllore.getInstance().controllaStringa(ragioneSociale);
         this.ragioneSociale = ragioneSociale;
     }
 
@@ -28,6 +33,7 @@ public class Commerciante extends Utente {
     }
 
     public void setIndirizzo(String indirizzo) {
+        Controllore.getInstance().controllaIndirizzo(indirizzo);
         this.indirizzo = indirizzo;
     }
 
@@ -36,6 +42,7 @@ public class Commerciante extends Utente {
     }
 
     public void setListaCategorie(List<CategoriaProdotto> listaCategorie) {
+        Controllore.getInstance().controllaLista(listaCategorie);
         this.listaCategorie = listaCategorie;
     }
 

@@ -1,5 +1,9 @@
 package it.unicam.cs.ids.c3.model;
 
+import it.unicam.cs.ids.c3.utilities.Controllore;
+
+import java.util.Objects;
+
 public class Corriere extends Utente {
     private String ragioneSociale;
     private StatoCorriere stato;
@@ -15,6 +19,7 @@ public class Corriere extends Utente {
     }
 
     public void setRagioneSociale(String ragioneSociale) {
+        Controllore.getInstance().controllaStringa(ragioneSociale);
         this.ragioneSociale = ragioneSociale;
     }
 
@@ -23,6 +28,8 @@ public class Corriere extends Utente {
     }
 
     public void setStato(StatoCorriere stato) {
+        if(Objects.isNull(stato))
+            throw new NullPointerException();
         this.stato = stato;
     }
 }

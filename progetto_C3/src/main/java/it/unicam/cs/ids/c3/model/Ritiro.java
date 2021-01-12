@@ -1,5 +1,7 @@
 package it.unicam.cs.ids.c3.model;
 
+import it.unicam.cs.ids.c3.utilities.Controllore;
+
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Objects;
@@ -46,10 +48,7 @@ public class Ritiro implements HasID {
     }
 
     public void setDataConsegna(GregorianCalendar dataConsegna) {
-        if (Objects.isNull(dataConsegna))
-            throw new NullPointerException("La data di consegna e' nulla");
-        if (dataConsegna.compareTo(new GregorianCalendar()) < 0)
-            throw new IllegalArgumentException("La data di consegna non e' valida");
+        Controllore.getInstance().controllaData(dataConsegna);
         this.dataConsegna = dataConsegna;
     }
 
@@ -66,8 +65,7 @@ public class Ritiro implements HasID {
     }
 
     public void setID(String ID) {
-        if (Objects.isNull(ID))
-            throw new NullPointerException(ID_NULLO);
+        Controllore.getInstance().controllaID(ID);
         this.ID = ID;
     }
 
@@ -76,10 +74,7 @@ public class Ritiro implements HasID {
     }
 
     public void setDataPrenotazione(GregorianCalendar dataPrenotazione) {
-        if (Objects.isNull(dataPrenotazione))
-            throw new NullPointerException("La data di prenotazione e' nulla");
-        if (dataPrenotazione.compareTo(new GregorianCalendar()) < 0)
-            throw new IllegalArgumentException("La data di prenotazione non e' valida");
+        Controllore.getInstance().controllaData(dataPrenotazione);
         this.dataPrenotazione = dataPrenotazione;
     }
 
@@ -88,10 +83,7 @@ public class Ritiro implements HasID {
     }
 
     public void setListaIDProdotti(List<String> listaIDProdotti) {
-        if (Objects.isNull(listaIDProdotti))
-            throw new NullPointerException("La lista dei prodotti e' nulla");
-        if (listaIDProdotti.isEmpty())
-            throw new IllegalArgumentException("La lista dei prodotti e' vuota");
+        Controllore.getInstance().controllaLista(listaIDProdotti);
         this.listaIDProdotti = listaIDProdotti;
     }
 
@@ -100,8 +92,7 @@ public class Ritiro implements HasID {
     }
 
     public void setIDCommerciante(String IDCommerciante) {
-        if (Objects.isNull(IDCommerciante))
-            throw new NullPointerException(ID_NULLO);
+        Controllore.getInstance().controllaID(IDCommerciante);
         this.IDCommerciante = IDCommerciante;
     }
 
@@ -110,8 +101,7 @@ public class Ritiro implements HasID {
     }
 
     public void setIDCliente(String IDCliente) {
-        if (Objects.isNull(IDCliente))
-            throw new NullPointerException(ID_NULLO);
+        Controllore.getInstance().controllaID(IDCliente);
         this.IDCliente = IDCliente;
     }
 
@@ -120,8 +110,7 @@ public class Ritiro implements HasID {
     }
 
     public void setIDCorriere(String IDCorriere) {
-        if (Objects.isNull(IDCorriere))
-            throw new NullPointerException(ID_NULLO);
+        Controllore.getInstance().controllaID(IDCorriere);
         this.IDCorriere = IDCorriere;
     }
 
@@ -130,10 +119,7 @@ public class Ritiro implements HasID {
     }
 
     public void setDestinazione(String destinazione) {
-        if (Objects.isNull(destinazione))
-            throw new NullPointerException("La destinazione e' nulla");
-        if (destinazione.equals(""))
-            throw new NullPointerException("La destinazione non e' valida");
+        Controllore.getInstance().controllaIndirizzo(destinazione);
         this.destinazione = destinazione;
     }
 
@@ -142,10 +128,6 @@ public class Ritiro implements HasID {
     }
 
     public void setCodiceRitiro(String codiceRitiro) {
-        if (Objects.isNull(codiceRitiro))
-            throw new NullPointerException("Il codice di ritiro e' nullo");
-        if (codiceRitiro.length() != 6)
-            throw new IllegalArgumentException("Il codice di ritiro non e' valido");
         this.codiceRitiro = codiceRitiro;
     }
 
@@ -154,8 +136,7 @@ public class Ritiro implements HasID {
     }
 
     public void setIDTracking(String IDTracking) {
-        if (Objects.isNull(IDTracking))
-            throw new NullPointerException(ID_NULLO);
+        Controllore.getInstance().controllaID(IDTracking);
         this.IDTracking = IDTracking;
     }
 

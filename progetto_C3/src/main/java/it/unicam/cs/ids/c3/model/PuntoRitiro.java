@@ -1,5 +1,7 @@
 package it.unicam.cs.ids.c3.model;
 
+import it.unicam.cs.ids.c3.utilities.Controllore;
+
 import java.util.Objects;
 
 public class PuntoRitiro extends Utente {
@@ -17,10 +19,7 @@ public class PuntoRitiro extends Utente {
     }
 
     public void setRagioneSociale(String ragioneSociale) {
-        if (Objects.isNull(ragioneSociale))
-            throw new NullPointerException("La ragione sociale e' nulla");
-        if (ragioneSociale.equals(""))
-            throw new NullPointerException("La ragione sociale non e' valida");
+        Controllore.getInstance().controllaStringa(ragioneSociale);
         this.ragioneSociale = ragioneSociale;
     }
 
@@ -29,10 +28,7 @@ public class PuntoRitiro extends Utente {
     }
 
     public void setIndirizzo(String indirizzo) {
-        if (Objects.isNull(indirizzo))
-            throw new NullPointerException("L'indirizzo sociale e' nulla");
-        if (indirizzo.equals(""))
-            throw new NullPointerException("L'indirizzo sociale non e' valida");
+        Controllore.getInstance().controllaIndirizzo(indirizzo);
         this.indirizzo = indirizzo;
     }
 }
