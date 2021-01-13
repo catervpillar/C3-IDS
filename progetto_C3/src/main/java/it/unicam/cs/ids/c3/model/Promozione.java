@@ -1,8 +1,6 @@
 package it.unicam.cs.ids.c3.model;
 
-import it.unicam.cs.ids.c3.utilities.Controllore;
 
-import javax.naming.ldap.Control;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Objects;
@@ -31,7 +29,6 @@ public class Promozione implements HasID{
     }
 
     public void setID(String ID) {
-        Controllore.getInstance().controllaID(ID);
         this.ID = ID;
     }
 
@@ -40,7 +37,6 @@ public class Promozione implements HasID{
     }
 
     public void setListaIDCommercianti(List<String> listaIDCommercianti) {
-        Controllore.getInstance().controllaLista(listaIDCommercianti);
         this.listaIDCommercianti = listaIDCommercianti;
     }
 
@@ -57,7 +53,6 @@ public class Promozione implements HasID{
     }
 
     public void setListaIDProdotti(List<String> listaIDProdotti) {
-        Controllore.getInstance().controllaLista(listaIDProdotti);
         this.listaIDProdotti = listaIDProdotti;
     }
 
@@ -66,7 +61,6 @@ public class Promozione implements HasID{
     }
 
     public void setNome(String nome) {
-        Controllore.getInstance().controllaStringa(nome);
         this.nome = nome;
     }
 
@@ -75,7 +69,6 @@ public class Promozione implements HasID{
     }
 
     public void setDataInizio(GregorianCalendar dataInizio) {
-        Controllore.getInstance().controllaData(dataInizio);
         this.dataInizio = dataInizio;
     }
 
@@ -84,7 +77,6 @@ public class Promozione implements HasID{
     }
 
     public void setDataScadenza(GregorianCalendar dataScadenza) {
-        Controllore.getInstance().controllaData(dataScadenza);
         this.dataScadenza = dataScadenza;
     }
 

@@ -1,7 +1,5 @@
 package it.unicam.cs.ids.c3.model;
 
-import it.unicam.cs.ids.c3.utilities.Controllore;
-
 import java.util.GregorianCalendar;
 import java.util.Objects;
 
@@ -32,7 +30,6 @@ public class Recensione implements HasID {
     }
 
     public void setID(String ID) {
-        Controllore.getInstance().controllaID(ID);
         this.ID = ID;
     }
 
@@ -41,7 +38,6 @@ public class Recensione implements HasID {
     }
 
     public void setTitolo(String titolo) {
-        Controllore.getInstance().controllaStringa(titolo);
         this.titolo = titolo;
     }
 
@@ -58,7 +54,6 @@ public class Recensione implements HasID {
     }
 
     public void setIDCliente(String IDCliente) {
-        Controllore.getInstance().controllaID(IDCliente);
         this.IDCliente = IDCliente;
     }
 
@@ -67,7 +62,6 @@ public class Recensione implements HasID {
     }
 
     public void setIDCommerciante(String IDCommerciante) {
-        Controllore.getInstance().controllaID(IDCommerciante);
         this.IDCommerciante = IDCommerciante;
     }
 
@@ -76,7 +70,6 @@ public class Recensione implements HasID {
     }
 
     public void setIDProdotto(String IDProdotto) {
-        Controllore.getInstance().controllaID(IDProdotto);
         this.IDProdotto = IDProdotto;
     }
 
@@ -85,7 +78,6 @@ public class Recensione implements HasID {
     }
 
     public void setData(GregorianCalendar data) {
-        Controllore.getInstance().controllaData(data);
         this.data = data;
     }
 
@@ -94,8 +86,6 @@ public class Recensione implements HasID {
     }
 
     public void setVotoRecensioni(VotoRecensioni votoRecensioni) {
-        if (Objects.isNull(votoRecensioni))
-            throw new NullPointerException("Il voto e' nullo");
         this.votoRecensioni = votoRecensioni;
     }
 

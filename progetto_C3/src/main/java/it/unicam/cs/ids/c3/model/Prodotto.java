@@ -1,6 +1,5 @@
 package it.unicam.cs.ids.c3.model;
 
-import it.unicam.cs.ids.c3.utilities.Controllore;
 
 import java.util.List;
 import java.util.Objects;
@@ -25,7 +24,6 @@ public class Prodotto implements HasID {
     }
 
     public void setID(String ID) {
-        Controllore.getInstance().controllaID(ID);
         this.ID = ID;
     }
 
@@ -34,8 +32,6 @@ public class Prodotto implements HasID {
     }
 
     public void setPrezzo(double prezzo) {
-        if (prezzo < 0)
-            throw new IllegalArgumentException("Il prezzo del prodotto e' nullo");
         this.prezzo = prezzo;
     }
 
@@ -44,7 +40,6 @@ public class Prodotto implements HasID {
     }
 
     public void setNome(String nome) {
-        Controllore.getInstance().controllaStringa(nome);
         this.nome = nome;
     }
 
@@ -53,7 +48,6 @@ public class Prodotto implements HasID {
     }
 
     public void setIDCommerciante(String IDCommerciante) {
-        Controllore.getInstance().controllaID(IDCommerciante);
         this.IDCommerciante = IDCommerciante;
     }
 
@@ -62,7 +56,6 @@ public class Prodotto implements HasID {
     }
 
     public void setListaCategorie(List<CategoriaProdotto> listaCategorie) {
-        Controllore.getInstance().controllaLista(listaCategorie);
         this.listaCategorie = listaCategorie;
     }
 

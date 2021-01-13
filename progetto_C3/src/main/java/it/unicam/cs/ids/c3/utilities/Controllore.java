@@ -1,21 +1,14 @@
 package it.unicam.cs.ids.c3.utilities;
 
-import it.unicam.cs.ids.c3.model.HasID;
+import it.unicam.cs.ids.c3.model.CategoriaProdotto;
 import org.apache.commons.validator.routines.EmailValidator;
 
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public final class Controllore {
     private static Controllore instance;
-
-    private final String STRINGA_VUOTA = "La stringa passata e' vuota";
-    private final String STRINGA_NON_VALIDA = "La stringa passata non e' valida";
-    private final String ID_NON_VALIDO = "L'ID passato non e' valido";
-
 
     public static Controllore getInstance() {
         if (Objects.isNull(instance))
@@ -23,19 +16,40 @@ public final class Controllore {
         return instance;
     }
 
-    public void controllaStringa(String stringa) {
-        if (stringa.length() == 0) throw new IllegalArgumentException(STRINGA_VUOTA);
-        if (Objects.isNull(stringa))
-            throw new NullPointerException();
+    private void controllaUtente(String username, String password, String email) {
+        controllaUsername(username);
+        controllaPassword(password);
+        controllaEmail(email);
+    }
 
-        boolean ok = false;
-        for (int i = 0; i < stringa.length(); i++) {
-            if (Character.isLetterOrDigit(stringa.charAt(i))) {
-                ok = true;
-                break;
-            }
-        }
-        if (!ok) throw new IllegalArgumentException(STRINGA_NON_VALIDA);
+    public void controllaCliente(String username, String password, String email, String nome, String cognome) {
+        controllaNome(nome, "Il nome non e' valido");
+        controllaNome(cognome, "Il cognome non e' valido");
+        controllaUtente(username, password, email);
+    }
+
+    public void controllaCommerciante(String username, String password, String email, String ragioneSociale, List<CategoriaProdotto> listaCategorie) {
+        controllaUtente(username, password, email);
+        controllaStringa(ragioneSociale);
+        controllaLista(listaCategorie);
+    }
+
+    public void controllaPuntoRitiro(String username, String password, String email, String ragioneSociale) {
+        controllaUtente(username, password, email);
+        controllaStringa(ragioneSociale);
+    }
+
+    public void controllaCorriere(String username, String password, String email, String ragioneSociale) {
+        controllaUtente(username, password, email);
+        controllaStringa(ragioneSociale);
+    }
+
+    public void controllaStringa(String stringa) {
+        if (Objects.isNull(stringa))
+            throw new NullPointerException("La stringa passata e' nulla");
+
+        if (stringa.isEmpty() || stringa.isBlank())
+            throw new IllegalArgumentException("La stringa passata e' vuota");
     }
 
     public void controllaID(String ID) {
@@ -44,67 +58,71 @@ public final class Controllore {
 
         for (int i = 0; i < ID.length(); i++) {
             if (!Character.isLetterOrDigit(ID.charAt(i))) {
-                throw new IllegalArgumentException(ID_NON_VALIDO);
+                throw new IllegalArgumentException("L'ID passato non e' valido");
             }
         }
     }
 
     public void controllaUsername(String username) {
         controllaStringa(username);
+
         for (int i = 0; i < username.length(); i++) {
             if (!Character.isLetterOrDigit(username.charAt(i))) {
                 if (username.charAt(i) != '.' || username.charAt(i) != '_' || username.charAt(i) != '-')
-                    throw new IllegalArgumentException(ID_NON_VALIDO);
+                    throw new IllegalArgumentException("L'username non e' valido");
             }
         }
+    }
+
+    public void controllaPassword(String password) {
+        controllaStringa(password);
     }
 
     public void controllaEmail(String email) {
         controllaStringa(email);
         if (!(EmailValidator.getInstance().isValid(email)))
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("L'email non e' valida");
     }
 
-    public void controllaTelefono(String telefono){
-        controllaStringa(telefono);
-        if (telefono.length() != 10) throw new IllegalArgumentException();
-        for (int i=0; i<telefono.length(); i++){
-            if(!(Character.isDigit(telefono.charAt(i))))
-                throw new IllegalArgumentException();
+    public void controllaNumero(String numero, int lunghezza) {
+        controllaStringa(numero);
+        if (numero.length() != lunghezza) throw new IllegalArgumentException();
+        for (int i = 0; i < numero.length(); i++) {
+            if (!(Character.isDigit(numero.charAt(i))))
+                throw new IllegalArgumentException("Il numero non e' valido");
         }
     }
 
-    public void controllaNome(String nome){
+    public void controllaNome(String nome, String message) {
         controllaStringa(nome);
-        for (int i=0; i<nome.length(); i++){
+        for (int i = 0; i < nome.length(); i++) {
             if (!(Character.isLetter(nome.charAt(i)))) {
-                    if((nome.charAt(i) != ' '))
-                        throw new IllegalArgumentException();
+                if ((nome.charAt(i) != ' '))
+                    throw new IllegalArgumentException(message);
             }
         }
     }
 
-    public void controllaIndirizzo(String indirizzo){
-        controllaStringa(indirizzo);
-        for (int i = 0; i < indirizzo.length(); i++) {
-            if (!Character.isLetterOrDigit(indirizzo.charAt(i))) {
-                throw new IllegalArgumentException(ID_NON_VALIDO);
-            }
-        }
+    public void controllaIndirizzo(String via, int numeroCivico, String citta, String CAP, String provincia, String stato) {
+        controllaNome(via, "La via non e' valida");
+        if (numeroCivico < 1) throw new IllegalArgumentException("Il numero civico non e' valido");
+        controllaNome(citta, "La citta' non e' valida");
+        controllaNumero(CAP, 5);
+        controllaNome(provincia, "La provincia non e' valida");
+        controllaNome(stato, "Lo stato non e' valido");
     }
 
-    public void controllaLista(List<?> listaCategorie){
+    public void controllaLista(List<?> listaCategorie) {
         if (Objects.isNull(listaCategorie))
-            throw new NullPointerException("La lista delle categorie del prodotto e' nulla");
+            throw new NullPointerException("La lista e' nulla");
         if (listaCategorie.isEmpty())
-            throw new IllegalArgumentException("La lista delle categorie del prodotto e' vuota");
+            throw new IllegalArgumentException("La lista e' vuota");
     }
 
-    public void controllaData(GregorianCalendar data){
+    public void controllaData(GregorianCalendar data) {
         if (Objects.isNull(data))
-            throw new NullPointerException();
+            throw new NullPointerException("La data e' nulla");
         if (data.compareTo(new GregorianCalendar()) < 0)
-            throw new IllegalArgumentException();
-
+            throw new IllegalArgumentException("La data non e' valida");
     }
 }

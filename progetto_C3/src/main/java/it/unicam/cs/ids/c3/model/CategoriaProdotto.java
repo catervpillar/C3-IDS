@@ -1,10 +1,8 @@
 package it.unicam.cs.ids.c3.model;
 
-import it.unicam.cs.ids.c3.utilities.Controllore;
-
 import java.util.Objects;
 
-public class CategoriaProdotto implements HasID{
+public class CategoriaProdotto implements HasID {
     private String ID;
     private String nome;
     private String descrizione;
@@ -15,11 +13,11 @@ public class CategoriaProdotto implements HasID{
         this.descrizione = descrizione;
     }
 
-    public String getID() { return ID;
+    public String getID() {
+        return ID;
     }
 
     public void setID(String ID) {
-        Controllore.getInstance().controllaID(ID);
         this.ID = ID;
     }
 
@@ -28,7 +26,6 @@ public class CategoriaProdotto implements HasID{
     }
 
     public void setNome(String nome) {
-        Controllore.getInstance().controllaStringa(nome);
         this.nome = nome;
     }
 

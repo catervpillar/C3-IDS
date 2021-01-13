@@ -3,11 +3,17 @@
  */
 package it.unicam.cs.ids.c3;
 
-import java.util.UUID;
+import it.unicam.cs.ids.c3.javafx.JavaFXC3;
+import javafx.application.Application;
+
+import java.io.IOException;
 
 public class App {
-    public static void main(String[] args) {
-        String ID = UUID.randomUUID().toString().substring(0, 8);
-        System.out.println("\n" + ID);
+    public static void main(String[] args) throws IOException {
+        launchGui();
+    }
+
+    private static void launchGui() {
+        Application.launch(JavaFXC3.class);
     }
 }

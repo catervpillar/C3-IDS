@@ -1,7 +1,5 @@
 package it.unicam.cs.ids.c3.model;
 
-import it.unicam.cs.ids.c3.utilities.Controllore;
-
 import java.util.Objects;
 
 public abstract class Utente implements HasID {
@@ -10,13 +8,15 @@ public abstract class Utente implements HasID {
     private String password;
     private String email;
     private String telefono;
+    private Indirizzo indirizzo;
 
-    public Utente(String username, String password, String email, String telefono) {
+    public Utente(String username, String password, String email) {
         IDGenerator.generateID(this);
         this.username = username;
         this.password = password;
         this.email = email;
-        this.telefono = telefono;
+        this.telefono = "";
+        this.indirizzo = new Indirizzo("", 0, "", "", "", "");
     }
 
     public String getID() {
@@ -24,7 +24,6 @@ public abstract class Utente implements HasID {
     }
 
     public void setID(String ID) {
-        Controllore.getInstance().controllaID(ID);
         this.ID = ID;
     }
 
@@ -33,7 +32,6 @@ public abstract class Utente implements HasID {
     }
 
     public void setUsername(String username) {
-        Controllore.getInstance().controllaUsername(username);
         this.username = username;
     }
 
@@ -42,10 +40,6 @@ public abstract class Utente implements HasID {
     }
 
     public void setPassword(String password) {
-        if (Objects.isNull(password))
-            throw new NullPointerException("La password dell'utente e' nulla");
-        if (password.equals(""))
-            throw new IllegalArgumentException("La password dell'utente non e' valida");
         this.password = password;
     }
 
@@ -54,7 +48,6 @@ public abstract class Utente implements HasID {
     }
 
     public void setEmail(String email) {
-        Controllore.getInstance().controllaEmail(email);
         this.email = email;
     }
 
@@ -63,8 +56,19 @@ public abstract class Utente implements HasID {
     }
 
     public void setTelefono(String telefono) {
-        Controllore.getInstance().controllaTelefono(telefono);
         this.telefono = telefono;
+    }
+
+    public Indirizzo getIndirizzo() {
+        return indirizzo;
+    }
+
+    public void setIndirizzo(Indirizzo indirizzo) {
+        this.indirizzo = indirizzo;
+    }
+
+    public void creaIndirizzo(String via, int numeroCivico, String citta, String CAP, String provincia, String stato) {
+        this.indirizzo = new Indirizzo(via, numeroCivico, citta, CAP, provincia, stato);
     }
 
     @Override
@@ -78,5 +82,72 @@ public abstract class Utente implements HasID {
     @Override
     public int hashCode() {
         return Objects.hash(ID, username, email);
+    }
+
+
+    private class Indirizzo {
+        private String via;
+        private int numeroCivico;
+        private String citta;
+        private String CAP;
+        private String provincia;
+        private String stato;
+
+        public Indirizzo(String via, int numeroCivico, String citta, String CAP, String provincia, String stato) {
+            this.via = via;
+            this.numeroCivico = numeroCivico;
+            this.citta = citta;
+            this.CAP = CAP;
+            this.provincia = provincia;
+            this.stato = stato;
+        }
+
+        public String getVia() {
+            return via;
+        }
+
+        public void setVia(String via) {
+            this.via = via;
+        }
+
+        public int getNumeroCivico() {
+            return numeroCivico;
+        }
+
+        public void setNumeroCivico(int numeroCivico) {
+            this.numeroCivico = numeroCivico;
+        }
+
+        public String getCitta() {
+            return citta;
+        }
+
+        public void setCitta(String citta) {
+            this.citta = citta;
+        }
+
+        public String getCAP() {
+            return CAP;
+        }
+
+        public void setCAP(String CAP) {
+            this.CAP = CAP;
+        }
+
+        public String getProvincia() {
+            return provincia;
+        }
+
+        public void setProvincia(String provincia) {
+            this.provincia = provincia;
+        }
+
+        public String getStato() {
+            return stato;
+        }
+
+        public void setStato(String stato) {
+            this.stato = stato;
+        }
     }
 }

@@ -38,8 +38,6 @@ public class Ritiro implements HasID {
     }
 
     public void setTipoConsegna(TipoConsegna tipoConsegna) {
-        if (Objects.isNull(tipoConsegna))
-            throw new NullPointerException("Il tipo della consegna e' nullo");
         this.tipoConsegna = tipoConsegna;
     }
 
@@ -48,7 +46,6 @@ public class Ritiro implements HasID {
     }
 
     public void setDataConsegna(GregorianCalendar dataConsegna) {
-        Controllore.getInstance().controllaData(dataConsegna);
         this.dataConsegna = dataConsegna;
     }
 
@@ -65,7 +62,6 @@ public class Ritiro implements HasID {
     }
 
     public void setID(String ID) {
-        Controllore.getInstance().controllaID(ID);
         this.ID = ID;
     }
 
@@ -74,7 +70,6 @@ public class Ritiro implements HasID {
     }
 
     public void setDataPrenotazione(GregorianCalendar dataPrenotazione) {
-        Controllore.getInstance().controllaData(dataPrenotazione);
         this.dataPrenotazione = dataPrenotazione;
     }
 
@@ -83,7 +78,6 @@ public class Ritiro implements HasID {
     }
 
     public void setListaIDProdotti(List<String> listaIDProdotti) {
-        Controllore.getInstance().controllaLista(listaIDProdotti);
         this.listaIDProdotti = listaIDProdotti;
     }
 
@@ -92,7 +86,6 @@ public class Ritiro implements HasID {
     }
 
     public void setIDCommerciante(String IDCommerciante) {
-        Controllore.getInstance().controllaID(IDCommerciante);
         this.IDCommerciante = IDCommerciante;
     }
 
@@ -101,7 +94,6 @@ public class Ritiro implements HasID {
     }
 
     public void setIDCliente(String IDCliente) {
-        Controllore.getInstance().controllaID(IDCliente);
         this.IDCliente = IDCliente;
     }
 
@@ -110,7 +102,6 @@ public class Ritiro implements HasID {
     }
 
     public void setIDCorriere(String IDCorriere) {
-        Controllore.getInstance().controllaID(IDCorriere);
         this.IDCorriere = IDCorriere;
     }
 
@@ -119,7 +110,6 @@ public class Ritiro implements HasID {
     }
 
     public void setDestinazione(String destinazione) {
-        Controllore.getInstance().controllaIndirizzo(destinazione);
         this.destinazione = destinazione;
     }
 
@@ -136,7 +126,6 @@ public class Ritiro implements HasID {
     }
 
     public void setIDTracking(String IDTracking) {
-        Controllore.getInstance().controllaID(IDTracking);
         this.IDTracking = IDTracking;
     }
 
