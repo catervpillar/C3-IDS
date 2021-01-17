@@ -1,6 +1,9 @@
 package it.unicam.cs.ids.c3.javafx;
 
 import it.unicam.cs.ids.c3.controller.ControllerCliente;
+import it.unicam.cs.ids.c3.controller.ControllerCommerciante;
+import it.unicam.cs.ids.c3.controller.ControllerCorriere;
+import it.unicam.cs.ids.c3.controller.ControllerPuntoRitiro;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
@@ -36,16 +39,24 @@ public class AccountTypePicker implements JavaFXController {
     @FXML
     public void procedi() throws IOException {
         if (clienteRadioButton.isSelected()) {
-            startWindow("Crea il tuo profilo cliente", "/clienteCreator.fxml", new ClienteCreator(ControllerCliente.getInstance()));
+            startWindow("Crea il tuo profilo cliente",
+                    "/clienteCreator.fxml",
+                    new ClienteCreator(ControllerCliente.getInstance()));
             close(clienteRadioButton);
         } else if (commercianteRadioButton.isSelected()) {
-            startWindow("Crea il tuo profilo commerciante", "/commercianteCreator.fxml", new CommercianteCreator());
+            startWindow("Crea il tuo profilo commerciante",
+                    "/commercianteCreator.fxml",
+                    new CommercianteCreator(ControllerCommerciante.getInstance()));
             close(commercianteRadioButton);
         } else if (puntoRitiroRadioButton.isSelected()) {
-            startWindow("Crea il tuo profilo punto di ritiro", "/puntoRitiroCreator.fxml", new PuntoRitiroCreator());
+            startWindow("Crea il tuo profilo punto di ritiro",
+                    "/puntoRitiroCreator.fxml",
+                    new PuntoRitiroCreator(ControllerPuntoRitiro.getInstance()));
             close(puntoRitiroRadioButton);
         } else if (corriereRadioButton.isSelected()) {
-            startWindow("Crea il tuo profilo corriere", "/clienteCreator.fxml", new CorriereCreator());
+            startWindow("Crea il tuo profilo corriere",
+                    "/corriereCreator.fxml",
+                    new CorriereCreator(ControllerCorriere.getInstance()));
             close(corriereRadioButton);
         }
     }

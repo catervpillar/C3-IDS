@@ -9,10 +9,14 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 
 public class ClienteCreator implements JavaFXController {
-    ControllerCliente controllerCliente;
+    private final ControllerCliente controllerCliente;
 
     public ClienteCreator(ControllerCliente controllerCliente) {
         this.controllerCliente = controllerCliente;
+    }
+
+    public ControllerCliente getControllerCliente() {
+        return controllerCliente;
     }
 
     @FXML

@@ -12,11 +12,13 @@ import java.io.IOException;
 public class JavaFXC3 extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/loginC3.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/loginC3_2.fxml"));
         stage.setTitle("C3 v1.0");
-        stage.setScene(new Scene(root, 450, 500));
-        stage.setResizable(false);
-//        stage.getIcons().add(new Image("/images/jbudget_icon.png"));
+        stage.setScene(new Scene(root));
+        stage.setMinWidth(450);
+        stage.setMinHeight(475);
+//        stage.setResizable(false);
+//        stage.getIcons().add(new Image("/images/c3_icon.png"));
         stage.show();
     }
 }

@@ -1,11 +1,29 @@
 package it.unicam.cs.ids.c3.controller;
 
+import it.unicam.cs.ids.c3.model.Corriere;
 import it.unicam.cs.ids.c3.model.StatoTracking;
 import it.unicam.cs.ids.c3.model.TipoConsegna;
 import it.unicam.cs.ids.c3.model.Tracking;
 import it.unicam.cs.ids.c3.utilities.AppList;
+import it.unicam.cs.ids.c3.utilities.Controllore;
+
+import java.util.Objects;
 
 public class ControllerCorriere {
+    private static ControllerCorriere instance;
+
+    private ControllerCorriere() {
+    }
+
+    public static ControllerCorriere getInstance() {
+        if (Objects.isNull(instance)) instance = new ControllerCorriere();
+        return instance;
+    }
+
+    public void creaCorriere(String username, String password, String email, String ragioneSociale) {
+        Controllore.getInstance().controllaCorriere(username, password, email, ragioneSociale);
+        Corriere corriere = new Corriere(username, password, email, ragioneSociale);
+    }
 
     public void aggiornaTracking(Tracking tracking, StatoTracking statoTracking) {
         tracking.setStato(statoTracking);

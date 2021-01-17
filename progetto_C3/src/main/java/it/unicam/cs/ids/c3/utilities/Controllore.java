@@ -28,10 +28,9 @@ public final class Controllore {
         controllaUtente(username, password, email);
     }
 
-    public void controllaCommerciante(String username, String password, String email, String ragioneSociale, List<CategoriaProdotto> listaCategorie) {
+    public void controllaCommerciante(String username, String password, String email, String ragioneSociale) {
         controllaUtente(username, password, email);
         controllaStringa(ragioneSociale);
-        controllaLista(listaCategorie);
     }
 
     public void controllaPuntoRitiro(String username, String password, String email, String ragioneSociale) {

@@ -1,0 +1,42 @@
+.login-window-background{
+	-fx-background-image:url('https://images.wallpaperscraft.com/image/paint_liquid_clots_130158_3840x2160.jpg');
+	-fx-background-size: 100% 100%;
+
+}
+
+.login-form-background{
+	-fx-background-color: #37444A;
+	-fx-background-radius: 45;
+}
+
+.login-menubar-background{
+	-fx-background-color: #4D6068;
+	-fx-text-fill: white;
+}
+
+.login-textfield-background{
+	-fx-background-color: #4D6068;
+	-fx-background-radius: 30;
+	-fx-text-fill: white;
+}
+
+.round-button {
+    -fx-background-color: linear-gradient(#B74839, #892D44);
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+}
+
+.round-button:hover {
+    -fx-background-color: linear-gradient(#E72D14, #892D44);
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+}
+
+.round-button:pressed {
+    -fx-background-color: linear-gradient(#762116, #892D44);
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+}

@@ -47,62 +47,52 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <Label fx:id="emailLabel" layoutX="80.0" layoutY="271.0" text="Email:">
+            <Label fx:id="emailLabel" layoutX="82.0" layoutY="226.0" text="Email:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Text layoutX="82.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Creazione di un profilo Cliente">
+            <Text layoutX="82.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Creazione di un profilo Commerciante">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
             </Text>
             <ImageView fitHeight="130.0" fitWidth="130.0" layoutX="722.0" layoutY="174.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/customer.png" />
+                  <Image url="@images/shop.png" />
                </image>
             </ImageView>
-            <TextField fx:id="emailTextField" layoutX="360.0" layoutY="264.0" onKeyTyped="#controllaCampiCompilati" prefHeight="39.0" prefWidth="300.0">
+            <TextField fx:id="emailTextField" layoutX="360.0" layoutY="219.0" onKeyTyped="#controllaCampiCompilati" prefHeight="39.0" prefWidth="300.0">
                <font>
                   <Font size="16.0" />
                </font>
             </TextField>
-            <Label fx:id="usernameLabel" layoutX="80.0" layoutY="316.0" text="Scegli un username:">
+            <Label fx:id="usernameLabel" layoutX="82.0" layoutY="271.0" text="Scegli un username:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="passwordLabel" layoutX="80.0" layoutY="361.0" text="Scegli una password:">
+            <Label fx:id="passwordLabel" layoutX="82.0" layoutY="316.0" text="Scegli una password:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="usernameTextField" layoutX="360.0" layoutY="309.0" onKeyTyped="#controllaCampiCompilati" prefHeight="39.0" prefWidth="300.0">
+            <TextField fx:id="usernameTextField" layoutX="360.0" layoutY="264.0" onKeyTyped="#controllaCampiCompilati" prefHeight="39.0" prefWidth="300.0">
                <font>
                   <Font size="16.0" />
                </font>
             </TextField>
-            <TextField fx:id="nomeTextField" layoutX="360.0" layoutY="175.0" onKeyTyped="#controllaCampiCompilati" prefHeight="39.0" prefWidth="300.0">
+            <TextField fx:id="ragioneSocialeTextField" layoutX="360.0" layoutY="175.0" onKeyTyped="#controllaCampiCompilati" prefHeight="39.0" prefWidth="300.0">
                <font>
                   <Font size="16.0" />
                </font>
             </TextField>
-            <TextField fx:id="cognomeTextField" layoutX="360.0" layoutY="219.0" onKeyTyped="#controllaCampiCompilati" prefHeight="39.0" prefWidth="300.0">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </TextField>
-            <Label fx:id="nomeLabel" layoutX="82.0" layoutY="181.0" text="Nome:">
+            <Label fx:id="ragioneSocialeLabel" layoutX="82.0" layoutY="181.0" text="Ragione sociale:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="cognomeLabel" layoutX="80.0" layoutY="226.0" text="Cognome:">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Label fx:id="confermaPasswordLabel" layoutX="80.0" layoutY="406.0" text="Conferma password:">
+            <Label fx:id="confermaPasswordLabel" layoutX="82.0" layoutY="361.0" text="Conferma password:">
                <font>
                   <Font size="16.0" />
                </font>
@@ -122,12 +112,12 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </Button>
-            <PasswordField fx:id="passwordTextField" layoutX="360.0" layoutY="354.0" onKeyTyped="#controllaCampiCompilati" prefHeight="39.0" prefWidth="300.0">
+            <PasswordField fx:id="passwordTextField" layoutX="360.0" layoutY="309.0" onKeyTyped="#controllaCampiCompilati" prefHeight="39.0" prefWidth="300.0">
                <font>
                   <Font size="16.0" />
                </font>
             </PasswordField>
-            <PasswordField fx:id="confermaPasswordTextField" layoutX="360.0" layoutY="399.0" onKeyTyped="#controllaCampiCompilati" prefHeight="39.0" prefWidth="300.0">
+            <PasswordField fx:id="confermaPasswordTextField" layoutX="360.0" layoutY="354.0" onKeyTyped="#controllaCampiCompilati" prefHeight="39.0" prefWidth="300.0">
                <font>
                   <Font size="16.0" />
                </font>

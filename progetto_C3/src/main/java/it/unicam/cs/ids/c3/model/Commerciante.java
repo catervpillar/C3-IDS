@@ -7,10 +7,9 @@ public class Commerciante extends Utente {
     private String ragioneSociale;
     private List<CategoriaProdotto> listaCategorie;
 
-    public Commerciante(String username, String password, String email, String ragioneSociale, List<CategoriaProdotto> listaCategorie) {
+    public Commerciante(String username, String password, String email, String ragioneSociale) {
         super(username, password, email);
         this.ragioneSociale = ragioneSociale;
-        this.listaCategorie = listaCategorie;
     }
 
     public String getRagioneSociale() {
