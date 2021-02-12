@@ -9,7 +9,7 @@ import it.unicam.cs.ids.c3.utilities.Controllore;
 
 import java.util.Objects;
 
-public class ControllerCorriere {
+public class ControllerCorriere implements Controller {
     private static ControllerCorriere instance;
 
     private ControllerCorriere() {
@@ -23,6 +23,8 @@ public class ControllerCorriere {
     public void creaCorriere(String username, String password, String email, String ragioneSociale) {
         Controllore.getInstance().controllaCorriere(username, password, email, ragioneSociale);
         Corriere corriere = new Corriere(username, password, email, ragioneSociale);
+
+        //TODO
     }
 
     public void aggiornaTracking(Tracking tracking, StatoTracking statoTracking) {
@@ -35,5 +37,13 @@ public class ControllerCorriere {
 //                        AppList.getInstance().getRitiri().get(i).setRitirato(true);
 //                }
 //            }
+    }
+
+    @Override
+    public void creaUtente(String username, String password, String email, String ragioneSociale) {
+        Controllore.getInstance().controllaCorriere(username, password, email, ragioneSociale);
+        Corriere corriere = new Corriere(username, password, email, ragioneSociale);
+
+        //TODO
     }
 }

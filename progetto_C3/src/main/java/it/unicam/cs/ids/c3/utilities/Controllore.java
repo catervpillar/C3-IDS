@@ -102,13 +102,8 @@ public final class Controllore {
         }
     }
 
-    public void controllaIndirizzo(String via, int numeroCivico, String citta, String CAP, String provincia, String stato) {
-        controllaNome(via, "La via non e' valida");
-        if (numeroCivico < 1) throw new IllegalArgumentException("Il numero civico non e' valido");
-        controllaNome(citta, "La citta' non e' valida");
-        controllaNumero(CAP, 5);
-        controllaNome(provincia, "La provincia non e' valida");
-        controllaNome(stato, "Lo stato non e' valido");
+    public void controllaIndirizzo(String indirizzo) {
+        controllaStringa(indirizzo);
     }
 
     public void controllaLista(List<?> listaCategorie) {

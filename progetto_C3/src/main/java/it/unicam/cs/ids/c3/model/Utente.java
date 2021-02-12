@@ -8,7 +8,7 @@ public abstract class Utente implements HasID {
     private String password;
     private String email;
     private String telefono;
-    private Indirizzo indirizzo;
+    private String indirizzo;
 
     public Utente(String username, String password, String email) {
         IDGenerator.generateID(this);
@@ -16,7 +16,7 @@ public abstract class Utente implements HasID {
         this.password = password;
         this.email = email;
         this.telefono = "";
-        this.indirizzo = new Indirizzo("", 0, "", "", "", "");
+        this.indirizzo = "";
     }
 
     public String getID() {
@@ -59,16 +59,12 @@ public abstract class Utente implements HasID {
         this.telefono = telefono;
     }
 
-    public Indirizzo getIndirizzo() {
+    public String getIndirizzo() {
         return indirizzo;
     }
 
-    public void setIndirizzo(Indirizzo indirizzo) {
+    public void setIndirizzo(String indirizzo) {
         this.indirizzo = indirizzo;
-    }
-
-    public void creaIndirizzo(String via, int numeroCivico, String citta, String CAP, String provincia, String stato) {
-        this.indirizzo = new Indirizzo(via, numeroCivico, citta, CAP, provincia, stato);
     }
 
     @Override
@@ -82,72 +78,5 @@ public abstract class Utente implements HasID {
     @Override
     public int hashCode() {
         return Objects.hash(ID, username, email);
-    }
-
-
-    private class Indirizzo {
-        private String via;
-        private int numeroCivico;
-        private String citta;
-        private String CAP;
-        private String provincia;
-        private String stato;
-
-        public Indirizzo(String via, int numeroCivico, String citta, String CAP, String provincia, String stato) {
-            this.via = via;
-            this.numeroCivico = numeroCivico;
-            this.citta = citta;
-            this.CAP = CAP;
-            this.provincia = provincia;
-            this.stato = stato;
-        }
-
-        public String getVia() {
-            return via;
-        }
-
-        public void setVia(String via) {
-            this.via = via;
-        }
-
-        public int getNumeroCivico() {
-            return numeroCivico;
-        }
-
-        public void setNumeroCivico(int numeroCivico) {
-            this.numeroCivico = numeroCivico;
-        }
-
-        public String getCitta() {
-            return citta;
-        }
-
-        public void setCitta(String citta) {
-            this.citta = citta;
-        }
-
-        public String getCAP() {
-            return CAP;
-        }
-
-        public void setCAP(String CAP) {
-            this.CAP = CAP;
-        }
-
-        public String getProvincia() {
-            return provincia;
-        }
-
-        public void setProvincia(String provincia) {
-            this.provincia = provincia;
-        }
-
-        public String getStato() {
-            return stato;
-        }
-
-        public void setStato(String stato) {
-            this.stato = stato;
-        }
     }
 }

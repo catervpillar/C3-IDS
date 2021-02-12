@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-public class ControllerCommerciante {
+public class ControllerCommerciante implements Controller {
     private static ControllerCommerciante instance;
     private List<CategoriaProdotto> listaCategorie;
     private List<Prodotto> listaProdotti;
@@ -82,4 +82,11 @@ public class ControllerCommerciante {
         listaProdotti.removeIf(p -> p.getID().equals(IDProdotto));
     }
 
+    @Override
+    public void creaUtente(String username, String password, String email, String ragioneSociale) {
+        Controllore.getInstance().controllaCommerciante(username, password, email, ragioneSociale);
+        Commerciante commerciante = new Commerciante(username, password, email, ragioneSociale);
+
+        //TODO
+    }
 }
