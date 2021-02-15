@@ -4,13 +4,18 @@
 package it.unicam.cs.ids.c3;
 
 import it.unicam.cs.ids.c3.javafx.JavaFXC3;
+import it.unicam.cs.ids.c3.services.DBManager;
 import javafx.application.Application;
 
 import java.io.IOException;
 
 public class App {
     public static void main(String[] args) throws IOException {
-        launchGui();
+        //launchGui();
+        DBManager.getInstance().setDBManager("jdbc:mysql://localhost:3306/DATABSE_C3?", "root", "rootroot");
+        DBManager.getInstance().connect();
+
+
     }
 
     private static void launchGui() {

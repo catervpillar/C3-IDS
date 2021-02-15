@@ -9,10 +9,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-/*public class ControllerCommerciante implements Controller {
+public class ControllerCommerciante implements Controller {
     private static ControllerCommerciante instance;
     private List<CategoriaProdotto> listaCategorie;
-    private List<Prodotto> listaProdotti;
+    private List<Articolo> listaProdotti;
 
     private ControllerCommerciante() {
     }
@@ -63,22 +63,21 @@ import java.util.Objects;
         listaCategorie.removeIf(categoria -> categoria.getID().equals(IDCategoria));
     }
 
-    public void aggiungiProdotto(String nome, List<CategoriaProdotto> categorie) {
-        Prodotto prodotto = new Prodotto(nome, categorie);
+    public void aggiungiArticolo(String nome, List<CategoriaProdotto> categorie) {
+        Articolo prodotto = new Articolo(nome, categorie);
         listaProdotti.add(prodotto);
     }
 
-    public void modificaProdotto(String nome, List<CategoriaProdotto> categorie, String IDProdotto) {
-        for (Prodotto prodotto : listaProdotti) {
+    public void modificaArticolo(String nome, List<CategoriaProdotto> categorie, String IDProdotto) {
+        for (Articolo prodotto : listaProdotti) {
             if (prodotto.getID().equals(IDProdotto)) {
                 prodotto.setNome(nome);
                 prodotto.setListaCategorie(categorie);
-                prodotto.setPrezzo(prezzo);
             }
         }
     }
 
-    public void rimuoviProdotto(String IDProdotto) {
+    public void rimuoviArticolo(String IDProdotto) {
         listaProdotti.removeIf(p -> p.getID().equals(IDProdotto));
     }
 
@@ -89,4 +88,4 @@ import java.util.Objects;
 
         //TODO
     }
-}*/
+}

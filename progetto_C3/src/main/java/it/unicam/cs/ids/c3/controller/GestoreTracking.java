@@ -18,7 +18,6 @@ public class GestoreTracking {
 
     public void creaTracking(Ritiro ritiro) {
         Tracking tracking = new Tracking(ritiro.getID());
-        ritiro.setIDTracking(tracking.getID());
         this.listaTracking.add(tracking);
     }
 

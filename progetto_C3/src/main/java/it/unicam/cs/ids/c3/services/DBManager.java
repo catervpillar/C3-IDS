@@ -9,6 +9,11 @@ public class DBManager {
     private String pwd;
     private Connection conn = null;
 
+    private Statement statement;
+    private ResultSet resultSet;
+    private String sql;
+
+
     private DBManager() {
     }
 
@@ -18,6 +23,8 @@ public class DBManager {
         this.pwd = pwd;
     }
 
+
+
     public static DBManager getInstance() {
         if (instance == null) {
             instance = new DBManager();
@@ -25,7 +32,7 @@ public class DBManager {
         return instance;
     }
 
-    private void connect() {
+    public void connect() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
@@ -34,8 +41,17 @@ public class DBManager {
         }
         try {
 //            conn = DriverManager.getConnection(url, user, pwd);
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/nomedb?user=root&password=");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/DB_C3?user=root&password=rootroot");
             System.out.println("Database connected, ready to go!");
+
+            sql = "SELECT * FROM articolo;";
+            statement = conn.createStatement();
+            resultSet = statement.executeQuery(sql);
+
+            while(resultSet.next()){
+                System.out.print(resultSet.getString("ID") + "\t" + resultSet.getString("nome"));
+            }
+
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             System.out.println("Problems in opening a connection to the DB");
@@ -43,7 +59,7 @@ public class DBManager {
         }
     }
 
-    private void close() {
+    public void close() {
         try {
             conn.close();
         } catch (SQLException e) {
