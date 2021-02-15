@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-public class ControllerCommerciante implements Controller {
+/*public class ControllerCommerciante implements Controller {
     private static ControllerCommerciante instance;
     private List<CategoriaProdotto> listaCategorie;
     private List<Prodotto> listaProdotti;
@@ -63,12 +63,12 @@ public class ControllerCommerciante implements Controller {
         listaCategorie.removeIf(categoria -> categoria.getID().equals(IDCategoria));
     }
 
-    public void aggiungiProdotto(String nome, String IDCommerciante, List<CategoriaProdotto> categorie, double prezzo) {
-        Prodotto prodotto = new Prodotto(nome, IDCommerciante, categorie, prezzo);
+    public void aggiungiProdotto(String nome, List<CategoriaProdotto> categorie) {
+        Prodotto prodotto = new Prodotto(nome, categorie);
         listaProdotti.add(prodotto);
     }
 
-    public void modificaProdotto(String nome, List<CategoriaProdotto> categorie, double prezzo, String IDProdotto) {
+    public void modificaProdotto(String nome, List<CategoriaProdotto> categorie, String IDProdotto) {
         for (Prodotto prodotto : listaProdotti) {
             if (prodotto.getID().equals(IDProdotto)) {
                 prodotto.setNome(nome);
@@ -89,4 +89,4 @@ public class ControllerCommerciante implements Controller {
 
         //TODO
     }
-}
+}*/

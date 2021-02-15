@@ -36,7 +36,7 @@ public class ControllerCliente {
         return GestoreRicerche.getInstance().cercaCommerciante(categorieCommercianti, ragioneSociale);
     }
 
-    public List<Prodotto> cercaProdotto(List<CategoriaProdotto> categorieProdotti, String nome) {
+    public List<Articolo> cercaProdotto(List<CategoriaProdotto> categorieProdotti, String nome) {
         return GestoreRicerche.getInstance().cercaProdotto(categorieProdotti, nome);
     }
 

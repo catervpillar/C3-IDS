@@ -9,7 +9,7 @@ import java.util.List;
 public final class AppList {
     //stringa connessiona al db
     //TODO: sposta le liste nei rispettivi controller (?)
-    private final List<Prodotto> prodotti = new ArrayList<>();
+    private final List<Articolo> prodotti = new ArrayList<>();
     private final List<CategoriaProdotto> categorieProdotti = new ArrayList<>();
 
     private final List<Commerciante> commercianti = new ArrayList<>();
@@ -25,7 +25,7 @@ public final class AppList {
         return instance;
     }
 
-    public List<Prodotto> getProdotti() {
+    public List<Articolo> getProdotti() {
         return prodotti;
     }
 

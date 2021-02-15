@@ -43,6 +43,7 @@ public class CorriereCreator implements JavaFXController {
                     passwordTextField.getText(), emailTextField.getText(),
                     ragioneSocialeTextField.getText());
             close(procediButton);
+
         } catch (IllegalArgumentException | IllegalStateException e) {
             createErrorAlert(e.getMessage());
         }

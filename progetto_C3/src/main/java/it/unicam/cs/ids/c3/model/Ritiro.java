@@ -14,7 +14,6 @@ public class Ritiro implements HasID {
     private String IDCorriere;
     private String destinazione;
     private String codiceRitiro;
-    private String IDTracking;
     private GregorianCalendar dataPrenotazione;
     private GregorianCalendar dataConsegna;
     private boolean ritirato;
@@ -121,13 +120,6 @@ public class Ritiro implements HasID {
         this.codiceRitiro = codiceRitiro;
     }
 
-    public String getIDTracking() {
-        return IDTracking;
-    }
-
-    public void setIDTracking(String IDTracking) {
-        this.IDTracking = IDTracking;
-    }
 
     @Override
     public boolean equals(Object o) {

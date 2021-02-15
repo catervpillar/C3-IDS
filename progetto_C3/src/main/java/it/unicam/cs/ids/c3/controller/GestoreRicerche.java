@@ -2,7 +2,7 @@ package it.unicam.cs.ids.c3.controller;
 
 import it.unicam.cs.ids.c3.model.CategoriaProdotto;
 import it.unicam.cs.ids.c3.model.Commerciante;
-import it.unicam.cs.ids.c3.model.Prodotto;
+import it.unicam.cs.ids.c3.model.Articolo;
 import it.unicam.cs.ids.c3.model.PuntoRitiro;
 import it.unicam.cs.ids.c3.utilities.AppList;
 
@@ -19,7 +19,7 @@ public final class GestoreRicerche {
         return instance;
     }
 
-    List<Prodotto> cercaProdotto(List<CategoriaProdotto> categorieProdotti, String nome) {
+    List<Articolo> cercaProdotto(List<CategoriaProdotto> categorieProdotti, String nome) {
         if (nome == null)
             return AppList.getInstance().getProdotti().stream().filter(p -> p.getListaCategorie().containsAll(categorieProdotti)).collect(Collectors.toList());
             //TODO confrontare le sottostringhe
