@@ -1,18 +1,16 @@
 package it.unicam.cs.ids.c3.controller;
 
 import it.unicam.cs.ids.c3.model.*;
+import it.unicam.cs.ids.c3.services.Deserializer;
 import it.unicam.cs.ids.c3.utilities.Controllore;
 
 
 import java.util.GregorianCalendar;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
 public class ControllerCommerciante implements Controller {
     private static ControllerCommerciante instance;
-    private List<CategoriaProdotto> listaCategorie;
-    private List<Articolo> listaProdotti;
 
     private ControllerCommerciante() {
     }
@@ -29,6 +27,14 @@ public class ControllerCommerciante implements Controller {
         //TODO
     }
 
+    public void riempiListaProdotti(){
+//        Deserializer.getInstance().deserializzaProdottiInVendita();
+//        Deserializer.getInstance().deserializzaArticoli();
+//
+//        Deserializer.getInstance().deserializzaCategorie();
+    }
+
+
     public void prenotaRitiro(String destinazione, List<String> listaIDProdotti, String IDCommerciante, String IDCliente, String IDCorriere, TipoConsegna tipoConsegna) {
         GestoreRitiri.getInstance().creaRitiro(listaIDProdotti, IDCommerciante, IDCliente, IDCorriere, destinazione, tipoConsegna);
     }
@@ -43,42 +49,6 @@ public class ControllerCommerciante implements Controller {
 
     public void rimuoviPromozione(String IDPromozione) {
         GestorePromozioni.getInstance().rimuoviPromozione(IDPromozione);
-    }
-
-    public void aggiungiCategoria(String nome, String descrizione) {
-        CategoriaProdotto categoriaProdotto = new CategoriaProdotto(nome, descrizione);
-        listaCategorie.add(categoriaProdotto);
-    }
-
-    public void modificaCategoria(String nome, String descrizione, String IDCategoria) {
-        for (CategoriaProdotto categoriaProdotto : listaCategorie) {
-            if (categoriaProdotto.getID().equals(IDCategoria)) {
-                categoriaProdotto.setNome(nome);
-                categoriaProdotto.setDescrizione(descrizione);
-            }
-        }
-    }
-
-    public void rimuoviCategoria(String IDCategoria) {
-        listaCategorie.removeIf(categoria -> categoria.getID().equals(IDCategoria));
-    }
-
-    public void aggiungiArticolo(String nome, List<CategoriaProdotto> categorie) {
-        Articolo prodotto = new Articolo(nome, categorie);
-        listaProdotti.add(prodotto);
-    }
-
-    public void modificaArticolo(String nome, List<CategoriaProdotto> categorie, String IDProdotto) {
-        for (Articolo prodotto : listaProdotti) {
-            if (prodotto.getID().equals(IDProdotto)) {
-                prodotto.setNome(nome);
-                prodotto.setListaCategorie(categorie);
-            }
-        }
-    }
-
-    public void rimuoviArticolo(String IDProdotto) {
-        listaProdotti.removeIf(p -> p.getID().equals(IDProdotto));
     }
 
     @Override

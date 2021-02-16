@@ -1,19 +1,27 @@
 package it.unicam.cs.ids.c3.model;
 
-public class ProdottoInVendita implements HasID{
-
-    private String IDArticolo;
-    private String IDCommerciante;
+public class Prodotto implements HasID {
+    private String ID;
+    private String nome;
     private double prezzo;
     private int quantita;
-    private String ID;
+    private String IDCommerciante;
 
-    public ProdottoInVendita(String IDArticolo, String IDCommerciante, double prezzo, int quantita) {
-        this.IDArticolo = IDArticolo;
-        this.IDCommerciante = IDCommerciante;
+
+    public Prodotto(String nome, double prezzo, int quantita, String IDCommerciante) {
+        IDGenerator.generateID(this);
+        this.nome = nome;
         this.prezzo = prezzo;
         this.quantita = quantita;
-        IDGenerator.generateID(this);
+        this.IDCommerciante = IDCommerciante;
+    }
+
+    public Prodotto(String ID, String nome, double prezzo, int quantita, String IDCommerciante) {
+        this.ID = ID;
+        this.nome = nome;
+        this.prezzo = prezzo;
+        this.quantita = quantita;
+        this.IDCommerciante = IDCommerciante;
     }
 
     @Override
@@ -26,12 +34,12 @@ public class ProdottoInVendita implements HasID{
         this.ID = ID;
     }
 
-    public String getIDArticolo() {
-        return IDArticolo;
+    public String getNome() {
+        return nome;
     }
 
-    public void setIDArticolo(String IDArticolo) {
-        this.IDArticolo = IDArticolo;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getIDCommerciante() {

@@ -1,28 +1,23 @@
 package it.unicam.cs.ids.c3.services;
 
 import java.sql.*;
+import java.util.TimeZone;
 
 public class DBManager {
     private static DBManager instance;
     private String url;
     private String user;
-    private String pwd;
-    private Connection conn = null;
-
-    private Statement statement;
-    private ResultSet resultSet;
-    private String sql;
-
+    private String password;
+    private Connection connection = null;
 
     private DBManager() {
     }
 
-    public void setDBManager(String url, String user, String pwd) {
-        this.url = url;
+    public void setDBManager(String user, String pwd) {
+        this.url = "jdbc:mysql://localhost:3306/database_c3?serverTimezone=" + TimeZone.getDefault().getID();
         this.user = user;
-        this.pwd = pwd;
+        this.password = pwd;
     }
-
 
 
     public static DBManager getInstance() {
@@ -32,40 +27,31 @@ public class DBManager {
         return instance;
     }
 
-    public void connect() {
+    public void connect() throws SQLException {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
-            System.out.println("Where is your PostgreSQL JDBC Driver? " + "Include in your library path!");
             e.printStackTrace();
         }
-        try {
-//            conn = DriverManager.getConnection(url, user, pwd);
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/DB_C3?user=root&password=rootroot");
-            System.out.println("Database connected, ready to go!");
-
-            sql = "SELECT * FROM articolo;";
-            statement = conn.createStatement();
-            resultSet = statement.executeQuery(sql);
-
-            while(resultSet.next()){
-                System.out.print(resultSet.getString("ID") + "\t" + resultSet.getString("nome"));
-            }
-
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            System.out.println("Problems in opening a connection to the DB");
-            e.printStackTrace();
-        }
+        connection = DriverManager.getConnection(url, user, password);
     }
 
-    public void close() {
-        try {
-            conn.close();
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            System.out.println("Problems in closing the connection to the DB");
-            e.printStackTrace();
+    public void disconnect(ResultSet resultSet) throws SQLException {
+        Statement statement = resultSet.getStatement();
+        Connection connection = statement.getConnection();
+        resultSet.close();
+        statement.close();
+        connection.close();
+    }
+
+    public ResultSet executeQuery(String query) throws SQLException {
+        Statement statement = connection.createStatement();
+        return statement.executeQuery(query);
+    }
+
+    public void stampaQuery(ResultSet resultSet) throws SQLException {
+        while (resultSet.next()) {
+            System.out.print(resultSet.getString("ID") + "\t" + resultSet.getString("nome") + "\n");
         }
     }
 }

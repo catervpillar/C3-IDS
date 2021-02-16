@@ -1,17 +1,26 @@
 package it.unicam.cs.ids.c3.controller;
 
-import it.unicam.cs.ids.c3.model.CategoriaProdotto;
-import it.unicam.cs.ids.c3.model.Commerciante;
-import it.unicam.cs.ids.c3.model.Articolo;
-import it.unicam.cs.ids.c3.model.PuntoRitiro;
+import it.unicam.cs.ids.c3.model.*;
 import it.unicam.cs.ids.c3.utilities.AppList;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 public final class GestoreRicerche {
     private static GestoreRicerche instance;
+
+    private final List<Commerciante> commercianti = new ArrayList<>();
+    private final List<PuntoRitiro> puntiDiRitiro = new ArrayList<>();
+    private final List<Corriere> corrieri = new ArrayList<>();
+    private final List<Prodotto> prodottiInVendita = new ArrayList<>();
+    private final List<Promozione> promozioni = new ArrayList<>();
+    private final List<Recensione> recensioni = new ArrayList<>();
+    private final List<Ritiro> ritiri = new ArrayList<>();
+
+
+    private GestoreRicerche() {
+    }
 
     public static GestoreRicerche getInstance() {
         if (instance == null)
@@ -19,28 +28,18 @@ public final class GestoreRicerche {
         return instance;
     }
 
-    List<Articolo> cercaProdotto(List<CategoriaProdotto> categorieProdotti, String nome) {
-        if (nome == null)
-            return AppList.getInstance().getProdotti().stream().filter(p -> p.getListaCategorie().containsAll(categorieProdotti)).collect(Collectors.toList());
-            //TODO confrontare le sottostringhe
-        else if (categorieProdotti.isEmpty() || Objects.isNull(categorieProdotti))
-            return AppList.getInstance().getProdotti().stream().filter(p -> p.getNome().contains(nome)).collect(Collectors.toList());
-        else if ((categorieProdotti.isEmpty() || Objects.isNull(categorieProdotti)) && nome == null)
-            return AppList.getInstance().getProdotti();
-        else
-            return AppList.getInstance().getProdotti().stream().filter(p -> p.getListaCategorie().containsAll(categorieProdotti) && p.getNome().contains(nome)).collect(Collectors.toList());
-    }
 
-    List<Commerciante> cercaCommerciante(List<CategoriaProdotto> categorieCommercianti, String ragioneSociale) {
-        if (ragioneSociale == null)
-            return AppList.getInstance().getCommercianti().stream().filter(p -> p.getListaCategorie().containsAll(categorieCommercianti)).collect(Collectors.toList());
-            //TODO confrontare le sottostringhe
-        else if (categorieCommercianti.isEmpty() || categorieCommercianti == null)
-            return AppList.getInstance().getCommercianti().stream().filter(p -> p.getListaCategorie().containsAll(categorieCommercianti)).collect(Collectors.toList());
-        else if ((categorieCommercianti.isEmpty() || categorieCommercianti == null) && ragioneSociale == null)
-            return AppList.getInstance().getCommercianti();
-        else
-            return AppList.getInstance().getCommercianti().stream().filter(p -> p.getListaCategorie().containsAll(categorieCommercianti) && p.getRagioneSociale().contains(ragioneSociale)).collect(Collectors.toList());
+    List<Commerciante> cercaCommerciante(String ragioneSociale) {
+//        if (ragioneSociale == null)
+//            return AppList.getInstance().getCommercianti().stream().filter(p -> p.getListaCategorie().containsAll(categorieCommercianti)).collect(Collectors.toList());
+//            //TODO confrontare le sottostringhe
+//        else if (categorieCommercianti.isEmpty() || categorieCommercianti == null)
+//            return AppList.getInstance().getCommercianti().stream().filter(p -> p.getListaCategorie().containsAll(categorieCommercianti)).collect(Collectors.toList());
+//        else if ((categorieCommercianti.isEmpty() || categorieCommercianti == null) && ragioneSociale == null)
+//            return AppList.getInstance().getCommercianti();
+//        else
+//            return AppList.getInstance().getCommercianti().stream().filter(p -> p.getListaCategorie().containsAll(categorieCommercianti) && p.getRagioneSociale().contains(ragioneSociale)).collect(Collectors.toList());
+        return null;
     }
 
     List<PuntoRitiro> cercaPuntiRitiro(String ragioneSociale) {

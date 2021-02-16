@@ -2,9 +2,6 @@ package it.unicam.cs.ids.c3.controller;
 
 import it.unicam.cs.ids.c3.model.Corriere;
 import it.unicam.cs.ids.c3.model.StatoTracking;
-import it.unicam.cs.ids.c3.model.TipoConsegna;
-import it.unicam.cs.ids.c3.model.Tracking;
-import it.unicam.cs.ids.c3.utilities.AppList;
 import it.unicam.cs.ids.c3.utilities.Controllore;
 
 import java.util.Objects;
@@ -27,8 +24,8 @@ public class ControllerCorriere implements Controller {
         //TODO
     }
 
-    public void aggiornaTracking(Tracking tracking, StatoTracking statoTracking) {
-        tracking.setStato(statoTracking);
+//    public void aggiornaTracking(Tracking tracking, StatoTracking statoTracking) {
+//        tracking.setStato(statoTracking);
 
 //        if (statoTracking.equals(StatoTracking.CONSEGNATO))
 //            for (int i = 0; i < AppList.getInstance().getRitiri().size(); i++) {
@@ -37,7 +34,7 @@ public class ControllerCorriere implements Controller {
 //                        AppList.getInstance().getRitiri().get(i).setRitirato(true);
 //                }
 //            }
-    }
+//    }
 
     @Override
     public void creaUtente(String username, String password, String email, String ragioneSociale) {

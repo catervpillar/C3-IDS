@@ -1,6 +1,5 @@
 package it.unicam.cs.ids.c3.utilities;
 
-import it.unicam.cs.ids.c3.model.CategoriaProdotto;
 import org.apache.commons.validator.routines.EmailValidator;
 
 import java.util.GregorianCalendar;

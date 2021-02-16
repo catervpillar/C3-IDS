@@ -32,12 +32,8 @@ public class ControllerCliente {
         return GestoreRicerche.getInstance().cercaPuntiRitiro(ragioneSociale);
     }
 
-    public List<Commerciante> cercaCommerciante(List<CategoriaProdotto> categorieCommercianti, String ragioneSociale) {
-        return GestoreRicerche.getInstance().cercaCommerciante(categorieCommercianti, ragioneSociale);
-    }
-
-    public List<Articolo> cercaProdotto(List<CategoriaProdotto> categorieProdotti, String nome) {
-        return GestoreRicerche.getInstance().cercaProdotto(categorieProdotti, nome);
+    public List<Commerciante> cercaCommerciante(String ragioneSociale) {
+        return GestoreRicerche.getInstance().cercaCommerciante(ragioneSociale);
     }
 
     public void pubblicaRecensione(String titolo, String testo, String IDCliente, String IDCommerciante, String IDProdotto, VotoRecensioni votoRecensioni) {
@@ -54,10 +50,6 @@ public class ControllerCliente {
 
     public List<Ritiro> getListaOrdini() {
         return listaOrdini;
-    }
-
-    public void getTracking(String IDtracking) {
-        GestoreTracking.getInstance().getTracking(IDtracking);
     }
 
 }

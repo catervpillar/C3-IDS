@@ -9,8 +9,6 @@ import java.util.List;
 public final class AppList {
     //stringa connessiona al db
     //TODO: sposta le liste nei rispettivi controller (?)
-    private final List<Articolo> prodotti = new ArrayList<>();
-    private final List<CategoriaProdotto> categorieProdotti = new ArrayList<>();
 
     private final List<Commerciante> commercianti = new ArrayList<>();
     private final List<Cliente> clienti = new ArrayList<>();
@@ -25,16 +23,9 @@ public final class AppList {
         return instance;
     }
 
-    public List<Articolo> getProdotti() {
-        return prodotti;
-    }
 
     public List<Commerciante> getCommercianti() {
         return commercianti;
-    }
-
-    public List<CategoriaProdotto> getCategorieProdotti() {
-        return categorieProdotti;
     }
 
     public List<Cliente> getClienti() {

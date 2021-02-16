@@ -4,17 +4,38 @@
 package it.unicam.cs.ids.c3;
 
 import it.unicam.cs.ids.c3.javafx.JavaFXC3;
+import it.unicam.cs.ids.c3.model.*;
 import it.unicam.cs.ids.c3.services.DBManager;
+import it.unicam.cs.ids.c3.services.Deserializer;
 import javafx.application.Application;
 
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class App {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, SQLException {
         //launchGui();
-        DBManager.getInstance().setDBManager("jdbc:mysql://localhost:3306/DATABSE_C3?", "root", "rootroot");
-        DBManager.getInstance().connect();
 
+        Commerciante leonardo = new Commerciante("dddddddd", "leo", "leoleo", "3334445556", "leo srl");
+        Commerciante tommaso = new Commerciante("eeeeeeee", "tom", "tomtom", null, "tom srl");
+
+        DBManager.getInstance().setDBManager("root", "toor");
+
+        DBManager.getInstance().connect();
+        ResultSet resultSet = DBManager.getInstance().executeQuery("select * from prodotto where commerciante_ID =\"" + leonardo.getID() + "\"");
+
+        List<Prodotto> listaProdottiInVendita = Deserializer.getInstance().deserializzaProdotti(resultSet);
+        DBManager.getInstance().disconnect(resultSet);
+
+
+        System.out.println("PRODOTTI_IN_VENDITA:\n");
+        System.out.println("ID\t\tprezzo\tquantita\tID_articolo\tcommerciante_ID\n");
+        listaProdottiInVendita.forEach(p -> System.out.println(p.getID() + "\t" + p.getNome() + "\t" + p.getPrezzo()
+                + "\t" + p.getQuantita() + "\t" + p.getIDCommerciante() + "\n"));
 
     }
 

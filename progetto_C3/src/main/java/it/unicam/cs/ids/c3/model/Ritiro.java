@@ -18,6 +18,8 @@ public class Ritiro implements HasID {
     private GregorianCalendar dataConsegna;
     private boolean ritirato;
     private TipoConsegna tipoConsegna;
+    private StatoTracking stato;
+
 
     public Ritiro(List<String> listaIDProdotti, String IDCommerciante, String IDCliente, String IDCorriere, String destinazione, TipoConsegna tipoConsegna) {
         IDGenerator.generateID(this);
@@ -120,6 +122,13 @@ public class Ritiro implements HasID {
         this.codiceRitiro = codiceRitiro;
     }
 
+    public StatoTracking getStato() {
+        return stato;
+    }
+
+    public void setStato(StatoTracking stato) {
+        this.stato = stato;
+    }
 
     @Override
     public boolean equals(Object o) {

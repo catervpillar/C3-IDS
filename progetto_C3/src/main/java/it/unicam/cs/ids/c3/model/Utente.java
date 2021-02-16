@@ -19,6 +19,15 @@ public abstract class Utente implements HasID {
         this.indirizzo = "";
     }
 
+    public Utente(String ID, String username, String password, String email) {
+        this.ID = ID;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.telefono = "";
+        this.indirizzo = "";
+    }
+
     public String getID() {
         return ID;
     }

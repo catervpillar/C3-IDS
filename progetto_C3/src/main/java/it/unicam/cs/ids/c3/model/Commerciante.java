@@ -5,10 +5,14 @@ import java.util.List;
 
 public class Commerciante extends Utente {
     private String ragioneSociale;
-    private List<CategoriaProdotto> listaCategorie;
 
     public Commerciante(String username, String password, String email, String ragioneSociale) {
         super(username, password, email);
+        this.ragioneSociale = ragioneSociale;
+    }
+
+    public Commerciante(String ID, String username, String password, String email, String ragioneSociale) {
+        super(ID, username, password, email);
         this.ragioneSociale = ragioneSociale;
     }
 
@@ -18,13 +22,5 @@ public class Commerciante extends Utente {
 
     public void setRagioneSociale(String ragioneSociale) {
         this.ragioneSociale = ragioneSociale;
-    }
-
-    public List<CategoriaProdotto> getListaCategorie() {
-        return listaCategorie;
-    }
-
-    public void setListaCategorie(List<CategoriaProdotto> listaCategorie) {
-        this.listaCategorie = listaCategorie;
     }
 }
