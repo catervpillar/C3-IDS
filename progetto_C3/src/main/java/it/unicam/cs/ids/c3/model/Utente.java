@@ -88,4 +88,16 @@ public abstract class Utente implements HasID {
     public int hashCode() {
         return Objects.hash(ID, username, email);
     }
+
+    @Override
+    public String toString() {
+        return "Utente{" +
+                "ID='" + ID + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", indirizzo='" + indirizzo + '\'' +
+                '}';
+    }
 }

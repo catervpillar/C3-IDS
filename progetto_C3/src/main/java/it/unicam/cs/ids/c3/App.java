@@ -6,37 +6,44 @@ package it.unicam.cs.ids.c3;
 import it.unicam.cs.ids.c3.javafx.JavaFXC3;
 import it.unicam.cs.ids.c3.model.*;
 import it.unicam.cs.ids.c3.services.DBManager;
-import it.unicam.cs.ids.c3.services.Deserializer;
+import it.unicam.cs.ids.c3.services.Serializer;
 import javafx.application.Application;
 
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.GregorianCalendar;
 
 public class App {
     public static void main(String[] args) throws IOException, SQLException {
         //launchGui();
 
-        Commerciante leonardo = new Commerciante("dddddddd", "leo", "leoleo", "3334445556", "leo srl");
-        Commerciante tommaso = new Commerciante("eeeeeeee", "tom", "tomtom", null, "tom srl");
-
         DBManager.getInstance().setDBManager("root", "toor");
 
-        DBManager.getInstance().connect();
-        ResultSet resultSet = DBManager.getInstance().executeQuery("select * from prodotto where commerciante_ID =\"" + leonardo.getID() + "\"");
+        Cliente cliente = new Cliente("paoloxxx", "password11", "paolo@gmail.com", "paolo", "pierfederici");
+        cliente.setIndirizzo(null);
+        cliente.setTelefono(null);
+        Serializer.getInstance().serializzaCliente(cliente);
 
-        List<Prodotto> listaProdottiInVendita = Deserializer.getInstance().deserializzaProdotti(resultSet);
-        DBManager.getInstance().disconnect(resultSet);
+        Commerciante commerciante = new Commerciante("leo", "password1111", "leo@gmail.com", "leo srl");
+        Serializer.getInstance().serializzaCommerciante(commerciante);
 
+        Corriere corriere = new Corriere("poste", "password", "poste@gmail.com", "poste italiane");
+        Serializer.getInstance().serializzaCorriere(corriere);
 
-        System.out.println("PRODOTTI_IN_VENDITA:\n");
-        System.out.println("ID\t\tprezzo\tquantita\tID_articolo\tcommerciante_ID\n");
-        listaProdottiInVendita.forEach(p -> System.out.println(p.getID() + "\t" + p.getNome() + "\t" + p.getPrezzo()
-                + "\t" + p.getQuantita() + "\t" + p.getIDCommerciante() + "\n"));
+        PuntoRitiro puntoRitiro = new PuntoRitiro("deposito 1", "password", "deposito1@gmail.com", "deposito n1");
+        Serializer.getInstance().serializzaPuntoRitiro(puntoRitiro);
 
+        Prodotto prodotto = new Prodotto("iphone", 500, 5, commerciante.getID());
+        Serializer.getInstance().serializzaProdotto(prodotto);
+
+        Promozione promozione = new Promozione("saldi!!!1", commerciante.getID(), "sconti altissimi", new GregorianCalendar(), new GregorianCalendar());
+        Serializer.getInstance().serializzaPromozione(promozione);
+
+        Ritiro ritiro = new Ritiro(commerciante.getID(), cliente.getID(), corriere.getID(), "camerino", TipoConsegna.CONSEGNA_A_DOMICILIO);
+        Serializer.getInstance().serializzaRitiro(ritiro);
+
+        //TODO prova a serializzare recensioni
     }
 
     private static void launchGui() {

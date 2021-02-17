@@ -11,7 +11,7 @@ import java.util.Objects;
 
 public class ControllerCliente {
     private static ControllerCliente instance;
-    private final List<Ritiro> listaOrdini = new ArrayList<>();
+    private Cliente cliente;
 
     private ControllerCliente() {
     }
@@ -22,15 +22,14 @@ public class ControllerCliente {
     }
 
     public void creaCliente(String username, String password, String email, String nome, String cognome) {
+        //TODO: la query con le credenziali per loggarsi
         Controllore.getInstance().controllaCliente(username, password, email, nome, cognome);
-        Cliente cliente = new Cliente(username, password, email, nome, cognome);
-
-        //TODO
+        cliente = new Cliente(username, password, email, nome, cognome);
     }
 
-    public List<PuntoRitiro> cercaPuntiRitiro(String ragioneSociale) {
-        return GestoreRicerche.getInstance().cercaPuntiRitiro(ragioneSociale);
-    }
+//    public List<PuntoRitiro> cercaPuntiRitiro(String ragioneSociale) {
+//        return GestoreRicerche.getInstance().cercaPuntiRitiro(ragioneSociale);
+//    }
 
     public List<Commerciante> cercaCommerciante(String ragioneSociale) {
         return GestoreRicerche.getInstance().cercaCommerciante(ragioneSociale);
@@ -47,9 +46,4 @@ public class ControllerCliente {
     public void rimuoviRecensione(String IDRecensione) {
         GestoreRecensioni.getInstance().rimuoviRecensione(IDRecensione);
     }
-
-    public List<Ritiro> getListaOrdini() {
-        return listaOrdini;
-    }
-
 }

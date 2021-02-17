@@ -21,17 +21,31 @@ public class Ritiro implements HasID {
     private StatoTracking stato;
 
 
-    public Ritiro(List<String> listaIDProdotti, String IDCommerciante, String IDCliente, String IDCorriere, String destinazione, TipoConsegna tipoConsegna) {
+    public Ritiro(String IDCommerciante, String IDCliente, String IDCorriere, String destinazione, TipoConsegna tipoConsegna) {
         IDGenerator.generateID(this);
-        this.listaIDProdotti = listaIDProdotti;
         this.IDCommerciante = IDCommerciante;
         this.IDCliente = IDCliente;
         this.IDCorriere = IDCorriere;
         this.destinazione = destinazione;
         this.ritirato = false;
         this.dataPrenotazione = new GregorianCalendar();
+        this.dataConsegna = null;
         this.codiceRitiro = CodiciRitiroGenerator.getInstance().generaCodice();
         this.tipoConsegna = tipoConsegna;
+    }
+
+    public Ritiro(String ID, String IDCommerciante, String IDCliente, String IDCorriere, String destinazione, String codiceRitiro, boolean ritirato, TipoConsegna tipoConsegna, StatoTracking stato, GregorianCalendar dataPrenotazione, GregorianCalendar dataConsegna) {
+        this.ID = ID;
+        this.IDCommerciante = IDCommerciante;
+        this.IDCliente = IDCliente;
+        this.IDCorriere = IDCorriere;
+        this.destinazione = destinazione;
+        this.ritirato = ritirato;
+        this.dataPrenotazione = dataPrenotazione;
+        this.dataConsegna = dataConsegna;
+        this.codiceRitiro = codiceRitiro;
+        this.tipoConsegna = tipoConsegna;
+        this.stato = stato;
     }
 
     public TipoConsegna getTipoConsegna() {
@@ -141,5 +155,23 @@ public class Ritiro implements HasID {
     @Override
     public int hashCode() {
         return Objects.hash(ID);
+    }
+
+    @Override
+    public String toString() {
+        return "Ritiro{" +
+                "ID='" + ID + '\'' +
+                ", listaIDProdotti=" + listaIDProdotti +
+                ", IDCommerciante='" + IDCommerciante + '\'' +
+                ", IDCliente='" + IDCliente + '\'' +
+                ", IDCorriere='" + IDCorriere + '\'' +
+                ", destinazione='" + destinazione + '\'' +
+                ", codiceRitiro='" + codiceRitiro + '\'' +
+                ", dataPrenotazione=" + dataPrenotazione +
+                ", dataConsegna=" + dataConsegna +
+                ", ritirato=" + ritirato +
+                ", tipoConsegna=" + tipoConsegna +
+                ", stato=" + stato +
+                '}';
     }
 }

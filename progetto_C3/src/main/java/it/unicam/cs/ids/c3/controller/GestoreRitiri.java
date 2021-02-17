@@ -20,7 +20,7 @@ public final class GestoreRitiri {
     }
 
     public void creaRitiro(List<String> listaIDProdotti, String IDCommerciante, String IDCliente, String IDCorriere, String destinazione, TipoConsegna tipoConsegna) {
-        Ritiro ritiro = new Ritiro(listaIDProdotti, IDCommerciante, IDCliente, IDCorriere, destinazione, tipoConsegna);
-        this.listaRitiri.add(ritiro);
+//        Ritiro ritiro = new Ritiro(listaIDProdotti, IDCommerciante, IDCliente, IDCorriere, destinazione, tipoConsegna);
+//        this.listaRitiri.add(ritiro);
     }
 }

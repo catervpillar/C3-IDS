@@ -11,6 +11,12 @@ public class Cliente extends Utente {
         this.cognome = cognome;
     }
 
+    public Cliente(String ID, String username, String password, String email, String nome, String cognome) {
+        super(ID, username, password, email);
+        this.nome = nome;
+        this.cognome = cognome;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -25,5 +31,13 @@ public class Cliente extends Utente {
 
     public void setCognome(String cognome) {
         this.cognome = cognome;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "Cliente{" +
+                "nome='" + nome + '\'' +
+                ", cognome='" + cognome + '\'' +
+                '}';
     }
 }

@@ -1,12 +1,10 @@
 package it.unicam.cs.ids.c3.services;
 
-import it.unicam.cs.ids.c3.model.Prodotto;
+import it.unicam.cs.ids.c3.model.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Deserializer {
     private static Deserializer instance;
@@ -30,9 +28,162 @@ public class Deserializer {
                     resultSet.getInt("quantita"),
                     resultSet.getString("commerciante_ID"));
             listaProdotti.add(prodotto);
-
         }
 
+        DBManager.getInstance().disconnect(resultSet);
         return listaProdotti;
+    }
+
+    public Cliente deserializzaCliente(ResultSet resultSet) throws SQLException {
+        Cliente cliente;
+
+        resultSet.last();
+
+        int count = 0;
+        while (resultSet.next()) {
+            count++;
+        }
+        if (count != 1)
+            throw new SQLException();
+        cliente = new Cliente(resultSet.getString("ID"),
+                resultSet.getString("username"),
+                resultSet.getString("password"),
+                resultSet.getString("email"),
+                resultSet.getString("nome"),
+                resultSet.getString("cognome"));
+        cliente.setTelefono(resultSet.getString("telefono"));
+        cliente.setIndirizzo(resultSet.getString("indirizzo"));
+
+        DBManager.getInstance().disconnect(resultSet);
+        return cliente;
+    }
+
+    public List<Commerciante> deserializzaCommercianti(ResultSet resultSet) throws SQLException {
+        List<Commerciante> listaCommercianti = new ArrayList<>();
+
+
+        while (resultSet.next()) {
+            Commerciante commerciante = new Commerciante(resultSet.getString("ID"),
+                    resultSet.getString("username"),
+                    resultSet.getString("password"),
+                    resultSet.getString("email"),
+                    resultSet.getString("ragioneSociale"));
+            commerciante.setTelefono(resultSet.getString("telefono"));
+            commerciante.setIndirizzo(resultSet.getString("indirizzo"));
+            listaCommercianti.add(commerciante);
+        }
+
+        DBManager.getInstance().disconnect(resultSet);
+        return listaCommercianti;
+    }
+
+    public List<Corriere> deserializzaCorrieri(ResultSet resultSet) throws SQLException {
+        List<Corriere> listaCorriere = new ArrayList<>();
+
+        while (resultSet.next()) {
+            Corriere corriere = new Corriere(resultSet.getString("ID"),
+                    resultSet.getString("username"),
+                    resultSet.getString("password"),
+                    resultSet.getString("email"),
+                    resultSet.getString("ragioneSociale"));
+            corriere.setTelefono(resultSet.getString("telefono"));
+            corriere.setIndirizzo(resultSet.getString("indirizzo"));
+            listaCorriere.add(corriere);
+        }
+
+        DBManager.getInstance().disconnect(resultSet);
+        return listaCorriere;
+    }
+
+    public List<PuntoRitiro> deserializzaPuntiRitiro(ResultSet resultSet) throws SQLException {
+        List<PuntoRitiro> listaPuntiRitiro = new ArrayList<>();
+
+        while (resultSet.next()) {
+            PuntoRitiro puntoRitiro = new PuntoRitiro(resultSet.getString("ID"),
+                    resultSet.getString("username"),
+                    resultSet.getString("password"),
+                    resultSet.getString("email"),
+                    resultSet.getString("ragioneSociale"));
+            puntoRitiro.setTelefono(resultSet.getString("telefono"));
+            puntoRitiro.setIndirizzo(resultSet.getString("indirizzo"));
+            listaPuntiRitiro.add(puntoRitiro);
+        }
+
+        DBManager.getInstance().disconnect(resultSet);
+        return listaPuntiRitiro;
+    }
+
+
+    public List<? extends Promozione> deserializzaPromozioni(ResultSet resultSet) throws SQLException {
+        List<Promozione> listaPromozioni = new ArrayList<>();
+
+        while (resultSet.next()) {
+            GregorianCalendar dataInizio = new GregorianCalendar();
+            dataInizio.setTime(resultSet.getDate("data_inizio"));
+            GregorianCalendar dataScadenza = new GregorianCalendar();
+            dataScadenza.setTime(resultSet.getDate("data_scadenza"));
+
+            Promozione promozione = new Promozione(resultSet.getString("ID"),
+                    resultSet.getString("nome"),
+                    resultSet.getString("commerciante_ID"),
+                    resultSet.getString("descrizione"),
+                    dataInizio,
+                    dataScadenza);
+
+            ResultSet resultSet1 = DBManager.getInstance().executeQuery("select * from promozione_has_prodotto where promozione_ID = \""
+                    + promozione.getID() + "\"");
+            while (resultSet1.next()) {
+                promozione.getListaIDProdotti().add(resultSet1.getString("prodottoInVendita_ID"));
+            }
+            listaPromozioni.add(promozione);
+        }
+
+        DBManager.getInstance().disconnect(resultSet);
+        return listaPromozioni;
+    }
+
+    public List<? extends Recensione> deserializzaRecensioni(ResultSet resultSet) throws SQLException {
+        List<Recensione> listaRecensioni = new ArrayList<>();
+
+        while (resultSet.next()) {
+            Recensione recensione = new Recensione(resultSet.getString("ID"),
+                    resultSet.getString("titolo"),
+                    resultSet.getString("testo"),
+                    resultSet.getString("cliente_ID"),
+                    resultSet.getString("commerciante_ID"),
+                    resultSet.getString("prodotto_ID"),
+                    VotoRecensioni.valueOf(resultSet.getString("voto_recensione")));
+            listaRecensioni.add(recensione);
+        }
+
+        DBManager.getInstance().disconnect(resultSet);
+        return listaRecensioni;
+    }
+
+    public List<? extends Ritiro> deserializzaRitiri(ResultSet resultSet) throws SQLException {
+        List<Ritiro> listaRitiri = new ArrayList<>();
+
+        while (resultSet.next()) {
+            GregorianCalendar dataPrenotazione = new GregorianCalendar();
+            dataPrenotazione.setTime(resultSet.getDate("data_prenotazione"));
+            GregorianCalendar dataConsegna = new GregorianCalendar();
+            dataConsegna.setTime(resultSet.getDate("data_consegna"));
+
+            Ritiro ritiro = new Ritiro(resultSet.getString("ID"),
+                    resultSet.getString("commerciante_ID"),
+                    resultSet.getString("cliente_ID"),
+                    resultSet.getString("corriere_ID"),
+                    resultSet.getString("destinazione"),
+                    resultSet.getString("codice_ritiro"),
+                    resultSet.getBoolean("ritirato"),
+                    TipoConsegna.valueOf(resultSet.getString("tipo_consegna")),
+                    StatoTracking.valueOf(resultSet.getString("stato_tracking")),
+                    dataPrenotazione,
+                    dataConsegna);
+            listaRitiri.add(ritiro);
+        }
+
+        DBManager.getInstance().disconnect(resultSet);
+        return listaRitiri;
     }
 }

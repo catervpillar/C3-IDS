@@ -24,6 +24,17 @@ public class Recensione implements HasID {
         this.data = new GregorianCalendar();
     }
 
+    public Recensione(String ID, String titolo, String testo, String IDCliente, String IDCommerciante, String IDProdotto, VotoRecensioni votoRecensioni) {
+        this.ID = ID;
+        this.titolo = titolo;
+        this.testo = testo;
+        this.IDCliente = IDCliente;
+        this.IDCommerciante = IDCommerciante;
+        this.IDProdotto = IDProdotto;
+        this.votoRecensioni = votoRecensioni;
+        this.data = new GregorianCalendar();
+    }
+
     @Override
     public String getID() {
         return ID;
@@ -100,5 +111,19 @@ public class Recensione implements HasID {
     @Override
     public int hashCode() {
         return Objects.hash(ID);
+    }
+
+    @Override
+    public String toString() {
+        return "Recensione{" +
+                "ID='" + ID + '\'' +
+                ", titolo='" + titolo + '\'' +
+                ", testo='" + testo + '\'' +
+                ", IDCliente='" + IDCliente + '\'' +
+                ", IDCommerciante='" + IDCommerciante + '\'' +
+                ", IDProdotto='" + IDProdotto + '\'' +
+                ", votoRecensioni=" + votoRecensioni +
+                ", data=" + data +
+                '}';
     }
 }

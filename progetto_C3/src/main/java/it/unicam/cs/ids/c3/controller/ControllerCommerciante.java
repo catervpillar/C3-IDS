@@ -5,12 +5,14 @@ import it.unicam.cs.ids.c3.services.Deserializer;
 import it.unicam.cs.ids.c3.utilities.Controllore;
 
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Objects;
 
 public class ControllerCommerciante implements Controller {
     private static ControllerCommerciante instance;
+    private Commerciante commerciante;
 
     private ControllerCommerciante() {
     }
@@ -27,7 +29,7 @@ public class ControllerCommerciante implements Controller {
         //TODO
     }
 
-    public void riempiListaProdotti(){
+    public void riempiListaProdotti() {
 //        Deserializer.getInstance().deserializzaProdottiInVendita();
 //        Deserializer.getInstance().deserializzaArticoli();
 //
@@ -39,8 +41,8 @@ public class ControllerCommerciante implements Controller {
         GestoreRitiri.getInstance().creaRitiro(listaIDProdotti, IDCommerciante, IDCliente, IDCorriere, destinazione, tipoConsegna);
     }
 
-    public void creaPromozione(List<String> listaIDCommercianti, String nome, String descrizione, List<String> listaIDProdotti, GregorianCalendar dataInizio, GregorianCalendar dataScadenza) {
-        GestorePromozioni.getInstance().creaPromozione(nome, listaIDCommercianti, listaIDProdotti, descrizione, dataInizio, dataScadenza);
+    public void creaPromozione(String IDCommerciante, String nome, String descrizione, List<String> listaIDProdotti, GregorianCalendar dataInizio, GregorianCalendar dataScadenza) {
+        GestorePromozioni.getInstance().creaPromozione(nome, IDCommerciante, listaIDProdotti, descrizione, dataInizio, dataScadenza);
     }
 
     public void modificaPromozione(List<String> listaIDCommercianti, String nome, String descrizione, List<String> listaIDProdotti, GregorianCalendar dataInizio, GregorianCalendar dataScadenza, String IDPromozione) {

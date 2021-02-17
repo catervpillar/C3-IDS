@@ -1,5 +1,7 @@
 package it.unicam.cs.ids.c3.model;
 
+import java.util.Objects;
+
 public class Prodotto implements HasID {
     private String ID;
     private String nome;
@@ -64,5 +66,29 @@ public class Prodotto implements HasID {
 
     public void setQuantita(int quantita) {
         this.quantita = quantita;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Prodotto prodotto = (Prodotto) o;
+        return ID.equals(prodotto.ID);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ID);
+    }
+
+    @Override
+    public String toString() {
+        return "Prodotto{" +
+                "ID='" + ID + '\'' +
+                ", nome='" + nome + '\'' +
+                ", prezzo=" + prezzo +
+                ", quantita=" + quantita +
+                ", IDCommerciante='" + IDCommerciante + '\'' +
+                '}';
     }
 }

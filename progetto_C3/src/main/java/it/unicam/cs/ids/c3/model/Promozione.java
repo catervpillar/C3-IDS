@@ -5,23 +5,31 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Objects;
 
-public class Promozione implements HasID{
+public class Promozione implements HasID {
     private String ID;
     private String nome;
     private String descrizione;
-    private List<String> listaIDCommercianti;
+    private String IDCommerciante;
     private List<String> listaIDProdotti;
     private GregorianCalendar dataInizio;
     private GregorianCalendar dataScadenza;
 
-    public Promozione(String nome, List<String> listaIDCommercianti, List<String> listaIDProdotti, String descrizione, GregorianCalendar dataInizio, GregorianCalendar dataScadenza) {
+    public Promozione(String nome, String IDCommerciante, String descrizione, GregorianCalendar dataInizio, GregorianCalendar dataScadenza) {
         IDGenerator.generateID(this);
-        this.listaIDProdotti = listaIDProdotti;
-        this.listaIDCommercianti = listaIDCommercianti;
+        this.nome = nome;
+        this.IDCommerciante = IDCommerciante;
         this.descrizione = descrizione;
         this.dataInizio = dataInizio;
         this.dataScadenza = dataScadenza;
+    }
+
+    public Promozione(String ID, String nome, String IDCommerciante, String descrizione, GregorianCalendar dataInizio, GregorianCalendar dataScadenza) {
+        this.ID = ID;
         this.nome = nome;
+        this.IDCommerciante = IDCommerciante;
+        this.descrizione = descrizione;
+        this.dataInizio = dataInizio;
+        this.dataScadenza = dataScadenza;
     }
 
     public String getID() {
@@ -32,12 +40,12 @@ public class Promozione implements HasID{
         this.ID = ID;
     }
 
-    public List<String> getListaIDCommercianti() {
-        return listaIDCommercianti;
+    public String getIDCommerciante() {
+        return IDCommerciante;
     }
 
-    public void setListaIDCommercianti(List<String> listaIDCommercianti) {
-        this.listaIDCommercianti = listaIDCommercianti;
+    public void setIDCommerciante(String IDCommerciante) {
+        this.IDCommerciante = IDCommerciante;
     }
 
     public String getDescrizione() {
@@ -91,5 +99,18 @@ public class Promozione implements HasID{
     @Override
     public int hashCode() {
         return Objects.hash(ID);
+    }
+
+    @Override
+    public String toString() {
+        return "Promozione{" +
+                "ID='" + ID + '\'' +
+                ", nome='" + nome + '\'' +
+                ", descrizione='" + descrizione + '\'' +
+                ", IDCommerciante='" + IDCommerciante + '\'' +
+                ", listaIDProdotti=" + listaIDProdotti +
+                ", dataInizio=" + dataInizio +
+                ", dataScadenza=" + dataScadenza +
+                '}';
     }
 }

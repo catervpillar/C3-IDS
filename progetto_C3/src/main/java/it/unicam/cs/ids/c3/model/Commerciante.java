@@ -1,8 +1,6 @@
 package it.unicam.cs.ids.c3.model;
 
 
-import java.util.List;
-
 public class Commerciante extends Utente {
     private String ragioneSociale;
 
@@ -22,5 +20,12 @@ public class Commerciante extends Utente {
 
     public void setRagioneSociale(String ragioneSociale) {
         this.ragioneSociale = ragioneSociale;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "Commerciante{" +
+                "ragioneSociale='" + ragioneSociale + '\'' +
+                '}';
     }
 }

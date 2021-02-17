@@ -10,6 +10,7 @@ public class DBManager {
     private String password;
     private Connection connection = null;
 
+
     private DBManager() {
     }
 
@@ -27,7 +28,7 @@ public class DBManager {
         return instance;
     }
 
-    public void connect() throws SQLException {
+    private void connect() throws SQLException {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
@@ -44,14 +45,20 @@ public class DBManager {
         connection.close();
     }
 
+    public void disconnect(PreparedStatement preparedStatement) throws SQLException {
+        Connection connection = preparedStatement.getConnection();
+        preparedStatement.close();
+        connection.close();
+    }
+
     public ResultSet executeQuery(String query) throws SQLException {
+        connect();
         Statement statement = connection.createStatement();
         return statement.executeQuery(query);
     }
 
-    public void stampaQuery(ResultSet resultSet) throws SQLException {
-        while (resultSet.next()) {
-            System.out.print(resultSet.getString("ID") + "\t" + resultSet.getString("nome") + "\n");
-        }
+    public PreparedStatement getPreparedStatement(String sql) throws SQLException {
+        connect();
+        return connection.prepareStatement(sql);
     }
 }
