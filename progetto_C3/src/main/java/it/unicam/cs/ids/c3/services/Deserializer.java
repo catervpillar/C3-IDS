@@ -1,5 +1,9 @@
 package it.unicam.cs.ids.c3.services;
 
+import it.unicam.cs.ids.c3.controller.ControllerCliente;
+import it.unicam.cs.ids.c3.controller.ControllerCommerciante;
+import it.unicam.cs.ids.c3.controller.ControllerCorriere;
+import it.unicam.cs.ids.c3.controller.ControllerPuntoRitiro;
 import it.unicam.cs.ids.c3.model.*;
 
 import java.sql.ResultSet;
@@ -40,11 +44,12 @@ public class Deserializer {
         resultSet.last();
 
         int count = 0;
-        while (resultSet.next()) {
+        /*while (resultSet.next()) {
             count++;
         }
+
         if (count != 1)
-            throw new SQLException();
+            throw new SQLException("Stronzata");*/
         cliente = new Cliente(resultSet.getString("ID"),
                 resultSet.getString("username"),
                 resultSet.getString("password"),
@@ -151,7 +156,7 @@ public class Deserializer {
                     resultSet.getString("testo"),
                     resultSet.getString("cliente_ID"),
                     resultSet.getString("commerciante_ID"),
-                    resultSet.getString("prodotto_ID"),
+                    resultSet.getString("prodottoInVendita_ID"),
                     VotoRecensioni.valueOf(resultSet.getString("voto_recensione")));
             listaRecensioni.add(recensione);
         }
@@ -167,7 +172,10 @@ public class Deserializer {
             GregorianCalendar dataPrenotazione = new GregorianCalendar();
             dataPrenotazione.setTime(resultSet.getDate("data_prenotazione"));
             GregorianCalendar dataConsegna = new GregorianCalendar();
-            dataConsegna.setTime(resultSet.getDate("data_consegna"));
+            if (!Objects.isNull(resultSet.getDate("data_consegna")))
+                dataConsegna.setTime(resultSet.getDate("data_consegna"));
+            else
+                dataConsegna = null;
 
             Ritiro ritiro = new Ritiro(resultSet.getString("ID"),
                     resultSet.getString("commerciante_ID"),
@@ -185,5 +193,18 @@ public class Deserializer {
 
         DBManager.getInstance().disconnect(resultSet);
         return listaRitiri;
+    }
+
+    public String cercaUtente(String username, String password) throws SQLException {
+        if (ControllerCliente.getInstance().loginCliente(username, password))
+            return "cliente";
+        if (ControllerCommerciante.getInstance().loginCommerciante(username, password))
+            return "commerciante";
+        if (ControllerCorriere.getInstance().loginCorriere(username, password))
+            return "corriere";
+
+        if (ControllerPuntoRitiro.getInstance().loginPuntoRitiro(username, password))
+            return "punto_ritiro";
+        return null;
     }
 }

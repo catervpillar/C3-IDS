@@ -7,7 +7,9 @@ import it.unicam.cs.ids.c3.javafx.JavaFXC3;
 import it.unicam.cs.ids.c3.model.*;
 import it.unicam.cs.ids.c3.services.DBManager;
 import it.unicam.cs.ids.c3.services.SerializerAggiunta;
+import it.unicam.cs.ids.c3.services.SerializerElimina;
 import javafx.application.Application;
+import org.checkerframework.checker.units.qual.C;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -15,55 +17,10 @@ import java.util.GregorianCalendar;
 
 public class App {
     public static void main(String[] args) throws IOException, SQLException {
-        //launchGui();
 
-        DBManager.getInstance().setDBManager("root", "toor");
-
-        Cliente cliente = new Cliente("c0f1a525", "paoloxxx", "password11", "paolo@gmail.com", "paolo", "pierfederici");
-        cliente.setIndirizzo(null);
-        cliente.setTelefono(null);
-        //SerializerAggiunta.getInstance().serializzaCliente(cliente);
-
-        Commerciante commerciante = new Commerciante("d76bf9ce", "leo", "password1111", "leo@gmail.com", "leo srl");
-        //SerializerAggiunta.getInstance().serializzaCommerciante(commerciante);
-
-        Corriere corriere = new Corriere("08f0cf37", "poste", "password", "poste@gmail.com", "poste italiane");
-        //SerializerAggiunta.getInstance().serializzaCorriere(corriere);
-
-        PuntoRitiro puntoRitiro = new PuntoRitiro("b92be962", "deposito 1", "password", "deposito1@gmail.com", "deposito n1");
-        //SerializerAggiunta.getInstance().serializzaPuntoRitiro(puntoRitiro);
-
-        Prodotto prodotto = new Prodotto("patate", 2, 500, commerciante.getID());
-        SerializerAggiunta.getInstance().serializzaProdotto(prodotto);
-
-        Prodotto prodotto2 = new Prodotto("ipad", 455, 45, commerciante.getID());
-        SerializerAggiunta.getInstance().serializzaProdotto(prodotto2);
-
-        Prodotto prodotto3 = new Prodotto("bambini", 9, 500, commerciante.getID());
-        SerializerAggiunta.getInstance().serializzaProdotto(prodotto3);
-
-        Prodotto prodotto4 = new Prodotto("goleador", 0.10, 50, commerciante.getID());
-        SerializerAggiunta.getInstance().serializzaProdotto(prodotto4);
-
-        Promozione promozione = new Promozione("saldi!!!1", commerciante.getID(), "sconti altissimi", new GregorianCalendar(), new GregorianCalendar());
-        System.out.println(prodotto.getID());
-        promozione.getListaIDProdotti().add(prodotto.getID());
-        promozione.getListaIDProdotti().add(prodotto2.getID());
-        promozione.getListaIDProdotti().add(prodotto3.getID());
-        promozione.getListaIDProdotti().add(prodotto4.getID());
-        SerializerAggiunta.getInstance().serializzaPromozione(promozione);
-
-        Ritiro ritiro = new Ritiro(commerciante.getID(), cliente.getID(), corriere.getID(), "camerino", TipoConsegna.CONSEGNA_A_DOMICILIO);
-        ritiro.getListaIDProdotti().add(prodotto.getID());
-        ritiro.getListaIDProdotti().add(prodotto2.getID());
-        ritiro.getListaIDProdotti().add(prodotto3.getID());
-        ritiro.getListaIDProdotti().add(prodotto4.getID());
-        SerializerAggiunta.getInstance().serializzaRitiro(ritiro);
-
-        //Recensione recensione = new Recensione("fantastico", "bel prodotto", cliente.getID(), commerciante.getID(), prodotto.getID(), VotoRecensioni.CINQUE_STELLE);
-        //SerializerAggiunta.getInstance().serializzaRecensione(recensione);
+        DBManager.getInstance().setDBManager("root", "rootroot");
+        launchGui();
     }
-
     private static void launchGui() {
         Application.launch(JavaFXC3.class);
     }

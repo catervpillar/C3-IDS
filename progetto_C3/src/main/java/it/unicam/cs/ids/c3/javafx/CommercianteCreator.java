@@ -7,19 +7,10 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class CommercianteCreator implements JavaFXController {
-    private final ControllerCommerciante controllerCommerciante;
-
-    public CommercianteCreator(ControllerCommerciante controllerCommerciante) {
-        this.controllerCommerciante = controllerCommerciante;
-    }
-
-    public ControllerCommerciante getControllerCommerciante() {
-        return controllerCommerciante;
-    }
-
-    @FXML
+@FXML
     TextField ragioneSocialeTextField;
     @FXML
     TextField emailTextField;
@@ -39,11 +30,11 @@ public class CommercianteCreator implements JavaFXController {
     public void procedi() {
         try {
             confrontaPassword();
-            controllerCommerciante.creaCommerciante(usernameTextField.getText(),
+            ControllerCommerciante.getInstance().creaCommerciante(usernameTextField.getText(),
                     passwordTextField.getText(), emailTextField.getText(),
                     ragioneSocialeTextField.getText());
             close(procediButton);
-        } catch (IllegalArgumentException | IllegalStateException e) {
+        } catch (IllegalArgumentException | IllegalStateException | SQLException e) {
             createErrorAlert(e.getMessage());
         }
     }

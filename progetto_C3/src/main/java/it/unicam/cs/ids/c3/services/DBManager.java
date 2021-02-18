@@ -53,7 +53,7 @@ public class DBManager {
 
     public ResultSet executeQuery(String query) throws SQLException {
         connect();
-        Statement statement = connection.createStatement();
+        Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.TYPE_SCROLL_INSENSITIVE);
         return statement.executeQuery(query);
     }
 

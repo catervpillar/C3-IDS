@@ -1,16 +1,20 @@
 package it.unicam.cs.ids.c3.controller;
 
 import it.unicam.cs.ids.c3.model.*;
+import it.unicam.cs.ids.c3.services.DBManager;
 import it.unicam.cs.ids.c3.services.Deserializer;
+import it.unicam.cs.ids.c3.services.SerializerAggiunta;
 import it.unicam.cs.ids.c3.utilities.Controllore;
 
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Objects;
 
-public class ControllerCommerciante implements Controller {
+public class ControllerCommerciante {
     private static ControllerCommerciante instance;
     private Commerciante commerciante;
 
@@ -22,11 +26,28 @@ public class ControllerCommerciante implements Controller {
         return instance;
     }
 
-    public void creaCommerciante(String username, String password, String email, String ragioneSociale) {
+    public Commerciante getCommerciante() {
+        return commerciante;
+    }
+
+    public void creaCommerciante(String username, String password, String email, String ragioneSociale) throws SQLException {
         Controllore.getInstance().controllaCommerciante(username, password, email, ragioneSociale);
         Commerciante commerciante = new Commerciante(username, password, email, ragioneSociale);
+        SerializerAggiunta.getInstance().serializzaCommerciante(commerciante);
+    }
 
-        //TODO
+    public boolean loginCommerciante(String username, String password) throws SQLException {
+        String sql = "select * from commerciante where username = \"" + username + "\" and password = \"" + password + "\";";
+        ResultSet resultSet = DBManager.getInstance().executeQuery(sql);
+        int i = 0;
+        while (resultSet.next()) {
+            i++;
+        }
+        if (i == 1) {
+            this.commerciante = Deserializer.getInstance().deserializzaCommercianti(resultSet).get(0);
+            return true;
+        }
+        else return false;
     }
 
     public void riempiListaProdotti() {
@@ -51,13 +72,5 @@ public class ControllerCommerciante implements Controller {
 
     public void rimuoviPromozione(String IDPromozione) {
         GestorePromozioni.getInstance().rimuoviPromozione(IDPromozione);
-    }
-
-    @Override
-    public void creaUtente(String username, String password, String email, String ragioneSociale) {
-        Controllore.getInstance().controllaCommerciante(username, password, email, ragioneSociale);
-        Commerciante commerciante = new Commerciante(username, password, email, ragioneSociale);
-
-        //TODO
     }
 }

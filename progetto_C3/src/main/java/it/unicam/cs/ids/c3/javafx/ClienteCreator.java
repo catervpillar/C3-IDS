@@ -7,17 +7,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class ClienteCreator implements JavaFXController {
-    private final ControllerCliente controllerCliente;
-
-    public ClienteCreator(ControllerCliente controllerCliente) {
-        this.controllerCliente = controllerCliente;
-    }
-
-    public ControllerCliente getControllerCliente() {
-        return controllerCliente;
-    }
 
     @FXML
     TextField nomeTextField;
@@ -41,12 +33,12 @@ public class ClienteCreator implements JavaFXController {
     public void procedi() {
         try {
             confrontaPassword();
-            controllerCliente.creaCliente(usernameTextField.getText(),
+            ControllerCliente.getInstance().creaCliente(usernameTextField.getText(),
                     passwordTextField.getText(), emailTextField.getText(),
                     nomeTextField.getText(),
                     cognomeTextField.getText());
             close(procediButton);
-        } catch (IllegalArgumentException | IllegalStateException e) {
+        } catch (IllegalArgumentException | IllegalStateException | SQLException e) {
             createErrorAlert(e.getMessage());
         }
     }

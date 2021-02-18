@@ -7,19 +7,10 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class PuntoRitiroCreator implements JavaFXController {
-    private final ControllerPuntoRitiro controllerPuntoRitiro;
-
-    public PuntoRitiroCreator(ControllerPuntoRitiro controllerPuntoRitiro) {
-        this.controllerPuntoRitiro = controllerPuntoRitiro;
-    }
-
-    public ControllerPuntoRitiro getControllerPuntoRitiro() {
-        return controllerPuntoRitiro;
-    }
-
-    @FXML
+   @FXML
     TextField ragioneSocialeTextField;
     @FXML
     TextField emailTextField;
@@ -39,11 +30,11 @@ public class PuntoRitiroCreator implements JavaFXController {
     public void procedi() {
         try {
             confrontaPassword();
-            controllerPuntoRitiro.creaPuntoRitiro(usernameTextField.getText(),
+            ControllerPuntoRitiro.getInstance().creaPuntoRitiro(usernameTextField.getText(),
                     passwordTextField.getText(), emailTextField.getText(),
                     ragioneSocialeTextField.getText());
             close(procediButton);
-        } catch (IllegalArgumentException | IllegalStateException e) {
+        } catch (IllegalArgumentException | IllegalStateException | SQLException e) {
             createErrorAlert(e.getMessage());
         }
     }

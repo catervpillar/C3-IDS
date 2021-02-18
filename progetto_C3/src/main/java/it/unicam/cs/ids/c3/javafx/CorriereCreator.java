@@ -7,19 +7,10 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class CorriereCreator implements JavaFXController {
-    private final ControllerCorriere controllerCorriere;
-
-    public CorriereCreator(ControllerCorriere controllerCorriere) {
-        this.controllerCorriere = controllerCorriere;
-    }
-
-    public ControllerCorriere getControllerCorriere() {
-        return controllerCorriere;
-    }
-
-    @FXML
+@FXML
     TextField ragioneSocialeTextField;
     @FXML
     TextField emailTextField;
@@ -39,12 +30,12 @@ public class CorriereCreator implements JavaFXController {
     public void procedi() {
         try {
             confrontaPassword();
-            controllerCorriere.creaCorriere(usernameTextField.getText(),
+            ControllerCorriere.getInstance().creaCorriere(usernameTextField.getText(),
                     passwordTextField.getText(), emailTextField.getText(),
                     ragioneSocialeTextField.getText());
             close(procediButton);
 
-        } catch (IllegalArgumentException | IllegalStateException e) {
+        } catch (IllegalArgumentException | IllegalStateException | SQLException e) {
             createErrorAlert(e.getMessage());
         }
     }

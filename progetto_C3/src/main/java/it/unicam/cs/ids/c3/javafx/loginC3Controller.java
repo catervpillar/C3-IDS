@@ -1,11 +1,14 @@
 package it.unicam.cs.ids.c3.javafx;
 
+import it.unicam.cs.ids.c3.controller.ControllerCliente;
+import it.unicam.cs.ids.c3.services.Deserializer;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class loginC3Controller implements JavaFXController {
 
@@ -40,6 +43,16 @@ public class loginC3Controller implements JavaFXController {
             erroreLoginText.setText("TUTTO OK!");
             erroreLoginText.setVisible(true);
         }
+        try{
+            String utente = Deserializer.getInstance().cercaUtente(usernameTextField.getText(), passwordField.getText());
+            switch (utente){
+                case "cliente": startWindow("ICliente", "/ICliente.fxml", new ICliente()); break;
+                case "commerciante": //startWindow("ControllerCliente, "); break;
+                case "corriere": //startWindow("ControllerCliente, ");break
+                case "punto_ritiro": //startWindow("ControllerCliente, ");break
+                default: throw new NullPointerException("Credenziali errate!!");
+            }
+        }catch (NullPointerException | SQLException | IOException e){createErrorAlert(e.getMessage());}
     }
 
     @FXML

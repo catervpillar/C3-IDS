@@ -41,24 +41,22 @@ public class AccountTypePicker implements JavaFXController {
         if (clienteRadioButton.isSelected()) {
             startWindow("Crea il tuo profilo cliente",
                     "/clienteCreator.fxml",
-                    new ClienteCreator(ControllerCliente.getInstance()));
+                    new ClienteCreator());
             close(clienteRadioButton);
         } else if (commercianteRadioButton.isSelected()) {
             startWindow("Crea il tuo profilo Commerciante",
                     "/attivitaCreator.fxml",
-                    new AttivitaCreator(ControllerCommerciante.getInstance(),
-                            "Commerciante",
-                            "https://www.flaticon.com/free-icon/shops_273177"));
+                    new CommercianteCreator());
             close(commercianteRadioButton);
         } else if (puntoRitiroRadioButton.isSelected()) {
             startWindow("Crea il tuo profilo Punto di Ritiro",
                     "/attivitaCreator.fxml",
-                    new AttivitaCreator(ControllerPuntoRitiro.getInstance(), "Punto di Ritiro", "images/warehouse.png"));
+                    new PuntoRitiroCreator());
             close(puntoRitiroRadioButton);
         } else if (corriereRadioButton.isSelected()) {
             startWindow("Crea il tuo profilo Corriere",
                     "/attivitaCreator.fxml",
-                    new AttivitaCreator(ControllerCorriere.getInstance(), "Corriere", "images/delivery-truck.png"));
+                    new CorriereCreator());
             close(corriereRadioButton);
         }
     }

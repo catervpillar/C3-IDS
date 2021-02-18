@@ -1,10 +1,14 @@
 package it.unicam.cs.ids.c3.controller;
 
 import it.unicam.cs.ids.c3.model.*;
+import it.unicam.cs.ids.c3.services.DBManager;
+import it.unicam.cs.ids.c3.services.Deserializer;
+import it.unicam.cs.ids.c3.services.SerializerAggiunta;
 import it.unicam.cs.ids.c3.utilities.Controllore;
 
 
-import java.util.ArrayList;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
 
@@ -21,10 +25,25 @@ public class ControllerCliente {
         return instance;
     }
 
-    public void creaCliente(String username, String password, String email, String nome, String cognome) {
-        //TODO: la query con le credenziali per loggarsi
+    public void creaCliente(String username, String password, String email, String nome, String cognome) throws SQLException {
         Controllore.getInstance().controllaCliente(username, password, email, nome, cognome);
-        cliente = new Cliente(username, password, email, nome, cognome);
+        Cliente cliente = new Cliente(username, password, email, nome, cognome);
+        SerializerAggiunta.getInstance().serializzaCliente(cliente);
+    }
+
+    public boolean loginCliente(String username, String password) throws SQLException {
+        String sql = "select * from cliente where username = \"" + username + "\" and password = \"" + password + "\";";
+        //String sql = "select * from cliente where username = ? and password ? + password;";
+        ResultSet resultSet = DBManager.getInstance().executeQuery(sql);
+        int i=0;
+        while(resultSet.next()){
+            i++;
+        }
+        if (i!=0) {
+            this.cliente = Deserializer.getInstance().deserializzaCliente(resultSet);
+            return true;
+        }
+        else return false;
     }
 
 //    public List<PuntoRitiro> cercaPuntiRitiro(String ragioneSociale) {
@@ -45,5 +64,9 @@ public class ControllerCliente {
 
     public void rimuoviRecensione(String IDRecensione) {
         GestoreRecensioni.getInstance().rimuoviRecensione(IDRecensione);
+    }
+
+    public Cliente getCliente() {
+        return cliente;
     }
 }

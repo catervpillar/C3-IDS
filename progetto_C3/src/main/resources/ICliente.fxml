@@ -33,38 +33,38 @@
           </Menu>
         </menus>
       </MenuBar>
-      <TableView layoutX="48.0" layoutY="169.0" prefHeight="192.0" prefWidth="501.0">
+      <TableView fx:id="promozioniTable" layoutX="48.0" layoutY="169.0" prefHeight="192.0" prefWidth="501.0">
         <columns>
-          <TableColumn prefWidth="62.0" text="ID" />
-          <TableColumn prefWidth="71.0" text="NOME" />
-            <TableColumn prefWidth="94.0" text="DESCRIZIONE" />
-            <TableColumn prefWidth="75.0" text="COMMERCIANTI" />
-            <TableColumn prefWidth="75.0" text="PRODOTTI" />
-            <TableColumn prefWidth="75.0" text="SCADENZA" />
+          <TableColumn fx:id="IDTab" prefWidth="62.0" text="ID" />
+          <TableColumn fx:id="nomeTab" prefWidth="71.0" text="NOME" />
+            <TableColumn fx:id="descrizioneTab" prefWidth="94.0" text="DESCRIZIONE" />
+            <TableColumn fx:id="commerciantiTab" prefWidth="75.0" text="COMMERCIANTI" />
+            <TableColumn fx:id="prodottiTab" prefWidth="75.0" text="PRODOTTI" />
+            <TableColumn fx:id="scadenzaTab" prefWidth="75.0" text="SCADENZA" />
         </columns>
       </TableView>
-      <TextField layoutX="211.0" layoutY="110.0" prefHeight="27.0" prefWidth="267.0" promptText="Cerca prodotto..." />
-      <Label layoutX="211.0" layoutY="77.0" text="Inserire un prodotto: ">
+      <TextField fx:id="cercaProdottoTextField" layoutX="211.0" layoutY="110.0" prefHeight="27.0" prefWidth="267.0" promptText="Cerca prodotto..." />
+      <Label fx:id="inserireProdottoLabel" layoutX="211.0" layoutY="77.0" text="Inserire un prodotto: ">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <ImageView fitHeight="60.0" fitWidth="58.0" layoutX="140.0" layoutY="70.0">
+      <ImageView fx:id="lenteImageView" fitHeight="60.0" fitWidth="58.0" layoutX="140.0" layoutY="70.0">
          <image>
             <Image url="@images/lenteRicerca.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="46.0" fitWidth="36.0" layoutX="527.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="aggiornaProfiloImageViewaggiornaProfiloImageView" fitHeight="46.0" fitWidth="36.0" layoutX="527.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/aggiornaProfilo.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="46.0" fitWidth="69.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="treLineeImageView" fitHeight="46.0" fitWidth="69.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/3linee.jpg" />
          </image>
       </ImageView>
-      <Label layoutX="48.0" layoutY="150.0" text="Promozioni attive:">
+      <Label fx:id="promozioniAttiveLabel" layoutX="48.0" layoutY="150.0" text="Promozioni attive:">
          <font>
             <Font size="15.0" />
          </font>
