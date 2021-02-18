@@ -2,13 +2,14 @@ package it.unicam.cs.ids.c3.model;
 
 import it.unicam.cs.ids.c3.utilities.Controllore;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Objects;
 
 public class Ritiro implements HasID {
     private String ID;
-    private List<String> listaIDProdotti;
+    private List<String> listaIDProdotti = new ArrayList<>();
     private String IDCommerciante;
     private String IDCliente;
     private String IDCorriere;
@@ -32,6 +33,7 @@ public class Ritiro implements HasID {
         this.dataConsegna = null;
         this.codiceRitiro = CodiciRitiroGenerator.getInstance().generaCodice();
         this.tipoConsegna = tipoConsegna;
+        this.stato = StatoTracking.IN_ELABORAZIONE;
     }
 
     public Ritiro(String ID, String IDCommerciante, String IDCliente, String IDCorriere, String destinazione, String codiceRitiro, boolean ritirato, TipoConsegna tipoConsegna, StatoTracking stato, GregorianCalendar dataPrenotazione, GregorianCalendar dataConsegna) {

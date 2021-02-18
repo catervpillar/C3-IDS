@@ -3,20 +3,18 @@ package it.unicam.cs.ids.c3.services;
 import it.unicam.cs.ids.c3.model.*;
 
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Objects;
 
-public class Serializer {
-    private static Serializer instance;
+public class SerializerAggiunta {
+    private static SerializerAggiunta instance;
 
-    private Serializer() {
+    private SerializerAggiunta() {
     }
 
-    public static Serializer getInstance() {
+    public static SerializerAggiunta getInstance() {
         if (Objects.isNull(instance))
-            instance = new Serializer();
+            instance = new SerializerAggiunta();
         return instance;
     }
 
@@ -101,7 +99,16 @@ public class Serializer {
         preparedStatement.setString(6, promozione.getIDCommerciante());
         preparedStatement.executeUpdate();
         DBManager.getInstance().disconnect(preparedStatement);
-        //TODO serializza lista dei prodotti
+
+        sql = "INSERT INTO promozione_has_prodotto VALUES (?,?)";
+
+        for (String s : promozione.getListaIDProdotti()) {
+            preparedStatement = DBManager.getInstance().getPreparedStatement(sql);
+            preparedStatement.setString(1, promozione.getID());
+            preparedStatement.setString(2, s);
+            preparedStatement.executeUpdate();
+            DBManager.getInstance().disconnect(preparedStatement);
+        }
     }
 
     public void serializzaRecensione(Recensione recensione) throws SQLException {
@@ -125,7 +132,10 @@ public class Serializer {
         preparedStatement.setString(2, ritiro.getDestinazione());
         preparedStatement.setString(3, ritiro.getCodiceRitiro());
         preparedStatement.setDate(4, new java.sql.Date(ritiro.getDataPrenotazione().getTimeInMillis()));
-        preparedStatement.setDate(5, new java.sql.Date(ritiro.getDataConsegna().getTimeInMillis()));
+        if (Objects.isNull(ritiro.getDataConsegna()))
+            preparedStatement.setDate(5, null);
+        else
+            preparedStatement.setDate(5, new java.sql.Date(ritiro.getDataConsegna().getTimeInMillis()));
         preparedStatement.setBoolean(6, ritiro.isRitirato());
         preparedStatement.setString(7, ritiro.getTipoConsegna().name());
         preparedStatement.setString(8, ritiro.getIDCommerciante());
@@ -134,6 +144,15 @@ public class Serializer {
         preparedStatement.setString(11, ritiro.getStato().name());
         preparedStatement.executeUpdate();
         DBManager.getInstance().disconnect(preparedStatement);
-        //TODO le date danno errore
+
+        sql = "INSERT INTO ritiro_has_prodotto VALUES (?,?)";
+
+        for (String s : ritiro.getListaIDProdotti()) {
+            preparedStatement = DBManager.getInstance().getPreparedStatement(sql);
+            preparedStatement.setString(1, s);
+            preparedStatement.setString(2, ritiro.getID());
+            preparedStatement.executeUpdate();
+            DBManager.getInstance().disconnect(preparedStatement);
+        }
     }
 }

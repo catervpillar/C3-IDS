@@ -1,6 +1,7 @@
 package it.unicam.cs.ids.c3.model;
 
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Objects;
@@ -10,7 +11,7 @@ public class Promozione implements HasID {
     private String nome;
     private String descrizione;
     private String IDCommerciante;
-    private List<String> listaIDProdotti;
+    private List<String> listaIDProdotti = new ArrayList<>();
     private GregorianCalendar dataInizio;
     private GregorianCalendar dataScadenza;
 

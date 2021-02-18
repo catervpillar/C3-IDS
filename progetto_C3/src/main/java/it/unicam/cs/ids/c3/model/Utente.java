@@ -15,8 +15,8 @@ public abstract class Utente implements HasID {
         this.username = username;
         this.password = password;
         this.email = email;
-        this.telefono = "";
-        this.indirizzo = "";
+        this.telefono = null;
+        this.indirizzo = null;
     }
 
     public Utente(String ID, String username, String password, String email) {
@@ -24,8 +24,8 @@ public abstract class Utente implements HasID {
         this.username = username;
         this.password = password;
         this.email = email;
-        this.telefono = "";
-        this.indirizzo = "";
+        this.telefono = null;
+        this.indirizzo = null;
     }
 
     public String getID() {
