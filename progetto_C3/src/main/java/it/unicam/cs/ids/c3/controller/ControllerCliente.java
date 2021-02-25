@@ -1,10 +1,8 @@
 package it.unicam.cs.ids.c3.controller;
 
 import it.unicam.cs.ids.c3.model.*;
-import it.unicam.cs.ids.c3.services.DBManager;
-import it.unicam.cs.ids.c3.services.Deserializer;
-import it.unicam.cs.ids.c3.services.SerializerAggiunta;
-import it.unicam.cs.ids.c3.utilities.Controllore;
+import it.unicam.cs.ids.c3.services.*;
+import it.unicam.cs.ids.c3.utilities.*;
 
 
 import java.sql.ResultSet;

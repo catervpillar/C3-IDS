@@ -7,7 +7,6 @@ import it.unicam.cs.ids.c3.utilities.Controllore;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Objects;
