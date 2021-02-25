@@ -43,91 +43,91 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="557.0" prefWidth="749.0" styleClass="basic-window-background" stylesheets="@styles/login.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="612.0" prefWidth="954.0" VBox.vgrow="ALWAYS">
          <children>
-            <Label fx:id="emailLabel" layoutX="80.0" layoutY="271.0" text="Email:">
+            <Label fx:id="emailLabel" layoutX="56.0" layoutY="279.0" text="Email:" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Text layoutX="82.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Creazione di un profilo Cliente">
+            <Text fill="WHITE" layoutX="56.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Creazione di un profilo cliente">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
             </Text>
-            <ImageView fitHeight="130.0" fitWidth="130.0" layoutX="722.0" layoutY="174.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="130.0" fitWidth="130.0" layoutX="575.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/customer.png" />
                </image>
             </ImageView>
-            <TextField fx:id="emailTextField" layoutX="360.0" layoutY="264.0" onKeyTyped="#controllaCampiCompilati" prefHeight="39.0" prefWidth="300.0">
+            <TextField fx:id="emailTextField" layoutX="334.0" layoutY="272.0" onKeyTyped="#controllaCampiCompilati" prefHeight="39.0" prefWidth="365.0" styleClass="login-textfield-background">
                <font>
                   <Font size="16.0" />
                </font>
             </TextField>
-            <Label fx:id="usernameLabel" layoutX="80.0" layoutY="316.0" text="Scegli un username:">
+            <Label fx:id="usernameLabel" layoutX="56.0" layoutY="324.0" text="Scegli un username:" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="passwordLabel" layoutX="80.0" layoutY="361.0" text="Scegli una password:">
+            <Label fx:id="passwordLabel" layoutX="56.0" layoutY="369.0" text="Scegli una password:" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="usernameTextField" layoutX="360.0" layoutY="309.0" onKeyTyped="#controllaCampiCompilati" prefHeight="39.0" prefWidth="300.0">
+            <TextField fx:id="usernameTextField" layoutX="334.0" layoutY="317.0" onKeyTyped="#controllaCampiCompilati" prefHeight="39.0" prefWidth="365.0" styleClass="login-textfield-background">
                <font>
                   <Font size="16.0" />
                </font>
             </TextField>
-            <TextField fx:id="nomeTextField" layoutX="360.0" layoutY="175.0" onKeyTyped="#controllaCampiCompilati" prefHeight="39.0" prefWidth="300.0">
+            <TextField fx:id="nomeTextField" layoutX="334.0" layoutY="183.0" onKeyTyped="#controllaCampiCompilati" prefHeight="39.0" prefWidth="365.0" styleClass="login-textfield-background">
                <font>
                   <Font size="16.0" />
                </font>
             </TextField>
-            <TextField fx:id="cognomeTextField" layoutX="360.0" layoutY="219.0" onKeyTyped="#controllaCampiCompilati" prefHeight="39.0" prefWidth="300.0">
+            <TextField fx:id="cognomeTextField" layoutX="334.0" layoutY="227.0" onKeyTyped="#controllaCampiCompilati" prefHeight="39.0" prefWidth="365.0" styleClass="login-textfield-background">
                <font>
                   <Font size="16.0" />
                </font>
             </TextField>
-            <Label fx:id="nomeLabel" layoutX="82.0" layoutY="181.0" text="Nome:">
+            <Label fx:id="nomeLabel" layoutX="56.0" layoutY="189.0" text="Nome:" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="cognomeLabel" layoutX="80.0" layoutY="226.0" text="Cognome:">
+            <Label fx:id="cognomeLabel" layoutX="56.0" layoutY="234.0" text="Cognome:" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="confermaPasswordLabel" layoutX="80.0" layoutY="406.0" text="Conferma password:">
+            <Label fx:id="confermaPasswordLabel" layoutX="56.0" layoutY="414.0" text="Conferma password:" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Text layoutX="82.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Compila i campi sottostanti per procedere:">
+            <Text fill="WHITE" layoutX="56.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Compila i campi sottostanti per procedere:">
                <font>
-                  <Font name="Corbel Bold" size="20.0" />
+                  <Font name="Corbel Bold" size="21.0" />
                </font>
             </Text>
-            <Button fx:id="procediButton" disable="true" layoutX="739.0" layoutY="502.0" mnemonicParsing="false" onAction="#procedi" text="PROCEDI">
+            <Button fx:id="procediButton" disable="true" layoutX="574.0" layoutY="462.0" mnemonicParsing="false" onAction="#procedi" prefHeight="44.0" prefWidth="123.0" styleClass="round-button" text="PROCEDI">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="annullaButton" layoutX="55.0" layoutY="502.0" mnemonicParsing="false" onAction="#annulla" text="ANNULLA">
+            <Button fx:id="annullaButton" layoutX="54.0" layoutY="462.0" mnemonicParsing="false" onAction="#annulla" styleClass="round-button" text="ANNULLA">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Button>
-            <PasswordField fx:id="passwordTextField" layoutX="360.0" layoutY="354.0" onKeyTyped="#controllaCampiCompilati" prefHeight="39.0" prefWidth="300.0">
+            <PasswordField fx:id="passwordTextField" layoutX="334.0" layoutY="362.0" onKeyTyped="#controllaCampiCompilati" prefHeight="39.0" prefWidth="365.0" styleClass="login-textfield-background">
                <font>
                   <Font size="16.0" />
                </font>
             </PasswordField>
-            <PasswordField fx:id="confermaPasswordTextField" layoutX="360.0" layoutY="399.0" onKeyTyped="#controllaCampiCompilati" prefHeight="39.0" prefWidth="300.0">
+            <PasswordField fx:id="confermaPasswordTextField" layoutX="334.0" layoutY="407.0" onKeyTyped="#controllaCampiCompilati" prefHeight="39.0" prefWidth="365.0" styleClass="login-textfield-background">
                <font>
                   <Font size="16.0" />
                </font>

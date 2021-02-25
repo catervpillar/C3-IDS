@@ -8,8 +8,19 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class ClienteCreator implements JavaFXController {
+    private static ClienteCreator instance;
+
+    private ClienteCreator() {
+    }
+
+    public static ClienteCreator getInstance() {
+        if (Objects.isNull(instance))
+            instance = new ClienteCreator();
+        return instance;
+    }
 
     @FXML
     TextField nomeTextField;
@@ -46,7 +57,7 @@ public class ClienteCreator implements JavaFXController {
     @FXML
     public void annulla() throws IOException {
         close(annullaButton);
-        startWindow("Registrati", "/tipoAccount.fxml", new AccountTypePicker());
+        startWindow("Registrati", "/tipoAccount.fxml", AccountTypePicker.getInstance());
     }
 
     private void confrontaPassword() {

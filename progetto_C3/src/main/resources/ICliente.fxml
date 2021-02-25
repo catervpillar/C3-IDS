@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -12,62 +13,211 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <MenuBar prefHeight="29.0" prefWidth="600.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-      <TableView fx:id="promozioniTable" layoutX="48.0" layoutY="169.0" prefHeight="192.0" prefWidth="501.0">
-        <columns>
-          <TableColumn fx:id="IDTab" prefWidth="62.0" text="ID" />
-          <TableColumn fx:id="nomeTab" prefWidth="71.0" text="NOME" />
-            <TableColumn fx:id="descrizioneTab" prefWidth="94.0" text="DESCRIZIONE" />
-            <TableColumn fx:id="commerciantiTab" prefWidth="75.0" text="COMMERCIANTI" />
-            <TableColumn fx:id="prodottiTab" prefWidth="75.0" text="PRODOTTI" />
-            <TableColumn fx:id="scadenzaTab" prefWidth="75.0" text="SCADENZA" />
-        </columns>
-      </TableView>
-      <TextField fx:id="cercaProdottoTextField" layoutX="211.0" layoutY="110.0" prefHeight="27.0" prefWidth="267.0" promptText="Cerca prodotto..." />
-      <Label fx:id="inserireProdottoLabel" layoutX="211.0" layoutY="77.0" text="Inserire un prodotto: ">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <ImageView fx:id="lenteImageView" fitHeight="60.0" fitWidth="58.0" layoutX="140.0" layoutY="70.0">
-         <image>
-            <Image url="@images/lenteRicerca.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="aggiornaProfiloImageViewaggiornaProfiloImageView" fitHeight="46.0" fitWidth="36.0" layoutX="527.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@images/aggiornaProfilo.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="treLineeImageView" fitHeight="46.0" fitWidth="69.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@images/3linee.jpg" />
-         </image>
-      </ImageView>
-      <Label fx:id="promozioniAttiveLabel" layoutX="48.0" layoutY="150.0" text="Promozioni attive:">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-   </children>
-</AnchorPane>
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="546.0" prefWidth="750.0" styleClass="basic-window-background" stylesheets="@styles/login.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+  <tabs>
+    <Tab text="HOME">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="tabellaPromozioni" layoutX="61.0" layoutY="210.0" prefHeight="264.0" prefWidth="628.0">
+                    <columns>
+                      <TableColumn fx:id="IDColonna" prefWidth="70.0" text="ID" />
+                      <TableColumn fx:id="nomeColonna" prefWidth="112.0" text="NOME" />
+                        <TableColumn fx:id="descrizioneColonna" prefWidth="243.0" text="DESCRIZIONE" />
+                        <TableColumn fx:id="dataInizioColonna" prefWidth="89.0" text="DATA INIZIO" />
+                        <TableColumn fx:id="dataScadenzaColonna" prefWidth="113.0" text="DATA SCADENZA" />
+                    </columns>
+                  </TableView>
+                  <Label layoutX="145.0" layoutY="175.0" text="Promozioni attive: " textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="56.0" fitWidth="68.0" layoutX="74.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/promozione.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="aggiornaButton" fitHeight="51.0" fitWidth="54.0" layoutX="658.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/profilo.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="nomeCognomeLabel" layoutX="245.0" layoutY="69.0" onMouseMoved="#setLabelBenvenuto" prefHeight="37.0" prefWidth="243.0" text="NOME COGNOME" textAlignment="RIGHT" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="110.0" fitWidth="135.0" layoutX="75.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/homepage.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="245.0" layoutY="37.0" text="BENVENUTO" textFill="WHITE">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="logout" layoutX="656.0" layoutY="93.0" mnemonicParsing="false" onAction="#logout" styleClass="round-button" text="LOGOUT">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="aggiornaPromozioni" layoutX="607.0" layoutY="177.0" mnemonicParsing="false" onAction="#aggiornaPromozioni" prefHeight="29.0" prefWidth="80.0" styleClass="round-button" text="REFRESH" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+      <Tab text="RECENSIONI">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="tabellaRecensioni" layoutX="61.0" layoutY="210.0" prefHeight="264.0" prefWidth="628.0">
+                    <columns>
+                      <TableColumn fx:id="IDColonnaRec" prefWidth="75.0" text="ID" />
+                      <TableColumn fx:id="titoloColonnaRec" prefWidth="75.0" text="TITOLO" />
+                        <TableColumn fx:id="testoColonnaRec" prefWidth="139.0" text="TESTO" />
+                        <TableColumn fx:id="prodottoColonnaRec" prefWidth="83.0" text="PRODOTTO" />
+                        <TableColumn fx:id="commercianteColonnaRec" prefWidth="111.0" text="COMMERCIANTE" />
+                        <TableColumn fx:id="valutazioneColonnaRec" prefWidth="144.0" text="VALUTAZIONE" />
+                    </columns>
+                  </TableView>
+                  <Label layoutX="61.0" layoutY="173.0" prefHeight="23.0" prefWidth="195.0" text="Recensioni effettuate: " textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="110.0" fitWidth="135.0" layoutX="75.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/customer-review.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="aggiungiRecensione" layoutX="220.0" layoutY="50.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="200.0" styleClass="round-button" text="AGGIUNGI RECENSIONE" />
+                  <Button fx:id="eliminaRecensione" layoutX="220.0" layoutY="100.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="200.0" styleClass="round-button" text="ELIMINA RECENSIONE" />
+                  <Button fx:id="modificaRecensione" layoutX="450.0" layoutY="50.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="200.0" styleClass="round-button" text="MODIFICA RECENSIONE" />
+                  <Button fx:id="aggiornaRecensioni" layoutX="607.0" layoutY="177.0" mnemonicParsing="false" onAction="#aggiornaRecensioni" prefHeight="29.0" prefWidth="80.0" styleClass="round-button" text="REFRESH" />
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+    <Tab text="RICERCA">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="110.0" fitWidth="135.0" layoutX="75.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/search.png" />
+                     </image>
+                  </ImageView>
+                  <TabPane layoutX="61.0" layoutY="210.0" prefHeight="264.0" prefWidth="628.0" styleClass="seconda-tabPane" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                      <Tab text="COMMERCIANTI">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TableView fx:id="tabCommercianti" layoutX="6.0" layoutY="-4.0" prefHeight="230.0" prefWidth="616.0" styleClass="basic-window-background">
+                                      <columns>
+                                        <TableColumn fx:id="IDcomm" text="ID" />
+                                        <TableColumn fx:id="ragSocComm" prefWidth="140.0" text="RAGIONE SOCIALE" />
+                                          <TableColumn fx:id="indirizzoComm" prefWidth="170.0" text="INDIRIZZO" />
+                                          <TableColumn fx:id="telComm" prefWidth="225.0" text="TELEFONO" />
+                                      </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                      <Tab text="CORRIERI">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TableView fx:id="tabCorrieri" layoutX="6.0" layoutY="-4.0" prefHeight="230.0" prefWidth="616.0" styleClass="basic-window-background">
+                                      <columns>
+                                        <TableColumn fx:id="IDCorr" text="ID" />
+                                        <TableColumn fx:id="ragSocCorr" prefWidth="140.0" text="RAGIONE SOCIALE" />
+                                          <TableColumn fx:id="indirizzoCorr" prefWidth="170.0" text="INDIRIZZO" />
+                                          <TableColumn fx:id="telCorr" prefWidth="225.0" text="TELEFONO" />
+                                      </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                        <Tab text="PUNTI RITIRO">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TableView fx:id="tabPuntiRitiro" layoutX="6.0" layoutY="-4.0" prefHeight="230.0" prefWidth="616.0" styleClass="basic-window-background">
+                                      <columns>
+                                        <TableColumn fx:id="IDPunto" text="ID" />
+                                        <TableColumn fx:id="ragSocPunto" prefWidth="140.0" text="RAGIONE SOCIALE" />
+                                          <TableColumn fx:id="indirizzoPunto" prefWidth="170.0" text="INDIRIZZO" />
+                                          <TableColumn fx:id="telPunto" prefWidth="225.0" text="TELEFONO" />
+                                      </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </Tab>
+                    </tabs>
+                  </TabPane>
+                  <Label layoutX="230.0" layoutY="57.0" text="CERCA L'UTENTE CHE DESIDERI" textFill="WHITE">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <RadioButton fx:id="corriere" layoutX="206.0" layoutY="141.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="73.0" text="Corriere" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="commerciante" layoutX="306.0" layoutY="141.0" mnemonicParsing="false" text="Commerciante" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="punto_ritiro" layoutX="439.0" layoutY="141.0" mnemonicParsing="false" text="Punto di ritiro" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </RadioButton>
+                  <TextField fx:id="ricercaTextField" layoutX="230.0" layoutY="100.0" prefHeight="27.0" prefWidth="282.0" promptText="Inserisci ragione sociale dell'utente..." />
+                  <Button fx:id="aggiornaRicerche" layoutX="607.0" layoutY="177.0" mnemonicParsing="false" onAction="#aggiornaRicerche" prefHeight="29.0" prefWidth="80.0" styleClass="round-button" text="REFRESH" />
+                  <Button fx:id="cercaUtente" layoutX="541.0" layoutY="99.0" mnemonicParsing="false" onAction="#cercaUtente" prefHeight="29.0" prefWidth="119.0" styleClass="round-button" text="CERCA UTENTE" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+      <Tab text="CRONOLOGIA ORDINI">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="110.0" fitWidth="135.0" layoutX="75.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/cronologia.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="64.0" fitWidth="62.0" layoutX="44.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true" rotate="82.6">
+                     <image>
+                        <Image url="@images/frecciaTonda.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="223.0" layoutY="57.0" prefHeight="30.0" prefWidth="449.0" text="ECCO GLI ORDINI CHE HAI EFFETTUATO" textFill="WHITE">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <TableView fx:id="tabOrdini" layoutX="61.0" layoutY="210.0" prefHeight="264.0" prefWidth="628.0">
+                     <columns>
+                        <TableColumn fx:id="IDordine" prefWidth="75.0" text="ID" />
+                        <TableColumn fx:id="commOrdine" prefWidth="116.0" text="COMMERCIANTE" />
+                        <TableColumn fx:id="dataOrdine" text="DATA" />
+                        <TableColumn fx:id="destOrdine" prefWidth="204.0" text="DESTINAZIONE" />
+                        <TableColumn fx:id="trackOrdine" prefWidth="152.0" text="TRACKING" />
+                     </columns>
+                  </TableView>
+                  <Button fx:id="aggiornaOrdini" layoutX="607.0" layoutY="177.0" mnemonicParsing="false" onAction="#aggiornaOrdini" prefHeight="29.0" prefWidth="80.0" styleClass="round-button" text="REFRESH" />
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+  </tabs>
+</TabPane>

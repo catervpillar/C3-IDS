@@ -9,16 +9,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class JavaFXC3 extends Application {
+public class JavaFXC3 extends Application implements JavaFXController {
     @Override
     public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/loginC3_2.fxml"));
-        stage.setTitle("C3 v1.0");
-        stage.setScene(new Scene(root));
-        stage.setMinWidth(450);
-        stage.setMinHeight(475);
-//        stage.setResizable(false);
-//        stage.getIcons().add(new Image("/images/c3_icon.png"));
-        stage.show();
+        startResizableWindow("C3 v1.0", "/loginC3_2.fxml", LoginC3Controller.getInstance());
     }
 }

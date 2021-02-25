@@ -1,16 +1,18 @@
 package it.unicam.cs.ids.c3.javafx;
 
-import it.unicam.cs.ids.c3.controller.ControllerCliente;
 import it.unicam.cs.ids.c3.services.Deserializer;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Objects;
 
-public class loginC3Controller implements JavaFXController {
+public class LoginC3Controller implements JavaFXController {
+    private static LoginC3Controller instance;
 
     @FXML
     Button loginButton;
@@ -32,32 +34,51 @@ public class loginC3Controller implements JavaFXController {
     @FXML
     CheckBox mostraPasswordCheckBox;
 
+    private LoginC3Controller() {
+    }
+
+    public static LoginC3Controller getInstance() {
+        if (Objects.isNull(instance))
+            instance = new LoginC3Controller();
+        return instance;
+    }
+
     @FXML
     public void accedi() {
-        if (!controllaCampi())
-            mostraErroreLogin();
-        else {
-            usernameTextField.setStyle("-fx-background-color: #478C64");
-            passwordField.setStyle("-fx-background-color: #478C64");
-            passwordVisibleText.setStyle("-fx-background-color: #478C64");
-            erroreLoginText.setText("TUTTO OK!");
+        try {
+            controllaCampi();
+            String utente;
+
+            if (mostraPasswordCheckBox.isSelected())
+                utente = Deserializer.getInstance().cercaUtente(usernameTextField.getText(), passwordVisibleText.getText());
+            else utente = Deserializer.getInstance().cercaUtente(usernameTextField.getText(), passwordField.getText());
+
+            switch (utente) {
+                case "cliente":
+                    startWindow("ICliente", "/ICliente.fxml", ICliente.getInstance());
+                    break;
+                case "commerciante":
+                    startWindow("ICommerciante", "/ICommerciante.fxml", ICommerciante.getInstance());
+                    break;
+                case "corriere":
+                    startWindow("ICorriere", "/ICorriere.fxml", ICorriere.getInstance());
+                    break;
+                case "punto_ritiro":
+                    startWindow("IPuntoRitiro", "/IPuntoRitiro.fxml", IPuntoRitiro.getInstance());
+                    break;
+                default:
+                    break;
+            }
+            close(loginButton);
+        } catch (SQLException | IOException | IllegalArgumentException e) {
+            erroreLoginText.setText(e.getMessage());
             erroreLoginText.setVisible(true);
         }
-        try{
-            String utente = Deserializer.getInstance().cercaUtente(usernameTextField.getText(), passwordField.getText());
-            switch (utente){
-                case "cliente": startWindow("ICliente", "/ICliente.fxml", new ICliente()); break;
-                case "commerciante": //startWindow("ControllerCliente, "); break;
-                case "corriere": //startWindow("ControllerCliente, ");break
-                case "punto_ritiro": //startWindow("ControllerCliente, ");break
-                default: throw new NullPointerException("Credenziali errate!!");
-            }
-        }catch (NullPointerException | SQLException | IOException e){createErrorAlert(e.getMessage());}
     }
 
     @FXML
     public void registrati() throws IOException {
-        startWindow("Registrati", "/tipoAccount.fxml", new AccountTypePicker());
+        startWindow("Registrati", "/tipoAccount.fxml", AccountTypePicker.getInstance());
     }
 
     @FXML
@@ -73,31 +94,36 @@ public class loginC3Controller implements JavaFXController {
         passwordVisibleText.setVisible(false);
     }
 
-    private void mostraErroreLogin() {
-        erroreLoginText.setVisible(true);
-        if (usernameTextField.getText().isEmpty())
+    private void controllaCampi() {
+        if (usernameTextField.getText().isBlank()) {
             usernameTextField.setStyle("-fx-background-color: #923F55");
-        if (passwordField.getText().isEmpty()) {
-            passwordField.setStyle("-fx-background-color: #923F55");
-            passwordVisibleText.setStyle("-fx-background-color: #923F55");
+            erroreLoginText.setVisible(true);
+            throw new IllegalArgumentException("IL NOME UTENTE NON E' VALIDO");
         }
-    }
-
-    private boolean controllaCampi() {
-        if (mostraPasswordCheckBox.isSelected())
-            return (usernameTextField.getText().isEmpty() && passwordVisibleText.getText().isEmpty());
-        else return (usernameTextField.getText().isEmpty() && passwordField.getText().isEmpty());
+        if (!mostraPasswordCheckBox.isSelected()) {
+            if (passwordField.getText().isBlank()) {
+                passwordField.setStyle("-fx-background-color: #923F55");
+                erroreLoginText.setVisible(true);
+                throw new IllegalArgumentException("LA PASSWORD NON E' VALIDA");
+            }
+        } else if (passwordVisibleText.getText().isBlank()) {
+            passwordVisibleText.setStyle("-fx-background-color: #923F55");
+            erroreLoginText.setVisible(true);
+            throw new IllegalArgumentException("LA PASSWORD NON E' VALIDA");
+        }
     }
 
     @FXML
     private void resetUsernameFieldBackgroundColor() {
         usernameTextField.setStyle("-fx-background-color: #4D6068");
+        erroreLoginText.setVisible(false);
     }
 
     @FXML
     private void resetPasswordFieldBackgroundColor() {
         passwordField.setStyle("-fx-background-color: #4D6068");
         passwordVisibleText.setStyle("-fx-background-color: #4D6068");
+        erroreLoginText.setVisible(false);
     }
 
     @FXML

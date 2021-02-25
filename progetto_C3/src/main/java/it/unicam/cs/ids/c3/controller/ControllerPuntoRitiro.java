@@ -1,5 +1,6 @@
 package it.unicam.cs.ids.c3.controller;
 
+import it.unicam.cs.ids.c3.model.Commerciante;
 import it.unicam.cs.ids.c3.model.Corriere;
 import it.unicam.cs.ids.c3.model.PuntoRitiro;
 import it.unicam.cs.ids.c3.model.Ritiro;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class ControllerPuntoRitiro{
+public class ControllerPuntoRitiro {
     private static ControllerPuntoRitiro instance;
     private PuntoRitiro puntoRitiro;
 
@@ -26,6 +27,10 @@ public class ControllerPuntoRitiro{
         return instance;
     }
 
+    public PuntoRitiro getPuntoRitiro() {
+        return puntoRitiro;
+    }
+
     public void creaPuntoRitiro(String username, String password, String email, String ragioneSociale) throws SQLException {
         Controllore.getInstance().controllaPuntoRitiro(username, password, email, ragioneSociale);
         PuntoRitiro puntoRitiro = new PuntoRitiro(username, password, email, ragioneSociale);
@@ -35,15 +40,12 @@ public class ControllerPuntoRitiro{
     public boolean loginPuntoRitiro(String username, String password) throws SQLException {
         String sql = "select * from punto_ritiro where username = \"" + username + "\" and password = \"" + password + "\";";
         ResultSet resultSet = DBManager.getInstance().executeQuery(sql);
-        int i=0;
-        while(resultSet.next()){
-            i++;
-        }
-        if (i==1){
-            this.puntoRitiro = Deserializer.getInstance().deserializzaPuntiRitiro(resultSet).get(0);
-            return true;
-        }
-        else return false;
-    }
 
+        if (resultSet.last()) {
+            resultSet.beforeFirst();
+            List<PuntoRitiro> listaPuntiRitiro = Deserializer.getInstance().deserializzaPuntiRitiro(resultSet);
+            this.puntoRitiro = listaPuntiRitiro.get(0);
+            return true;
+        } else return false;
+    }
 }

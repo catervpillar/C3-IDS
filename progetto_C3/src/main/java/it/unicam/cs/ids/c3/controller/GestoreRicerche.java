@@ -33,6 +33,7 @@ public final class GestoreRicerche {
 
 
     List<Commerciante> cercaCommerciante(String ragioneSociale) {
+        commercianti.clear();
         if (!Objects.isNull(ragioneSociale)) {
             try {
                 ResultSet resultSet = DBManager.getInstance().executeQuery("select * from commerciante where ragioneSociale = \"" + ragioneSociale + "\"");
@@ -52,6 +53,7 @@ public final class GestoreRicerche {
     }
 
     List<Corriere> cercaCorriere(String ragioneSociale) {
+        corrieri.clear();
         if (!Objects.isNull(ragioneSociale)) {
             try {
                 ResultSet resultSet = DBManager.getInstance().executeQuery("select * from corriere where ragioneSociale = \"" + ragioneSociale + "\"");
@@ -71,6 +73,7 @@ public final class GestoreRicerche {
     }
 
     List<PuntoRitiro> cercaPuntoRitiro(String ragioneSociale) {
+        puntiDiRitiro.clear();
         if (!Objects.isNull(ragioneSociale)) {
             try {
                 ResultSet resultSet = DBManager.getInstance().executeQuery("select * from punto_ritiro where ragioneSociale = \"" + ragioneSociale + "\"");
@@ -89,7 +92,8 @@ public final class GestoreRicerche {
         return puntiDiRitiro;
     }
 
-    List<Prodotto> cercaProdotto(String nome) {
+    List<Prodotto> cercaProdotto(String nome, String ID) {
+        prodotti.clear();
         if (!Objects.isNull(nome)) {
             try {
                 ResultSet resultSet = DBManager.getInstance().executeQuery("select * from prodotto where nome = \"" + nome + "\"");
@@ -97,9 +101,17 @@ public final class GestoreRicerche {
             } catch (SQLException e) {
                 System.out.println("Errore nella ricerca: nessun risultato trovato");
             }
+        } else if (!Objects.isNull(ID)) {
+            try {
+                ResultSet resultSet = DBManager.getInstance().executeQuery("select * from prodotto where ID = \"" + ID + "\"");
+                prodotti.addAll(Deserializer.getInstance().deserializzaProdotti(resultSet));
+            } catch (SQLException e) {
+                System.out.println("Errore nella ricerca: nessun risultato trovato");
+            }
         } else {
             try {
-                DBManager.getInstance().executeQuery("select * from prodotto");
+                ResultSet resultSet = DBManager.getInstance().executeQuery("select * from prodotto");
+                prodotti.addAll(Deserializer.getInstance().deserializzaProdotti(resultSet));
             } catch (SQLException e) {
                 System.out.println("Errore nella ricerca: nessun risultato trovato");
             }
@@ -108,6 +120,7 @@ public final class GestoreRicerche {
     }
 
     List<Promozione> getPromozioni() {
+        promozioni.clear();
         try {
             ResultSet resultSet = DBManager.getInstance().executeQuery("select * from promozione");
             promozioni.addAll(Deserializer.getInstance().deserializzaPromozioni(resultSet));
@@ -118,7 +131,8 @@ public final class GestoreRicerche {
         return promozioni;
     }
 
-    List<Recensione> getRecensionii() {
+    List<Recensione> getRecensioni() {
+        recensioni.clear();
         try {
             ResultSet resultSet = DBManager.getInstance().executeQuery("select * from recensione");
             recensioni.addAll(Deserializer.getInstance().deserializzaRecensioni(resultSet));
@@ -130,6 +144,7 @@ public final class GestoreRicerche {
     }
 
     List<Ritiro> getRitiri() {
+        ritiri.clear();
         try {
             ResultSet resultSet = DBManager.getInstance().executeQuery("select * from ritiro");
             ritiri.addAll(Deserializer.getInstance().deserializzaRitiri(resultSet));
@@ -140,5 +155,13 @@ public final class GestoreRicerche {
         return ritiri;
     }
 
-
+    public void reset() {
+        commercianti.clear();
+        puntiDiRitiro.clear();
+        corrieri.clear();
+        prodotti.clear();
+        promozioni.clear();
+        recensioni.clear();
+        ritiri.clear();
+    }
 }

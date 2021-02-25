@@ -1,9 +1,7 @@
 package it.unicam.cs.ids.c3.controller;
 
 import it.unicam.cs.ids.c3.model.*;
-import it.unicam.cs.ids.c3.services.DBManager;
-import it.unicam.cs.ids.c3.services.Deserializer;
-import it.unicam.cs.ids.c3.services.SerializerAggiunta;
+import it.unicam.cs.ids.c3.services.*;
 import it.unicam.cs.ids.c3.utilities.Controllore;
 
 
@@ -30,33 +28,58 @@ public class ControllerCommerciante {
         return commerciante;
     }
 
+    public void setCommerciante(Commerciante commerciante) {
+        this.commerciante = commerciante;
+    }
+
     public void creaCommerciante(String username, String password, String email, String ragioneSociale) throws SQLException {
         Controllore.getInstance().controllaCommerciante(username, password, email, ragioneSociale);
         Commerciante commerciante = new Commerciante(username, password, email, ragioneSociale);
         SerializerAggiunta.getInstance().serializzaCommerciante(commerciante);
     }
 
+    public void modificaCommerciante(String username, String password, String email, String ragioneSociale, String telefono, String indirizzo) throws SQLException {
+        Controllore.getInstance().controllaCommerciante(username, password, email, ragioneSociale);
+        Commerciante commerciante = new Commerciante(this.commerciante.getID(), username, password, email, ragioneSociale);
+
+        if (!indirizzo.isBlank()) {
+            Controllore.getInstance().controllaIndirizzo(indirizzo);
+            commerciante.setIndirizzo(indirizzo);
+        }
+        if (!telefono.isBlank()) {
+            Controllore.getInstance().controllaNumero(telefono, 10);
+            commerciante.setTelefono(telefono);
+        }
+        setCommerciante(commerciante);
+        SerializerModifica.getInstance().modificaCommerciante(commerciante);
+    }
+
+    public void eliminaAccount() throws SQLException {
+        SerializerElimina.getInstance().eliminaCommerciante(this.commerciante.getID());
+        setCommerciante(null);
+        GestoreRicerche.getInstance().reset();
+    }
+
+    public void logout() {
+        GestoreRicerche.getInstance().reset();
+        setCommerciante(null);
+    }
+
     public boolean loginCommerciante(String username, String password) throws SQLException {
         String sql = "select * from commerciante where username = \"" + username + "\" and password = \"" + password + "\";";
         ResultSet resultSet = DBManager.getInstance().executeQuery(sql);
-        int i = 0;
-        while (resultSet.next()) {
-            i++;
-        }
-        if (i == 1) {
-            this.commerciante = Deserializer.getInstance().deserializzaCommercianti(resultSet).get(0);
+
+        if (resultSet.last()) {
+            resultSet.beforeFirst();
+            List<Commerciante> listaCommercianti = Deserializer.getInstance().deserializzaCommercianti(resultSet);
+            this.commerciante = listaCommercianti.get(0);
             return true;
-        }
-        else return false;
+        } else return false;
     }
 
-    public void riempiListaProdotti() {
-//        Deserializer.getInstance().deserializzaProdottiInVendita();
-//        Deserializer.getInstance().deserializzaArticoli();
-//
-//        Deserializer.getInstance().deserializzaCategorie();
+    public List<Prodotto> getProdotti() throws SQLException {
+        return GestoreRicerche.getInstance().cercaProdotto(null, this.commerciante.getID());
     }
-
 
     public void prenotaRitiro(String destinazione, List<String> listaIDProdotti, String IDCommerciante, String IDCliente, String IDCorriere, TipoConsegna tipoConsegna) {
         GestoreRitiri.getInstance().creaRitiro(listaIDProdotti, IDCommerciante, IDCliente, IDCorriere, destinazione, tipoConsegna);

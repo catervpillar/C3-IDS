@@ -8,6 +8,7 @@ import it.unicam.cs.ids.c3.model.*;
 import it.unicam.cs.ids.c3.services.DBManager;
 import it.unicam.cs.ids.c3.services.SerializerAggiunta;
 import it.unicam.cs.ids.c3.services.SerializerElimina;
+import it.unicam.cs.ids.c3.services.SerializerModifica;
 import javafx.application.Application;
 import org.checkerframework.checker.units.qual.C;
 
@@ -17,8 +18,7 @@ import java.util.GregorianCalendar;
 
 public class App {
     public static void main(String[] args) throws IOException, SQLException {
-
-        DBManager.getInstance().setDBManager("root", "rootroot");
+        DBManager.getInstance().setDBManager("root", "toor");
         launchGui();
     }
     private static void launchGui() {

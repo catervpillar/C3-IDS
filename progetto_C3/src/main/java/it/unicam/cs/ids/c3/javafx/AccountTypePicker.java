@@ -1,17 +1,24 @@
 package it.unicam.cs.ids.c3.javafx;
 
-import it.unicam.cs.ids.c3.controller.ControllerCliente;
-import it.unicam.cs.ids.c3.controller.ControllerCommerciante;
-import it.unicam.cs.ids.c3.controller.ControllerCorriere;
-import it.unicam.cs.ids.c3.controller.ControllerPuntoRitiro;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.image.ImageView;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class AccountTypePicker implements JavaFXController {
+    private static AccountTypePicker instance;
+
+    private AccountTypePicker() {
+    }
+
+    public static AccountTypePicker getInstance() {
+        if (Objects.isNull(instance))
+            instance = new AccountTypePicker();
+        return instance;
+    }
 
     @FXML
     RadioButton clienteRadioButton;
@@ -41,22 +48,22 @@ public class AccountTypePicker implements JavaFXController {
         if (clienteRadioButton.isSelected()) {
             startWindow("Crea il tuo profilo cliente",
                     "/clienteCreator.fxml",
-                    new ClienteCreator());
+                    ClienteCreator.getInstance());
             close(clienteRadioButton);
         } else if (commercianteRadioButton.isSelected()) {
             startWindow("Crea il tuo profilo Commerciante",
-                    "/attivitaCreator.fxml",
-                    new CommercianteCreator());
+                    "/commercianteCreator.fxml",
+                    CommercianteCreator.getInstance());
             close(commercianteRadioButton);
         } else if (puntoRitiroRadioButton.isSelected()) {
             startWindow("Crea il tuo profilo Punto di Ritiro",
-                    "/attivitaCreator.fxml",
+                    "/corriereCreator.fxml",
                     new PuntoRitiroCreator());
             close(puntoRitiroRadioButton);
         } else if (corriereRadioButton.isSelected()) {
             startWindow("Crea il tuo profilo Corriere",
-                    "/attivitaCreator.fxml",
-                    new CorriereCreator());
+                    "/puntoRitiroCreator.fxml",
+                    CorriereCreator.getInstance());
             close(corriereRadioButton);
         }
     }

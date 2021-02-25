@@ -37,6 +37,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -99,7 +100,7 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="prenotaRitiroButton" layoutX="37.0" layoutY="41.0" mnemonicParsing="false" onAction="#prenotaRitiro" styleClass="round-button" text="PRENOTA RITIRO">
+                              <Button fx:id="aggiornaRitiroButton" layoutX="37.0" layoutY="41.0" mnemonicParsing="false" onAction="#prenotaRitiro" styleClass="round-button" text="AGGIORNA RITIRO">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -118,7 +119,7 @@
                                     <TableColumn prefWidth="93.0" text="STATO" />
                                 </columns>
                               </TableView>
-                              <Label layoutX="37.0" layoutY="112.0" text="Ultimi ritiri:" textFill="WHITE">
+                              <Label layoutX="37.0" layoutY="112.0" text="Ritiri commissionati" textFill="WHITE">
                                  <font>
                                     <Font name="Calibri" size="28.0" />
                                  </font>
@@ -132,86 +133,6 @@
                         </AnchorPane>
                     </content>
                   </Tab>
-                <Tab text="PRODOTTI">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <Button fx:id="vendiProdottoButton" layoutX="37.0" layoutY="41.0" mnemonicParsing="false" onAction="#vendiProdotto" styleClass="round-button" text="VENDI PRODOTTO">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Button>
-                              <TableView fx:id="tabellaProdotti" layoutX="37.0" layoutY="157.0" prefHeight="200.0" prefWidth="830.0">
-                                <columns>
-                                  <TableColumn fx:id="IDtabellaProdotti" text="ID" />
-                                  <TableColumn fx:id="nomeTabellaProdotti" prefWidth="300.0" text="Nome" />
-                                    <TableColumn fx:id="prezzoTabellaProdotti" prefWidth="120.0" text="Prezzo" />
-                                    <TableColumn fx:id="quantitaTabellaProdotti" text="Quantità" />
-                                    <TableColumn fx:id="statoTabellaProdotti" prefWidth="250.0" text="STATO" />
-                                </columns>
-                              </TableView>
-                              <Label layoutX="37.0" layoutY="112.0" text="Prodotti attualmente in vendita:" textFill="WHITE">
-                                 <font>
-                                    <Font name="Calibri" size="28.0" />
-                                 </font>
-                              </Label>
-                              <ImageView fitHeight="120.0" fitWidth="120.0" layoutX="844.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@images/box.png" />
-                                 </image>
-                              </ImageView>
-                              <Label layoutX="37.0" layoutY="376.0" text="Recensioni dei tuoi prodotti:" textFill="WHITE">
-                                 <font>
-                                    <Font name="Calibri" size="28.0" />
-                                 </font>
-                              </Label>
-                              <TableView layoutX="37.0" layoutY="418.0" prefHeight="200.0" prefWidth="927.0">
-                                <columns>
-                                  <TableColumn prefWidth="75.0" text="ID" />
-                                  <TableColumn prefWidth="200.0" text="Titolo" />
-                                    <TableColumn prefWidth="261.0" text="Testo" />
-                                    <TableColumn text="ID cliente" />
-                                    <TableColumn text="ID prodotto" />
-                                    <TableColumn prefWidth="150.0" text="Voto" />
-                                    <TableColumn text="Data" />
-                                </columns>
-                              </TableView>
-                           </children>
-                        </AnchorPane>
-                  </content>
-                </Tab>
-                <Tab text="PROMOZIONI">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <Button fx:id="creaPromozioneButton" layoutX="37.0" layoutY="41.0" mnemonicParsing="false" onAction="#creaPromozione" styleClass="round-button" text="CREA PROMOZIONE">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Button>
-                              <Label layoutX="37.0" layoutY="112.0" text="Promozioni attualmente attive:" textFill="WHITE">
-                                 <font>
-                                    <Font name="Calibri" size="28.0" />
-                                 </font>
-                              </Label>
-                              <TableView layoutX="37.0" layoutY="157.0" prefHeight="200.0" prefWidth="780.0">
-                                <columns>
-                                  <TableColumn text="ID" />
-                                  <TableColumn prefWidth="200.0" text="Nome" />
-                                    <TableColumn prefWidth="300.0" text="Descrizione" />
-                                    <TableColumn prefWidth="100.0" text="Data inizio" />
-                                    <TableColumn prefWidth="100.0" text="Data scadenza" />
-                                </columns>
-                              </TableView>
-                              <ImageView fitHeight="120.0" fitWidth="120.0" layoutX="844.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@images/tag.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </AnchorPane>
-                  </content>
-                </Tab>
                   <Tab text="ACCOUNT">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
@@ -306,6 +227,21 @@
                                     <Font name="System Bold Italic" size="20.0" />
                                  </font>
                               </Label>
+                              <Label fx:id="statoLabel" layoutX="28.0" layoutY="438.0" text="STATO" textFill="WHITE">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <RadioButton fx:id="disponibileRadioButton" layoutX="237.0" layoutY="438.0" mnemonicParsing="false" onAction="#selezionaDisponibile" text="DISPONIBILE" textFill="WHITE">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </RadioButton>
+                              <RadioButton fx:id="nonDisponibileRadioButton" layoutX="396.0" layoutY="438.0" mnemonicParsing="false" onAction="#selezionaNonDisponibile" text="NON DISPONIBILE" textFill="WHITE">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </RadioButton>
                            </children>
                         </AnchorPane>
                     </content>

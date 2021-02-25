@@ -66,7 +66,7 @@ public final class Controllore {
 
         for (int i = 0; i < username.length(); i++) {
             if (!Character.isLetterOrDigit(username.charAt(i))) {
-                if (username.charAt(i) != '.' || username.charAt(i) != '_' || username.charAt(i) != '-')
+                if (username.charAt(i) != '.' && username.charAt(i) != '_' && username.charAt(i) != '-')
                     throw new IllegalArgumentException("L'username non e' valido");
             }
         }

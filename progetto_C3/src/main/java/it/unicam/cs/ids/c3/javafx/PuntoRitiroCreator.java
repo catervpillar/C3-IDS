@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class PuntoRitiroCreator implements JavaFXController {
-   @FXML
+    @FXML
     TextField ragioneSocialeTextField;
     @FXML
     TextField emailTextField;
@@ -42,7 +42,7 @@ public class PuntoRitiroCreator implements JavaFXController {
     @FXML
     public void annulla() throws IOException {
         close(annullaButton);
-        startWindow("Registrati", "/tipoAccount.fxml", new AccountTypePicker());
+        startWindow("Registrati", "/tipoAccount.fxml", AccountTypePicker.getInstance());
     }
 
     private void confrontaPassword() {

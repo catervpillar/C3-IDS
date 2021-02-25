@@ -39,18 +39,7 @@ public class Deserializer {
     }
 
     public Cliente deserializzaCliente(ResultSet resultSet) throws SQLException {
-        Cliente cliente;
-
-        resultSet.last();
-
-        int count = 0;
-        /*while (resultSet.next()) {
-            count++;
-        }
-
-        if (count != 1)
-            throw new SQLException("Stronzata");*/
-        cliente = new Cliente(resultSet.getString("ID"),
+        Cliente cliente = new Cliente(resultSet.getString("ID"),
                 resultSet.getString("username"),
                 resultSet.getString("password"),
                 resultSet.getString("email"),
@@ -65,8 +54,6 @@ public class Deserializer {
 
     public List<Commerciante> deserializzaCommercianti(ResultSet resultSet) throws SQLException {
         List<Commerciante> listaCommercianti = new ArrayList<>();
-
-
         while (resultSet.next()) {
             Commerciante commerciante = new Commerciante(resultSet.getString("ID"),
                     resultSet.getString("username"),
@@ -84,7 +71,6 @@ public class Deserializer {
 
     public List<Corriere> deserializzaCorrieri(ResultSet resultSet) throws SQLException {
         List<Corriere> listaCorriere = new ArrayList<>();
-
         while (resultSet.next()) {
             Corriere corriere = new Corriere(resultSet.getString("ID"),
                     resultSet.getString("username"),
@@ -102,7 +88,6 @@ public class Deserializer {
 
     public List<PuntoRitiro> deserializzaPuntiRitiro(ResultSet resultSet) throws SQLException {
         List<PuntoRitiro> listaPuntiRitiro = new ArrayList<>();
-
         while (resultSet.next()) {
             PuntoRitiro puntoRitiro = new PuntoRitiro(resultSet.getString("ID"),
                     resultSet.getString("username"),
@@ -198,13 +183,12 @@ public class Deserializer {
     public String cercaUtente(String username, String password) throws SQLException {
         if (ControllerCliente.getInstance().loginCliente(username, password))
             return "cliente";
-        if (ControllerCommerciante.getInstance().loginCommerciante(username, password))
+        else if (ControllerCommerciante.getInstance().loginCommerciante(username, password))
             return "commerciante";
-        if (ControllerCorriere.getInstance().loginCorriere(username, password))
+        else if (ControllerCorriere.getInstance().loginCorriere(username, password))
             return "corriere";
-
-        if (ControllerPuntoRitiro.getInstance().loginPuntoRitiro(username, password))
+        else if (ControllerPuntoRitiro.getInstance().loginPuntoRitiro(username, password))
             return "punto_ritiro";
-        return null;
+        else throw new IllegalArgumentException("CREDENZIALI ERRATE");
     }
 }

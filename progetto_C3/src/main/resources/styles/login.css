@@ -9,6 +9,10 @@
 	-fx-background-radius: 45;
 }
 
+.basic-window-background{
+	-fx-background-color: #37444A;
+}
+
 .login-menubar-background{
 	-fx-background-color: #4D6068;
 	-fx-text-fill: white;
@@ -39,4 +43,9 @@
     -fx-background-radius: 30;
     -fx-background-insets: 0;
     -fx-text-fill: white;
+}
+
+.seconda-tabPane {
+-fx-background-color: #B4CDD2;
+
 }

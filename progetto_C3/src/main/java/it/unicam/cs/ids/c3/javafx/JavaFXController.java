@@ -58,6 +58,28 @@ public interface JavaFXController {
     }
 
     /**
+     * Opens a new FXML window from a specific path and then sets its title with
+     * the given {@code title} parameter.
+     *
+     * @param title the title to set as the window title.
+     * @param path  the path of the .fxml file to be read.
+     * @throws IOException if an error with the reading of the .fxml occurs.
+     */
+    default void startResizableWindow(String title, String path, JavaFXController controller) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
+        fxmlLoader.setController(controller);
+        Stage stage = new Stage();
+        stage.setTitle(title);
+        stage.setResizable(true);
+        stage.setMinWidth(450);
+        stage.setMinHeight(475);
+//        stage.getIcons().add(new Image("/images/jbudget_icon.png"));
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(new Scene(fxmlLoader.load()));
+        stage.show();
+    }
+
+    /**
      * Closes the window of a JavaFX controller by closing the stage.
      * The stage to close is obtained from a FXML control element of the controller,
      * usually the {@code abortButton}.

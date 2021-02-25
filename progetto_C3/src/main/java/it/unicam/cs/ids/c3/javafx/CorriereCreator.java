@@ -8,9 +8,21 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class CorriereCreator implements JavaFXController {
-@FXML
+    private static CorriereCreator instance;
+
+    private CorriereCreator() {
+    }
+
+    public static CorriereCreator getInstance() {
+        if (Objects.isNull(instance))
+            instance = new CorriereCreator();
+        return instance;
+    }
+
+    @FXML
     TextField ragioneSocialeTextField;
     @FXML
     TextField emailTextField;
@@ -43,7 +55,7 @@ public class CorriereCreator implements JavaFXController {
     @FXML
     public void annulla() throws IOException {
         close(annullaButton);
-        startWindow("Registrati", "/tipoAccount.fxml", new AccountTypePicker());
+        startWindow("Registrati", "/tipoAccount.fxml", AccountTypePicker.getInstance());
     }
 
     private void confrontaPassword() {

@@ -4,6 +4,7 @@ import it.unicam.cs.ids.c3.model.Prodotto;
 import it.unicam.cs.ids.c3.model.Promozione;
 import it.unicam.cs.ids.c3.model.Recensione;
 import it.unicam.cs.ids.c3.model.Ritiro;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -38,7 +39,6 @@ public class SerializerElimina {
         preparedStatement.executeUpdate();
         DBManager.getInstance().disconnect(preparedStatement);
 
-
         sql = "delete from prodotto where ID = ?";
         preparedStatement = DBManager.getInstance().getPreparedStatement(sql);
         preparedStatement.setString(1, IDProdotto);
@@ -47,8 +47,7 @@ public class SerializerElimina {
     }
 
     public void eliminaCliente(String IDCliente) throws SQLException {
-
-        String sql = "select * from recensione where cliente_ID = \""+IDCliente+"\";";
+        String sql = "select * from recensione where cliente_ID = \"" + IDCliente + "\";";
         ResultSet resultSet = DBManager.getInstance().executeQuery(sql);
         List<Recensione> recensioni = new ArrayList<>(Deserializer.getInstance().deserializzaRecensioni(resultSet));
 
@@ -77,7 +76,7 @@ public class SerializerElimina {
         DBManager.getInstance().disconnect(preparedStatement);
     }
 
-    public void eliminaRitiro(String IDRitiro) throws SQLException{
+    public void eliminaRitiro(String IDRitiro) throws SQLException {
         String sql = "delete from ritiro_has_prodotto where ritiro_ID = ?";
         PreparedStatement preparedStatement = DBManager.getInstance().getPreparedStatement(sql);
         preparedStatement.setString(1, IDRitiro);
@@ -98,7 +97,7 @@ public class SerializerElimina {
     }
 
     public void eliminaCorriere(String IDCorriere) throws SQLException {
-        String sql = "select * from ritiro where corriere_ID = \""+IDCorriere+"\";";
+        String sql = "select * from ritiro where corriere_ID = \"" + IDCorriere + "\";";
         ResultSet resultSet = DBManager.getInstance().executeQuery(sql);
         List<Ritiro> ritiri = new ArrayList<>(Deserializer.getInstance().deserializzaRitiri(resultSet));
         for (Ritiro r : ritiri)
@@ -111,37 +110,35 @@ public class SerializerElimina {
     }
 
     public void eliminaCommerciante(String IDCommerciante) throws SQLException {
-        String sql = "select * from prodotto where commerciante_ID = \""+IDCommerciante+"\";";
+        String sql = "select * from recensione where commerciante_ID = \"" + IDCommerciante + "\";";
         ResultSet resultSet = DBManager.getInstance().executeQuery(sql);
-        List<Prodotto> prodotti = new ArrayList<>(Deserializer.getInstance().deserializzaProdotti(resultSet));
-        for (Prodotto p : prodotti)
-            eliminaProdotto(p.getID());
+        List<Recensione> recensioni = new ArrayList<>(Deserializer.getInstance().deserializzaRecensioni(resultSet));
+        for (Recensione p : recensioni)
+            eliminaRecensione(p.getID());
 
-        sql = "select * from promozione where commerciante_ID = \""+IDCommerciante+"\";";
+        sql = "select * from promozione where commerciante_ID = \"" + IDCommerciante + "\";";
         resultSet = DBManager.getInstance().executeQuery(sql);
         List<Promozione> promozioni = new ArrayList<>(Deserializer.getInstance().deserializzaPromozioni(resultSet));
         for (Promozione p : promozioni)
             eliminaPromozione(p.getID());
 
-        sql = "select * from recensione where commerciante_ID = \""+IDCommerciante+"\";";
-        resultSet = DBManager.getInstance().executeQuery(sql);
-        List<Recensione> recensioni = new ArrayList<>(Deserializer.getInstance().deserializzaRecensioni(resultSet));
-        for (Recensione p : recensioni)
-            eliminaRecensione(p.getID());
-
-        sql = "select * from ritiro where commerciante_ID = \""+IDCommerciante+"\";";
+        sql = "select * from ritiro where commerciante_ID = \"" + IDCommerciante + "\";";
         resultSet = DBManager.getInstance().executeQuery(sql);
         List<Ritiro> ritiri = new ArrayList<>(Deserializer.getInstance().deserializzaRitiri(resultSet));
         for (Ritiro r : ritiri)
             eliminaRitiro(r.getID());
+
+        sql = "select * from prodotto where commerciante_ID = \"" + IDCommerciante + "\";";
+        resultSet = DBManager.getInstance().executeQuery(sql);
+        List<Prodotto> prodotti = new ArrayList<>(Deserializer.getInstance().deserializzaProdotti(resultSet));
+        for (Prodotto p : prodotti)
+            eliminaProdotto(p.getID());
 
         sql = "delete from commerciante where ID = ?";
         PreparedStatement preparedStatement = DBManager.getInstance().getPreparedStatement(sql);
         preparedStatement.setString(1, IDCommerciante);
         preparedStatement.executeUpdate();
         DBManager.getInstance().disconnect(preparedStatement);
-
-
     }
 
     public void eliminaPromozione(String IDpromozione) throws SQLException {
@@ -157,6 +154,4 @@ public class SerializerElimina {
         preparedStatement.executeUpdate();
         DBManager.getInstance().disconnect(preparedStatement);
     }
-
-
 }

@@ -33,17 +33,11 @@ public class ControllerCliente {
 
     public boolean loginCliente(String username, String password) throws SQLException {
         String sql = "select * from cliente where username = \"" + username + "\" and password = \"" + password + "\";";
-        //String sql = "select * from cliente where username = ? and password ? + password;";
         ResultSet resultSet = DBManager.getInstance().executeQuery(sql);
-        int i=0;
-        while(resultSet.next()){
-            i++;
-        }
-        if (i!=0) {
+        if (resultSet.last()) {
             this.cliente = Deserializer.getInstance().deserializzaCliente(resultSet);
             return true;
-        }
-        else return false;
+        } else return false;
     }
 
 //    public List<PuntoRitiro> cercaPuntiRitiro(String ragioneSociale) {
@@ -69,4 +63,57 @@ public class ControllerCliente {
     public Cliente getCliente() {
         return cliente;
     }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public List<? extends Promozione> cercaPromozioni() throws SQLException {
+        return Deserializer.getInstance().deserializzaPromozioni(DBManager.getInstance().executeQuery("select * from promozione;"));
+    }
+
+    public List<? extends Recensione> cercaRecensioni() throws SQLException {
+        return Deserializer.getInstance().deserializzaRecensioni(DBManager.getInstance().executeQuery("select * from recensione where cliente_ID = \"" + this.cliente.getID() + "\";"));
+    }
+
+    public List<? extends Commerciante> cercaCommercianti() throws SQLException {
+        return Deserializer.getInstance().deserializzaCommercianti(DBManager.getInstance().executeQuery("select * from commerciante"));
+    }
+
+    public List<? extends Corriere> cercaCorrieri() throws SQLException {
+        return Deserializer.getInstance().deserializzaCorrieri(DBManager.getInstance().executeQuery("select * from corriere"));
+    }
+
+    public List<? extends PuntoRitiro> cercaPuntiRitiro() throws SQLException {
+        return Deserializer.getInstance().deserializzaPuntiRitiro(DBManager.getInstance().executeQuery("select * from punto_ritiro"));
+    }
+
+    public List<? extends Ritiro> cercaOrdini() throws SQLException {
+        return Deserializer.getInstance().deserializzaRitiri(DBManager.getInstance().executeQuery("select * from ritiro"));
+    }
+
+    public Corriere cercaCorriereDalTextField(String ragioneSociale) throws SQLException {
+        ResultSet resultSet = DBManager.getInstance().executeQuery("select * from corriere where ragioneSociale = \"" + ragioneSociale + "\";");
+        //if (!Deserializer.getInstance().deserializzaCorrieri(resultSet).isEmpty())
+        return Deserializer.getInstance().deserializzaCorrieri(resultSet).get(0);
+        //else
+        //  return null;
+    }
+
+    public PuntoRitiro cercaPuntoRitiroDalTextField(String ragioneSociale) throws SQLException {
+        return Deserializer.getInstance().deserializzaPuntiRitiro(DBManager.getInstance().executeQuery("select * from punto_ritiro where ragione_sociale = \"" + ragioneSociale + "\";")).get(0);
+    }
+
+    public Commerciante cercaCommercianteDalTextField(String ragioneSociale) throws SQLException {
+        return Deserializer.getInstance().deserializzaCommercianti(DBManager.getInstance().executeQuery("select * from commerciante where ragioneSociale = \"" + ragioneSociale + "\";")).get(0);
+    }
+
+    public void logout() {
+        GestoreRicerche.getInstance().reset();
+        setCliente(null);
+    }
+
+    /*public Commerciante cercaCommercianteDalTextField(String ragioneSociale) throws SQLException{
+
+    }*/
 }
