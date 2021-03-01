@@ -24,6 +24,25 @@
 	-fx-text-fill: white;
 }
 
+.menu-slide-window {
+    -fx-background-color: #426D76;
+}
+
+.menu-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+}
+
+.menu-button:hover {
+    -fx-background-color: #DCDCDC;
+    -fx-text-fill: black;
+}
+
+.menu-button:pressed {
+    -fx-background-color: #C9C9C9;
+    -fx-text-fill: black;
+}
+
 .round-button {
     -fx-background-color: linear-gradient(#B74839, #892D44);
     -fx-background-radius: 30;
@@ -42,6 +61,27 @@
     -fx-background-color: linear-gradient(#762116, #892D44);
     -fx-background-radius: 30;
     -fx-background-insets: 0;
+    -fx-text-fill: white;
+}
+
+.round-button2 {
+    -fx-background-color: linear-gradient(#50567D, #002d40);
+    /*-fx-background-radius: 30;
+    -fx-background-insets: 0;*/
+    -fx-text-fill: white;
+}
+
+.round-button2:hover {
+    -fx-background-color: linear-gradient(#6B75AB, #002d40);
+    /*-fx-background-radius: 30;
+    -fx-background-insets: 0;*/
+    -fx-text-fill: white;
+}
+
+.round-button2:pressed {
+    -fx-background-color: linear-gradient(#242842, #002d40);
+    /*-fx-background-radius: 30;
+    -fx-background-insets: 0;*/
     -fx-text-fill: white;
 }
 

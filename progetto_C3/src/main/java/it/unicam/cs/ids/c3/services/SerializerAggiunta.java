@@ -19,13 +19,14 @@ public class SerializerAggiunta {
     }
 
     public void serializzaProdotto(Prodotto prodotto) throws SQLException {
-        String sql = "INSERT INTO prodotto VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO prodotto VALUES (?,?,?,?,?,?)";
         PreparedStatement preparedStatement = DBManager.getInstance().getPreparedStatement(sql);
         preparedStatement.setString(1, prodotto.getID());
         preparedStatement.setString(2, prodotto.getNome());
         preparedStatement.setDouble(3, prodotto.getPrezzo());
         preparedStatement.setInt(4, prodotto.getQuantita());
         preparedStatement.setString(5, prodotto.getIDCommerciante());
+        preparedStatement.setString(6, prodotto.getURLImmagine());
         preparedStatement.executeUpdate();
         DBManager.getInstance().disconnect(preparedStatement);
     }

@@ -8,22 +8,24 @@ public class Prodotto implements HasID {
     private double prezzo;
     private int quantita;
     private String IDCommerciante;
+    private String URLImmagine;
 
-
-    public Prodotto(String nome, double prezzo, int quantita, String IDCommerciante) {
+    public Prodotto(String nome, double prezzo, int quantita, String IDCommerciante, String URLImmagine) {
         IDGenerator.generateID(this);
         this.nome = nome;
         this.prezzo = prezzo;
         this.quantita = quantita;
         this.IDCommerciante = IDCommerciante;
+        this.URLImmagine = URLImmagine;
     }
 
-    public Prodotto(String ID, String nome, double prezzo, int quantita, String IDCommerciante) {
+    public Prodotto(String ID, String nome, double prezzo, int quantita, String IDCommerciante, String URLImmagine) {
         this.ID = ID;
         this.nome = nome;
         this.prezzo = prezzo;
         this.quantita = quantita;
         this.IDCommerciante = IDCommerciante;
+        this.URLImmagine = URLImmagine;
     }
 
     @Override
@@ -66,6 +68,14 @@ public class Prodotto implements HasID {
 
     public void setQuantita(int quantita) {
         this.quantita = quantita;
+    }
+
+    public String getURLImmagine() {
+        return URLImmagine;
+    }
+
+    public void setURLImmagine(String URLImmagine) {
+        this.URLImmagine = URLImmagine;
     }
 
     @Override

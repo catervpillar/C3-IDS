@@ -31,6 +31,21 @@ public final class GestoreRicerche {
         return instance;
     }
 
+    public List<Commerciante> getCommercianti() {
+        return commercianti;
+    }
+
+    public List<PuntoRitiro> getPuntiDiRitiro() {
+        return puntiDiRitiro;
+    }
+
+    public List<Corriere> getCorrieri() {
+        return corrieri;
+    }
+
+    public List<Prodotto> getProdotti() {
+        return prodotti;
+    }
 
     List<Commerciante> cercaCommerciante(String ragioneSociale) {
         commercianti.clear();
@@ -92,7 +107,7 @@ public final class GestoreRicerche {
         return puntiDiRitiro;
     }
 
-    List<Prodotto> cercaProdotto(String nome, String ID) {
+    List<Prodotto> cercaProdotto(String nome, String ID, String IDCommerciante) {
         prodotti.clear();
         if (!Objects.isNull(nome)) {
             try {
@@ -108,7 +123,14 @@ public final class GestoreRicerche {
             } catch (SQLException e) {
                 System.out.println("Errore nella ricerca: nessun risultato trovato");
             }
-        } else {
+        } else if (!Objects.isNull(IDCommerciante)){
+            try {
+                ResultSet resultSet = DBManager.getInstance().executeQuery("select * from prodotto where commerciante_ID = \"" + IDCommerciante + "\"");
+                prodotti.addAll(Deserializer.getInstance().deserializzaProdotti(resultSet));
+            } catch (SQLException e) {
+                System.out.println("Errore nella ricerca: nessun risultato trovato");
+            }
+        }else {
             try {
                 ResultSet resultSet = DBManager.getInstance().executeQuery("select * from prodotto");
                 prodotti.addAll(Deserializer.getInstance().deserializzaProdotti(resultSet));

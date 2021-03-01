@@ -58,7 +58,7 @@ public class LoginC3Controller implements JavaFXController {
                     startWindow("ICliente", "/ICliente.fxml", ICliente.getInstance());
                     break;
                 case "commerciante":
-                    startWindow("ICommerciante", "/ICommerciante.fxml", ICommerciante.getInstance());
+                    startWindow("ICommerciante", "/ICommerciante2.fxml", ICommerciante2.getInstance());
                     break;
                 case "corriere":
                     startWindow("ICorriere", "/ICorriere.fxml", ICorriere.getInstance());
@@ -127,7 +127,6 @@ public class LoginC3Controller implements JavaFXController {
     }
 
     @FXML
-    public void recuperaPassword() {
-
+    public void recuperaPassword() throws IOException {
     }
 }

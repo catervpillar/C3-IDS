@@ -30,7 +30,8 @@ public class Deserializer {
                     resultSet.getString("nome"),
                     resultSet.getDouble("prezzo"),
                     resultSet.getInt("quantita"),
-                    resultSet.getString("commerciante_ID"));
+                    resultSet.getString("commerciante_ID"),
+                    resultSet.getString("URL_immagine"));
             listaProdotti.add(prodotto);
         }
 

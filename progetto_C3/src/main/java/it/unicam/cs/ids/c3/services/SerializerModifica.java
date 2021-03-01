@@ -19,14 +19,15 @@ public class SerializerModifica {
     }
 
     public void modificaProdotto(Prodotto prodotto) throws SQLException {
-        String sql = "UPDATE prodotto SET nome = ?, prezzo = ?, quantita = ?, commerciante_ID = ? WHERE ID = ?;";
+        String sql = "UPDATE prodotto SET nome = ?, prezzo = ?, quantita = ?, commerciante_ID = ?, URL_immagine = ? WHERE ID = ?;";
 
         PreparedStatement preparedStatement = DBManager.getInstance().getPreparedStatement(sql);
         preparedStatement.setString(1, prodotto.getNome());
         preparedStatement.setDouble(2, prodotto.getPrezzo());
         preparedStatement.setInt(3, prodotto.getQuantita());
         preparedStatement.setString(4, prodotto.getIDCommerciante());
-        preparedStatement.setString(5, prodotto.getID());
+        preparedStatement.setString(5, prodotto.getURLImmagine());
+        preparedStatement.setString(6, prodotto.getID());
         preparedStatement.executeUpdate();
         DBManager.getInstance().disconnect(preparedStatement);
     }

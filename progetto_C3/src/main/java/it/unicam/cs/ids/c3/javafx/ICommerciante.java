@@ -108,7 +108,6 @@ public class ICommerciante implements JavaFXController {
         setDatiAccount();
     }
 
-
     private void setDatiAccount() {
         IDutenteLabel.setText("ID UTENTE: " + ControllerCommerciante.getInstance().getCommerciante().getID());
         usernameTextField.setText(ControllerCommerciante.getInstance().getCommerciante().getUsername());

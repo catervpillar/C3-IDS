@@ -77,7 +77,11 @@ public class ControllerCommerciante {
     }
 
     public List<Prodotto> getProdotti() throws SQLException {
-        return GestoreRicerche.getInstance().cercaProdotto(null, this.commerciante.getID());
+        return GestoreRicerche.getInstance().cercaProdotto(null, null, this.commerciante.getID());
+    }
+
+    public void creaProdotto(String nome, Double prezzo, int quantita, String URLimmagine) throws SQLException {
+        SerializerAggiunta.getInstance().serializzaProdotto(new Prodotto(nome, prezzo, quantita, this.commerciante.getID(), URLimmagine));
     }
 
     public void prenotaRitiro(String destinazione, List<String> listaIDProdotti, String IDCommerciante, String IDCliente, String IDCorriere, TipoConsegna tipoConsegna) {
