@@ -46,6 +46,14 @@ public class ICommerciante2 implements Initializable, JavaFXController {
     @FXML
     private Button aggiungiProdottoButton, modificaProdottoButton, eliminaProdottoButton;
 
+    //Ritiri pane
+    @FXML
+    private Button prenotaRitiroButton, annullaRitiroButton;
+    @FXML
+    private Label elencoRitiriLabel;
+    @FXML
+    private Accordion ritiriAccordion;
+
     // Account pane
     @FXML
     private Button salvaModificheButton, logoutButton, eliminaAccountButton;
@@ -268,6 +276,16 @@ public class ICommerciante2 implements Initializable, JavaFXController {
         nascondiMenu();
         nascondiTutto();
         mostraTransition(ritiriPane);
+    }
+
+    @FXML
+    private void prenotaRitiro() throws IOException {
+        startWindow("Prenotazione nuovo ritiro", "/prenotaRitiro.fxml", PrenotaRitiro.getInstance());
+    }
+
+    @FXML
+    private void annullaRitiro(){
+
     }
 
     @FXML

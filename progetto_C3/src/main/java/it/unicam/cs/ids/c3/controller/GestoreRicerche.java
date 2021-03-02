@@ -47,7 +47,7 @@ public final class GestoreRicerche {
         return prodotti;
     }
 
-    List<Commerciante> cercaCommerciante(String ragioneSociale) {
+    public List<Commerciante> cercaCommerciante(String ragioneSociale) {
         commercianti.clear();
         if (!Objects.isNull(ragioneSociale)) {
             try {
@@ -67,7 +67,7 @@ public final class GestoreRicerche {
         return commercianti;
     }
 
-    List<Corriere> cercaCorriere(String ragioneSociale) {
+    public List<Corriere> cercaCorriere(String ragioneSociale) {
         corrieri.clear();
         if (!Objects.isNull(ragioneSociale)) {
             try {
@@ -87,7 +87,7 @@ public final class GestoreRicerche {
         return corrieri;
     }
 
-    List<PuntoRitiro> cercaPuntoRitiro(String ragioneSociale) {
+    public List<PuntoRitiro> cercaPuntoRitiro(String ragioneSociale) {
         puntiDiRitiro.clear();
         if (!Objects.isNull(ragioneSociale)) {
             try {
@@ -107,7 +107,7 @@ public final class GestoreRicerche {
         return puntiDiRitiro;
     }
 
-    List<Prodotto> cercaProdotto(String nome, String ID, String IDCommerciante) {
+    public List<Prodotto> cercaProdotto(String nome, String ID, String IDCommerciante) {
         prodotti.clear();
         if (!Objects.isNull(nome)) {
             try {
@@ -123,14 +123,14 @@ public final class GestoreRicerche {
             } catch (SQLException e) {
                 System.out.println("Errore nella ricerca: nessun risultato trovato");
             }
-        } else if (!Objects.isNull(IDCommerciante)){
+        } else if (!Objects.isNull(IDCommerciante)) {
             try {
                 ResultSet resultSet = DBManager.getInstance().executeQuery("select * from prodotto where commerciante_ID = \"" + IDCommerciante + "\"");
                 prodotti.addAll(Deserializer.getInstance().deserializzaProdotti(resultSet));
             } catch (SQLException e) {
                 System.out.println("Errore nella ricerca: nessun risultato trovato");
             }
-        }else {
+        } else {
             try {
                 ResultSet resultSet = DBManager.getInstance().executeQuery("select * from prodotto");
                 prodotti.addAll(Deserializer.getInstance().deserializzaProdotti(resultSet));
@@ -141,7 +141,7 @@ public final class GestoreRicerche {
         return prodotti;
     }
 
-    List<Promozione> getPromozioni() {
+    public List<Promozione> getPromozioni() {
         promozioni.clear();
         try {
             ResultSet resultSet = DBManager.getInstance().executeQuery("select * from promozione");
@@ -153,7 +153,7 @@ public final class GestoreRicerche {
         return promozioni;
     }
 
-    List<Recensione> getRecensioni() {
+    public List<Recensione> getRecensioni() {
         recensioni.clear();
         try {
             ResultSet resultSet = DBManager.getInstance().executeQuery("select * from recensione");
@@ -165,7 +165,7 @@ public final class GestoreRicerche {
         return recensioni;
     }
 
-    List<Ritiro> getRitiri() {
+    public List<Ritiro> getRitiri() {
         ritiri.clear();
         try {
             ResultSet resultSet = DBManager.getInstance().executeQuery("select * from ritiro");

@@ -72,7 +72,7 @@
             </Text>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="prodottiPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="44.0">
+      <AnchorPane fx:id="prodottiPane" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="44.0">
          <children>
             <Accordion fx:id="prodottiAccordion" layoutX="58.0" layoutY="130.0" prefHeight="240.0" prefWidth="675.0" />
             <Text layoutX="58.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prodotti">
@@ -102,7 +102,30 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="ritiriPane" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="44.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="46.0" />
+      <AnchorPane fx:id="ritiriPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="44.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="46.0">
+         <children>
+            <Button fx:id="prenotaRitiroButton" layoutX="757.0" layoutY="130.0" mnemonicParsing="false" onAction="#prenotaRitiro" prefWidth="155.0" styleClass="round-button2" text="Prenota ritiro">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="annullaRitiroButton" layoutX="757.0" layoutY="180.0" mnemonicParsing="false" onAction="#annullaRitiro" prefHeight="37.0" prefWidth="155.0" styleClass="round-button2" text="Annulla ritiro">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+            <Accordion fx:id="ritiriAccordion" layoutX="58.0" layoutY="130.0" prefHeight="240.0" prefWidth="675.0" />
+            <Text layoutX="58.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ritiri">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Text>
+            <Label fx:id="elencoRitiriLabel" layoutX="58.0" layoutY="88.0" text="Elenco dei ritiri prenotati:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
       <AnchorPane fx:id="promozioniPane" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="44.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="46.0" />
       <AnchorPane fx:id="accountPane" layoutX="44.0" layoutY="46.0" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="44.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="46.0">
          <children>
