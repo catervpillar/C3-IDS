@@ -24,8 +24,6 @@ public class PuntoRitiro extends Utente {
 
     @Override
     public String toString() {
-        return super.toString() + "PuntoRitiro{" +
-                "ragioneSociale='" + ragioneSociale + '\'' +
-                '}';
+        return ragioneSociale;
     }
 }

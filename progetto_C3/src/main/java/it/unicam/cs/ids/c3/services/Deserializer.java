@@ -89,12 +89,13 @@ public class Deserializer {
 
     public List<PuntoRitiro> deserializzaPuntiRitiro(ResultSet resultSet) throws SQLException {
         List<PuntoRitiro> listaPuntiRitiro = new ArrayList<>();
+
         while (resultSet.next()) {
             PuntoRitiro puntoRitiro = new PuntoRitiro(resultSet.getString("ID"),
                     resultSet.getString("username"),
                     resultSet.getString("password"),
                     resultSet.getString("email"),
-                    resultSet.getString("ragioneSociale"));
+                    resultSet.getString("ragione_sociale"));
             puntoRitiro.setTelefono(resultSet.getString("telefono"));
             puntoRitiro.setIndirizzo(resultSet.getString("indirizzo"));
             listaPuntiRitiro.add(puntoRitiro);

@@ -100,6 +100,7 @@ public final class GestoreRicerche {
             try {
                 ResultSet resultSet = DBManager.getInstance().executeQuery("select * from punto_ritiro");
                 puntiDiRitiro.addAll(Deserializer.getInstance().deserializzaPuntiRitiro(resultSet));
+
             } catch (SQLException e) {
                 System.out.println("Errore nella ricerca: nessun risultato trovato");
             }

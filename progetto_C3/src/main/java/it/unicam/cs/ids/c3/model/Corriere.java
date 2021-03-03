@@ -35,9 +35,6 @@ public class Corriere extends Utente {
 
     @Override
     public String toString() {
-        return super.toString() + "Corriere{" +
-                "ragioneSociale='" + ragioneSociale + '\'' +
-                ", stato=" + stato +
-                '}';
+        return ragioneSociale;
     }
 }
