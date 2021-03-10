@@ -1,7 +1,6 @@
 package it.unicam.cs.ids.c3.javafx;
 
 import it.unicam.cs.ids.c3.controller.ControllerCommerciante;
-import it.unicam.cs.ids.c3.services.SerializerAggiunta;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -42,7 +41,7 @@ public class CreaProdotto implements Initializable, JavaFXController {
                     Double.parseDouble(prezzoTextField.getText()),
                     Integer.parseInt(disponibilitaTextField.getText()),
                     URLimmagineTextField.getText());
-            ICommerciante2.getInstance().aggiornaListaProdotti();
+            ICommerciante.getInstance().aggiornaListaProdotti();
             close(creaButton);
         } catch (SQLException | IllegalArgumentException e) {
             createErrorAlert(e.getMessage());

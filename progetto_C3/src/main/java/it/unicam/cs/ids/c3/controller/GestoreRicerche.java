@@ -49,104 +49,81 @@ public final class GestoreRicerche {
 
     public List<Commerciante> cercaCommerciante(String ragioneSociale) {
         commercianti.clear();
-        if (!Objects.isNull(ragioneSociale)) {
-            try {
-                ResultSet resultSet = DBManager.getInstance().executeQuery("select * from commerciante where ragioneSociale = \"" + ragioneSociale + "\"");
-                commercianti.addAll(Deserializer.getInstance().deserializzaCommercianti(resultSet));
-            } catch (SQLException e) {
-                System.out.println("Errore nella ricerca: nessun risultato trovato");
-            }
-        } else {
-            try {
-                ResultSet resultSet = DBManager.getInstance().executeQuery("select * from commerciante");
-                commercianti.addAll(Deserializer.getInstance().deserializzaCommercianti(resultSet));
-            } catch (SQLException e) {
-                System.out.println("Errore nella ricerca: nessun risultato trovato");
-            }
+        try {
+            ResultSet resultSet;
+            if (!Objects.isNull(ragioneSociale)) {
+                resultSet = DBManager.getInstance().executeQuery("select * from commerciante where ragioneSociale = \"" + ragioneSociale + "\"");
+            } else
+                resultSet = DBManager.getInstance().executeQuery("select * from commerciante");
+            commercianti.addAll(Deserializer.getInstance().deserializzaCommercianti(resultSet));
+        } catch (SQLException e) {
+            System.out.println("Errore nella ricerca: nessun risultato trovato");
         }
         return commercianti;
     }
 
     public List<Corriere> cercaCorriere(String ragioneSociale) {
         corrieri.clear();
-        if (!Objects.isNull(ragioneSociale)) {
-            try {
-                ResultSet resultSet = DBManager.getInstance().executeQuery("select * from corriere where ragioneSociale = \"" + ragioneSociale + "\"");
-                corrieri.addAll(Deserializer.getInstance().deserializzaCorrieri(resultSet));
-            } catch (SQLException e) {
-                System.out.println("Errore nella ricerca: nessun risultato trovato");
-            }
-        } else {
-            try {
-                ResultSet resultSet = DBManager.getInstance().executeQuery("select * from corriere");
-                corrieri.addAll(Deserializer.getInstance().deserializzaCorrieri(resultSet));
-            } catch (SQLException e) {
-                System.out.println("Errore nella ricerca: nessun risultato trovato");
-            }
+        try {
+            ResultSet resultSet;
+            if (!Objects.isNull(ragioneSociale)) {
+                resultSet = DBManager.getInstance().executeQuery("select * from corriere where ragioneSociale = \"" + ragioneSociale + "\"");
+            } else
+                resultSet = DBManager.getInstance().executeQuery("select * from corriere");
+            corrieri.addAll(Deserializer.getInstance().deserializzaCorrieri(resultSet));
+        } catch (SQLException e) {
+            System.out.println("Errore nella ricerca: nessun risultato trovato");
         }
         return corrieri;
     }
 
     public List<PuntoRitiro> cercaPuntoRitiro(String ragioneSociale) {
         puntiDiRitiro.clear();
-        if (!Objects.isNull(ragioneSociale)) {
-            try {
-                ResultSet resultSet = DBManager.getInstance().executeQuery("select * from punto_ritiro where ragioneSociale = \"" + ragioneSociale + "\"");
-                puntiDiRitiro.addAll(Deserializer.getInstance().deserializzaPuntiRitiro(resultSet));
-            } catch (SQLException e) {
-                System.out.println("Errore nella ricerca: nessun risultato trovato");
-            }
-        } else {
-            try {
-                ResultSet resultSet = DBManager.getInstance().executeQuery("select * from punto_ritiro");
-                puntiDiRitiro.addAll(Deserializer.getInstance().deserializzaPuntiRitiro(resultSet));
-
-            } catch (SQLException e) {
-                System.out.println("Errore nella ricerca: nessun risultato trovato");
-            }
+        try {
+            ResultSet resultSet;
+            if (!Objects.isNull(ragioneSociale)) {
+                resultSet = DBManager.getInstance().executeQuery("select * from punto_ritiro where ragioneSociale = \"" + ragioneSociale + "\"");
+            } else
+                resultSet = DBManager.getInstance().executeQuery("select * from punto_ritiro");
+            puntiDiRitiro.addAll(Deserializer.getInstance().deserializzaPuntiRitiro(resultSet));
+        } catch (SQLException e) {
+            System.out.println("Errore nella ricerca: nessun risultato trovato");
         }
         return puntiDiRitiro;
     }
 
     public List<Prodotto> cercaProdotto(String nome, String ID, String IDCommerciante) {
         prodotti.clear();
-        if (!Objects.isNull(nome)) {
-            try {
+        try {
+            if (!Objects.isNull(nome)) {
                 ResultSet resultSet = DBManager.getInstance().executeQuery("select * from prodotto where nome = \"" + nome + "\"");
                 prodotti.addAll(Deserializer.getInstance().deserializzaProdotti(resultSet));
-            } catch (SQLException e) {
-                System.out.println("Errore nella ricerca: nessun risultato trovato");
-            }
-        } else if (!Objects.isNull(ID)) {
-            try {
+            } else if (!Objects.isNull(ID)) {
                 ResultSet resultSet = DBManager.getInstance().executeQuery("select * from prodotto where ID = \"" + ID + "\"");
                 prodotti.addAll(Deserializer.getInstance().deserializzaProdotti(resultSet));
-            } catch (SQLException e) {
-                System.out.println("Errore nella ricerca: nessun risultato trovato");
-            }
-        } else if (!Objects.isNull(IDCommerciante)) {
-            try {
+            } else if (!Objects.isNull(IDCommerciante)) {
                 ResultSet resultSet = DBManager.getInstance().executeQuery("select * from prodotto where commerciante_ID = \"" + IDCommerciante + "\"");
                 prodotti.addAll(Deserializer.getInstance().deserializzaProdotti(resultSet));
-            } catch (SQLException e) {
-                System.out.println("Errore nella ricerca: nessun risultato trovato");
-            }
-        } else {
-            try {
+            } else {
                 ResultSet resultSet = DBManager.getInstance().executeQuery("select * from prodotto");
                 prodotti.addAll(Deserializer.getInstance().deserializzaProdotti(resultSet));
-            } catch (SQLException e) {
-                System.out.println("Errore nella ricerca: nessun risultato trovato");
             }
+        } catch (SQLException e) {
+            System.out.println("Errore nella ricerca: nessun risultato trovato");
         }
         return prodotti;
     }
 
-    public List<Promozione> getPromozioni() {
+    public List<Promozione> getPromozioni(String IDCommerciante) {
         promozioni.clear();
         try {
-            ResultSet resultSet = DBManager.getInstance().executeQuery("select * from promozione");
-            promozioni.addAll(Deserializer.getInstance().deserializzaPromozioni(resultSet));
+            if (!Objects.isNull(IDCommerciante)) {
+                ResultSet resultSet = DBManager.getInstance().executeQuery("select * from promozione where commerciante_ID = \"" + IDCommerciante + "\";");
+                promozioni.addAll(Deserializer.getInstance().deserializzaPromozioni(resultSet));
+            } else {
+                ResultSet resultSet = DBManager.getInstance().executeQuery("select * from promozione");
+                promozioni.addAll(Deserializer.getInstance().deserializzaPromozioni(resultSet));
+            }
         } catch (SQLException e) {
             System.out.println("Errore nella ricerca: nessun risultato trovato");
         }
@@ -166,15 +143,25 @@ public final class GestoreRicerche {
         return recensioni;
     }
 
-    public List<Ritiro> getRitiri() {
+    public List<Ritiro> getRitiri(String IDCommerciante, String IDCliente, String IDCorriere, String destinazione) {
         ritiri.clear();
         try {
-            ResultSet resultSet = DBManager.getInstance().executeQuery("select * from ritiro");
-            ritiri.addAll(Deserializer.getInstance().deserializzaRitiri(resultSet));
+            if (!Objects.isNull(IDCommerciante)) {
+                ResultSet resultSet = DBManager.getInstance().executeQuery("select * from ritiro where commerciante_ID = \"" + IDCommerciante + "\";");
+                ritiri.addAll(Deserializer.getInstance().deserializzaRitiri(resultSet));
+            } else if (!Objects.isNull(IDCliente)) {
+                ResultSet resultSet = DBManager.getInstance().executeQuery("select * from ritiro where cliente_ID = \"" + IDCliente + "\";");
+                ritiri.addAll(Deserializer.getInstance().deserializzaRitiri(resultSet));
+            } else if (!Objects.isNull(IDCorriere)) {
+                ResultSet resultSet = DBManager.getInstance().executeQuery("select * from ritiro where corriere_ID = \"" + IDCorriere + "\";");
+                ritiri.addAll(Deserializer.getInstance().deserializzaRitiri(resultSet));
+            } else if (!Objects.isNull(destinazione)) {
+                ResultSet resultSet = DBManager.getInstance().executeQuery("select * from ritiro where destinazione = \"" + destinazione + "\";");
+                ritiri.addAll(Deserializer.getInstance().deserializzaRitiri(resultSet));
+            }
         } catch (SQLException e) {
             System.out.println("Errore nella ricerca: nessun risultato trovato");
         }
-
         return ritiri;
     }
 

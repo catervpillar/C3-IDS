@@ -1,10 +1,7 @@
 package it.unicam.cs.ids.c3.javafx;
 
 import it.unicam.cs.ids.c3.controller.ControllerCliente;
-import it.unicam.cs.ids.c3.controller.ControllerCommerciante;
 import it.unicam.cs.ids.c3.model.*;
-import it.unicam.cs.ids.c3.services.DBManager;
-import it.unicam.cs.ids.c3.services.Deserializer;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -16,7 +13,6 @@ import javafx.scene.image.ImageView;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.List;
 import java.util.Objects;
 
 public class ICliente implements JavaFXController {
@@ -225,7 +221,7 @@ public class ICliente implements JavaFXController {
         commOrdine.setCellValueFactory(ordine -> new SimpleObjectProperty<>(ordine.getValue().getIDCommerciante()));
         dataOrdine.setCellValueFactory(ordine -> new SimpleObjectProperty<>(new SimpleDateFormat("dd-MM-yyyy").format(ordine.getValue().getDataPrenotazione().getTime())));
         destOrdine.setCellValueFactory(ordine -> new SimpleObjectProperty<>(ordine.getValue().getDestinazione()));
-        trackOrdine.setCellValueFactory(ordine -> new SimpleObjectProperty<>(ordine.getValue().getStato().toString()));
+        trackOrdine.setCellValueFactory(ordine -> new SimpleObjectProperty<>(ordine.getValue().getStatoTracking().toString()));
     }
 
     @FXML

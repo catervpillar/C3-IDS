@@ -142,7 +142,7 @@ public class SerializerAggiunta {
         preparedStatement.setString(8, ritiro.getIDCommerciante());
         preparedStatement.setString(9, ritiro.getIDCliente());
         preparedStatement.setString(10, ritiro.getIDCorriere());
-        preparedStatement.setString(11, ritiro.getStato().name());
+        preparedStatement.setString(11, ritiro.getStatoTracking().name());
         preparedStatement.executeUpdate();
         DBManager.getInstance().disconnect(preparedStatement);
 

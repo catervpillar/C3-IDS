@@ -141,7 +141,7 @@ public class SerializerModifica {
         preparedStatement.setString(7, ritiro.getIDCommerciante());
         preparedStatement.setString(8, ritiro.getIDCliente());
         preparedStatement.setString(9, ritiro.getIDCorriere());
-        preparedStatement.setString(10, ritiro.getStato().name());
+        preparedStatement.setString(10, ritiro.getStatoTracking().name());
         preparedStatement.setString(11, ritiro.getID());
         preparedStatement.executeUpdate();
         DBManager.getInstance().disconnect(preparedStatement);

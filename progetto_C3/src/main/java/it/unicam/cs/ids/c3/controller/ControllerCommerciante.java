@@ -80,16 +80,32 @@ public class ControllerCommerciante {
         return GestoreRicerche.getInstance().cercaProdotto(null, null, this.commerciante.getID());
     }
 
+    public List<Ritiro> getRitiri() throws SQLException {
+        return GestoreRicerche.getInstance().getRitiri(this.commerciante.getID(), null, null, null);
+    }
+
     public void creaProdotto(String nome, Double prezzo, int quantita, String URLimmagine) throws SQLException {
         SerializerAggiunta.getInstance().serializzaProdotto(new Prodotto(nome, prezzo, quantita, this.commerciante.getID(), URLimmagine));
     }
 
-    public void prenotaRitiro(String destinazione, List<String> listaIDProdotti, String IDCommerciante, String IDCliente, String IDCorriere, TipoConsegna tipoConsegna) {
-        GestoreRitiri.getInstance().creaRitiro(listaIDProdotti, IDCommerciante, IDCliente, IDCorriere, destinazione, tipoConsegna);
+    public void prenotaRitiro(String IDCliente, String IDCorriere, String destinazione, TipoConsegna tipoConsegna, List<String> listaIDProdotti) throws SQLException {
+        GestoreRitiri.getInstance().creaRitiro(this.commerciante.getID(), IDCliente, IDCorriere, destinazione, tipoConsegna, listaIDProdotti);
     }
 
-    public void creaPromozione(String IDCommerciante, String nome, String descrizione, List<String> listaIDProdotti, GregorianCalendar dataInizio, GregorianCalendar dataScadenza) {
-        GestorePromozioni.getInstance().creaPromozione(nome, IDCommerciante, listaIDProdotti, descrizione, dataInizio, dataScadenza);
+    public void modificaRitiro() throws SQLException {
+        GestoreRitiri.getInstance().modificaRitiro();
+    }
+
+    public void eliminaRitiro() throws SQLException {
+        GestoreRitiri.getInstance().eliminaRitiro();
+    }
+
+    public List<Promozione> getPromozioni() throws SQLException {
+        return GestoreRicerche.getInstance().getPromozioni(this.commerciante.getID());
+    }
+
+    public void creaPromozione(String nome, String descrizione, GregorianCalendar dataInizio, GregorianCalendar dataScadenza, List<String> listaIDProdotti) throws SQLException {
+        GestorePromozioni.getInstance().creaPromozione(nome, this.commerciante.getID(), listaIDProdotti, descrizione, dataInizio, dataScadenza);
     }
 
     public void modificaPromozione(List<String> listaIDCommercianti, String nome, String descrizione, List<String> listaIDProdotti, GregorianCalendar dataInizio, GregorianCalendar dataScadenza, String IDPromozione) {

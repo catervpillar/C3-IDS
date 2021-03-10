@@ -40,7 +40,7 @@ public class ModificaProdotto implements Initializable, JavaFXController {
     }
 
     private void setDati() {
-        Accordion accordion = ICommerciante2.getInstance().getProdottiAccordion();
+        Accordion accordion = ICommerciante.getInstance().getProdottiAccordion();
         AnchorPane anchorPane = (AnchorPane) accordion.getExpandedPane().getContent();
         Label ID = (Label) anchorPane.getChildren().get(2);
         try {
@@ -71,7 +71,7 @@ public class ModificaProdotto implements Initializable, JavaFXController {
         prodottoDaModificare.setQuantita(Integer.parseInt(disponibilitaTextField.getText()));
         prodottoDaModificare.setURLImmagine(URLimmagineTextField.getText());
         SerializerModifica.getInstance().modificaProdotto(prodottoDaModificare);
-        ICommerciante2.getInstance().aggiornaListaProdotti();
+        ICommerciante.getInstance().aggiornaListaProdotti();
         this.prodottoDaModificare = null;
         close(salvaButton);
     }

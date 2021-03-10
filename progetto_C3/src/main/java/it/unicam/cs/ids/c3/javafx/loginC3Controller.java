@@ -2,10 +2,8 @@ package it.unicam.cs.ids.c3.javafx;
 
 import it.unicam.cs.ids.c3.services.Deserializer;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -58,7 +56,7 @@ public class LoginC3Controller implements JavaFXController {
                     startWindow("ICliente", "/ICliente.fxml", ICliente.getInstance());
                     break;
                 case "commerciante":
-                    startWindow("ICommerciante", "/ICommerciante2.fxml", ICommerciante2.getInstance());
+                    startWindow("ICommerciante", "/ICommerciante.fxml", ICommerciante.getInstance());
                     break;
                 case "corriere":
                     startWindow("ICorriere", "/ICorriere.fxml", ICorriere.getInstance());

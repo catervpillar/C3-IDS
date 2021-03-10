@@ -1,7 +1,5 @@
 package it.unicam.cs.ids.c3.model;
 
-import it.unicam.cs.ids.c3.utilities.Controllore;
-
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -19,7 +17,7 @@ public class Ritiro implements HasID {
     private GregorianCalendar dataConsegna;
     private boolean ritirato;
     private TipoConsegna tipoConsegna;
-    private StatoTracking stato;
+    private StatoTracking statoTracking;
 
 
     public Ritiro(String IDCommerciante, String IDCliente, String IDCorriere, String destinazione, TipoConsegna tipoConsegna) {
@@ -33,7 +31,7 @@ public class Ritiro implements HasID {
         this.dataConsegna = null;
         this.codiceRitiro = CodiciRitiroGenerator.getInstance().generaCodice();
         this.tipoConsegna = tipoConsegna;
-        this.stato = StatoTracking.IN_ELABORAZIONE;
+        this.statoTracking = StatoTracking.IN_ELABORAZIONE;
     }
 
     public Ritiro(String ID, String IDCommerciante, String IDCliente, String IDCorriere, String destinazione, String codiceRitiro, boolean ritirato, TipoConsegna tipoConsegna, StatoTracking stato, GregorianCalendar dataPrenotazione, GregorianCalendar dataConsegna) {
@@ -47,7 +45,7 @@ public class Ritiro implements HasID {
         this.dataConsegna = dataConsegna;
         this.codiceRitiro = codiceRitiro;
         this.tipoConsegna = tipoConsegna;
-        this.stato = stato;
+        this.statoTracking = stato;
     }
 
     public TipoConsegna getTipoConsegna() {
@@ -138,12 +136,12 @@ public class Ritiro implements HasID {
         this.codiceRitiro = codiceRitiro;
     }
 
-    public StatoTracking getStato() {
-        return stato;
+    public StatoTracking getStatoTracking() {
+        return statoTracking;
     }
 
-    public void setStato(StatoTracking stato) {
-        this.stato = stato;
+    public void setStatoTracking(StatoTracking statoTracking) {
+        this.statoTracking = statoTracking;
     }
 
     @Override
@@ -173,7 +171,7 @@ public class Ritiro implements HasID {
                 ", dataConsegna=" + dataConsegna +
                 ", ritirato=" + ritirato +
                 ", tipoConsegna=" + tipoConsegna +
-                ", stato=" + stato +
+                ", stato=" + statoTracking +
                 '}';
     }
 }
