@@ -2,9 +2,8 @@ package it.unicam.cs.ids.c3.javafx;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Control;
+import javafx.scene.control.*;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -89,5 +88,18 @@ public interface JavaFXController {
     default void close(Control control) {
         Stage stage = (Stage) control.getScene().getWindow();
         stage.close();
+    }
+
+
+    default void mostraPassword(CheckBox mostraPassword, PasswordField passwordField, TextField passwordTextField) {
+        if (mostraPassword.isSelected()) {
+            passwordTextField.setText(passwordField.getText());
+            passwordTextField.setVisible(true);
+            passwordField.setVisible(false);
+            return;
+        }
+        passwordField.setText(passwordTextField.getText());
+        passwordField.setVisible(true);
+        passwordTextField.setVisible(false);
     }
 }

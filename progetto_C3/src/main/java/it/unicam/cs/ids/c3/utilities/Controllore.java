@@ -1,5 +1,7 @@
 package it.unicam.cs.ids.c3.utilities;
 
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
 import org.apache.commons.validator.routines.EmailValidator;
 
 import java.util.GregorianCalendar;
@@ -29,40 +31,29 @@ public final class Controllore {
 
     public void controllaCommerciante(String username, String password, String email, String ragioneSociale) {
         controllaUtente(username, password, email);
-        controllaStringa(ragioneSociale);
+        controllaStringa(ragioneSociale, "La ragione sociale non e' valida");
     }
 
     public void controllaPuntoRitiro(String username, String password, String email, String ragioneSociale) {
         controllaUtente(username, password, email);
-        controllaStringa(ragioneSociale);
+        controllaStringa(ragioneSociale, "La ragione sociale non e' valida");
     }
 
     public void controllaCorriere(String username, String password, String email, String ragioneSociale) {
         controllaUtente(username, password, email);
-        controllaStringa(ragioneSociale);
+        controllaStringa(ragioneSociale, "La ragione sociale non e' valida");
     }
 
-    public void controllaStringa(String stringa) {
+    public void controllaStringa(String stringa, String errore) {
         if (Objects.isNull(stringa))
             throw new NullPointerException("La stringa passata e' nulla");
 
-        if (stringa.isEmpty() || stringa.isBlank())
-            throw new IllegalArgumentException("La stringa passata e' vuota");
-    }
-
-    public void controllaID(String ID) {
-        controllaStringa(ID);
-        if (ID.length() != 8) throw new IllegalArgumentException();
-
-        for (int i = 0; i < ID.length(); i++) {
-            if (!Character.isLetterOrDigit(ID.charAt(i))) {
-                throw new IllegalArgumentException("L'ID passato non e' valido");
-            }
-        }
+        if (stringa.isBlank())
+            throw new IllegalArgumentException(errore);
     }
 
     public void controllaUsername(String username) {
-        controllaStringa(username);
+        controllaStringa(username, "L'username' non e' valido");
 
         for (int i = 0; i < username.length(); i++) {
             if (!Character.isLetterOrDigit(username.charAt(i))) {
@@ -73,17 +64,17 @@ public final class Controllore {
     }
 
     public void controllaPassword(String password) {
-        controllaStringa(password);
+        controllaStringa(password, "La password non e' valida");
     }
 
     public void controllaEmail(String email) {
-        controllaStringa(email);
+        controllaStringa(email, "L'email non e' valida");
         if (!(EmailValidator.getInstance().isValid(email)))
             throw new IllegalArgumentException("L'email non e' valida");
     }
 
     public void controllaNumero(String numero, int lunghezza) {
-        controllaStringa(numero);
+        controllaStringa(numero, "Il numero non e' valido");
         if (numero.length() != lunghezza) throw new IllegalArgumentException();
         for (int i = 0; i < numero.length(); i++) {
             if (!(Character.isDigit(numero.charAt(i))))
@@ -92,7 +83,7 @@ public final class Controllore {
     }
 
     public void controllaNome(String nome, String message) {
-        controllaStringa(nome);
+        controllaStringa(nome, "Il nome non e' valido");
         for (int i = 0; i < nome.length(); i++) {
             if (!(Character.isLetter(nome.charAt(i)))) {
                 if ((nome.charAt(i) != ' '))
@@ -102,20 +93,11 @@ public final class Controllore {
     }
 
     public void controllaIndirizzo(String indirizzo) {
-        controllaStringa(indirizzo);
+        controllaStringa(indirizzo, "L'indirizzo non e' valido");
     }
 
-    public void controllaLista(List<?> listaCategorie) {
-        if (Objects.isNull(listaCategorie))
-            throw new NullPointerException("La lista e' nulla");
-        if (listaCategorie.isEmpty())
-            throw new IllegalArgumentException("La lista e' vuota");
-    }
-
-    public void controllaData(GregorianCalendar data) {
-        if (Objects.isNull(data))
-            throw new NullPointerException("La data e' nulla");
-        if (data.compareTo(new GregorianCalendar()) < 0)
-            throw new IllegalArgumentException("La data non e' valida");
+    public void controllaDatePicker(DatePicker datePicker, String errore) {
+        if (Objects.isNull(datePicker.getValue()))
+            throw new IllegalArgumentException(errore);
     }
 }

@@ -108,8 +108,8 @@ public class ControllerCommerciante {
         GestorePromozioni.getInstance().creaPromozione(nome, this.commerciante.getID(), listaIDProdotti, descrizione, dataInizio, dataScadenza);
     }
 
-    public void modificaPromozione(List<String> listaIDCommercianti, String nome, String descrizione, List<String> listaIDProdotti, GregorianCalendar dataInizio, GregorianCalendar dataScadenza, String IDPromozione) {
-        GestorePromozioni.getInstance().modificaPromozione(nome, listaIDCommercianti, listaIDProdotti, descrizione, dataInizio, dataScadenza, IDPromozione);
+    public void modificaPromozione(String IDPromozione, String nome, String descrizione, GregorianCalendar dataInizio, GregorianCalendar dataScadenza) throws SQLException {
+        GestorePromozioni.getInstance().modificaPromozione(IDPromozione, this.commerciante.getID(), nome, descrizione, dataInizio, dataScadenza);
     }
 
     public void rimuoviPromozione(String IDPromozione) {

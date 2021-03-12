@@ -2,6 +2,7 @@ package it.unicam.cs.ids.c3.javafx;
 
 import it.unicam.cs.ids.c3.controller.ControllerCommerciante;
 import it.unicam.cs.ids.c3.model.Prodotto;
+import it.unicam.cs.ids.c3.utilities.Controllore;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -125,14 +126,10 @@ public class CreaPromozione implements Initializable, JavaFXController {
     }
 
     private void controllaCampi() {
-        if (nomeTextField.getText().isBlank())
-            throw new IllegalArgumentException("Inserisci un nome per la promozione");
-        if (descrizioneTextArea.getText().isBlank())
-            throw new IllegalArgumentException("Inserisci una descrizione per la promozione");
-        if (Objects.isNull(dataInizioDatePicker.getValue()))
-            throw new IllegalArgumentException("Selezionare una data d'inizio della promozione");
-        if (Objects.isNull(dataScadenzaDatePicker.getValue()))
-            throw new IllegalArgumentException("Selezionare una data di scadenza della promozione");
+        Controllore.getInstance().controllaStringa(nomeTextField.getText(),"Inserisci un nome per la promozione");
+        Controllore.getInstance().controllaStringa(descrizioneTextArea.getText(),"Inserisci una descrizione per la promozione");
+        Controllore.getInstance().controllaDatePicker(dataInizioDatePicker,"Selezionare una data d'inizio della promozione");
+        Controllore.getInstance().controllaDatePicker(dataScadenzaDatePicker,"Selezionare una data di scadenza della promozione");
         if (dataInizioDatePicker.getValue().compareTo(dataScadenzaDatePicker.getValue()) > 0)
             throw new IllegalArgumentException("La data di scadenza non puo' essere precedente alla data di inizio");
     }

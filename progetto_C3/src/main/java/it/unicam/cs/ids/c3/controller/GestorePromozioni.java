@@ -2,6 +2,7 @@ package it.unicam.cs.ids.c3.controller;
 
 import it.unicam.cs.ids.c3.model.*;
 import it.unicam.cs.ids.c3.services.SerializerAggiunta;
+import it.unicam.cs.ids.c3.services.SerializerModifica;
 
 
 import java.sql.SQLException;
@@ -23,20 +24,9 @@ public final class GestorePromozioni {
         SerializerAggiunta.getInstance().serializzaPromozione(promozione);
     }
 
-    public void modificaPromozione(String nome, List<String> listaIDCommercianti, List<String> listaIDProdotti, String descrizione, GregorianCalendar dataInizio, GregorianCalendar dataScadenza, String IDPromozione) {
-//        for (Promozione promozione : listaPromozioni) {
-//            GregorianCalendar now = new GregorianCalendar();
-//            if (promozione.getID().equals(IDPromozione)) {
-//                if (nome != null)
-//                    promozione.setNome(nome);
-//                if (descrizione != null)
-//                    promozione.setDescrizione(descrizione);
-//                if ((dataInizio != null) && (dataInizio.compareTo(now)) >= 0)
-//                    promozione.setDataInizio(dataInizio);
-//                if ((dataScadenza != null) && (dataInizio.compareTo(now)) >= 0)
-//                    promozione.setDataScadenza(dataScadenza);
-//            }
-//        }
+    public void modificaPromozione(String IDPromozione, String IDCommerciante, String nome, String descrizione, GregorianCalendar dataInizio, GregorianCalendar dataScadenza) throws SQLException {
+        Promozione promozione = new Promozione(IDPromozione, nome, IDCommerciante, descrizione, dataInizio, dataScadenza);
+        SerializerModifica.getInstance().modificaPromozione(promozione);
     }
 
     public void rimuoviPromozione(String IDPromozione) {

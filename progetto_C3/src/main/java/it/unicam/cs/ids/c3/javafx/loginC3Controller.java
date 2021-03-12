@@ -81,15 +81,7 @@ public class LoginC3Controller implements JavaFXController {
 
     @FXML
     public void mostraPassword() {
-        if (mostraPasswordCheckBox.isSelected()) {
-            passwordVisibleText.setText(passwordField.getText());
-            passwordVisibleText.setVisible(true);
-            passwordField.setVisible(false);
-            return;
-        }
-        passwordField.setText(passwordVisibleText.getText());
-        passwordField.setVisible(true);
-        passwordVisibleText.setVisible(false);
+        mostraPassword(mostraPasswordCheckBox,passwordField,passwordVisibleText);
     }
 
     private void controllaCampi() {

@@ -1,10 +1,12 @@
 package it.unicam.cs.ids.c3.javafx;
 
 import it.unicam.cs.ids.c3.controller.ControllerCommerciante;
+import it.unicam.cs.ids.c3.controller.GestorePromozioni;
 import it.unicam.cs.ids.c3.model.Prodotto;
 import it.unicam.cs.ids.c3.model.Promozione;
 import it.unicam.cs.ids.c3.model.Ritiro;
 import it.unicam.cs.ids.c3.services.SerializerElimina;
+import it.unicam.cs.ids.c3.utilities.Controllore;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
@@ -223,53 +225,11 @@ public class ICommerciante implements Initializable, JavaFXController {
         prodottiAccordion.getPanes().clear();
         List<Prodotto> listaProdotti = ControllerCommerciante.getInstance().getProdotti();
         listaProdotti.forEach(prodotto -> {
-            prodottiAccordion.getPanes().add(new TitledPane(prodotto.getNome(), getProdottoAnchorPane(prodotto)));
+            prodottiAccordion.getPanes().add(new TitledPane(prodotto.getNome(), Utils.getInstance().getProdottoAnchorPane(prodotto)));
         });
         if (prodottiAccordion.getPanes().isEmpty())
             elencoProdottiLabel.setText("Nessun prodotto attualmente in vendita.");
         else elencoProdottiLabel.setText("Elenco dei tuoi prodotti attualmente in vendita:");
-    }
-
-    private AnchorPane getProdottoAnchorPane(Prodotto prodotto) {
-        AnchorPane anchorPane = new AnchorPane();
-        Image image;
-        if (!Objects.isNull(prodotto.getURLImmagine()) && !prodotto.getURLImmagine().isBlank())
-            image = new Image(prodotto.getURLImmagine(), 150, 150, false, false);
-        else
-            image = new Image("https://bit.ly/3011Ztl", 150, 150, false, false);
-        ImageView imageView = new ImageView();
-        imageView.setImage(image);
-        imageView.setX(15);
-        imageView.setY(15);
-
-        Label nomeProdotto = new Label("Nome prodotto: " + prodotto.getNome());
-        nomeProdotto.setFont(new Font(16));
-        nomeProdotto.setLayoutX(188);
-        nomeProdotto.setLayoutY(15);
-
-        Label IDprodotto = new Label("ID prodotto: ");
-        IDprodotto.setFont(new Font(16));
-        IDprodotto.setLayoutX(188);
-        IDprodotto.setLayoutY(40);
-
-        Label ID = new Label(prodotto.getID());
-        ID.setFont(new Font(16));
-        ID.setLayoutX(280);
-        ID.setLayoutY(40);
-
-        Label prezzo = new Label("Prezzo: " + "\u20AC" + prodotto.getPrezzo());
-        prezzo.setFont(new Font(16));
-        prezzo.setLayoutX(188);
-        prezzo.setLayoutY(65);
-
-        Label disponibilita = new Label("Disponibilita': " + prodotto.getQuantita());
-        disponibilita.setFont(new Font(16));
-        disponibilita.setLayoutX(188);
-        disponibilita.setLayoutY(90);
-
-        anchorPane.getChildren().addAll(nomeProdotto, IDprodotto, ID, prezzo, disponibilita, imageView);
-
-        return anchorPane;
     }
 
     //RITIRI-----------------------------------------------------------------------------------------------------
@@ -304,90 +264,11 @@ public class ICommerciante implements Initializable, JavaFXController {
         List<Ritiro> listaRitiri = ControllerCommerciante.getInstance().getRitiri();
         listaRitiri.forEach(ritiro -> {
             ritiriAccordion.getPanes().add(new TitledPane(ritiro.getID() + " " + ritiro.getDestinazione(),
-                    getRitiroAnchorPane(ritiro)));
+                    Utils.getInstance().getRitiroAnchorPane(ritiro)));
         });
         if (ritiriAccordion.getPanes().isEmpty())
             elencoRitiriLabel.setText("Nessun ritiro attivo.");
         else elencoRitiriLabel.setText("Elenco dei ritiri prenotati:");
-    }
-
-    private AnchorPane getRitiroAnchorPane(Ritiro ritiro) {
-        AnchorPane anchorPane = new AnchorPane();
-
-        Label IDRitiro = new Label("ID ritiro: ");
-        IDRitiro.setFont(new Font(16));
-        IDRitiro.setLayoutX(25);
-        IDRitiro.setLayoutY(15);
-
-        Label ID = new Label(ritiro.getID());
-        ID.setFont(new Font(16));
-        ID.setLayoutX(90);
-        ID.setLayoutY(15);
-
-        Label destinazione = new Label("Destinazione: " + ritiro.getDestinazione());
-        destinazione.setFont(new Font(16));
-        destinazione.setLayoutX(25);
-        destinazione.setLayoutY(40);
-
-        Label codiceRitiro = new Label("Codice ritiro: " + ritiro.getCodiceRitiro());
-        codiceRitiro.setFont(new Font(16));
-        codiceRitiro.setLayoutX(25);
-        codiceRitiro.setLayoutY(65);
-
-        Label dataPrenotazione = new Label("Data prenotazione: " +
-                ritiro.getDataPrenotazione().get(Calendar.DAY_OF_MONTH) + "/" +
-                (ritiro.getDataPrenotazione().get(Calendar.MONTH) + 1) + "/" +
-                ritiro.getDataPrenotazione().get(Calendar.YEAR));
-
-
-        dataPrenotazione.setFont(new Font(16));
-        dataPrenotazione.setLayoutX(25);
-        dataPrenotazione.setLayoutY(90);
-
-        Label dataConsegna;
-        if (!Objects.isNull(ritiro.getDataConsegna()))
-            dataConsegna = new Label("Data consegna: " + ritiro.getDataConsegna().get(Calendar.DAY_OF_MONTH) + "/" +
-                    (ritiro.getDataConsegna().get(Calendar.MONTH) + 1) + "/" +
-                    ritiro.getDataConsegna().get(Calendar.YEAR));
-        else
-            dataConsegna = new Label("Data consegna: Non ancora consegnato");
-        dataConsegna.setFont(new Font(16));
-        dataConsegna.setLayoutX(25);
-        dataConsegna.setLayoutY(115);
-
-        Label ritirato;
-        if (ritiro.isRitirato())
-            ritirato = new Label("Ritirato dal cliente: RITIRATO");
-        else ritirato = new Label("Ritirato dal cliente: NON RITIRATO");
-        ritirato.setFont(new Font(16));
-        ritirato.setLayoutX(25);
-        ritirato.setLayoutY(140);
-
-        Label tipoConsegna = new Label("Tipo consegna: " + ritiro.getTipoConsegna().name());
-        tipoConsegna.setFont(new Font(16));
-        tipoConsegna.setLayoutX(25);
-        tipoConsegna.setLayoutY(165);
-
-        Label IDCliente = new Label("ID cliente: " + ritiro.getIDCliente());
-        IDCliente.setFont(new Font(16));
-        IDCliente.setLayoutX(25);
-        IDCliente.setLayoutY(190);
-
-        Label IDCorriere = new Label("ID corriere: " + ritiro.getIDCorriere());
-        IDCorriere.setFont(new Font(16));
-        IDCorriere.setLayoutX(25);
-        IDCorriere.setLayoutY(215);
-
-
-        Label statoTracking = new Label("Stato tracking: " + ritiro.getStatoTracking().name());
-        statoTracking.setFont(new Font(16));
-        statoTracking.setLayoutX(25);
-        statoTracking.setLayoutY(240);
-
-        anchorPane.getChildren().addAll(IDRitiro, ID, destinazione, codiceRitiro, dataPrenotazione,
-                dataConsegna, ritirato, tipoConsegna, IDCliente, IDCorriere, statoTracking);
-
-        return anchorPane;
     }
 
     //PROMOZIONI--------------------------------------------------------------------------------------------------
@@ -408,11 +289,35 @@ public class ICommerciante implements Initializable, JavaFXController {
     private void modificaPromozione() {
         try {
             controllaAccordion(promozioniAccordion, "promozione");
-            startWindow("Modifica promozione", "/modificaPromozione.fxml", ModificaPromozione.getInstance());
+            AnchorPane anchorPane = (AnchorPane) promozioniAccordion.getExpandedPane().getContent();
+            Label ID = (Label) anchorPane.getChildren().get(1);
+            TextField nome = (TextField) anchorPane.getChildren().get(3);
+            TextField descrizione = (TextField) anchorPane.getChildren().get(5);
 
-        } catch (IllegalArgumentException | IOException e) {
+            DatePicker dataInizioDatePicker = (DatePicker) anchorPane.getChildren().get(7);
+            GregorianCalendar dataInizio = new GregorianCalendar();
+            dataInizio.setTime(java.sql.Date.valueOf(dataInizioDatePicker.getValue()));
+
+            DatePicker dataScadenzaDatePicker = (DatePicker) anchorPane.getChildren().get(9);
+            GregorianCalendar dataScadenza = new GregorianCalendar();
+            dataScadenza.setTime(java.sql.Date.valueOf(dataScadenzaDatePicker.getValue()));
+
+            controllaCampi(nome, descrizione, dataInizioDatePicker, dataScadenzaDatePicker);
+            ControllerCommerciante.getInstance().modificaPromozione(ID.getText(), nome.getText(), descrizione.getText(), dataInizio, dataScadenza);
+
+            aggiornaListaPromozioni();
+        } catch (IllegalArgumentException | SQLException e) {
             createErrorAlert(e.getMessage());
         }
+    }
+
+    private void controllaCampi(TextField nome, TextField descrizione, DatePicker dataInizioDatePicker, DatePicker dataScadenzaDatePicker) {
+        Controllore.getInstance().controllaStringa(nome.getText(), "Inserisci un nome valido per la promozione");
+        Controllore.getInstance().controllaStringa(descrizione.getText(), "Inserisci una descrizione per la promozione");
+        Controllore.getInstance().controllaDatePicker(dataInizioDatePicker, "Selezionare una data d'inizio della promozione");
+        Controllore.getInstance().controllaDatePicker(dataScadenzaDatePicker, "Selezionare una data di scadenza della promozione");
+        if (dataInizioDatePicker.getValue().compareTo(dataScadenzaDatePicker.getValue()) > 0)
+            throw new IllegalArgumentException("La data di scadenza non puo' essere precedente alla data di inizio");
     }
 
     @FXML
@@ -432,73 +337,10 @@ public class ICommerciante implements Initializable, JavaFXController {
         promozioniAccordion.getPanes().clear();
         List<Promozione> listaPromozioni = ControllerCommerciante.getInstance().getPromozioni();
         listaPromozioni.forEach(promo -> promozioniAccordion.getPanes().add(new TitledPane(promo.getNome(),
-                getPromozioneAnchorPane(promo))));
+                Utils.getInstance().getPromozioneAnchorPane(promo))));
         if (promozioniAccordion.getPanes().isEmpty())
             elencoPromozioniLabel.setText("Nessuna promozione attiva.");
         else elencoPromozioniLabel.setText("Elenco delle promozioni attive:");
-    }
-
-    private AnchorPane getPromozioneAnchorPane(Promozione promozione) {
-        AnchorPane anchorPane = new AnchorPane();
-
-        Label IDPromozione = new Label("ID promozione: ");
-        IDPromozione.setFont(new Font(13));
-        IDPromozione.setLayoutX(25);
-        IDPromozione.setLayoutY(15);
-
-        Label ID = new Label(promozione.getID());
-        ID.setFont(new Font(13));
-        ID.setLayoutX(142);
-        ID.setLayoutY(15);
-
-        Label dataInizioLabel = new Label("Data inizio: ");
-        dataInizioLabel.setFont(new Font(13));
-        dataInizioLabel.setLayoutX(25);
-        dataInizioLabel.setLayoutY(120);
-
-        DatePicker dataInizio = new DatePicker();
-        dataInizio.setValue(LocalDate.of(promozione.getDataInizio().get(Calendar.YEAR),
-                promozione.getDataInizio().get(Calendar.MONTH) + 1,
-                promozione.getDataInizio().get(Calendar.DAY_OF_MONTH)));
-        dataInizio.setLayoutX(140);
-        dataInizio.setLayoutY(115);
-
-        Label dataScadenzaLabel = new Label("Data scadenza: ");
-        dataScadenzaLabel.setFont(new Font(13));
-        dataScadenzaLabel.setLayoutX(25);
-        dataScadenzaLabel.setLayoutY(155);
-
-        DatePicker dataScadenza = new DatePicker();
-        dataScadenza.setValue(LocalDate.of(promozione.getDataScadenza().get(Calendar.YEAR),
-                promozione.getDataScadenza().get(Calendar.MONTH) + 1,
-                promozione.getDataScadenza().get(Calendar.DAY_OF_MONTH)));
-        dataScadenza.setLayoutX(140);
-        dataScadenza.setLayoutY(150);
-
-        Label nomeLabel = new Label("Nome: ");
-        nomeLabel.setFont(new Font(13));
-        nomeLabel.setLayoutX(25);
-        nomeLabel.setLayoutY(50);
-
-        TextField nome = new TextField(promozione.getNome());
-        nome.setFont(new Font(13));
-        nome.setLayoutX(140);
-        nome.setLayoutY(45);
-        nome.setMinHeight(dataInizio.getMinHeight());
-
-        Label descrizioneLabel = new Label("Descrizione: ");
-        descrizioneLabel.setFont(new Font(13));
-        descrizioneLabel.setLayoutX(25);
-        descrizioneLabel.setLayoutY(85);
-
-        TextField descrizione = new TextField(promozione.getDescrizione());
-        descrizione.setFont(new Font(13));
-        descrizione.setLayoutX(140);
-        descrizione.setLayoutY(80);
-        descrizione.setMinHeight(dataInizio.getMinHeight());
-
-        anchorPane.getChildren().addAll(IDPromozione, ID, nomeLabel, nome, descrizioneLabel, descrizione, dataInizioLabel, dataInizio, dataScadenzaLabel, dataScadenza);
-        return anchorPane;
     }
 
     //ACCOUNT-----------------------------------------------------------------------------------------------------
@@ -524,15 +366,7 @@ public class ICommerciante implements Initializable, JavaFXController {
 
     @FXML
     private void mostraPassword() {
-        if (mostraPasswordCheckBox.isSelected()) {
-            mostraPasswordTextField.setText(passwordField.getText());
-            mostraPasswordTextField.setVisible(true);
-            passwordField.setVisible(false);
-            return;
-        }
-        passwordField.setText(mostraPasswordTextField.getText());
-        passwordField.setVisible(true);
-        mostraPasswordTextField.setVisible(false);
+        mostraPassword(mostraPasswordCheckBox, passwordField, mostraPasswordTextField);
     }
 
     @FXML
