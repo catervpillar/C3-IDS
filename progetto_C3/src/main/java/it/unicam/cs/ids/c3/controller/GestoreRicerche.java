@@ -92,14 +92,11 @@ public final class GestoreRicerche {
         return puntiDiRitiro;
     }
 
-    public List<Prodotto> cercaProdotto(String nome, String ID, String IDCommerciante) {
+    public List<Prodotto> cercaProdotto(String nome, String IDCommerciante) {
         prodotti.clear();
         try {
-            if (!Objects.isNull(nome)) {
+            if (!Objects.isNull(nome) && !nome.isBlank()) {
                 ResultSet resultSet = DBManager.getInstance().executeQuery("select * from prodotto where nome = \"" + nome + "\"");
-                prodotti.addAll(Deserializer.getInstance().deserializzaProdotti(resultSet));
-            } else if (!Objects.isNull(ID)) {
-                ResultSet resultSet = DBManager.getInstance().executeQuery("select * from prodotto where ID = \"" + ID + "\"");
                 prodotti.addAll(Deserializer.getInstance().deserializzaProdotti(resultSet));
             } else if (!Objects.isNull(IDCommerciante)) {
                 ResultSet resultSet = DBManager.getInstance().executeQuery("select * from prodotto where commerciante_ID = \"" + IDCommerciante + "\"");
@@ -131,10 +128,10 @@ public final class GestoreRicerche {
         return promozioni;
     }
 
-    public List<Recensione> getRecensioni() {
+    public List<Recensione> getRecensioni(String query) {
         recensioni.clear();
         try {
-            ResultSet resultSet = DBManager.getInstance().executeQuery("select * from recensione");
+            ResultSet resultSet = DBManager.getInstance().executeQuery(query);
             recensioni.addAll(Deserializer.getInstance().deserializzaRecensioni(resultSet));
         } catch (SQLException e) {
             System.out.println("Errore nella ricerca: nessun risultato trovato");

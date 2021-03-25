@@ -1,21 +1,15 @@
 package it.unicam.cs.ids.c3.javafx;
 
-import it.unicam.cs.ids.c3.model.Prodotto;
-import it.unicam.cs.ids.c3.model.Promozione;
-import it.unicam.cs.ids.c3.model.Ritiro;
-import javafx.scene.control.DateCell;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import it.unicam.cs.ids.c3.model.*;
+import javafx.collections.FXCollections;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.Objects;
+import java.util.*;
 
 public class Utils {
     private static Utils instance;
@@ -58,6 +52,14 @@ public class Utils {
         return textField;
     }
 
+    private TextArea getTextArea(String text, int font, int x, int y) {
+        TextArea textArea = new TextArea(text);
+        textArea.setFont(new Font(font));
+        textArea.setLayoutX(x);
+        textArea.setLayoutY(y);
+        return textArea;
+    }
+
     private DatePicker getDatePicker(GregorianCalendar data, int x, int y) {
         DatePicker datePicker = new DatePicker();
         datePicker.setValue(LocalDate.of(data.get(Calendar.YEAR),
@@ -67,6 +69,15 @@ public class Utils {
         datePicker.setLayoutY(y);
         disabilitaDatePassate(datePicker);
         return datePicker;
+    }
+
+    private <T> ChoiceBox<T> getChoiceBox(List<T> listaValori, T valore, int x, int y) {
+        ChoiceBox<T> choiceBox = new ChoiceBox<>();
+        choiceBox.setItems(FXCollections.observableArrayList(listaValori));
+        choiceBox.setValue(valore);
+        choiceBox.setLayoutX(x);
+        choiceBox.setLayoutY(y);
+        return choiceBox;
     }
 
     private void disabilitaDatePassate(DatePicker datePicker) {
@@ -149,10 +160,28 @@ public class Utils {
         DatePicker dataScadenzaDatePicker = getDatePicker(promozione.getDataScadenza(), 140, 150);
 
 
-        TextField nome = getTextField(promozione.getNome(),13,140,45);
-        TextField descrizione = getTextField(promozione.getDescrizione(),13,140,80);
+        TextField nome = getTextField(promozione.getNome(), 13, 140, 45);
+        TextField descrizione = getTextField(promozione.getDescrizione(), 13, 140, 80);
 
         anchorPane.getChildren().addAll(IDPromozione, ID, nomeLabel, nome, descrizioneLabel, descrizione, dataInizioLabel, dataInizioDatePicker, dataScadenzaLabel, dataScadenzaDatePicker);
+        return anchorPane;
+    }
+
+    public AnchorPane getRecensioneAnchorPane(Recensione recensione) {
+        AnchorPane anchorPane = new AnchorPane();
+
+        Label IDRecensione = getLabel("ID recensione: ", 13, 25, 15);
+        Label ID = getLabel(recensione.getID(), 13, 142, 15);
+        Label titolo = getLabel("Titolo: ", 13, 25, 50);
+        TextField titoloTextField = getTextField(recensione.getTitolo(), 13, 140, 45);
+        Label testo = getLabel("Testo: ", 13, 25, 100);
+        TextArea testoTextArea = getTextArea(recensione.getTesto(), 13, 140, 95);
+
+        Label voto = getLabel("Voto: ", 13, 25, 305);
+        ChoiceBox<VotoRecensioni> votoChoiceBox = getChoiceBox(Arrays.asList(VotoRecensioni.values().clone()), recensione.getVotoRecensioni(), 140, 300);
+
+        anchorPane.getChildren().addAll(IDRecensione, ID, titolo, titoloTextField, testo, testoTextArea,voto,votoChoiceBox);
+
         return anchorPane;
     }
 }

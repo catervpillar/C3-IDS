@@ -3,7 +3,9 @@ package it.unicam.cs.ids.c3.controller;
 import it.unicam.cs.ids.c3.model.Promozione;
 import it.unicam.cs.ids.c3.model.Recensione;
 import it.unicam.cs.ids.c3.model.VotoRecensioni;
+import it.unicam.cs.ids.c3.services.SerializerAggiunta;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,9 +21,9 @@ public final class GestoreRecensioni {
         return instance;
     }
 
-    public void creaRecensione(String titolo, String testo, String IDCliente, String IDCommerciante, String IDProdotto, VotoRecensioni votoRecensioni) {
+    public void creaRecensione(String titolo, String testo, String IDCliente, String IDCommerciante, String IDProdotto, VotoRecensioni votoRecensioni) throws SQLException {
         Recensione recensione = new Recensione(titolo, testo, IDCliente, IDCommerciante, IDProdotto, votoRecensioni);
-
+        SerializerAggiunta.getInstance().serializzaRecensione(recensione);
     }
 
     public void modificaRecensione(String titolo, String testo, VotoRecensioni votoRecensioni, String IDRecensione) {

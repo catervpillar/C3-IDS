@@ -39,6 +39,17 @@ public class Deserializer {
         return listaProdotti;
     }
 
+    public List<String> deserializzaIDProdotti(ResultSet resultSet) throws SQLException {
+        List<String> listaIDProdotti = new ArrayList<>();
+
+        while (resultSet.next()) {
+            listaIDProdotti.add(resultSet.getString("prodottoInVendita_ID"));
+        }
+
+        DBManager.getInstance().disconnect(resultSet);
+        return listaIDProdotti;
+    }
+
     public Cliente deserializzaCliente(ResultSet resultSet) throws SQLException {
         Cliente cliente = new Cliente(resultSet.getString("ID"),
                 resultSet.getString("username"),

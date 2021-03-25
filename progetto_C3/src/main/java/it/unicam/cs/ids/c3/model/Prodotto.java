@@ -93,12 +93,6 @@ public class Prodotto implements HasID {
 
     @Override
     public String toString() {
-        return "Prodotto{" +
-                "ID='" + ID + '\'' +
-                ", nome='" + nome + '\'' +
-                ", prezzo=" + prezzo +
-                ", quantita=" + quantita +
-                ", IDCommerciante='" + IDCommerciante + '\'' +
-                '}';
+        return nome + ", \u20AC" + prezzo + ", Commerciante: " + IDCommerciante;
     }
 }

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="666.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ChoiceBox fx:id="prodottoChoiceBox" layoutX="55.0" layoutY="144.0" prefHeight="37.0" prefWidth="595.0" />
+      <Label layoutX="55.0" layoutY="198.0" text="Titolo:">
+         <font>
+            <Font size="16.0" />
+         </font></Label>
+      <TextField fx:id="titoloTextField" layoutX="55.0" layoutY="231.0" prefHeight="37.0" prefWidth="595.0">
+         <font>
+            <Font size="16.0" />
+         </font></TextField>
+      <Label layoutX="55.0" layoutY="281.0" text="Testo:">
+         <font>
+            <Font size="16.0" />
+         </font></Label>
+      <TextArea fx:id="textArea" layoutX="55.0" layoutY="313.0" prefHeight="200.0" prefWidth="595.0">
+         <font>
+            <Font size="16.0" />
+         </font></TextArea>
+      <ImageView fx:id="stella1" fitHeight="35.0" fitWidth="35.0" layoutX="275.0" layoutY="525.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/grey-star-64.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="stella2" fitHeight="35.0" fitWidth="35.0" layoutX="320.0" layoutY="525.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/grey-star-64.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="stella3" fitHeight="35.0" fitWidth="35.0" layoutX="365.0" layoutY="525.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/grey-star-64.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="stella4" fitHeight="35.0" fitWidth="35.0" layoutX="410.0" layoutY="525.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/grey-star-64.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="stella5" fitHeight="35.0" fitWidth="35.0" layoutX="455.0" layoutY="525.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/grey-star-64.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="55.0" layoutY="530.0" text="Dai un voto al prodotto:">
+         <font>
+            <Font size="16.0" />
+         </font></Label>
+      <Label layoutX="55.0" layoutY="106.0" text="Seleziona il prodotto da recensire">
+         <font>
+            <Font size="16.0" />
+         </font></Label>
+      <Button fx:id="annullaButton" layoutX="55.0" layoutY="581.0" mnemonicParsing="false" onAction="#annulla" text="Annulla">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
+      <Button fx:id="pubblicaButton" layoutX="567.0" layoutY="581.0" mnemonicParsing="false" onAction="#pubblica" text="Pubblica">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
+      <Text layoutX="55.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pubblica recensione">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="stellaBlu1" fitHeight="35.0" fitWidth="35.0" layoutX="275.0" layoutY="525.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@images/blue-star-64.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="stellaBlu2" fitHeight="35.0" fitWidth="35.0" layoutX="320.0" layoutY="525.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@images/blue-star-64.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="stellaBlu3" fitHeight="35.0" fitWidth="35.0" layoutX="365.0" layoutY="525.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@images/blue-star-64.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="stellaBlu4" fitHeight="35.0" fitWidth="35.0" layoutX="410.0" layoutY="525.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@images/blue-star-64.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="stellaBlu5" fitHeight="35.0" fitWidth="35.0" layoutX="455.0" layoutY="525.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@images/blue-star-64.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

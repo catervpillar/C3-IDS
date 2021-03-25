@@ -77,7 +77,7 @@ public class ControllerCommerciante {
     }
 
     public List<Prodotto> getProdotti() throws SQLException {
-        return GestoreRicerche.getInstance().cercaProdotto(null, null, this.commerciante.getID());
+        return GestoreRicerche.getInstance().cercaProdotto(null, this.commerciante.getID());
     }
 
     public List<Ritiro> getRitiri() throws SQLException {

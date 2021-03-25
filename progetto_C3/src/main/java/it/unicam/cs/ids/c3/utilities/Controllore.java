@@ -1,5 +1,6 @@
 package it.unicam.cs.ids.c3.utilities;
 
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import org.apache.commons.validator.routines.EmailValidator;
@@ -98,6 +99,11 @@ public final class Controllore {
 
     public void controllaDatePicker(DatePicker datePicker, String errore) {
         if (Objects.isNull(datePicker.getValue()))
+            throw new IllegalArgumentException(errore);
+    }
+
+    public void controllaChoiceBox(ChoiceBox<?> choiceBox, String errore) {
+        if (Objects.isNull(choiceBox.getValue()))
             throw new IllegalArgumentException(errore);
     }
 }

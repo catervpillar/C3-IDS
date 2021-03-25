@@ -1,21 +1,34 @@
 package it.unicam.cs.ids.c3.javafx;
 
 import it.unicam.cs.ids.c3.controller.ControllerCliente;
+import it.unicam.cs.ids.c3.controller.ControllerCommerciante;
 import it.unicam.cs.ids.c3.model.*;
+import it.unicam.cs.ids.c3.services.SerializerElimina;
+import it.unicam.cs.ids.c3.utilities.Controllore;
+import javafx.animation.FadeTransition;
+import javafx.animation.TranslateTransition;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
-public class ICliente implements JavaFXController {
+public class ICliente implements Initializable, JavaFXController {
     private static ICliente instance;
 
     private ICliente() {
@@ -28,232 +41,299 @@ public class ICliente implements JavaFXController {
     }
 
     @FXML
-    Label nomeCognomeLabel;
+    private ImageView menuImageView;
     @FXML
-    TableView<Promozione> tabellaPromozioni;
+    private AnchorPane blackPane, menuPane, homePane, prodottiPane, ritiriPane, promozioniPane, recensioniPane, accountPane, impostazioniPane;
     @FXML
-    TableColumn<Promozione, String> IDColonna;
-    @FXML
-    TableColumn<Promozione, String> nomeColonna;
-    @FXML
-    TableColumn<Promozione, String> descrizioneColonna;
-    @FXML
-    TableColumn<Promozione, String> dataInizioColonna;
-    @FXML
-    TableColumn<Promozione, String> dataScadenzaColonna;
-    @FXML
-    ImageView aggiornaButton;
-    @FXML
-    Button aggiungiRecensione;
-    @FXML
-    Button modificaRecensione;
-    @FXML
-    Button eliminaRecensione;
-    @FXML
-    TableView<Recensione> tabellaRecensioni;
-    @FXML
-    TableColumn<Recensione, String> IDColonnaRec;
-    @FXML
-    TableColumn<Recensione, String> titoloColonnaRec;
-    @FXML
-    TableColumn<Recensione, String> testoColonnaRec;
-    @FXML
-    TableColumn<Recensione, String> prodottoColonnaRec;
-    @FXML
-    TableColumn<Recensione, String> commercianteColonnaRec;
-    @FXML
-    TableColumn<Recensione, String> valutazioneColonnaRec;
-    @FXML
-    TextField ricerca;
-    @FXML
-    RadioButton corriere;
-    @FXML
-    RadioButton commerciante;
-    @FXML
-    RadioButton punto_ritiro;
-    @FXML
-    TableView<Commerciante> tabCommercianti;
-    @FXML
-    TableView<Corriere> tabCorrieri;
-    @FXML
-    TableView<PuntoRitiro> tabPuntiRitiro;
-    @FXML
-    TableColumn<Commerciante, String> IDComm;
-    @FXML
-    TableColumn<Commerciante, String> ragSocComm;
-    @FXML
-    TableColumn<Commerciante, String> indirizzoComm;
-    @FXML
-    TableColumn<Commerciante, String> telComm;
-    @FXML
-    TableColumn<Corriere, String> IDCorr;
-    @FXML
-    TableColumn<Corriere, String> ragSocCorr;
-    @FXML
-    TableColumn<Corriere, String> indirizzoCorr;
-    @FXML
-    TableColumn<Corriere, String> telCorr;
-    @FXML
-    TableColumn<PuntoRitiro, String> IDPunto;
-    @FXML
-    TableColumn<PuntoRitiro, String> ragSocPunto;
-    @FXML
-    TableColumn<PuntoRitiro, String> indirizzoPunto;
-    @FXML
-    TableColumn<PuntoRitiro, String> telPunto;
-    @FXML
-    TableView<Ritiro> tabOrdini;
-    @FXML
-    TableColumn<Ritiro, String> IDOrdine;
-    @FXML
-    TableColumn<Ritiro, String> commOrdine;
-    @FXML
-    TableColumn<Ritiro, String> dataOrdine;
-    @FXML
-    TableColumn<Ritiro, String> destOrdine;
-    @FXML
-    TableColumn<Ritiro, String> trackOrdine;
-    @FXML
-    Button logout;
-    @FXML
-    Button aggiornaPromozioni;
-    @FXML
-    Button aggiornaRecensioni;
-    @FXML
-    Button aggiornaRicerche;
-    @FXML
-    Button aggiornaOrdini;
-    @FXML
-    Button cercaUtente;
-    @FXML
-    TextField ricercaTextField;
+    private Button homeButton, prodottiButton, ritiriButton, promozioniButton, recensioniButton, accountButton, impostazioniButton;
 
-
+    //Home pane
     @FXML
-    public void aggiornaPromozioni() throws SQLException {
-        riempiTabellaPromozioni();
-        tabellaPromozioni.getItems().clear();
-        tabellaPromozioni.getItems().addAll(ControllerCliente.getInstance().cercaPromozioni());
+    private Text bentornatoText;
 
-    }
-
-    private void riempiTabellaPromozioni() {
-        IDColonna.setCellValueFactory(promozione -> new SimpleObjectProperty<>(promozione.getValue().getID()));
-        nomeColonna.setCellValueFactory(promozione -> new SimpleObjectProperty<>(promozione.getValue().getNome()));
-        descrizioneColonna.setCellValueFactory(promozione -> new SimpleObjectProperty<>(promozione.getValue().getDescrizione()));
-        dataInizioColonna.setCellValueFactory(promozione -> new SimpleObjectProperty<>(new SimpleDateFormat("dd-MM-yyyy").format(promozione.getValue().getDataInizio().getTime())));
-        dataScadenzaColonna.setCellValueFactory(promozione -> new SimpleObjectProperty<>(new SimpleDateFormat("dd-MM-yyyy").format(promozione.getValue().getDataScadenza().getTime())));
-    }
-
+    //Prodotti pane
     @FXML
-    public void aggiornaRecensioni() throws SQLException {
-        riempiTabellaRecensioni();
-        tabellaRecensioni.getItems().clear();
-        tabellaRecensioni.getItems().addAll(ControllerCliente.getInstance().cercaRecensioni());
-
-    }
-
-    private void riempiTabellaRecensioni() {
-        IDColonnaRec.setCellValueFactory(recensione -> new SimpleObjectProperty<>(recensione.getValue().getID()));
-        titoloColonnaRec.setCellValueFactory(recensione -> new SimpleObjectProperty<>(recensione.getValue().getTitolo()));
-        testoColonnaRec.setCellValueFactory(recensione -> new SimpleObjectProperty<>(recensione.getValue().getTesto()));
-        prodottoColonnaRec.setCellValueFactory(recensione -> new SimpleObjectProperty<>(recensione.getValue().getIDProdotto()));
-        commercianteColonnaRec.setCellValueFactory(recensione -> new SimpleObjectProperty<>(recensione.getValue().getIDCommerciante()));
-        valutazioneColonnaRec.setCellValueFactory(recensione -> new SimpleObjectProperty<>(recensione.getValue().getVotoRecensioni().toString()));
-    }
-
+    private Label elencoProdottiLabel;
     @FXML
-    public void aggiornaRicerche() throws SQLException {
-        aggiornaRicercaCommercianti();
-        aggiornaRicercaCorrieri();
-        aggiornaRicercaPuntiRitiro();
-    }
-
-    private void aggiornaRicercaCommercianti() throws SQLException {
-        riempiTabellaRicercaCommercianti();
-        tabCommercianti.getItems().clear();
-        tabCommercianti.getItems().addAll(ControllerCliente.getInstance().cercaCommercianti());
-    }
-
-    private void riempiTabellaRicercaCommercianti() {
-        IDComm.setCellValueFactory(commerciante -> new SimpleObjectProperty<>(commerciante.getValue().getID()));
-        ragSocComm.setCellValueFactory(commerciante -> new SimpleObjectProperty<>(commerciante.getValue().getRagioneSociale()));
-        indirizzoComm.setCellValueFactory(commerciante -> new SimpleObjectProperty<>(commerciante.getValue().getIndirizzo()));
-        telComm.setCellValueFactory(commerciante -> new SimpleObjectProperty<>(commerciante.getValue().getTelefono()));
-    }
-
-    private void aggiornaRicercaCorrieri() throws SQLException {
-        riempiTabellaRicercaCorrieri();
-        tabCorrieri.getItems().clear();
-        tabCorrieri.getItems().addAll(ControllerCliente.getInstance().cercaCorrieri());
-    }
-
-    private void riempiTabellaRicercaCorrieri() {
-        IDCorr.setCellValueFactory(corriere -> new SimpleObjectProperty<>(corriere.getValue().getID()));
-        ragSocCorr.setCellValueFactory(corriere -> new SimpleObjectProperty<>(corriere.getValue().getRagioneSociale()));
-        indirizzoCorr.setCellValueFactory(corriere -> new SimpleObjectProperty<>(corriere.getValue().getIndirizzo()));
-        telCorr.setCellValueFactory(corriere -> new SimpleObjectProperty<>(corriere.getValue().getTelefono()));
-    }
-
-    private void aggiornaRicercaPuntiRitiro() throws SQLException {
-        riempiTabellaRicercaPuntiRitiro();
-        tabPuntiRitiro.getItems().clear();
-        tabPuntiRitiro.getItems().addAll(ControllerCliente.getInstance().cercaPuntiRitiro());
-    }
-
-    private void riempiTabellaRicercaPuntiRitiro() {
-        IDPunto.setCellValueFactory(puntoRitiro -> new SimpleObjectProperty<>(puntoRitiro.getValue().getID()));
-        ragSocPunto.setCellValueFactory(puntoRitiro -> new SimpleObjectProperty<>(puntoRitiro.getValue().getRagioneSociale()));
-        indirizzoPunto.setCellValueFactory(puntoRitiro -> new SimpleObjectProperty<>(puntoRitiro.getValue().getIndirizzo()));
-        telPunto.setCellValueFactory(puntoRitiro -> new SimpleObjectProperty<>(puntoRitiro.getValue().getTelefono()));
-    }
-
+    private Accordion prodottiAccordion;
     @FXML
-    public void aggiornaOrdini() throws SQLException {
-        riempiTabellaOrdini();
-        tabOrdini.getItems().clear();
-        tabOrdini.getItems().addAll(ControllerCliente.getInstance().cercaOrdini());
-
-    }
-
-    private void riempiTabellaOrdini() {
-        IDOrdine.setCellValueFactory(ordine -> new SimpleObjectProperty<>(ordine.getValue().getID()));
-        commOrdine.setCellValueFactory(ordine -> new SimpleObjectProperty<>(ordine.getValue().getIDCommerciante()));
-        dataOrdine.setCellValueFactory(ordine -> new SimpleObjectProperty<>(new SimpleDateFormat("dd-MM-yyyy").format(ordine.getValue().getDataPrenotazione().getTime())));
-        destOrdine.setCellValueFactory(ordine -> new SimpleObjectProperty<>(ordine.getValue().getDestinazione()));
-        trackOrdine.setCellValueFactory(ordine -> new SimpleObjectProperty<>(ordine.getValue().getStatoTracking().toString()));
-    }
-
+    private TextField ricercaProdottoTextField;
     @FXML
-    public void cercaUtente() throws SQLException {
-        if (corriere.isSelected()) {
-            riempiTabellaRicercaCorrieri();
-            tabCorrieri.getItems().clear();
-            //if (!Objects.isNull(ControllerCliente.getInstance().cercaCorriereDalTextField(ricercaTextField.getText())))
-            tabCorrieri.getItems().addAll(ControllerCliente.getInstance().cercaCorriereDalTextField(ricercaTextField.getText()));
-            //else ricercaTextField.setText("errore");
-        } else if (commerciante.isSelected()) {
-            riempiTabellaRicercaCommercianti();
-            tabCommercianti.getItems().clear();
-            tabCommercianti.getItems().addAll(ControllerCliente.getInstance().cercaCommercianteDalTextField(ricercaTextField.getText()));
-        } else if (punto_ritiro.isSelected()) {
-            riempiTabellaRicercaPuntiRitiro();
-            tabPuntiRitiro.getItems().clear();
-            tabPuntiRitiro.getItems().addAll(ControllerCliente.getInstance().cercaPuntoRitiroDalTextField(ricercaTextField.getText()));
+    private Button cercaProdottoButton;
+
+    //Ritiri pane
+    @FXML
+    private Label elencoRitiriLabel;
+    @FXML
+    private Accordion ritiriAccordion;
+
+    //Promozioni pane
+    @FXML
+    private Label elencoPromozioniLabel;
+    @FXML
+    private Accordion promozioniAccordion;
+
+    //Recensioni pane
+    @FXML
+    private Label elencoRecensioniLabel;
+    @FXML
+    private Accordion recensioniAccordion;
+    @FXML
+    private Button aggiungiRecensioneButton, modificaRecensioneButton, eliminaRecensioneButton;
+
+    // Account pane
+    @FXML
+    private Button salvaModificheButton, logoutButton, eliminaAccountButton;
+    @FXML
+    private CheckBox mostraPasswordCheckBox;
+    @FXML
+    private Label IDutenteLabel;
+    @FXML
+    private TextField usernameTextField, emailTextField, nomeTextField, cognomeTextField, telefonoTextField, indirizzoTextField, mostraPasswordTextField;
+    @FXML
+    private PasswordField passwordField;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        menuPane.setVisible(true);
+        blackPane.setVisible(false);
+
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5), blackPane);
+        fadeTransition.setFromValue(1);
+        fadeTransition.setToValue(0);
+        fadeTransition.play();
+
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5), menuPane);
+        translateTransition.setByX(-600);
+        translateTransition.play();
+
+        menuImageView.setOnMouseClicked(event -> {
+            blackPane.setVisible(true);
+
+            FadeTransition fadeTransition1 = new FadeTransition(Duration.seconds(0.5), blackPane);
+            fadeTransition1.setFromValue(0);
+            fadeTransition1.setToValue(0.15);
+            fadeTransition1.play();
+
+            TranslateTransition translateTransition1 = new TranslateTransition(Duration.seconds(0.5), menuPane);
+            translateTransition1.setByX(+600);
+            translateTransition1.play();
+
+        });
+
+        nascondiTutto();
+        mostraTransition(homePane);
+        try {
+            aggiornaListaRitiri();
+            aggiornaListaPromozioni();
+            aggiornaListaRecensioni();
+        } catch (SQLException e) {
+            createErrorAlert(e.getMessage());
         }
+        setDatiAccount();
+        bentornatoText.setText("Bentornato, " + ControllerCliente.getInstance().getCliente().getUsername() + "!");
+
     }
 
     @FXML
-    private void setLabelBenvenuto() {
-        nomeCognomeLabel.setText(ControllerCliente.getInstance().getCliente().getNome().toUpperCase() + " " + ControllerCliente.getInstance().getCliente().getCognome().toUpperCase());
+    private void nascondiMenu() {
+        FadeTransition fadeTransition1 = new FadeTransition(Duration.seconds(0.5), blackPane);
+        fadeTransition1.setFromValue(0.15);
+        fadeTransition1.setToValue(0);
+        fadeTransition1.play();
+
+        fadeTransition1.setOnFinished(event1 -> {
+            blackPane.setVisible(false);
+        });
+
+        TranslateTransition translateTransition1 = new TranslateTransition(Duration.seconds(0.5), menuPane);
+        translateTransition1.setByX(-600);
+        translateTransition1.play();
+    }
+
+    private void mostraTransition(AnchorPane pane) {
+        pane.setVisible(true);
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5), pane);
+        fadeTransition.setFromValue(0);
+        fadeTransition.setToValue(1);
+        fadeTransition.play();
+    }
+
+    private void nascondiTutto() {
+        homePane.setVisible(false);
+        prodottiPane.setVisible(false);
+        ritiriPane.setVisible(false);
+        promozioniPane.setVisible(false);
+        recensioniPane.setVisible(false);
+        accountPane.setVisible(false);
+        impostazioniPane.setVisible(false);
+        prodottiAccordion.setExpandedPane(null);
+    }
+
+    @FXML
+    private void mostraHome() {
+        nascondiMenu();
+        nascondiTutto();
+        mostraTransition(homePane);
+    }
+
+    //PRODOTTI---------------------------------------------------------------------------------------------------
+
+    @FXML
+    private void mostraProdotti() {
+        nascondiMenu();
+        nascondiTutto();
+        mostraTransition(prodottiPane);
+    }
+
+    @FXML
+    public void aggiornaListaProdotti() throws SQLException {
+        prodottiAccordion.getPanes().clear();
+        List<Prodotto> listaProdotti = ControllerCliente.getInstance().getProdotti(ricercaProdottoTextField.getText());
+        listaProdotti.forEach(prodotto -> {
+            prodottiAccordion.getPanes().add(new TitledPane(prodotto.getNome(), Utils.getInstance().getProdottoAnchorPane(prodotto)));
+        });
+    }
+
+    //RITIRI-----------------------------------------------------------------------------------------------------
+
+    @FXML
+    private void mostraRitiri() {
+        nascondiMenu();
+        nascondiTutto();
+        mostraTransition(ritiriPane);
+    }
+
+    public void aggiornaListaRitiri() throws SQLException {
+        ritiriAccordion.getPanes().clear();
+        List<Ritiro> listaRitiri = ControllerCliente.getInstance().getRitiri();
+        listaRitiri.forEach(ritiro -> {
+            ritiriAccordion.getPanes().add(new TitledPane(ritiro.getID() + " " + ritiro.getDestinazione(),
+                    Utils.getInstance().getRitiroAnchorPane(ritiro)));
+        });
+        if (ritiriAccordion.getPanes().isEmpty())
+            elencoRitiriLabel.setText("Nessun ritiro attivo.");
+        else elencoRitiriLabel.setText("Elenco dei ritiri prenotati:");
+    }
+
+    //PROMOZIONI--------------------------------------------------------------------------------------------------
+
+    @FXML
+    private void mostraPromozioni() {
+        nascondiMenu();
+        nascondiTutto();
+        mostraTransition(promozioniPane);
+    }
+
+    public void aggiornaListaPromozioni() throws SQLException {
+        promozioniAccordion.getPanes().clear();
+        List<Promozione> listaPromozioni = ControllerCliente.getInstance().getPromozioni();
+        listaPromozioni.forEach(promo -> promozioniAccordion.getPanes().add(new TitledPane(promo.getNome(),
+                Utils.getInstance().getPromozioneAnchorPane(promo))));
+        if (promozioniAccordion.getPanes().isEmpty())
+            elencoPromozioniLabel.setText("Nessuna promozione attiva.");
+        else elencoPromozioniLabel.setText("Elenco delle promozioni attive:");
+    }
+
+    //RECENSIONI--------------------------------------------------------------------------------------------------
+
+    @FXML
+    private void mostraRecensioni() {
+        nascondiMenu();
+        nascondiTutto();
+        mostraTransition(recensioniPane);
+    }
+
+    public void aggiornaListaRecensioni() throws SQLException {
+        recensioniAccordion.getPanes().clear();
+        List<Recensione> listaRecensioni = ControllerCliente.getInstance().getRecensioni();
+        listaRecensioni.forEach(r -> recensioniAccordion.getPanes().add(new TitledPane(r.getTitolo(),
+                Utils.getInstance().getRecensioneAnchorPane(r))));
+        if (recensioniAccordion.getPanes().isEmpty())
+            elencoPromozioniLabel.setText("Nessuna recensione pubblicata.");
+        else elencoPromozioniLabel.setText("Elenco delle recensioni pubblicate:");
+    }
+
+    @FXML
+    private void aggiungiRecensione() throws IOException {
+        startWindow("Pubblica una recensione", "/pubblicaRecensione.fxml", CreaRecensione.getInstance());
+    }
+
+    @FXML
+    private void modificaRecensione() {
+
+    }
+
+    @FXML
+    private void eliminaRecensione() {
+
+    }
+
+    //ACCOUNT-----------------------------------------------------------------------------------------------------
+
+    @FXML
+    private void mostraAccount() {
+        nascondiMenu();
+        nascondiTutto();
+        mostraTransition(accountPane);
+    }
+
+    private void setDatiAccount() {
+        IDutenteLabel.setText("ID UTENTE: " + ControllerCliente.getInstance().getCliente().getID());
+        usernameTextField.setText(ControllerCliente.getInstance().getCliente().getUsername());
+        passwordField.setText(ControllerCliente.getInstance().getCliente().getPassword());
+        emailTextField.setText(ControllerCliente.getInstance().getCliente().getEmail());
+        nomeTextField.setText(ControllerCliente.getInstance().getCliente().getNome());
+        cognomeTextField.setText(ControllerCliente.getInstance().getCliente().getCognome());
+        if (!Objects.isNull(ControllerCliente.getInstance().getCliente().getTelefono()))
+            telefonoTextField.setText(ControllerCliente.getInstance().getCliente().getTelefono());
+        if (!Objects.isNull(ControllerCliente.getInstance().getCliente().getIndirizzo()))
+            indirizzoTextField.setText(ControllerCliente.getInstance().getCliente().getIndirizzo());
+    }
+
+    @FXML
+    private void mostraPassword() {
+        mostraPassword(mostraPasswordCheckBox, passwordField, mostraPasswordTextField);
+    }
+
+    @FXML
+    private void salvaModifiche() throws SQLException {
+        ControllerCliente.getInstance().modificaCliente(usernameTextField.getText(),
+                getPassword(), emailTextField.getText(), nomeTextField.getText(), cognomeTextField.getText(),
+                telefonoTextField.getText(), indirizzoTextField.getText());
+        setDatiAccount();
+    }
+
+    private String getPassword() {
+        if (mostraPasswordCheckBox.isSelected())
+            return mostraPasswordTextField.getText();
+        else return passwordField.getText();
     }
 
     @FXML
     private void logout() throws IOException {
-        ControllerCliente.getInstance().logout();
-        close(aggiornaPromozioni);
-        startWindow("C3 v1.0", "/loginC3_2.fxml", LoginC3Controller.getInstance());
-
+        if (createConfirmationAlert("Sei sicuro di voler uscire?")) {
+            ControllerCliente.getInstance().logout();
+            close(logoutButton);
+            startWindow("C3 v1.0", "/loginC3_2.fxml", LoginC3Controller.getInstance());
+        }
     }
+
+    @FXML
+    private void eliminaAccount() throws SQLException, IOException {
+        if (createConfirmationAlert("Sei sicuro di voler eliminare l'account?\nL'operazione sara' irreversibile.")) {
+            ControllerCliente.getInstance().eliminaAccount();
+            close(logoutButton);
+            startWindow("C3 v1.0", "/loginC3_2.fxml", LoginC3Controller.getInstance());
+        }
+    }
+
+    @FXML
+    private void mostraImpostazioni() {
+        nascondiMenu();
+        nascondiTutto();
+        mostraTransition(impostazioniPane);
+    }
+
 }
 
