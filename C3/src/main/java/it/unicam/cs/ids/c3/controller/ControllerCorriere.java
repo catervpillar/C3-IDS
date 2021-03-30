@@ -1,12 +1,7 @@
 package it.unicam.cs.ids.c3.controller;
 
-import it.unicam.cs.ids.c3.model.Cliente;
-import it.unicam.cs.ids.c3.model.Commerciante;
-import it.unicam.cs.ids.c3.model.Corriere;
-import it.unicam.cs.ids.c3.model.StatoTracking;
-import it.unicam.cs.ids.c3.services.DBManager;
-import it.unicam.cs.ids.c3.services.Deserializer;
-import it.unicam.cs.ids.c3.services.SerializerAggiunta;
+import it.unicam.cs.ids.c3.model.*;
+import it.unicam.cs.ids.c3.services.*;
 import it.unicam.cs.ids.c3.utilities.Controllore;
 
 import java.sql.ResultSet;
@@ -46,5 +41,36 @@ public class ControllerCorriere {
             this.corriere = listaCorrieri.get(0);
             return true;
         } else return false;
+    }
+
+    public void modificaCorriere(String username, String password, String email, String ragioneSociale, String telefono, String indirizzo) throws SQLException {
+        Controllore.getInstance().controllaCorriere(username, password, email, ragioneSociale);
+        Corriere corriere = new Corriere(this.corriere.getID(), username, password, email, ragioneSociale);
+
+        if (!indirizzo.isBlank()) {
+            Controllore.getInstance().controllaIndirizzo(indirizzo);
+            corriere.setIndirizzo(indirizzo);
+        }
+        if (!telefono.isBlank()) {
+            Controllore.getInstance().controllaNumero(telefono, 10);
+            corriere.setTelefono(telefono);
+        }
+        this.corriere = corriere;
+        SerializerModifica.getInstance().modificaCorriere(corriere);
+    }
+
+    public void eliminaAccount() throws SQLException {
+        SerializerElimina.getInstance().eliminaCorriere(this.corriere.getID());
+        this.corriere = null;
+        GestoreRicerche.getInstance().reset();
+    }
+
+    public void logout() {
+        GestoreRicerche.getInstance().reset();
+        this.corriere = null;
+    }
+
+    public List<Ritiro> getRitiri() {
+        return null;
     }
 }

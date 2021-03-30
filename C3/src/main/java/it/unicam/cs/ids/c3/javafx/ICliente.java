@@ -163,6 +163,9 @@ public class ICliente implements Initializable, JavaFXController {
         accountPane.setVisible(false);
         impostazioniPane.setVisible(false);
         prodottiAccordion.setExpandedPane(null);
+        ritiriAccordion.setExpandedPane(null);
+        promozioniAccordion.setExpandedPane(null);
+        recensioniAccordion.setExpandedPane(null);
     }
 
     @FXML
@@ -256,7 +259,7 @@ public class ICliente implements Initializable, JavaFXController {
 
     @FXML
     private void modificaRecensione() {
-        try{
+        try {
             Utils.getInstance().controllaAccordion(recensioniAccordion, "prodotto");
             AnchorPane anchorPane = (AnchorPane) recensioniAccordion.getExpandedPane().getContent();
             Label ID = (Label) anchorPane.getChildren().get(1);
@@ -266,7 +269,7 @@ public class ICliente implements Initializable, JavaFXController {
             ControllerCliente.getInstance().modificaRecensione(nome.getText(), descrizione.getText(), voto.getValue(), ID.getText());
             aggiornaListaRecensioni();
 
-        }catch(IllegalArgumentException | SQLException e){
+        } catch (IllegalArgumentException | SQLException e) {
             createErrorAlert(e.getMessage());
         }
 
@@ -274,14 +277,14 @@ public class ICliente implements Initializable, JavaFXController {
 
     @FXML
     private void eliminaRecensione() {
-        try{
+        try {
             Utils.getInstance().controllaAccordion(recensioniAccordion, "recensione");
             if (createConfirmationAlert("Sei sicuro di voler eliminare la recensione selezionata?")) {
                 ControllerCliente.getInstance().rimuoviRecensione(Utils.getInstance().getExpandedItemID(recensioniAccordion, 1));
 
             }
             aggiornaListaRecensioni();
-        }catch(IllegalArgumentException | SQLException e){
+        } catch (IllegalArgumentException | SQLException e) {
             createErrorAlert(e.getMessage());
         }
     }

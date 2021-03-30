@@ -163,6 +163,8 @@ public class ICommerciante implements Initializable, JavaFXController {
         accountPane.setVisible(false);
         impostazioniPane.setVisible(false);
         prodottiAccordion.setExpandedPane(null);
+        ritiriAccordion.setExpandedPane(null);
+        promozioniAccordion.setExpandedPane(null);
     }
 
     @FXML
