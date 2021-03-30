@@ -35,6 +35,10 @@ public final class GestoreRicerche {
         return commercianti;
     }
 
+    public List<Recensione> getRecensioni() {
+        return recensioni;
+    }
+
     public List<PuntoRitiro> getPuntiDiRitiro() {
         return puntiDiRitiro;
     }

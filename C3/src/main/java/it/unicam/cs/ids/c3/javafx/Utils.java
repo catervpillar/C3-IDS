@@ -57,6 +57,7 @@ public class Utils {
         textArea.setFont(new Font(font));
         textArea.setLayoutX(x);
         textArea.setLayoutY(y);
+        textArea.setMaxHeight(200);
         return textArea;
     }
 
@@ -183,5 +184,17 @@ public class Utils {
         anchorPane.getChildren().addAll(IDRecensione, ID, titolo, titoloTextField, testo, testoTextArea,voto,votoChoiceBox);
 
         return anchorPane;
+    }
+
+    public void controllaAccordion(Accordion accordion, String word) {
+        TitledPane expandedPane = accordion.getExpandedPane();
+        if (Objects.isNull(expandedPane))
+            throw new IllegalArgumentException("Seleziona prima un " + word);
+    }
+
+    public String getExpandedItemID(Accordion accordion, int index) {
+        AnchorPane anchorPane = (AnchorPane) accordion.getExpandedPane().getContent();
+        Label ID = (Label) anchorPane.getChildren().get(index);
+        return ID.getText();
     }
 }

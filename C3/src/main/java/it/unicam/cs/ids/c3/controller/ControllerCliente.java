@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 
 public class ControllerCliente {
@@ -57,7 +58,7 @@ public class ControllerCliente {
             }
         });
 
-        listaIDProdotti.forEach(ID -> {
+        listaIDProdotti.stream().distinct().collect(Collectors.toList()).forEach(ID -> {
             String query = "select * from prodotto where ID = \"" + ID + "\";";
             try{
                 listaProdotti.addAll(Deserializer.getInstance().deserializzaProdotti(DBManager.getInstance().executeQuery(query)));
@@ -73,12 +74,12 @@ public class ControllerCliente {
         GestoreRecensioni.getInstance().creaRecensione(titolo, testo, this.cliente.getID(), IDCommerciante, IDProdotto, votoRecensione);
     }
 
-    public void modificaRecensione(String titolo, String testo, VotoRecensioni votoRecensioni, String IDRecensione) {
-        //GestoreRecensioni.getInstance().modificaRecensione(titolo, testo, votoRecensioni, IDRecensione);
+    public void modificaRecensione(String titolo, String testo, VotoRecensioni votoRecensioni, String IDRecensione) throws SQLException {
+        GestoreRecensioni.getInstance().modificaRecensione(titolo, testo, votoRecensioni, IDRecensione);
     }
 
-    public void rimuoviRecensione(String IDRecensione) {
-        //GestoreRecensioni.getInstance().rimuoviRecensione(IDRecensione);
+    public void rimuoviRecensione(String IDRecensione) throws SQLException {
+        GestoreRecensioni.getInstance().rimuoviRecensione(IDRecensione);
     }
 
     public Cliente getCliente() {

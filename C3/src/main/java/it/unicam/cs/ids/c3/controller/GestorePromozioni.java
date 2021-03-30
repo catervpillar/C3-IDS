@@ -1,7 +1,9 @@
 package it.unicam.cs.ids.c3.controller;
 
+import it.unicam.cs.ids.c3.javafx.Utils;
 import it.unicam.cs.ids.c3.model.*;
 import it.unicam.cs.ids.c3.services.SerializerAggiunta;
+import it.unicam.cs.ids.c3.services.SerializerElimina;
 import it.unicam.cs.ids.c3.services.SerializerModifica;
 
 
@@ -29,7 +31,7 @@ public final class GestorePromozioni {
         SerializerModifica.getInstance().modificaPromozione(promozione);
     }
 
-    public void rimuoviPromozione(String IDPromozione) {
-        //listaPromozioni.removeIf(promozione -> promozione.getID().equals(IDPromozione));
+    public void rimuoviPromozione(String IDPromozione) throws SQLException {
+        SerializerElimina.getInstance().eliminaPromozione(IDPromozione);
     }
 }

@@ -1,13 +1,10 @@
 package it.unicam.cs.ids.c3.javafx;
 
 import it.unicam.cs.ids.c3.controller.ControllerCliente;
-import it.unicam.cs.ids.c3.controller.ControllerCommerciante;
 import it.unicam.cs.ids.c3.model.*;
 import it.unicam.cs.ids.c3.services.SerializerElimina;
-import it.unicam.cs.ids.c3.utilities.Controllore;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -22,8 +19,6 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -261,12 +256,34 @@ public class ICliente implements Initializable, JavaFXController {
 
     @FXML
     private void modificaRecensione() {
+        try{
+            Utils.getInstance().controllaAccordion(recensioniAccordion, "prodotto");
+            AnchorPane anchorPane = (AnchorPane) recensioniAccordion.getExpandedPane().getContent();
+            Label ID = (Label) anchorPane.getChildren().get(1);
+            TextField nome = (TextField) anchorPane.getChildren().get(3);
+            TextArea descrizione = (TextArea) anchorPane.getChildren().get(5);
+            ChoiceBox<VotoRecensioni> voto = (ChoiceBox<VotoRecensioni>) anchorPane.getChildren().get(7);
+            ControllerCliente.getInstance().modificaRecensione(nome.getText(), descrizione.getText(), voto.getValue(), ID.getText());
+            aggiornaListaRecensioni();
+
+        }catch(IllegalArgumentException | SQLException e){
+            createErrorAlert(e.getMessage());
+        }
 
     }
 
     @FXML
     private void eliminaRecensione() {
+        try{
+            Utils.getInstance().controllaAccordion(recensioniAccordion, "recensione");
+            if (createConfirmationAlert("Sei sicuro di voler eliminare la recensione selezionata?")) {
+                ControllerCliente.getInstance().rimuoviRecensione(Utils.getInstance().getExpandedItemID(recensioniAccordion, 1));
 
+            }
+            aggiornaListaRecensioni();
+        }catch(IllegalArgumentException | SQLException e){
+            createErrorAlert(e.getMessage());
+        }
     }
 
     //ACCOUNT-----------------------------------------------------------------------------------------------------

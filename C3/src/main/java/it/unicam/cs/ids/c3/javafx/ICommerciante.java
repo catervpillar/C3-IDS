@@ -189,7 +189,7 @@ public class ICommerciante implements Initializable, JavaFXController {
     @FXML
     private void modificaProdotto() {
         try {
-            controllaAccordion(prodottiAccordion, "prodotto");
+            Utils.getInstance().controllaAccordion(prodottiAccordion, "prodotto");
             startWindow("Modifica prodotto", "/modificaProdotto.fxml", ModificaProdotto.getInstance());
         } catch (IllegalArgumentException | IOException e) {
             createErrorAlert(e.getMessage());
@@ -199,9 +199,9 @@ public class ICommerciante implements Initializable, JavaFXController {
     @FXML
     private void eliminaProdotto() {
         try {
-            controllaAccordion(prodottiAccordion, "prodotto");
+            Utils.getInstance().controllaAccordion(prodottiAccordion, "prodotto");
             if (createConfirmationAlert("Sei sicuro di eliminare il prodotto selezionato?")) {
-                SerializerElimina.getInstance().eliminaProdotto(getExpandedItemID(prodottiAccordion, 2));
+                SerializerElimina.getInstance().eliminaProdotto(Utils.getInstance().getExpandedItemID(prodottiAccordion, 2));
                 aggiornaListaProdotti();
             }
         } catch (IllegalArgumentException | SQLException e) {
@@ -209,17 +209,9 @@ public class ICommerciante implements Initializable, JavaFXController {
         }
     }
 
-    private void controllaAccordion(Accordion accordion, String word) {
-        TitledPane expandedPane = accordion.getExpandedPane();
-        if (Objects.isNull(expandedPane))
-            throw new IllegalArgumentException("Seleziona prima un " + word);
-    }
 
-    private String getExpandedItemID(Accordion accordion, int index) {
-        AnchorPane anchorPane = (AnchorPane) accordion.getExpandedPane().getContent();
-        Label ID = (Label) anchorPane.getChildren().get(index);
-        return ID.getText();
-    }
+
+
 
     public void aggiornaListaProdotti() throws SQLException {
         prodottiAccordion.getPanes().clear();
@@ -249,9 +241,9 @@ public class ICommerciante implements Initializable, JavaFXController {
     @FXML
     private void annullaRitiro() {
         try {
-            controllaAccordion(ritiriAccordion, "ritiro");
+            Utils.getInstance().controllaAccordion(ritiriAccordion, "ritiro");
             if (createConfirmationAlert("Sei sicuro di voler annullare il ritiro selezionato?")) {
-                SerializerElimina.getInstance().eliminaRitiro(getExpandedItemID(ritiriAccordion, 1));
+                SerializerElimina.getInstance().eliminaRitiro(Utils.getInstance().getExpandedItemID(ritiriAccordion, 1));
                 aggiornaListaRitiri();
             }
         } catch (IllegalArgumentException | SQLException e) {
@@ -288,7 +280,7 @@ public class ICommerciante implements Initializable, JavaFXController {
     @FXML
     private void modificaPromozione() {
         try {
-            controllaAccordion(promozioniAccordion, "promozione");
+            Utils.getInstance().controllaAccordion(promozioniAccordion, "promozione");
             AnchorPane anchorPane = (AnchorPane) promozioniAccordion.getExpandedPane().getContent();
             Label ID = (Label) anchorPane.getChildren().get(1);
             TextField nome = (TextField) anchorPane.getChildren().get(3);
@@ -323,9 +315,10 @@ public class ICommerciante implements Initializable, JavaFXController {
     @FXML
     private void eliminaPromozione() {
         try {
-            controllaAccordion(promozioniAccordion, "promozione");
+            Utils.getInstance().controllaAccordion(promozioniAccordion, "promozione");
             if (createConfirmationAlert("Sei sicuro di voler eliminare la promozione selezionata?")) {
-                SerializerElimina.getInstance().eliminaPromozione(getExpandedItemID(promozioniAccordion, 1));
+
+                ControllerCommerciante.getInstance().rimuoviPromozione(Utils.getInstance().getExpandedItemID(promozioniAccordion, 1));
                 aggiornaListaPromozioni();
             }
         } catch (IllegalArgumentException | SQLException e) {

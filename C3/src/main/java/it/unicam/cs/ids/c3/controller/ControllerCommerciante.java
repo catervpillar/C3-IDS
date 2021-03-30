@@ -112,7 +112,7 @@ public class ControllerCommerciante {
         GestorePromozioni.getInstance().modificaPromozione(IDPromozione, this.commerciante.getID(), nome, descrizione, dataInizio, dataScadenza);
     }
 
-    public void rimuoviPromozione(String IDPromozione) {
+    public void rimuoviPromozione(String IDPromozione) throws SQLException {
         GestorePromozioni.getInstance().rimuoviPromozione(IDPromozione);
     }
 }
