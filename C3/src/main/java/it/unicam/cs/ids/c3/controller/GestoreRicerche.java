@@ -73,7 +73,7 @@ public final class GestoreRicerche {
             if (!Objects.isNull(ragioneSociale)) {
                 resultSet = DBManager.getInstance().executeQuery("select * from corriere where ragioneSociale = \"" + ragioneSociale + "\"");
             } else
-                resultSet = DBManager.getInstance().executeQuery("select * from corriere");
+                resultSet = DBManager.getInstance().executeQuery("select * from corriere where stato = \"DISPONIBILE\";");
             corrieri.addAll(Deserializer.getInstance().deserializzaCorrieri(resultSet));
         } catch (SQLException e) {
             System.out.println("Errore nella ricerca: nessun risultato trovato");

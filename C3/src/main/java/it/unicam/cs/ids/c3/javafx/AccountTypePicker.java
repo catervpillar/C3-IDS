@@ -57,12 +57,12 @@ public class AccountTypePicker implements JavaFXController {
             close(commercianteRadioButton);
         } else if (puntoRitiroRadioButton.isSelected()) {
             startWindow("Crea il tuo profilo Punto di Ritiro",
-                    "/corriereCreator.fxml",
-                    new PuntoRitiroCreator());
+                    "/puntoRitiroCreator.fxml",
+                    PuntoRitiroCreator.getInstance());
             close(puntoRitiroRadioButton);
         } else if (corriereRadioButton.isSelected()) {
             startWindow("Crea il tuo profilo Corriere",
-                    "/puntoRitiroCreator.fxml",
+                    "/corriereCreator.fxml",
                     CorriereCreator.getInstance());
             close(corriereRadioButton);
         }

@@ -2,11 +2,17 @@ package it.unicam.cs.ids.c3.javafx;
 
 import it.unicam.cs.ids.c3.model.Prodotto;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 
+import java.net.URL;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
-public class ICorriere implements JavaFXController {
+public class ICorriere implements Initializable, JavaFXController {
     private static ICorriere instance;
 
     private ICorriere() {
@@ -19,61 +25,39 @@ public class ICorriere implements JavaFXController {
     }
 
     @FXML
+    private ImageView menuImageView;
+    @FXML
+    private AnchorPane blackPane, menuPane, homePane, ritiriPane, accountPane, impostazioniPane;
+    @FXML
+    private Button homeButton, ritiriButton, accountButton, impostazioniButton;
+
+    //Home pane
+    @FXML
+    private Text bentornatoText;
+
+    //Ritiri pane
+    @FXML
+    private Label elencoRitiriLabel;
+    @FXML
+    private Accordion ritiriAccordion;
+    @FXML
+    private Button aggiornaTracking;
+
+    // Account pane
+    @FXML
+    private Button salvaModificheButton, logoutButton, eliminaAccountButton;
+    @FXML
+    private CheckBox mostraPasswordCheckBox;
+    @FXML
     private Label IDutenteLabel;
+    @FXML
+    private TextField usernameTextField, emailTextField, ragioneSocialeTextField, telefonoTextField, indirizzoTextField, mostraPasswordTextField;
+    @FXML
+    private PasswordField passwordField;
 
-    @FXML
-    private Button prenotaRitiroButton;
-    @FXML
-    private Button vendiProdottoButton;
-    @FXML
-    private Button creaPromozioneButton;
-    @FXML
-    private Button salvaModificheButton;
-    @FXML
-    private Button eliminaAccountButton;
-    @FXML
-    private Button logoutButton;
-    @FXML
-    private RadioButton disponibileRadioButton;
-    @FXML
-    private RadioButton nonDisponibileRadioButton;
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
 
-    @FXML
-    private TextField usernameTextField;
-    @FXML
-    private TextField passwordTextField;
-    @FXML
-    private TextField emailTextField;
-    @FXML
-    private TextField ragioneSocialeTextField;
-    @FXML
-    private TextField telefonoTextField;
-    @FXML
-    private TextField indirizzoTextField;
-
-    @FXML
-    private TableView<Prodotto> tabellaProdotti;
-    private TableColumn<Prodotto, String> IDtabellaProdotti;
-    private TableColumn<Prodotto, String> nomeTabellaProdotti;
-    private TableColumn<Prodotto, Double> prezzoTabellaProdotti;
-    private TableColumn<Prodotto, Integer> quantitaTabellaProdotti;
-    private TableColumn<Prodotto, String> statoTabellaProdotti;
-
-    @FXML
-    private void aggiornaRitiro() {
-        createConfirmationAlert("Rinunciare agli studi?");
-    }
-
-    @FXML
-    private void selezionaDisponibile() {
-        disponibileRadioButton.setSelected(true);
-        nonDisponibileRadioButton.setSelected(false);
-    }
-
-    @FXML
-    private void selezionaNonDisponibile() {
-        disponibileRadioButton.setSelected(false);
-        nonDisponibileRadioButton.setSelected(true);
     }
 
 

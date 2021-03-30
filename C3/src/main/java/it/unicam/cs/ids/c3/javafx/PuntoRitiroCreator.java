@@ -8,8 +8,11 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class PuntoRitiroCreator implements JavaFXController {
+    private static PuntoRitiroCreator instance;
+
     @FXML
     TextField ragioneSocialeTextField;
     @FXML
@@ -25,6 +28,15 @@ public class PuntoRitiroCreator implements JavaFXController {
     Button procediButton;
     @FXML
     Button annullaButton;
+
+    private PuntoRitiroCreator() {
+    }
+
+    public static PuntoRitiroCreator getInstance() {
+        if (Objects.isNull(instance))
+            instance = new PuntoRitiroCreator();
+        return instance;
+    }
 
     @FXML
     public void procedi() {

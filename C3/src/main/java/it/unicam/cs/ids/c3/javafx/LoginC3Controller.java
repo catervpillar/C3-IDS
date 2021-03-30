@@ -53,7 +53,7 @@ public class LoginC3Controller implements JavaFXController {
 
             switch (utente) {
                 case "cliente":
-                    startWindow("ICliente", "/ICliente-2.fxml", ICliente.getInstance());
+                    startWindow("ICliente", "/ICliente.fxml", ICliente.getInstance());
                     break;
                 case "commerciante":
                     startWindow("ICommerciante", "/ICommerciante.fxml", ICommerciante.getInstance());
