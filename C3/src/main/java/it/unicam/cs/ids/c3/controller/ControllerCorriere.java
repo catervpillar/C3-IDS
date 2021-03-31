@@ -43,7 +43,7 @@ public class ControllerCorriere {
         } else return false;
     }
 
-    public void modificaCorriere(String username, String password, String email, String ragioneSociale, String telefono, String indirizzo) throws SQLException {
+    public void modificaCorriere(String username, String password, String email, String ragioneSociale, String telefono, String indirizzo, StatoCorriere stato) throws SQLException {
         Controllore.getInstance().controllaCorriere(username, password, email, ragioneSociale);
         Corriere corriere = new Corriere(this.corriere.getID(), username, password, email, ragioneSociale);
 
@@ -55,6 +55,8 @@ public class ControllerCorriere {
             Controllore.getInstance().controllaNumero(telefono, 10);
             corriere.setTelefono(telefono);
         }
+        if(!Objects.isNull(stato))
+            corriere.setStato(stato);
         this.corriere = corriere;
         SerializerModifica.getInstance().modificaCorriere(corriere);
     }

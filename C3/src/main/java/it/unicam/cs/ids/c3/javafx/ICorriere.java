@@ -5,12 +5,16 @@ import it.unicam.cs.ids.c3.controller.ControllerCommerciante;
 import it.unicam.cs.ids.c3.controller.ControllerCorriere;
 import it.unicam.cs.ids.c3.model.Prodotto;
 import it.unicam.cs.ids.c3.model.Ritiro;
+import it.unicam.cs.ids.c3.model.StatoCorriere;
+import javafx.animation.FadeTransition;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -54,6 +58,8 @@ public class ICorriere implements Initializable, JavaFXController, IUtente {
     @FXML
     private Button salvaModificheButton, logoutButton, eliminaAccountButton;
     @FXML
+    private RadioButton disponibileRadioButton, nonDisponibileRadioButton;
+    @FXML
     private CheckBox mostraPasswordCheckBox;
     @FXML
     private Label IDutenteLabel;
@@ -64,7 +70,47 @@ public class ICorriere implements Initializable, JavaFXController, IUtente {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        menuPane.setVisible(true);
+        blackPane.setVisible(false);
 
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5), blackPane);
+        fadeTransition.setFromValue(1);
+        fadeTransition.setToValue(0);
+        fadeTransition.play();
+
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5), menuPane);
+        translateTransition.setByX(-600);
+        translateTransition.play();
+
+        menuImageView.setOnMouseClicked(event -> {
+            blackPane.setVisible(true);
+
+            FadeTransition fadeTransition1 = new FadeTransition(Duration.seconds(0.5), blackPane);
+            fadeTransition1.setFromValue(0);
+            fadeTransition1.setToValue(0.15);
+            fadeTransition1.play();
+
+            TranslateTransition translateTransition1 = new TranslateTransition(Duration.seconds(0.5), menuPane);
+            translateTransition1.setByX(+600);
+            translateTransition1.play();
+
+        });
+
+        nascondiTutto();
+        mostraTransition(homePane);
+        //TODO: non funziona
+//        try {
+//            aggiornaListaRitiri();
+//        } catch (SQLException e) {
+//            createErrorAlert(e.getMessage());
+//        }
+        setDatiAccount();
+        bentornatoText.setText("Bentornato, " + ControllerCorriere.getInstance().getCorriere().getUsername() + "!");
+    }
+
+    @FXML
+    private void nascondiMenu() {
+        nascondiMenu(blackPane, menuPane);
     }
 
     @Override
@@ -105,7 +151,7 @@ public class ICorriere implements Initializable, JavaFXController, IUtente {
     }
 
     @FXML
-    private void aggiornaTracking(){
+    private void aggiornaTracking() {
 
     }
 
@@ -118,6 +164,18 @@ public class ICorriere implements Initializable, JavaFXController, IUtente {
         mostraTransition(accountPane);
     }
 
+    @FXML
+    private void selezionaDisponibile() {
+        disponibileRadioButton.setSelected(true);
+        nonDisponibileRadioButton.setSelected(false);
+    }
+
+    @FXML
+    private void selezionaNonDisponibile() {
+        disponibileRadioButton.setSelected(false);
+        nonDisponibileRadioButton.setSelected(true);
+    }
+
     private void setDatiAccount() {
         IDutenteLabel.setText("ID UTENTE: " + ControllerCorriere.getInstance().getCorriere().getID());
         usernameTextField.setText(ControllerCorriere.getInstance().getCorriere().getUsername());
@@ -128,6 +186,9 @@ public class ICorriere implements Initializable, JavaFXController, IUtente {
             telefonoTextField.setText(ControllerCorriere.getInstance().getCorriere().getTelefono());
         if (!Objects.isNull(ControllerCorriere.getInstance().getCorriere().getIndirizzo()))
             indirizzoTextField.setText(ControllerCorriere.getInstance().getCorriere().getIndirizzo());
+        if (ControllerCorriere.getInstance().getCorriere().getStato().equals(StatoCorriere.DISPONIBILE))
+            selezionaDisponibile();
+        else selezionaNonDisponibile();
     }
 
     @FXML
@@ -139,8 +200,14 @@ public class ICorriere implements Initializable, JavaFXController, IUtente {
     private void salvaModifiche() throws SQLException {
         ControllerCorriere.getInstance().modificaCorriere(usernameTextField.getText(),
                 getPassword(), emailTextField.getText(), ragioneSocialeTextField.getText(),
-                telefonoTextField.getText(), indirizzoTextField.getText());
+                telefonoTextField.getText(), indirizzoTextField.getText(), getStato());
         setDatiAccount();
+    }
+
+    private StatoCorriere getStato() {
+        if (disponibileRadioButton.isSelected())
+            return StatoCorriere.DISPONIBILE;
+        else return StatoCorriere.NON_DISPONIBILE;
     }
 
     private String getPassword() {

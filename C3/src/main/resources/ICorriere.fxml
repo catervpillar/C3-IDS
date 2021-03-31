@@ -6,6 +6,7 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -14,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" stylesheets="@styles/login.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" stylesheets="@styles/login.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane layoutX="228.0" layoutY="128.0" prefHeight="46.0" prefWidth="200.0" style="-fx-background-color: #002d40;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -72,7 +73,7 @@
             </Text>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="ritiriPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="44.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="46.0">
+      <AnchorPane fx:id="ritiriPane" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="44.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="46.0">
          <children>
             <Accordion fx:id="ritiriAccordion" layoutX="58.0" layoutY="130.0" prefHeight="240.0" prefWidth="675.0" />
             <Text layoutX="58.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ritiri">
@@ -91,7 +92,7 @@
                </font>
             </Button>
          </children></AnchorPane>
-      <AnchorPane fx:id="accountPane" layoutX="44.0" layoutY="46.0" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="44.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="46.0">
+      <AnchorPane fx:id="accountPane" layoutX="44.0" layoutY="46.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="44.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="46.0">
          <children>
             <Text layoutX="58.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modifica account">
                <font>
@@ -133,32 +134,32 @@
                   <Font size="16.0" />
                </font>
             </TextField>
-            <Label fx:id="nomeLabel" layoutX="58.0" layoutY="255.0" text="Nome:">
+            <Label fx:id="ragioneSocialeLabel" layoutX="58.0" layoutY="255.0" text="Ragione sociale:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="nomeTextField" layoutX="257.0" layoutY="249.0" prefWidth="300.0">
+            <TextField fx:id="ragioneSocialeTextField" layoutX="257.0" layoutY="249.0" prefWidth="300.0">
                <font>
                   <Font size="16.0" />
                </font>
             </TextField>
-            <Label fx:id="telefonoLabel" layoutX="58.0" layoutY="345.0" text="Telefono:">
+            <Label fx:id="telefonoLabel" layoutX="58.0" layoutY="300.0" text="Telefono:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="telefonoTextField" layoutX="257.0" layoutY="339.0" prefWidth="300.0">
+            <TextField fx:id="telefonoTextField" layoutX="257.0" layoutY="295.0" prefWidth="300.0">
                <font>
                   <Font size="16.0" />
                </font>
             </TextField>
-            <Label fx:id="indirizzoLabel" layoutX="58.0" layoutY="390.0" text="Indirizzo:">
+            <Label fx:id="indirizzoLabel" layoutX="58.0" layoutY="345.0" text="Indirizzo:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="indirizzoTextField" layoutX="257.0" layoutY="384.0" prefWidth="300.0">
+            <TextField fx:id="indirizzoTextField" layoutX="257.0" layoutY="340.0" prefWidth="300.0">
                <font>
                   <Font size="16.0" />
                </font>
@@ -173,7 +174,7 @@
                   <Font size="14.0" />
                </font>
             </CheckBox>
-            <Button fx:id="salvaModificheButton" layoutX="424.0" layoutY="436.0" mnemonicParsing="false" onAction="#salvaModifiche" styleClass="round-button2" text="Salva modifiche">
+            <Button fx:id="salvaModificheButton" layoutX="424.0" layoutY="433.0" mnemonicParsing="false" onAction="#salvaModifiche" styleClass="round-button2" text="Salva modifiche">
                <font>
                   <Font size="16.0" />
                </font>
@@ -188,16 +189,21 @@
                   <Font size="16.0" />
                </font>
             </Button>
-            <Label fx:id="cognomeLabel" layoutX="58.0" layoutY="300.0" text="Cognome:">
+            <Label fx:id="disponibilitaLabel" layoutX="58.0" layoutY="390.0" text="Stato disponibilità:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="cognomeTextField" layoutX="257.0" layoutY="294.0" prefHeight="37.0" prefWidth="300.0">
+            <RadioButton fx:id="disponibileRadioButton" layoutX="257.0" layoutY="390.0" mnemonicParsing="false" onAction="#selezionaDisponibile" text="Disponibile">
                <font>
                   <Font size="16.0" />
                </font>
-            </TextField>
+            </RadioButton>
+            <RadioButton fx:id="nonDisponibileRadioButton" layoutX="415.0" layoutY="390.0" mnemonicParsing="false" onAction="#selezionaNonDisponibile" text="Non disponibile">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </RadioButton>
          </children>
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
