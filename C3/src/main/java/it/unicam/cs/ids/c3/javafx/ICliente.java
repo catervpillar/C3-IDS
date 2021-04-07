@@ -2,11 +2,11 @@ package it.unicam.cs.ids.c3.javafx;
 
 import it.unicam.cs.ids.c3.controller.ControllerCliente;
 import it.unicam.cs.ids.c3.model.*;
-import it.unicam.cs.ids.c3.services.SerializerElimina;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -207,7 +207,7 @@ public class ICliente implements Initializable, JavaFXController {
         List<Ritiro> listaRitiri = ControllerCliente.getInstance().getRitiri();
         listaRitiri.forEach(ritiro -> {
             ritiriAccordion.getPanes().add(new TitledPane(ritiro.getID() + " " + ritiro.getDestinazione(),
-                    Utils.getInstance().getRitiroAnchorPane(ritiro)));
+                    Utils.getInstance().getRitiroAnchorPaneCliente(ritiro)));
         });
         if (ritiriAccordion.getPanes().isEmpty())
             elencoRitiriLabel.setText("Nessun ritiro attivo.");
@@ -265,8 +265,16 @@ public class ICliente implements Initializable, JavaFXController {
             Label ID = (Label) anchorPane.getChildren().get(1);
             TextField nome = (TextField) anchorPane.getChildren().get(3);
             TextArea descrizione = (TextArea) anchorPane.getChildren().get(5);
-            ChoiceBox<VotoRecensioni> voto = (ChoiceBox<VotoRecensioni>) anchorPane.getChildren().get(7);
-            ControllerCliente.getInstance().modificaRecensione(nome.getText(), descrizione.getText(), voto.getValue(), ID.getText());
+
+            Node child = anchorPane.getChildren().get(7);
+            VotoRecensioni votoRecensione;
+
+            if (child instanceof ChoiceBox) {
+                ChoiceBox votoRecensioneChoicebox = (ChoiceBox) child;
+                votoRecensione = VotoRecensioni.valueOf(votoRecensioneChoicebox.getValue().toString());
+            } else throw new IllegalArgumentException("Not a Choicebox");
+
+            ControllerCliente.getInstance().modificaRecensione(nome.getText(), descrizione.getText(), votoRecensione, ID.getText());
             aggiornaListaRecensioni();
 
         } catch (IllegalArgumentException | SQLException e) {
@@ -335,7 +343,7 @@ public class ICliente implements Initializable, JavaFXController {
         if (createConfirmationAlert("Sei sicuro di voler uscire?")) {
             ControllerCliente.getInstance().logout();
             close(logoutButton);
-            startWindow("C3 v1.0", "/loginC3_2.fxml", LoginC3Controller.getInstance());
+            startWindow("C3 v1.0", "/loginC3.fxml", LoginC3Controller.getInstance());
         }
     }
 
@@ -344,7 +352,7 @@ public class ICliente implements Initializable, JavaFXController {
         if (createConfirmationAlert("Sei sicuro di voler eliminare l'account?\nL'operazione sara' irreversibile.")) {
             ControllerCliente.getInstance().eliminaAccount();
             close(logoutButton);
-            startWindow("C3 v1.0", "/loginC3_2.fxml", LoginC3Controller.getInstance());
+            startWindow("C3 v1.0", "/loginC3.fxml", LoginC3Controller.getInstance());
         }
     }
 

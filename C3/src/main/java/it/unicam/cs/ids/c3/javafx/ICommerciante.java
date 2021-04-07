@@ -1,7 +1,6 @@
 package it.unicam.cs.ids.c3.javafx;
 
 import it.unicam.cs.ids.c3.controller.ControllerCommerciante;
-import it.unicam.cs.ids.c3.controller.GestorePromozioni;
 import it.unicam.cs.ids.c3.model.Prodotto;
 import it.unicam.cs.ids.c3.model.Promozione;
 import it.unicam.cs.ids.c3.model.Ritiro;
@@ -12,17 +11,14 @@ import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.*;
 
 public class ICommerciante implements Initializable, JavaFXController {
@@ -245,7 +241,7 @@ public class ICommerciante implements Initializable, JavaFXController {
         try {
             Utils.getInstance().controllaAccordion(ritiriAccordion, "ritiro");
             if (createConfirmationAlert("Sei sicuro di voler annullare il ritiro selezionato?")) {
-                SerializerElimina.getInstance().eliminaRitiro(Utils.getInstance().getExpandedItemID(ritiriAccordion, 1));
+                ControllerCommerciante.getInstance().eliminaRitiro(Utils.getInstance().getExpandedItemID(ritiriAccordion, 1));
                 aggiornaListaRitiri();
             }
         } catch (IllegalArgumentException | SQLException e) {
@@ -258,7 +254,7 @@ public class ICommerciante implements Initializable, JavaFXController {
         List<Ritiro> listaRitiri = ControllerCommerciante.getInstance().getRitiri();
         listaRitiri.forEach(ritiro -> {
             ritiriAccordion.getPanes().add(new TitledPane(ritiro.getID() + " " + ritiro.getDestinazione(),
-                    Utils.getInstance().getRitiroAnchorPane(ritiro)));
+                    Utils.getInstance().getRitiroAnchorPaneCliente(ritiro)));
         });
         if (ritiriAccordion.getPanes().isEmpty())
             elencoRitiriLabel.setText("Nessun ritiro attivo.");
@@ -383,7 +379,7 @@ public class ICommerciante implements Initializable, JavaFXController {
         if (createConfirmationAlert("Sei sicuro di voler uscire?")) {
             ControllerCommerciante.getInstance().logout();
             close(logoutButton);
-            startWindow("C3 v1.0", "/loginC3_2.fxml", LoginC3Controller.getInstance());
+            startWindow("C3 v1.0", "/loginC3.fxml", LoginC3Controller.getInstance());
         }
     }
 
@@ -392,7 +388,7 @@ public class ICommerciante implements Initializable, JavaFXController {
         if (createConfirmationAlert("Sei sicuro di voler eliminare l'account?\nL'operazione sara' irreversibile.")) {
             ControllerCommerciante.getInstance().eliminaAccount();
             close(logoutButton);
-            startWindow("C3 v1.0", "/loginC3_2.fxml", LoginC3Controller.getInstance());
+            startWindow("C3 v1.0", "/loginC3.fxml", LoginC3Controller.getInstance());
         }
     }
 

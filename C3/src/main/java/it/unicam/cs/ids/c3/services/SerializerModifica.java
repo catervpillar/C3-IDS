@@ -4,6 +4,7 @@ import it.unicam.cs.ids.c3.model.*;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.GregorianCalendar;
 import java.util.Objects;
 
 public class SerializerModifica {
@@ -124,25 +125,20 @@ public class SerializerModifica {
     }
 
     public void modificaRitiro(Ritiro ritiro) throws SQLException {
-        String sql = "UPDATE ritiro SET destinazione = ?, codice_ritiro = ?, data_prenotazione = ?, data_consegna = ?, ritirato = ?, " +
-                "tipo_consegna = ?, commerciante_ID = ?, cliente_ID = ?, corriere_ID = ?, stato_tracking = ? WHERE ID = ?;";
+        String sql = "UPDATE ritiro SET data_consegna = ?, ritirato = ?, stato_tracking = ? WHERE ID = ?;";
 
         PreparedStatement preparedStatement = DBManager.getInstance().getPreparedStatement(sql);
-        preparedStatement.setString(1, ritiro.getDestinazione());
-        preparedStatement.setString(2, ritiro.getCodiceRitiro());
-        preparedStatement.setDate(3, new java.sql.Date(ritiro.getDataPrenotazione().getTimeInMillis()));
-        if (!Objects.isNull(ritiro.getDataConsegna()))
-            preparedStatement.setDate(4, new java.sql.Date(ritiro.getDataConsegna().getTimeInMillis()));
-        else
-            preparedStatement.setDate(4, null);
 
-        preparedStatement.setBoolean(5, ritiro.isRitirato());
-        preparedStatement.setString(6, ritiro.getTipoConsegna().name());
-        preparedStatement.setString(7, ritiro.getIDCommerciante());
-        preparedStatement.setString(8, ritiro.getIDCliente());
-        preparedStatement.setString(9, ritiro.getIDCorriere());
-        preparedStatement.setString(10, ritiro.getStatoTracking().name());
-        preparedStatement.setString(11, ritiro.getID());
+        if (ritiro.getStatoTracking().equals(StatoTracking.CONSEGNATO)) {
+            GregorianCalendar dataConsegna = new GregorianCalendar();
+            preparedStatement.setDate(1, new java.sql.Date(dataConsegna.getTimeInMillis()));
+        }
+        else
+            preparedStatement.setDate(1, null);
+
+        preparedStatement.setBoolean(2, ritiro.isRitirato());
+        preparedStatement.setString(3, ritiro.getStatoTracking().name());
+        preparedStatement.setString(4, ritiro.getID());
         preparedStatement.executeUpdate();
         DBManager.getInstance().disconnect(preparedStatement);
     }

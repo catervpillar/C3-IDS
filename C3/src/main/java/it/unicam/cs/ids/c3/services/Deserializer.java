@@ -91,6 +91,7 @@ public class Deserializer {
                     resultSet.getString("ragioneSociale"));
             corriere.setTelefono(resultSet.getString("telefono"));
             corriere.setIndirizzo(resultSet.getString("indirizzo"));
+            corriere.setStato(StatoCorriere.valueOf(resultSet.getString("stato")));
             listaCorriere.add(corriere);
         }
 
@@ -180,12 +181,13 @@ public class Deserializer {
                     resultSet.getString("cliente_ID"),
                     resultSet.getString("corriere_ID"),
                     resultSet.getString("destinazione"),
-                    resultSet.getString("codice_ritiro"),
-                    resultSet.getBoolean("ritirato"),
-                    TipoConsegna.valueOf(resultSet.getString("tipo_consegna")),
-                    StatoTracking.valueOf(resultSet.getString("stato_tracking")),
-                    dataPrenotazione,
-                    dataConsegna);
+                    TipoConsegna.valueOf(resultSet.getString("tipo_consegna")));
+            ritiro.setCodiceRitiro(resultSet.getString("codice_ritiro"));
+            ritiro.setRitirato(resultSet.getBoolean("ritirato"));
+            ritiro.setStatoTracking(StatoTracking.valueOf(resultSet.getString("stato_tracking")));
+            ritiro.setDataPrenotazione(dataPrenotazione);
+            ritiro.setDataConsegna(dataConsegna);
+
             listaRitiri.add(ritiro);
         }
 

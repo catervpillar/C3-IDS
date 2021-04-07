@@ -34,18 +34,13 @@ public class Ritiro implements HasID {
         this.statoTracking = StatoTracking.IN_ELABORAZIONE;
     }
 
-    public Ritiro(String ID, String IDCommerciante, String IDCliente, String IDCorriere, String destinazione, String codiceRitiro, boolean ritirato, TipoConsegna tipoConsegna, StatoTracking stato, GregorianCalendar dataPrenotazione, GregorianCalendar dataConsegna) {
+    public Ritiro(String ID, String IDCommerciante, String IDCliente, String IDCorriere, String destinazione, TipoConsegna tipoConsegna) {
         this.ID = ID;
         this.IDCommerciante = IDCommerciante;
         this.IDCliente = IDCliente;
         this.IDCorriere = IDCorriere;
         this.destinazione = destinazione;
-        this.ritirato = ritirato;
-        this.dataPrenotazione = dataPrenotazione;
-        this.dataConsegna = dataConsegna;
-        this.codiceRitiro = codiceRitiro;
         this.tipoConsegna = tipoConsegna;
-        this.statoTracking = stato;
     }
 
     public TipoConsegna getTipoConsegna() {

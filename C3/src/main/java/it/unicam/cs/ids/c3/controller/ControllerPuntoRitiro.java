@@ -1,12 +1,7 @@
 package it.unicam.cs.ids.c3.controller;
 
-import it.unicam.cs.ids.c3.model.Commerciante;
-import it.unicam.cs.ids.c3.model.Corriere;
-import it.unicam.cs.ids.c3.model.PuntoRitiro;
-import it.unicam.cs.ids.c3.model.Ritiro;
-import it.unicam.cs.ids.c3.services.DBManager;
-import it.unicam.cs.ids.c3.services.Deserializer;
-import it.unicam.cs.ids.c3.services.SerializerAggiunta;
+import it.unicam.cs.ids.c3.model.*;
+import it.unicam.cs.ids.c3.services.*;
 import it.unicam.cs.ids.c3.utilities.Controllore;
 
 import java.sql.ResultSet;
@@ -47,5 +42,36 @@ public class ControllerPuntoRitiro {
             this.puntoRitiro = listaPuntiRitiro.get(0);
             return true;
         } else return false;
+    }
+
+    public void modificaPuntoRitiro(String username, String password, String email, String ragioneSociale, String telefono, String indirizzo) throws SQLException {
+        Controllore.getInstance().controllaPuntoRitiro(username, password, email, ragioneSociale);
+        PuntoRitiro puntoRitiro = new PuntoRitiro(this.puntoRitiro.getID(), username, password, email, ragioneSociale);
+
+        if (!indirizzo.isBlank()) {
+            Controllore.getInstance().controllaIndirizzo(indirizzo);
+            puntoRitiro.setIndirizzo(indirizzo);
+        }
+        if (!telefono.isBlank()) {
+            Controllore.getInstance().controllaNumero(telefono, 10);
+            puntoRitiro.setTelefono(telefono);
+        }
+        this.puntoRitiro = puntoRitiro;
+        SerializerModifica.getInstance().modificaPuntoRitiro(puntoRitiro);
+    }
+
+    public void eliminaAccount() throws SQLException {
+        SerializerElimina.getInstance().eliminaPuntoDiRitiro(this.puntoRitiro.getID());
+        this.puntoRitiro = null;
+        GestoreRicerche.getInstance().reset();
+    }
+
+    public void logout() {
+        GestoreRicerche.getInstance().reset();
+        this.puntoRitiro = null;
+    }
+
+    public List<Ritiro> getRitiri() {
+        return GestoreRicerche.getInstance().getRitiri(null, null, null, this.puntoRitiro.getIndirizzo());
     }
 }

@@ -12,6 +12,6 @@ import java.io.IOException;
 public class JavaFXC3 extends Application implements JavaFXController {
     @Override
     public void start(Stage stage) throws IOException {
-        startResizableWindow("C3 v1.0", "/loginC3_2.fxml", LoginC3Controller.getInstance());
+        startResizableWindow("C3 v1.0", "/loginC3.fxml", LoginC3Controller.getInstance());
     }
 }

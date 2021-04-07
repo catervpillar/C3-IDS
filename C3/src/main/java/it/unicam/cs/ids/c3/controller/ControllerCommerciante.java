@@ -92,12 +92,8 @@ public class ControllerCommerciante {
         GestoreRitiri.getInstance().creaRitiro(this.commerciante.getID(), IDCliente, IDCorriere, destinazione, tipoConsegna, listaIDProdotti);
     }
 
-    public void modificaRitiro() throws SQLException {
-        GestoreRitiri.getInstance().modificaRitiro();
-    }
-
-    public void eliminaRitiro() throws SQLException {
-        GestoreRitiri.getInstance().eliminaRitiro();
+    public void eliminaRitiro(String ID) throws SQLException {
+        GestoreRitiri.getInstance().eliminaRitiro(ID);
     }
 
     public List<Promozione> getPromozioni() throws SQLException {

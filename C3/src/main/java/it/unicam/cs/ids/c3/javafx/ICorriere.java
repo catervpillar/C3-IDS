@@ -1,15 +1,16 @@
 package it.unicam.cs.ids.c3.javafx;
 
-import it.unicam.cs.ids.c3.controller.ControllerCliente;
 import it.unicam.cs.ids.c3.controller.ControllerCommerciante;
 import it.unicam.cs.ids.c3.controller.ControllerCorriere;
-import it.unicam.cs.ids.c3.model.Prodotto;
 import it.unicam.cs.ids.c3.model.Ritiro;
 import it.unicam.cs.ids.c3.model.StatoCorriere;
+import it.unicam.cs.ids.c3.model.StatoTracking;
+import it.unicam.cs.ids.c3.model.TipoConsegna;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -98,12 +99,11 @@ public class ICorriere implements Initializable, JavaFXController, IUtente {
 
         nascondiTutto();
         mostraTransition(homePane);
-        //TODO: non funziona
-//        try {
-//            aggiornaListaRitiri();
-//        } catch (SQLException e) {
-//            createErrorAlert(e.getMessage());
-//        }
+        try {
+            aggiornaListaRitiri();
+        } catch (SQLException e) {
+            createErrorAlert(e.getMessage());
+        }
         setDatiAccount();
         bentornatoText.setText("Bentornato, " + ControllerCorriere.getInstance().getCorriere().getUsername() + "!");
     }
@@ -143,7 +143,7 @@ public class ICorriere implements Initializable, JavaFXController, IUtente {
         List<Ritiro> listaRitiri = ControllerCorriere.getInstance().getRitiri();
         listaRitiri.forEach(ritiro -> {
             ritiriAccordion.getPanes().add(new TitledPane(ritiro.getID() + " " + ritiro.getDestinazione(),
-                    Utils.getInstance().getRitiroAnchorPane(ritiro)));
+                    Utils.getInstance().getRitiroAnchorPaneCorriere(ritiro)));
         });
         if (ritiriAccordion.getPanes().isEmpty())
             elencoRitiriLabel.setText("Nessun ritiro attivo.");
@@ -152,7 +152,35 @@ public class ICorriere implements Initializable, JavaFXController, IUtente {
 
     @FXML
     private void aggiornaTracking() {
+        try {
+            Utils.getInstance().controllaAccordion(ritiriAccordion, "ritiro");
+            AnchorPane anchorPane = (AnchorPane) ritiriAccordion.getExpandedPane().getContent();
 
+            String ID = ((Label) anchorPane.getChildren().get(1)).getText();
+            String IDCommerciante = ((Label) anchorPane.getChildren().get(12)).getText();
+            String IDCliente = ((Label) anchorPane.getChildren().get(10)).getText();
+            String destinazione = ((Label) anchorPane.getChildren().get(2)).getText();
+
+            String tipo = ((Label) anchorPane.getChildren().get(8)).getText();
+            TipoConsegna tipoConsegna = TipoConsegna.valueOf(tipo);
+
+            String ritirato = ((Label) anchorPane.getChildren().get(6)).getText();
+            boolean isRitirato = ritirato.equals("Ritirato dal cliente: RITIRATO");
+
+            Node child = anchorPane.getChildren().get(15);
+            StatoTracking statoTracking;
+
+            if (child instanceof ChoiceBox) {
+                ChoiceBox statoTrackingChoiceBox = (ChoiceBox) child;
+                statoTracking = StatoTracking.valueOf(statoTrackingChoiceBox.getValue().toString());
+            } else throw new IllegalArgumentException("Not a Choicebox");
+
+            ControllerCorriere.getInstance().aggiornaTracking(ID, IDCommerciante, IDCliente, destinazione, isRitirato, tipoConsegna, statoTracking);
+
+            aggiornaListaRitiri();
+        } catch (IllegalArgumentException | SQLException e) {
+            createErrorAlert(e.getMessage());
+        }
     }
 
     //ACCOUNT-----------------------------------------------------------------------------------------------------
@@ -221,7 +249,7 @@ public class ICorriere implements Initializable, JavaFXController, IUtente {
         if (createConfirmationAlert("Sei sicuro di voler uscire?")) {
             ControllerCorriere.getInstance().logout();
             close(logoutButton);
-            startWindow("C3 v1.0", "/loginC3_2.fxml", LoginC3Controller.getInstance());
+            startWindow("C3 v1.0", "/loginC3.fxml", LoginC3Controller.getInstance());
         }
     }
 
@@ -230,7 +258,7 @@ public class ICorriere implements Initializable, JavaFXController, IUtente {
         if (createConfirmationAlert("Sei sicuro di voler eliminare l'account?\nL'operazione sara' irreversibile.")) {
             ControllerCommerciante.getInstance().eliminaAccount();
             close(logoutButton);
-            startWindow("C3 v1.0", "/loginC3_2.fxml", LoginC3Controller.getInstance());
+            startWindow("C3 v1.0", "/loginC3.fxml", LoginC3Controller.getInstance());
         }
     }
 

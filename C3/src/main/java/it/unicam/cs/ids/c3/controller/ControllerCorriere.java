@@ -6,6 +6,7 @@ import it.unicam.cs.ids.c3.utilities.Controllore;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Objects;
 
@@ -55,7 +56,7 @@ public class ControllerCorriere {
             Controllore.getInstance().controllaNumero(telefono, 10);
             corriere.setTelefono(telefono);
         }
-        if(!Objects.isNull(stato))
+        if (!Objects.isNull(stato))
             corriere.setStato(stato);
         this.corriere = corriere;
         SerializerModifica.getInstance().modificaCorriere(corriere);
@@ -73,6 +74,10 @@ public class ControllerCorriere {
     }
 
     public List<Ritiro> getRitiri() {
-        return null;
+        return GestoreRicerche.getInstance().getRitiri(null, null, this.corriere.getID(), null);
+    }
+
+    public void aggiornaTracking(String ID, String IDCommerciante, String IDCliente, String destinazione, boolean ritirato, TipoConsegna tipoConsegna, StatoTracking stato) throws SQLException {
+        GestoreRitiri.getInstance().modificaRitiro(ID, IDCommerciante, IDCliente, this.corriere.getID(), destinazione, ritirato, tipoConsegna, stato);
     }
 }

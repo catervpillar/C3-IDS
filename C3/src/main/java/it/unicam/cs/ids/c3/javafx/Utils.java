@@ -108,7 +108,41 @@ public class Utils {
         return anchorPane;
     }
 
-    public AnchorPane getRitiroAnchorPane(Ritiro ritiro) {
+    public AnchorPane getRitiroAnchorPaneCliente(Ritiro ritiro) {
+        AnchorPane anchorPane = getRitiroAnchorPane(ritiro);
+        Label statoTracking = getLabel("Stato tracking: " + ritiro.getStatoTracking().name(), 16, 25, 265);
+
+        anchorPane.getChildren().addAll(statoTracking);
+
+        return anchorPane;
+    }
+
+    public AnchorPane getRitiroAnchorPaneCorriere(Ritiro ritiro) {
+        AnchorPane anchorPane = getRitiroAnchorPane(ritiro);
+        Label statoTracking = getLabel("Stato tracking: ", 16, 25, 265);
+        ChoiceBox<StatoTracking> stato = getChoiceBox(Arrays.asList(StatoTracking.values().clone()), ritiro.getStatoTracking(), 140, 265);
+        anchorPane.getChildren().addAll(statoTracking, stato);
+
+        return anchorPane;
+    }
+
+    public AnchorPane getRitiroAnchorPanePuntoRitiro(Ritiro ritiro) {
+        AnchorPane anchorPane = getRitiroAnchorPane(ritiro);
+
+        Label ritiratoLabel = getLabel("Ritirato dal cliente:",16,25,140);
+        anchorPane.getChildren().set(6, ritiratoLabel);
+
+        ArrayList<String> list = new ArrayList<>();
+        list.add("RITIRATO");
+        list.add("NON RITIRATO");
+
+        ChoiceBox<String> choiceBox = getChoiceBox(list, "RITIRATO", 130, 140);
+        anchorPane.getChildren().addAll(ritiratoLabel, choiceBox);
+
+        return anchorPane;
+    }
+
+    private AnchorPane getRitiroAnchorPane(Ritiro ritiro) {
         AnchorPane anchorPane = new AnchorPane();
 
         Label IDRitiro = getLabel("ID ritiro: ", 16, 25, 15);
@@ -136,13 +170,17 @@ public class Utils {
             ritirato = getLabel("Ritirato dal cliente: NON RITIRATO", 16, 25, 140);
 
 
-        Label tipoConsegna = getLabel("Tipo consegna: " + ritiro.getTipoConsegna().name(), 16, 25, 165);
-        Label IDCliente = getLabel("ID cliente: " + ritiro.getIDCliente(), 16, 25, 190);
-        Label IDCorriere = getLabel("ID corriere: " + ritiro.getIDCorriere(), 16, 25, 215);
-        Label statoTracking = getLabel("Stato tracking: " + ritiro.getStatoTracking().name(), 16, 25, 240);
+        Label tipoConsegna = getLabel("Tipo consegna: ", 16, 25, 165);
+        Label tipo = getLabel(ritiro.getTipoConsegna().name(), 16, 135, 165);
+        Label IDClienteLabel = getLabel("ID cliente: ", 16, 25, 190);
+        Label IDCliente = getLabel(ritiro.getIDCliente(), 16, 100, 190);
+        Label IDCommercianteLabel = getLabel("ID commerciante: ", 16, 25, 215);
+        Label IDCommerciante = getLabel(ritiro.getIDCommerciante(), 16, 155, 215);
+
+        Label IDCorriere = getLabel("ID corriere: " + ritiro.getIDCorriere(), 16, 25, 240);
 
         anchorPane.getChildren().addAll(IDRitiro, ID, destinazione, codiceRitiro, dataPrenotazione,
-                dataConsegna, ritirato, tipoConsegna, IDCliente, IDCorriere, statoTracking);
+                dataConsegna, ritirato, tipoConsegna, tipo, IDClienteLabel, IDCliente, IDCommercianteLabel, IDCommerciante, IDCorriere);
 
         return anchorPane;
     }
@@ -181,7 +219,7 @@ public class Utils {
         Label voto = getLabel("Voto: ", 13, 25, 305);
         ChoiceBox<VotoRecensioni> votoChoiceBox = getChoiceBox(Arrays.asList(VotoRecensioni.values().clone()), recensione.getVotoRecensioni(), 140, 300);
 
-        anchorPane.getChildren().addAll(IDRecensione, ID, titolo, titoloTextField, testo, testoTextArea,voto,votoChoiceBox);
+        anchorPane.getChildren().addAll(IDRecensione, ID, titolo, titoloTextField, testo, testoTextArea, voto, votoChoiceBox);
 
         return anchorPane;
     }
