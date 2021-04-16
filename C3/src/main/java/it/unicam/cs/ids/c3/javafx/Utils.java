@@ -1,6 +1,11 @@
 package it.unicam.cs.ids.c3.javafx;
 
-import it.unicam.cs.ids.c3.model.*;
+import it.unicam.cs.ids.c3.prodotto.Prodotto;
+import it.unicam.cs.ids.c3.promozione.Promozione;
+import it.unicam.cs.ids.c3.recensione.Recensione;
+import it.unicam.cs.ids.c3.recensione.VotoRecensioni;
+import it.unicam.cs.ids.c3.ritiro.Ritiro;
+import it.unicam.cs.ids.c3.ritiro.StatoTracking;
 import javafx.collections.FXCollections;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -128,17 +133,20 @@ public class Utils {
 
     public AnchorPane getRitiroAnchorPanePuntoRitiro(Ritiro ritiro) {
         AnchorPane anchorPane = getRitiroAnchorPane(ritiro);
-
-        Label ritiratoLabel = getLabel("Ritirato dal cliente:",16,25,140);
-        anchorPane.getChildren().set(6, ritiratoLabel);
+        ((Label) anchorPane.getChildren().get(6)).setText("Ritirato dal cliente:");
 
         ArrayList<String> list = new ArrayList<>();
         list.add("RITIRATO");
         list.add("NON RITIRATO");
 
-        ChoiceBox<String> choiceBox = getChoiceBox(list, "RITIRATO", 130, 140);
-        anchorPane.getChildren().addAll(ritiratoLabel, choiceBox);
+        ChoiceBox<String> choiceBox;
+        if (ritiro.isRitirato())
+            choiceBox = getChoiceBox(list, "RITIRATO", 160, 140);
+        else choiceBox = getChoiceBox(list, "NON RITIRATO", 160, 140);
 
+        Label statoTracking = getLabel("Stato tracking: " + ritiro.getStatoTracking().name(), 16, 25, 265);
+
+        anchorPane.getChildren().addAll(choiceBox, statoTracking);
         return anchorPane;
     }
 

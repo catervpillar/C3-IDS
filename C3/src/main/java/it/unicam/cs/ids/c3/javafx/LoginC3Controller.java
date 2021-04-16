@@ -1,6 +1,6 @@
 package it.unicam.cs.ids.c3.javafx;
 
-import it.unicam.cs.ids.c3.services.Deserializer;
+import it.unicam.cs.ids.c3.database.Deserializer;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;

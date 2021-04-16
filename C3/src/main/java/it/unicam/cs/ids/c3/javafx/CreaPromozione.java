@@ -1,7 +1,7 @@
 package it.unicam.cs.ids.c3.javafx;
 
-import it.unicam.cs.ids.c3.controller.ControllerCommerciante;
-import it.unicam.cs.ids.c3.model.Prodotto;
+import it.unicam.cs.ids.c3.utenti.commerciante.ControllerCommerciante;
+import it.unicam.cs.ids.c3.prodotto.Prodotto;
 import it.unicam.cs.ids.c3.utilities.Controllore;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -11,11 +11,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
 import java.net.URL;
-import java.sql.Date;
 import java.sql.SQLException;
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 

@@ -4,17 +4,11 @@
 package it.unicam.cs.ids.c3;
 
 import it.unicam.cs.ids.c3.javafx.JavaFXC3;
-import it.unicam.cs.ids.c3.model.*;
-import it.unicam.cs.ids.c3.services.DBManager;
-import it.unicam.cs.ids.c3.services.SerializerAggiunta;
-import it.unicam.cs.ids.c3.services.SerializerElimina;
-import it.unicam.cs.ids.c3.services.SerializerModifica;
+import it.unicam.cs.ids.c3.database.DBManager;
 import javafx.application.Application;
-import org.checkerframework.checker.units.qual.C;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.GregorianCalendar;
 
 public class App {
     public static void main(String[] args) throws IOException, SQLException {

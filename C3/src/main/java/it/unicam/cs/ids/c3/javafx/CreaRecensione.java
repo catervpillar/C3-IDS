@@ -1,8 +1,8 @@
 package it.unicam.cs.ids.c3.javafx;
 
-import it.unicam.cs.ids.c3.controller.ControllerCliente;
-import it.unicam.cs.ids.c3.model.Prodotto;
-import it.unicam.cs.ids.c3.model.VotoRecensioni;
+import it.unicam.cs.ids.c3.utenti.cliente.ControllerCliente;
+import it.unicam.cs.ids.c3.prodotto.Prodotto;
+import it.unicam.cs.ids.c3.recensione.VotoRecensioni;
 import it.unicam.cs.ids.c3.utilities.Controllore;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;

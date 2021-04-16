@@ -1,12 +1,9 @@
 package it.unicam.cs.ids.c3.javafx;
 
-import it.unicam.cs.ids.c3.controller.ControllerCommerciante;
-import it.unicam.cs.ids.c3.controller.ControllerCorriere;
-import it.unicam.cs.ids.c3.controller.ControllerPuntoRitiro;
-import it.unicam.cs.ids.c3.model.Ritiro;
-import it.unicam.cs.ids.c3.model.StatoCorriere;
-import it.unicam.cs.ids.c3.model.StatoTracking;
-import it.unicam.cs.ids.c3.model.TipoConsegna;
+import it.unicam.cs.ids.c3.utenti.puntoRitiro.ControllerPuntoRitiro;
+import it.unicam.cs.ids.c3.ritiro.Ritiro;
+import it.unicam.cs.ids.c3.ritiro.StatoTracking;
+import it.unicam.cs.ids.c3.ritiro.TipoConsegna;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
@@ -151,35 +148,35 @@ public class IPuntoRitiro implements Initializable, JavaFXController, IUtente {
 
     @FXML
     private void contrassegna() {
-//        try {
-//            Utils.getInstance().controllaAccordion(ritiriAccordion, "ritiro");
-//            AnchorPane anchorPane = (AnchorPane) ritiriAccordion.getExpandedPane().getContent();
-//
-//            String ID = ((Label) anchorPane.getChildren().get(1)).getText();
-//            String IDCommerciante = ((Label) anchorPane.getChildren().get(12)).getText();
-//            String IDCliente = ((Label) anchorPane.getChildren().get(10)).getText();
-//            String destinazione = ((Label) anchorPane.getChildren().get(2)).getText();
-//
-//            String tipo = ((Label) anchorPane.getChildren().get(8)).getText();
-//            TipoConsegna tipoConsegna = TipoConsegna.valueOf(tipo);
-//
-//            String ritirato = ((Label) anchorPane.getChildren().get(6)).getText();
-//            boolean isRitirato = ritirato.equals("Ritirato dal cliente: RITIRATO");
-//
-//            Node child = anchorPane.getChildren().get(15);
-//            StatoTracking statoTracking;
-//
-//            if (child instanceof ChoiceBox) {
-//                ChoiceBox statoTrackingChoiceBox = (ChoiceBox) child;
-//                statoTracking = StatoTracking.valueOf(statoTrackingChoiceBox.getValue().toString());
-//            } else throw new IllegalArgumentException("Not a Choicebox");
-//
-//            ControllerCorriere.getInstance().aggiornaTracking(ID, IDCommerciante, IDCliente, destinazione, isRitirato, tipoConsegna, statoTracking);
-//
-//            aggiornaListaRitiri();
-//        } catch (IllegalArgumentException | SQLException e) {
-//            createErrorAlert(e.getMessage());
-//        }
+        try {
+            Utils.getInstance().controllaAccordion(ritiriAccordion, "ritiro");
+            AnchorPane anchorPane = (AnchorPane) ritiriAccordion.getExpandedPane().getContent();
+
+            String ID = ((Label) anchorPane.getChildren().get(1)).getText();
+            String IDCommerciante = ((Label) anchorPane.getChildren().get(12)).getText();
+            String IDCliente = ((Label) anchorPane.getChildren().get(10)).getText();
+            String IDCorriere = ((Label) anchorPane.getChildren().get(13)).getText();
+
+            String tipo = ((Label) anchorPane.getChildren().get(8)).getText();
+            TipoConsegna tipoConsegna = TipoConsegna.valueOf(tipo);
+
+            String statoTracking = ((Label) anchorPane.getChildren().get(15)).getText().substring(16);
+            StatoTracking stato = StatoTracking.valueOf(statoTracking);
+
+            Node child = anchorPane.getChildren().get(14);
+            boolean isRitirato;
+
+            if (child instanceof ChoiceBox) {
+                ChoiceBox ritiratoChoiceBox = (ChoiceBox) child;
+                isRitirato = ritiratoChoiceBox.getValue().equals("RITIRATO");
+            } else throw new IllegalArgumentException("Not a Choicebox");
+
+            ControllerPuntoRitiro.getInstance().contrassegna(ID, IDCommerciante, IDCliente, IDCorriere, isRitirato, tipoConsegna, stato);
+
+            aggiornaListaRitiri();
+        } catch (IllegalArgumentException | SQLException e) {
+            createErrorAlert(e.getMessage());
+        }
     }
 
     //ACCOUNT-----------------------------------------------------------------------------------------------------

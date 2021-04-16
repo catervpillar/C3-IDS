@@ -1,11 +1,11 @@
 package it.unicam.cs.ids.c3.javafx;
 
-import it.unicam.cs.ids.c3.controller.ControllerCommerciante;
-import it.unicam.cs.ids.c3.controller.GestoreRicerche;
-import it.unicam.cs.ids.c3.model.Corriere;
-import it.unicam.cs.ids.c3.model.Prodotto;
-import it.unicam.cs.ids.c3.model.PuntoRitiro;
-import it.unicam.cs.ids.c3.model.TipoConsegna;
+import it.unicam.cs.ids.c3.utenti.commerciante.ControllerCommerciante;
+import it.unicam.cs.ids.c3.utilities.GestoreRicerche;
+import it.unicam.cs.ids.c3.utenti.corriere.Corriere;
+import it.unicam.cs.ids.c3.prodotto.Prodotto;
+import it.unicam.cs.ids.c3.utenti.puntoRitiro.PuntoRitiro;
+import it.unicam.cs.ids.c3.ritiro.TipoConsegna;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;

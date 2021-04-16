@@ -1,6 +1,6 @@
 package it.unicam.cs.ids.c3.javafx;
 
-import it.unicam.cs.ids.c3.controller.ControllerCorriere;
+import it.unicam.cs.ids.c3.utenti.corriere.ControllerCorriere;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;

@@ -1,6 +1,6 @@
 package it.unicam.cs.ids.c3.javafx;
 
-import it.unicam.cs.ids.c3.controller.ControllerPuntoRitiro;
+import it.unicam.cs.ids.c3.utenti.puntoRitiro.ControllerPuntoRitiro;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;

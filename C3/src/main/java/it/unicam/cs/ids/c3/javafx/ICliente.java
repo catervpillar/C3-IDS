@@ -1,7 +1,11 @@
 package it.unicam.cs.ids.c3.javafx;
 
-import it.unicam.cs.ids.c3.controller.ControllerCliente;
-import it.unicam.cs.ids.c3.model.*;
+import it.unicam.cs.ids.c3.prodotto.Prodotto;
+import it.unicam.cs.ids.c3.promozione.Promozione;
+import it.unicam.cs.ids.c3.recensione.Recensione;
+import it.unicam.cs.ids.c3.recensione.VotoRecensioni;
+import it.unicam.cs.ids.c3.ritiro.Ritiro;
+import it.unicam.cs.ids.c3.utenti.cliente.ControllerCliente;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;

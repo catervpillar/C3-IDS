@@ -1,8 +1,9 @@
 package it.unicam.cs.ids.c3.javafx;
 
-import it.unicam.cs.ids.c3.controller.GestoreRicerche;
-import it.unicam.cs.ids.c3.model.Prodotto;
-import it.unicam.cs.ids.c3.services.SerializerModifica;
+import it.unicam.cs.ids.c3.utenti.commerciante.ControllerCommerciante;
+import it.unicam.cs.ids.c3.utilities.GestoreRicerche;
+import it.unicam.cs.ids.c3.prodotto.Prodotto;
+import it.unicam.cs.ids.c3.database.SerializerModifica;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Accordion;
@@ -70,7 +71,7 @@ public class ModificaProdotto implements Initializable, JavaFXController {
         prodottoDaModificare.setPrezzo(Double.parseDouble(prezzoTextField.getText()));
         prodottoDaModificare.setQuantita(Integer.parseInt(disponibilitaTextField.getText()));
         prodottoDaModificare.setURLImmagine(URLimmagineTextField.getText());
-        SerializerModifica.getInstance().modificaProdotto(prodottoDaModificare);
+        ControllerCommerciante.getInstance().modificaProdotto(prodottoDaModificare);
         ICommerciante.getInstance().aggiornaListaProdotti();
         this.prodottoDaModificare = null;
         close(salvaButton);

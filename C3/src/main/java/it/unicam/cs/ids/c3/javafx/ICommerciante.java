@@ -1,10 +1,10 @@
 package it.unicam.cs.ids.c3.javafx;
 
-import it.unicam.cs.ids.c3.controller.ControllerCommerciante;
-import it.unicam.cs.ids.c3.model.Prodotto;
-import it.unicam.cs.ids.c3.model.Promozione;
-import it.unicam.cs.ids.c3.model.Ritiro;
-import it.unicam.cs.ids.c3.services.SerializerElimina;
+import it.unicam.cs.ids.c3.utenti.commerciante.ControllerCommerciante;
+import it.unicam.cs.ids.c3.prodotto.Prodotto;
+import it.unicam.cs.ids.c3.promozione.Promozione;
+import it.unicam.cs.ids.c3.ritiro.Ritiro;
+import it.unicam.cs.ids.c3.database.SerializerElimina;
 import it.unicam.cs.ids.c3.utilities.Controllore;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
@@ -199,17 +199,13 @@ public class ICommerciante implements Initializable, JavaFXController {
         try {
             Utils.getInstance().controllaAccordion(prodottiAccordion, "prodotto");
             if (createConfirmationAlert("Sei sicuro di eliminare il prodotto selezionato?")) {
-                SerializerElimina.getInstance().eliminaProdotto(Utils.getInstance().getExpandedItemID(prodottiAccordion, 2));
+                ControllerCommerciante.getInstance().eliminaProdotto(Utils.getInstance().getExpandedItemID(prodottiAccordion, 2));
                 aggiornaListaProdotti();
             }
         } catch (IllegalArgumentException | SQLException e) {
             createErrorAlert(e.getMessage());
         }
     }
-
-
-
-
 
     public void aggiornaListaProdotti() throws SQLException {
         prodottiAccordion.getPanes().clear();

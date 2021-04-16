@@ -1,11 +1,11 @@
 package it.unicam.cs.ids.c3.javafx;
 
-import it.unicam.cs.ids.c3.controller.ControllerCommerciante;
-import it.unicam.cs.ids.c3.controller.ControllerCorriere;
-import it.unicam.cs.ids.c3.model.Ritiro;
-import it.unicam.cs.ids.c3.model.StatoCorriere;
-import it.unicam.cs.ids.c3.model.StatoTracking;
-import it.unicam.cs.ids.c3.model.TipoConsegna;
+import it.unicam.cs.ids.c3.utenti.commerciante.ControllerCommerciante;
+import it.unicam.cs.ids.c3.utenti.corriere.ControllerCorriere;
+import it.unicam.cs.ids.c3.ritiro.Ritiro;
+import it.unicam.cs.ids.c3.utenti.corriere.StatoCorriere;
+import it.unicam.cs.ids.c3.ritiro.StatoTracking;
+import it.unicam.cs.ids.c3.ritiro.TipoConsegna;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
