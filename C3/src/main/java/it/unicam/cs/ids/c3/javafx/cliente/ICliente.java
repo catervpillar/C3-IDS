@@ -1,5 +1,9 @@
-package it.unicam.cs.ids.c3.javafx;
+package it.unicam.cs.ids.c3.javafx.cliente;
 
+import it.unicam.cs.ids.c3.javafx.IUtente;
+import it.unicam.cs.ids.c3.javafx.JavaFXController;
+import it.unicam.cs.ids.c3.javafx.LoginC3Controller;
+import it.unicam.cs.ids.c3.javafx.Utils;
 import it.unicam.cs.ids.c3.prodotto.Prodotto;
 import it.unicam.cs.ids.c3.promozione.Promozione;
 import it.unicam.cs.ids.c3.recensione.Recensione;
@@ -27,7 +31,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class ICliente implements Initializable, JavaFXController {
+public class ICliente implements Initializable, JavaFXController, IUtente {
     private static ICliente instance;
 
     private ICliente() {
@@ -94,31 +98,7 @@ public class ICliente implements Initializable, JavaFXController {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        menuPane.setVisible(true);
-        blackPane.setVisible(false);
-
-        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5), blackPane);
-        fadeTransition.setFromValue(1);
-        fadeTransition.setToValue(0);
-        fadeTransition.play();
-
-        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5), menuPane);
-        translateTransition.setByX(-600);
-        translateTransition.play();
-
-        menuImageView.setOnMouseClicked(event -> {
-            blackPane.setVisible(true);
-
-            FadeTransition fadeTransition1 = new FadeTransition(Duration.seconds(0.5), blackPane);
-            fadeTransition1.setFromValue(0);
-            fadeTransition1.setToValue(0.15);
-            fadeTransition1.play();
-
-            TranslateTransition translateTransition1 = new TranslateTransition(Duration.seconds(0.5), menuPane);
-            translateTransition1.setByX(+600);
-            translateTransition1.play();
-
-        });
+        setMenu(menuPane, blackPane, menuImageView);
 
         nascondiTutto();
         mostraTransition(homePane);
@@ -136,36 +116,15 @@ public class ICliente implements Initializable, JavaFXController {
 
     @FXML
     private void nascondiMenu() {
-        FadeTransition fadeTransition1 = new FadeTransition(Duration.seconds(0.5), blackPane);
-        fadeTransition1.setFromValue(0.15);
-        fadeTransition1.setToValue(0);
-        fadeTransition1.play();
-
-        fadeTransition1.setOnFinished(event1 -> {
-            blackPane.setVisible(false);
-        });
-
-        TranslateTransition translateTransition1 = new TranslateTransition(Duration.seconds(0.5), menuPane);
-        translateTransition1.setByX(-600);
-        translateTransition1.play();
+        nascondiMenu(blackPane, menuPane);
     }
 
-    private void mostraTransition(AnchorPane pane) {
-        pane.setVisible(true);
-        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5), pane);
-        fadeTransition.setFromValue(0);
-        fadeTransition.setToValue(1);
-        fadeTransition.play();
-    }
 
     private void nascondiTutto() {
-        homePane.setVisible(false);
+        nascondiTutto(homePane, ritiriPane, accountPane, impostazioniPane);
         prodottiPane.setVisible(false);
-        ritiriPane.setVisible(false);
         promozioniPane.setVisible(false);
         recensioniPane.setVisible(false);
-        accountPane.setVisible(false);
-        impostazioniPane.setVisible(false);
         prodottiAccordion.setExpandedPane(null);
         ritiriAccordion.setExpandedPane(null);
         promozioniAccordion.setExpandedPane(null);
@@ -173,7 +132,8 @@ public class ICliente implements Initializable, JavaFXController {
     }
 
     @FXML
-    private void mostraHome() {
+    @Override
+    public void mostraHome() {
         nascondiMenu();
         nascondiTutto();
         mostraTransition(homePane);
@@ -200,7 +160,8 @@ public class ICliente implements Initializable, JavaFXController {
     //RITIRI-----------------------------------------------------------------------------------------------------
 
     @FXML
-    private void mostraRitiri() {
+    @Override
+    public void mostraRitiri() {
         nascondiMenu();
         nascondiTutto();
         mostraTransition(ritiriPane);
@@ -304,7 +265,8 @@ public class ICliente implements Initializable, JavaFXController {
     //ACCOUNT-----------------------------------------------------------------------------------------------------
 
     @FXML
-    private void mostraAccount() {
+    @Override
+    public void mostraAccount() {
         nascondiMenu();
         nascondiTutto();
         mostraTransition(accountPane);
@@ -361,7 +323,8 @@ public class ICliente implements Initializable, JavaFXController {
     }
 
     @FXML
-    private void mostraImpostazioni() {
+    @Override
+    public void mostraImpostazioni() {
         nascondiMenu();
         nascondiTutto();
         mostraTransition(impostazioniPane);

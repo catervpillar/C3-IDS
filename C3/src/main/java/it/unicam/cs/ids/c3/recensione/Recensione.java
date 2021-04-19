@@ -6,7 +6,7 @@ import it.unicam.cs.ids.c3.utilities.IDGenerator;
 import java.util.GregorianCalendar;
 import java.util.Objects;
 
-public class Recensione implements HasID {
+public class Recensione implements HasID, RecensioneInterface {
     private String ID;
     private String titolo;
     private String testo;

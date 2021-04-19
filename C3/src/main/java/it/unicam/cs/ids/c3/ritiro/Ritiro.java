@@ -9,7 +9,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Objects;
 
-public class Ritiro implements HasID {
+public class Ritiro implements HasID, RitiroInterface {
     private String ID;
     private List<String> listaIDProdotti = new ArrayList<>();
     private String IDCommerciante;

@@ -1,5 +1,6 @@
-package it.unicam.cs.ids.c3.javafx;
+package it.unicam.cs.ids.c3.javafx.commerciante;
 
+import it.unicam.cs.ids.c3.javafx.JavaFXController;
 import it.unicam.cs.ids.c3.utenti.commerciante.ControllerCommerciante;
 import it.unicam.cs.ids.c3.utilities.GestoreRicerche;
 import it.unicam.cs.ids.c3.utenti.corriere.Corriere;

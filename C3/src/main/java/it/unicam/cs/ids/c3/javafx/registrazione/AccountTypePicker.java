@@ -1,5 +1,6 @@
-package it.unicam.cs.ids.c3.javafx;
+package it.unicam.cs.ids.c3.javafx.registrazione;
 
+import it.unicam.cs.ids.c3.javafx.JavaFXController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
@@ -75,37 +76,29 @@ public class AccountTypePicker implements JavaFXController {
 
     @FXML
     public void selezionaCliente() {
-        clienteRadioButton.setSelected(true);
-        commercianteRadioButton.setSelected(false);
-        puntoRitiroRadioButton.setSelected(false);
-        corriereRadioButton.setSelected(false);
-        procediButton.setDisable(false);
+        seleziona(clienteRadioButton);
     }
-
     @FXML
     public void selezionaCommerciante() {
-        commercianteRadioButton.setSelected(true);
-        clienteRadioButton.setSelected(false);
-        puntoRitiroRadioButton.setSelected(false);
-        corriereRadioButton.setSelected(false);
-        procediButton.setDisable(false);
+        seleziona(commercianteRadioButton);
     }
 
     @FXML
     public void selezionaPuntoRitiro() {
-        puntoRitiroRadioButton.setSelected(true);
-        clienteRadioButton.setSelected(false);
-        commercianteRadioButton.setSelected(false);
-        corriereRadioButton.setSelected(false);
-        procediButton.setDisable(false);
+        seleziona(puntoRitiroRadioButton);
     }
 
     @FXML
     public void selezionaCorriere() {
-        corriereRadioButton.setSelected(true);
+        seleziona(corriereRadioButton);
+    }
+
+    public void seleziona(RadioButton radioButton) {
         clienteRadioButton.setSelected(false);
         commercianteRadioButton.setSelected(false);
         puntoRitiroRadioButton.setSelected(false);
+        corriereRadioButton.setSelected(false);
         procediButton.setDisable(false);
+        radioButton.setSelected(true);
     }
 }

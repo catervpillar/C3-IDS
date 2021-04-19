@@ -1,5 +1,6 @@
-package it.unicam.cs.ids.c3.javafx;
+package it.unicam.cs.ids.c3.javafx.registrazione;
 
+import it.unicam.cs.ids.c3.javafx.JavaFXController;
 import it.unicam.cs.ids.c3.utenti.cliente.ControllerCliente;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,7 +11,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Objects;
 
-public class ClienteCreator implements JavaFXController {
+public class ClienteCreator implements JavaFXController, UtenteCreator {
     private static ClienteCreator instance;
 
     private ClienteCreator() {
@@ -43,7 +44,7 @@ public class ClienteCreator implements JavaFXController {
     @FXML
     public void procedi() {
         try {
-            confrontaPassword();
+            confrontaPassword(passwordTextField, confermaPasswordTextField);
             ControllerCliente.getInstance().creaCliente(usernameTextField.getText(),
                     passwordTextField.getText(), emailTextField.getText(),
                     nomeTextField.getText(),
@@ -60,35 +61,15 @@ public class ClienteCreator implements JavaFXController {
         startWindow("Registrati", "/tipoAccount.fxml", AccountTypePicker.getInstance());
     }
 
-    private void confrontaPassword() {
-        if (!passwordTextField.getText().equals(confermaPasswordTextField.getText()))
-            throw new IllegalStateException("Le due password non coincidono");
-    }
-
     @FXML
     private void controllaCampiCompilati() {
-        boolean sblocca = true;
-        if (nomeTextField.getText().isEmpty()) sblocca = false;
-        if (cognomeTextField.getText().isEmpty()) sblocca = false;
-        if (emailTextField.getText().isEmpty()) sblocca = false;
-        if (usernameTextField.getText().isEmpty()) sblocca = false;
-        if (passwordTextField.getText().isEmpty()) sblocca = false;
-        if (confermaPasswordTextField.getText().isEmpty()) sblocca = false;
-        if (sblocca)
-            procediButton.setDisable(false);
 
-        controllaContenutoTextField(nomeTextField);
-        controllaContenutoTextField(cognomeTextField);
-        controllaContenutoTextField(emailTextField);
-        controllaContenutoTextField(usernameTextField);
-        controllaContenutoTextField(passwordTextField);
-        controllaContenutoTextField(confermaPasswordTextField);
+        controllaContenutoTextField(nomeTextField, procediButton);
+        controllaContenutoTextField(cognomeTextField, procediButton);
+        controllaContenutoTextField(emailTextField, procediButton);
+        controllaContenutoTextField(usernameTextField, procediButton);
+        controllaContenutoTextField(passwordTextField, procediButton);
+        controllaContenutoTextField(confermaPasswordTextField, procediButton);
 
-    }
-
-    public void controllaContenutoTextField(TextField textField) {
-        textField.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (textField.getText().isEmpty()) procediButton.setDisable(true);
-        });
     }
 }

@@ -1,6 +1,11 @@
 package it.unicam.cs.ids.c3.javafx;
 
 import it.unicam.cs.ids.c3.database.Deserializer;
+import it.unicam.cs.ids.c3.javafx.cliente.ICliente;
+import it.unicam.cs.ids.c3.javafx.commerciante.ICommerciante;
+import it.unicam.cs.ids.c3.javafx.corriere.ICorriere;
+import it.unicam.cs.ids.c3.javafx.puntoRitiro.IPuntoRitiro;
+import it.unicam.cs.ids.c3.javafx.registrazione.AccountTypePicker;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;

@@ -37,9 +37,9 @@ public class Cliente extends Utente implements ClienteInterface {
 
     @Override
     public String toString() {
-        return super.toString() + "Cliente{" +
-                "nome='" + nome + '\'' +
-                ", cognome='" + cognome + '\'' +
+        return super.toString() + ", " +
+                "nome=" + nome  +
+                ", cognome=" + cognome  +
                 '}';
     }
 }

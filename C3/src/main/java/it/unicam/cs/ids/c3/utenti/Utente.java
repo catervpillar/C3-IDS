@@ -94,13 +94,12 @@ public abstract class Utente implements HasID {
 
     @Override
     public String toString() {
-        return "Utente{" +
-                "ID='" + ID + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", telefono='" + telefono + '\'' +
-                ", indirizzo='" + indirizzo + '\'' +
-                '}';
+        return "{" +
+                "ID=" + ID +
+                ", username=" + username +
+                ", password=" + password +
+                ", email=" + email  +
+                ", telefono=" + telefono +
+                ", indirizzo=" + indirizzo;
     }
 }

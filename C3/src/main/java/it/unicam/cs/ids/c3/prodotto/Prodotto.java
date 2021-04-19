@@ -5,7 +5,7 @@ import it.unicam.cs.ids.c3.utilities.IDGenerator;
 
 import java.util.Objects;
 
-public class Prodotto implements HasID {
+public class Prodotto implements HasID, ProdottoInterface {
     private String ID;
     private String nome;
     private double prezzo;

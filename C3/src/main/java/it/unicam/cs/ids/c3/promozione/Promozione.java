@@ -9,7 +9,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Objects;
 
-public class Promozione implements HasID {
+public class Promozione implements HasID, PromozioneInterface{
     private String ID;
     private String nome;
     private String descrizione;

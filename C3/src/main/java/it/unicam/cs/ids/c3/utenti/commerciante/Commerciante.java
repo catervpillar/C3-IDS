@@ -26,8 +26,8 @@ public class Commerciante extends Utente implements CommercianteInterface {
 
     @Override
     public String toString() {
-        return super.toString() + "Commerciante{" +
-                "ragioneSociale='" + ragioneSociale + '\'' +
+        return super.toString() + ", " +
+                "ragioneSociale=" + ragioneSociale +
                 '}';
     }
 }
