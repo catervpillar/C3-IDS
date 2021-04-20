@@ -1,28 +1,14 @@
 package it.unicam.cs.ids.c3.utenti.cliente;
-
-import com.mysql.cj.xdevapi.Client;
 import it.unicam.cs.ids.c3.database.DBManager;
 import it.unicam.cs.ids.c3.database.Deserializer;
-import it.unicam.cs.ids.c3.database.SerializerAggiunta;
 import it.unicam.cs.ids.c3.database.SerializerElimina;
-import it.unicam.cs.ids.c3.prodotto.Prodotto;
-import it.unicam.cs.ids.c3.ritiro.Ritiro;
-import it.unicam.cs.ids.c3.ritiro.TipoConsegna;
-import it.unicam.cs.ids.c3.utenti.commerciante.Commerciante;
-import it.unicam.cs.ids.c3.utenti.commerciante.ControllerCommerciante;
-import it.unicam.cs.ids.c3.utenti.corriere.Corriere;
-import org.checkerframework.checker.units.qual.C;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class ControllerClienteTest {
-
 
     @BeforeAll
     static void init(){
@@ -53,49 +39,44 @@ class ControllerClienteTest {
         SerializerElimina.getInstance().eliminaCliente(cliente.getID());
     }
 
-
-
     @Test
-    void pubblicaRecensione() {
-    }
-
-    @Test
-    void modificaRecensione() {
-    }
-
-    @Test
-    void rimuoviRecensione() {
-    }
-
-    @Test
-    void getCliente() {
+    void getCliente() throws SQLException {
+        ControllerCliente.getInstance().creaCliente("user", "password", "mail@alice.it", "nomeee", "cognome");
+        ControllerCliente.getInstance().loginCliente("user", "password");
+        assertEquals("nomeee", ControllerCliente.getInstance().getCliente().getNome());
+        SerializerElimina.getInstance().eliminaCliente(ControllerCliente.getInstance().getCliente().getID());
     }
 
     @Test
     void setCliente() {
+        Cliente cliente = new Cliente("id123456", "usern", "pass", "mail@alice.it", "name", "surname");
+        ControllerCliente.getInstance().setCliente(cliente);
+        assertEquals("usern", ControllerCliente.getInstance().getCliente().getUsername());
     }
 
     @Test
-    void getPromozioni() {
-    }
-
-    @Test
-    void getRecensioni() {
-    }
-
-    @Test
-    void getRitiri() {
-    }
-
-    @Test
-    void modificaCliente() {
+    void modificaCliente() throws SQLException {
+        Cliente cliente = new Cliente("id123456", "usern", "pass", "mail@alice.it", "name", "surname");
+        ControllerCliente.getInstance().setCliente(cliente);
+        ControllerCliente.getInstance().modificaCliente("usern", "pwd", "mail@alice.it", "name", "surname", "0733633458", "via prova 2");
+        assertEquals("pwd", ControllerCliente.getInstance().getCliente().getPassword());
+        assertEquals("0733633458", ControllerCliente.getInstance().getCliente().getTelefono());
+        assertEquals("via prova 2", ControllerCliente.getInstance().getCliente().getIndirizzo());
     }
 
     @Test
     void logout() {
+        ControllerCliente.getInstance().logout();
+        assertNull(ControllerCliente.getInstance().getCliente());
     }
 
     @Test
-    void eliminaAccount() {
+    void eliminaAccount() throws SQLException {
+        ControllerCliente.getInstance().creaCliente("user", "password", "mail@alice.it", "nomeee", "cognome");
+        ControllerCliente.getInstance().loginCliente("user", "password");
+        ControllerCliente.getInstance().eliminaAccount();
+        assertFalse(ControllerCliente.getInstance().loginCliente("user", "password"));
+        assertNull(ControllerCliente.getInstance().getCliente());
+
     }
 }

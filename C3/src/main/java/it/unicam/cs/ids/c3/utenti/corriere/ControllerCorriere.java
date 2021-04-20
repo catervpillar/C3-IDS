@@ -83,4 +83,7 @@ public class ControllerCorriere {
     public void aggiornaTracking(String ID, String IDCommerciante, String IDCliente, String destinazione, boolean ritirato, TipoConsegna tipoConsegna, StatoTracking stato) throws SQLException {
         GestoreRitiri.getInstance().modificaRitiro(ID, IDCommerciante, IDCliente, this.corriere.getID(), destinazione, ritirato, tipoConsegna, stato);
     }
+    public void setCorriere(Corriere corriere){
+        this.corriere = corriere;
+    }
 }

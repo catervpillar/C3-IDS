@@ -81,4 +81,8 @@ public class ControllerPuntoRitiro {
     public void contrassegna(String ID, String IDCommerciante, String IDCliente, String IDCorriere, boolean ritirato, TipoConsegna tipoConsegna, StatoTracking stato) throws SQLException {
         GestoreRitiri.getInstance().modificaRitiro(ID, IDCommerciante, IDCliente, IDCorriere, this.puntoRitiro.getIndirizzo(), ritirato, tipoConsegna, stato);
     }
+
+    public void setPuntoRitiro(PuntoRitiro puntoRitiro){
+        this.puntoRitiro = puntoRitiro;
+    }
 }
