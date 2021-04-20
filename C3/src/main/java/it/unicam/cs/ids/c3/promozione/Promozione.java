@@ -108,10 +108,10 @@ public class Promozione implements HasID, PromozioneInterface{
     @Override
     public String toString() {
         return "Promozione{" +
-                "ID='" + ID + '\'' +
-                ", nome='" + nome + '\'' +
-                ", descrizione='" + descrizione + '\'' +
-                ", IDCommerciante='" + IDCommerciante + '\'' +
+                "ID=" + ID +
+                ", nome=" + nome +
+                ", descrizione=" + descrizione +
+                ", IDCommerciante=" + IDCommerciante +
                 ", listaIDProdotti=" + listaIDProdotti +
                 ", dataInizio=" + dataInizio +
                 ", dataScadenza=" + dataScadenza +
