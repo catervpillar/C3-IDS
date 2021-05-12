@@ -14,7 +14,7 @@ public interface CommercianteInterface {
     /**
      * Metodo setter per l'attributo ID.
      *
-     * @param ID - Il nuovo attributo il ID.
+     * @param ID - Il nuovo attributo ID.
      */
     void setID(String ID);
 
@@ -28,7 +28,7 @@ public interface CommercianteInterface {
     /**
      * Metodo setter per l'attributo username.
      *
-     * @param username - Il nuovo attributo il username.
+     * @param username - Il nuovo attributo username.
      */
     void setUsername(String username);
 
@@ -42,7 +42,7 @@ public interface CommercianteInterface {
     /**
      * Metodo setter per l'attributo email.
      *
-     * @param email - Il nuovo attributo il email.
+     * @param email - Il nuovo attributo email.
      */
     void setEmail(String email);
 
@@ -56,7 +56,7 @@ public interface CommercianteInterface {
     /**
      * Metodo setter per l'attributo password.
      *
-     * @param password - Il nuovo attributo il password.
+     * @param password - Il nuovo attributo password.
      */
     void setPassword(String password);
 
@@ -70,7 +70,7 @@ public interface CommercianteInterface {
     /**
      * Metodo setter per l'attributo telefono.
      *
-     * @param telefono - Il nuovo attributo il telefono.
+     * @param telefono - Il nuovo attributo telefono.
      */
     void setTelefono(String telefono);
 
@@ -84,7 +84,7 @@ public interface CommercianteInterface {
     /**
      * Metodo setter per l'attributo indirizzo.
      *
-     * @param indirizzo - Il nuovo attributo il indirizzo.
+     * @param indirizzo - Il nuovo attributo indirizzo.
      */
     void setIndirizzo(String indirizzo);
 
@@ -98,7 +98,7 @@ public interface CommercianteInterface {
     /**
      * Metodo setter per l'attributo ragioneSociale.
      *
-     * @param ragioneSociale - Il nuovo attributo il ragioneSociale.
+     * @param ragioneSociale - Il nuovo attributo ragioneSociale.
      */
     void setRagioneSociale(String ragioneSociale);
 }

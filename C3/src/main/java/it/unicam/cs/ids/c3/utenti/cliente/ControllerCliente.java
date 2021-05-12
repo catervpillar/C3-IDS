@@ -1,9 +1,13 @@
 package it.unicam.cs.ids.c3.utenti.cliente;
 
+import it.unicam.cs.ids.c3.prodotto.Prodotto;
 import it.unicam.cs.ids.c3.prodotto.ProdottoInterface;
+import it.unicam.cs.ids.c3.promozione.Promozione;
 import it.unicam.cs.ids.c3.promozione.PromozioneInterface;
 import it.unicam.cs.ids.c3.recensione.GestoreRecensioni;
+import it.unicam.cs.ids.c3.recensione.Recensione;
 import it.unicam.cs.ids.c3.recensione.RecensioneInterface;
+import it.unicam.cs.ids.c3.ritiro.Ritiro;
 import it.unicam.cs.ids.c3.ritiro.RitiroInterface;
 import it.unicam.cs.ids.c3.utilities.GestoreRicerche;
 import it.unicam.cs.ids.c3.recensione.VotoRecensioni;
@@ -26,7 +30,7 @@ public class ControllerCliente {
     private ClienteInterface cliente;
 
     /**
-     * Costruttore privato usato solamente all'interno di questa classe
+     * Costruttore privato usato solamente all'interno di questa classe.
      */
     private ControllerCliente() {
     }
@@ -87,7 +91,7 @@ public class ControllerCliente {
     }
 
     /**
-     * Ritorna la lista di tutti i prodotti inclusi nei {@link it.unicam.cs.ids.c3.ritiro.Ritiro}
+     * Ritorna la lista di tutti i prodotti inclusi nei {@link Ritiro}
      * relativi al {@link Cliente} corrente.
      *
      * @return la lista di tutti i prodotti acquistati dal {@link Cliente}.
@@ -120,13 +124,13 @@ public class ControllerCliente {
     }
 
     /**
-     * Crea una nuova {@link it.unicam.cs.ids.c3.recensione.Recensione} tramite l'apposito gestore.
+     * Crea una nuova {@link Recensione} tramite l'apposito gestore.
      *
-     * @param titolo         - Il titolo della {@link it.unicam.cs.ids.c3.recensione.Recensione}.
-     * @param testo          - Il testo della {@link it.unicam.cs.ids.c3.recensione.Recensione}.
-     * @param IDCommerciante - L'ID del commerciante che ha venduto il {@link it.unicam.cs.ids.c3.prodotto.Prodotto} della {@link it.unicam.cs.ids.c3.recensione.Recensione}.
-     * @param IDProdotto     - L'ID del {@link it.unicam.cs.ids.c3.prodotto.Prodotto} della {@link it.unicam.cs.ids.c3.recensione.Recensione}.
-     * @param votoRecensione - Il voto della {@link it.unicam.cs.ids.c3.recensione.Recensione}.
+     * @param titolo         - Il titolo della {@link Recensione}.
+     * @param testo          - Il testo della {@link Recensione}.
+     * @param IDCommerciante - L'ID del commerciante che ha venduto il {@link Prodotto} della {@link Recensione}.
+     * @param IDProdotto     - L'ID del {@link Prodotto} della {@link Recensione}.
+     * @param votoRecensione - Il voto della {@link Recensione}.
      * @throws SQLException in caso di errori col database.
      */
     public void pubblicaRecensione(String titolo, String testo, String IDCommerciante, String IDProdotto, VotoRecensioni votoRecensione) throws SQLException {
@@ -134,7 +138,7 @@ public class ControllerCliente {
     }
 
     /**
-     * Permette di modificare una {@link it.unicam.cs.ids.c3.recensione.Recensione} tramite l'apposito gestore.
+     * Permette di modificare una {@link Recensione} tramite l'apposito gestore.
      *
      * @param titolo         - Il nuovo titolo della {@link it.unicam.cs.ids.c3.recensione.Recensione}.
      * @param testo          - Il nuovo testo della {@link it.unicam.cs.ids.c3.recensione.Recensione}.
@@ -147,9 +151,9 @@ public class ControllerCliente {
     }
 
     /**
-     * Permette di eliminare una {@link it.unicam.cs.ids.c3.recensione.Recensione} tramite l'apposito gestore.
+     * Permette di eliminare una {@link Recensione} tramite l'apposito gestore.
      *
-     * @param IDRecensione - L'ID della {@link it.unicam.cs.ids.c3.recensione.Recensione} da eliminare.
+     * @param IDRecensione - L'ID della {@link Recensione} da eliminare.
      * @throws SQLException in caso di problemi col database.
      */
     public void rimuoviRecensione(String IDRecensione) throws SQLException {
@@ -177,7 +181,7 @@ public class ControllerCliente {
     /**
      * Ritorna la lista delle promozioni del database mediante l'apposito gestore.
      *
-     * @return la lista delle {@link it.unicam.cs.ids.c3.promozione.Promozione}.
+     * @return la lista delle {@link Promozione}.
      */
     public List<PromozioneInterface> getPromozioni() {
         return GestoreRicerche.getInstance().getPromozioni(null);
@@ -186,7 +190,7 @@ public class ControllerCliente {
     /**
      * Ritorna la lista delle recensioni del database del {@link Cliente} corrente mediante l'apposito gestore.
      *
-     * @return la lista delle {@link it.unicam.cs.ids.c3.promozione.Promozione}.
+     * @return la lista delle {@link Promozione}.
      */
     public List<RecensioneInterface> getRecensioni() {
         return GestoreRicerche.getInstance().getRecensioni("select * from recensione where cliente_ID = \"" + this.cliente.getID() + "\";");
@@ -195,7 +199,7 @@ public class ControllerCliente {
     /**
      * Ritorna la lista dei ritiri del database del {@link Cliente} corrente mediante l'apposito gestore.
      *
-     * @return la lista delle {@link it.unicam.cs.ids.c3.ritiro.Ritiro}.
+     * @return la lista delle {@link Ritiro}.
      */
     public List<RitiroInterface> getRitiri() {
         return GestoreRicerche.getInstance().getRitiri(null, this.cliente.getID(), null, null);
