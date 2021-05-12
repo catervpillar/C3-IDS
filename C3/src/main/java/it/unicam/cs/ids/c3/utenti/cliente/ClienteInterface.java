@@ -14,7 +14,7 @@ public interface ClienteInterface {
     /**
      * Metodo setter per l'attributo ID.
      *
-     * @param ID - Il nuovo attributo il ID.
+     * @param ID - Il nuovo attributo ID.
      */
     void setID(String ID);
 
@@ -28,7 +28,7 @@ public interface ClienteInterface {
     /**
      * Metodo setter per l'attributo username.
      *
-     * @param username - Il nuovo attributo il username.
+     * @param username - Il nuovo attributo username.
      */
     void setUsername(String username);
 
@@ -42,7 +42,7 @@ public interface ClienteInterface {
     /**
      * Metodo setter per l'attributo password.
      *
-     * @param password - Il nuovo attributo il password.
+     * @param password - Il nuovo attributo password.
      */
     void setPassword(String password);
 
@@ -56,7 +56,7 @@ public interface ClienteInterface {
     /**
      * Metodo setter per l'attributo indirizzo.
      *
-     * @param indirizzo - Il nuovo attributo il indirizzo.
+     * @param indirizzo - Il nuovo attributo indirizzo.
      */
     void setIndirizzo(String indirizzo);
 
@@ -70,7 +70,7 @@ public interface ClienteInterface {
     /**
      * Metodo setter per l'attributo email.
      *
-     * @param email - Il nuovo attributo il email.
+     * @param email - Il nuovo attributo email.
      */
     void setEmail(String email);
 
@@ -84,7 +84,7 @@ public interface ClienteInterface {
     /**
      * Metodo setter per l'attributo telefono.
      *
-     * @param telefono - Il nuovo attributo il telefono.
+     * @param telefono - Il nuovo attributo telefono.
      */
     void setTelefono(String telefono);
 
@@ -98,7 +98,7 @@ public interface ClienteInterface {
     /**
      * Metodo setter per l'attributo nome.
      *
-     * @param nome - Il nuovo attributo il nome.
+     * @param nome - Il nuovo attributo nome.
      */
     void setNome(String nome);
 
@@ -112,7 +112,7 @@ public interface ClienteInterface {
     /**
      * Metodo setter per l'attributo cognome.
      *
-     * @param cognome - Il nuovo attributo il cognome.
+     * @param cognome - Il nuovo attributo cognome.
      */
     void setCognome(String cognome);
 }
