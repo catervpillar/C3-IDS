@@ -23,7 +23,7 @@ public class GestoreProdotti {
         SerializerAggiunta.getInstance().serializzaProdotto(new Prodotto(nome, prezzo, quantita, IDCommerciante, URLimmagine));
     }
 
-    public void modificaProdotto(Prodotto prodotto) throws SQLException {
+    public void modificaProdotto(ProdottoInterface prodotto) throws SQLException {
         SerializerModifica.getInstance().modificaProdotto(prodotto);
     }
 

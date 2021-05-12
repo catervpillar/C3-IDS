@@ -33,7 +33,7 @@ class ControllerCommercianteTest {
 
     @Test
     void setCommerciante() {
-        Commerciante commerciante = new Commerciante("id123456", "usern", "pass", "mail@alice.it", "ragSoc");
+        CommercianteInterface commerciante = new Commerciante("id123456", "usern", "pass", "mail@alice.it", "ragSoc");
         ControllerCommerciante.getInstance().setCommerciante(commerciante);
         assertEquals("usern", ControllerCommerciante.getInstance().getCommerciante().getUsername());
     }
@@ -42,14 +42,14 @@ class ControllerCommercianteTest {
     void creaCommerciante() throws SQLException {
         ControllerCommerciante.getInstance().creaCommerciante("username", "password", "email@gmail.com", "nome");
         ResultSet resultSet = DBManager.getInstance().executeQuery("select * from commerciante where username ='username' AND password='password'");
-        Commerciante commerciante = Deserializer.getInstance().deserializzaCommercianti(resultSet).get(0);
+        CommercianteInterface commerciante = Deserializer.getInstance().deserializzaCommercianti(resultSet).get(0);
         assertNotNull(commerciante);
         SerializerElimina.getInstance().eliminaCommerciante(commerciante.getID());
     }
 
     @Test
     void modificaCommerciante() throws SQLException {
-        Commerciante commerciante = new Commerciante("id123456", "usern", "pass", "mail@alice.it", "ragSoc");
+        CommercianteInterface commerciante = new Commerciante("id123456", "usern", "pass", "mail@alice.it", "ragSoc");
         ControllerCommerciante.getInstance().setCommerciante(commerciante);
         ControllerCommerciante.getInstance().modificaCommerciante("usern", "pwd", "mail@alice.it", "ragSoc", "1111111111", "via roma 5");
         assertEquals("pwd", ControllerCommerciante.getInstance().getCommerciante().getPassword());
@@ -76,7 +76,7 @@ class ControllerCommercianteTest {
         ControllerCommerciante.getInstance().creaCommerciante("username", "password", "email@gmail.com", "ragSoc");
         assertTrue(ControllerCommerciante.getInstance().loginCommerciante("username", "password"));
         ResultSet resultSet = DBManager.getInstance().executeQuery("select * from commerciante where username ='username' AND password='password'");
-        Commerciante commerciante = Deserializer.getInstance().deserializzaCommercianti(resultSet).get(0);
+        CommercianteInterface commerciante = Deserializer.getInstance().deserializzaCommercianti(resultSet).get(0);
         SerializerElimina.getInstance().eliminaCommerciante(commerciante.getID());
     }
 }

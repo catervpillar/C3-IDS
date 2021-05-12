@@ -1,10 +1,10 @@
-package it.unicam.cs.ids.c3.javafx.cliente;
+package it.unicam.cs.ids.c3.javafx;
 
-import it.unicam.cs.ids.c3.javafx.JavaFXController;
+import it.unicam.cs.ids.c3.prodotto.ProdottoInterface;
 import it.unicam.cs.ids.c3.utenti.cliente.ControllerCliente;
-import it.unicam.cs.ids.c3.prodotto.Prodotto;
 import it.unicam.cs.ids.c3.recensione.VotoRecensioni;
 import it.unicam.cs.ids.c3.utilities.Controllore;
+import it.unicam.cs.ids.c3.view.ICliente;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -27,7 +27,7 @@ public class CreaRecensione implements Initializable, JavaFXController {
     private Button pubblicaButton, annullaButton;
 
     @FXML
-    private ChoiceBox<Prodotto> prodottoChoiceBox;
+    private ChoiceBox<ProdottoInterface> prodottoChoiceBox;
     @FXML
     private TextField titoloTextField;
     @FXML
@@ -103,7 +103,7 @@ public class CreaRecensione implements Initializable, JavaFXController {
 
     private void riempiChoiceBox() throws SQLException {
         if (Objects.isNull(prodottoChoiceBox.getValue())) {
-            List<Prodotto> listaProdotti = ControllerCliente.getInstance().getListaProdottiAcquistati();
+            List<ProdottoInterface> listaProdotti = ControllerCliente.getInstance().getListaProdottiAcquistati();
             prodottoChoiceBox.setItems(FXCollections.observableArrayList(listaProdotti));
         }
     }

@@ -1,12 +1,17 @@
 package it.unicam.cs.ids.c3.recensione;
 
 import it.unicam.cs.ids.c3.prodotto.Prodotto;
+import it.unicam.cs.ids.c3.prodotto.ProdottoInterface;
 import it.unicam.cs.ids.c3.ritiro.GestoreRitiri;
 import it.unicam.cs.ids.c3.ritiro.Ritiro;
+import it.unicam.cs.ids.c3.ritiro.RitiroInterface;
 import it.unicam.cs.ids.c3.ritiro.TipoConsegna;
 import it.unicam.cs.ids.c3.utenti.cliente.Cliente;
+import it.unicam.cs.ids.c3.utenti.cliente.ClienteInterface;
 import it.unicam.cs.ids.c3.utenti.commerciante.Commerciante;
+import it.unicam.cs.ids.c3.utenti.commerciante.CommercianteInterface;
 import it.unicam.cs.ids.c3.utenti.corriere.Corriere;
+import it.unicam.cs.ids.c3.utenti.corriere.CorriereInterface;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,12 +20,12 @@ import java.util.GregorianCalendar;
 import static org.junit.jupiter.api.Assertions.*;
 
 class RecensioneTest {
-    private Ritiro ritiro;
-    private Commerciante commerciante;
-    private Corriere corriere;
-    private Cliente cliente;
+    private RitiroInterface ritiro;
+    private CommercianteInterface commerciante;
+    private CorriereInterface corriere;
+    private ClienteInterface cliente;
     private Recensione recensione;
-    private Prodotto prodotto;
+    private ProdottoInterface prodotto;
     @BeforeEach
     void init(){
         cliente = new Cliente("aaaaaaaa", "leocipo", "pwd", "leocipo@alice.it", "leonardo", "cipolletta");

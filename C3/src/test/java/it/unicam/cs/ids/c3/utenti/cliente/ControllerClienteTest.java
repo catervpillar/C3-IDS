@@ -24,7 +24,7 @@ class ControllerClienteTest {
         ControllerCliente.getInstance().creaCliente("username", "password", "email@gmail.com", "nome", "cognome");
         ResultSet resultSet = DBManager.getInstance().executeQuery("select * from cliente where username ='username' AND password='password'");
         assertTrue(resultSet.last());
-        Cliente cliente = Deserializer.getInstance().deserializzaCliente(resultSet);
+        ClienteInterface cliente = Deserializer.getInstance().deserializzaCliente(resultSet);
         assertNotNull(cliente);
         SerializerElimina.getInstance().eliminaCliente(cliente.getID());
     }
@@ -35,7 +35,7 @@ class ControllerClienteTest {
         assertTrue(ControllerCliente.getInstance().loginCliente("username", "password"));
         ResultSet resultSet = DBManager.getInstance().executeQuery("select * from cliente where username ='username' AND password='password'");
         assertTrue(resultSet.last());
-        Cliente cliente = Deserializer.getInstance().deserializzaCliente(resultSet);
+        ClienteInterface cliente = Deserializer.getInstance().deserializzaCliente(resultSet);
         SerializerElimina.getInstance().eliminaCliente(cliente.getID());
     }
 
@@ -49,14 +49,14 @@ class ControllerClienteTest {
 
     @Test
     void setCliente() {
-        Cliente cliente = new Cliente("id123456", "usern", "pass", "mail@alice.it", "name", "surname");
+        ClienteInterface cliente = new Cliente("id123456", "usern", "pass", "mail@alice.it", "name", "surname");
         ControllerCliente.getInstance().setCliente(cliente);
         assertEquals("usern", ControllerCliente.getInstance().getCliente().getUsername());
     }
 
     @Test
     void modificaCliente() throws SQLException {
-        Cliente cliente = new Cliente("id123456", "usern", "pass", "mail@alice.it", "name", "surname");
+        ClienteInterface cliente = new Cliente("id123456", "usern", "pass", "mail@alice.it", "name", "surname");
         ControllerCliente.getInstance().setCliente(cliente);
         ControllerCliente.getInstance().modificaCliente("usern", "pwd", "mail@alice.it", "name", "surname", "0733633458", "via prova 2");
         assertEquals("pwd", ControllerCliente.getInstance().getCliente().getPassword());
@@ -77,6 +77,5 @@ class ControllerClienteTest {
         ControllerCliente.getInstance().eliminaAccount();
         assertFalse(ControllerCliente.getInstance().loginCliente("user", "password"));
         assertNull(ControllerCliente.getInstance().getCliente());
-
     }
 }

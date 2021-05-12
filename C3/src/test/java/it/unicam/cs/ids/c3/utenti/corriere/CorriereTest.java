@@ -1,15 +1,11 @@
 package it.unicam.cs.ids.c3.utenti.corriere;
 
-import it.unicam.cs.ids.c3.javafx.commerciante.ICommerciante;
-import it.unicam.cs.ids.c3.utenti.cliente.Cliente;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class CorriereTest {
-
     private Corriere corriere;
 
     @BeforeEach

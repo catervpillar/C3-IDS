@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ControllerPuntoRitiroTest {
+
     @BeforeAll
     static void init(){
         DBManager.getInstance().setDBManager("root", "toor");
@@ -36,7 +37,7 @@ class ControllerPuntoRitiroTest {
     void creaPuntoRitiro() throws SQLException {
         ControllerPuntoRitiro.getInstance().creaPuntoRitiro("username", "password", "email@gmail.com", "ragSoc");
         ResultSet resultSet = DBManager.getInstance().executeQuery("select * from punto_ritiro where username ='username' AND password='password'");
-        PuntoRitiro puntoRitiro = Deserializer.getInstance().deserializzaPuntiRitiro(resultSet).get(0);
+        PuntoRitiroInterface puntoRitiro = Deserializer.getInstance().deserializzaPuntiRitiro(resultSet).get(0);
         assertNotNull(puntoRitiro);
         SerializerElimina.getInstance().eliminaPuntoDiRitiro(puntoRitiro.getID());
     }
@@ -46,13 +47,13 @@ class ControllerPuntoRitiroTest {
         ControllerPuntoRitiro.getInstance().creaPuntoRitiro("username", "password", "email@gmail.com", "ragSoc");
         assertTrue(ControllerPuntoRitiro.getInstance().loginPuntoRitiro("username", "password"));
         ResultSet resultSet = DBManager.getInstance().executeQuery("select * from punto_ritiro where username ='username' AND password='password'");
-        PuntoRitiro puntoRitiro = Deserializer.getInstance().deserializzaPuntiRitiro(resultSet).get(0);
+        PuntoRitiroInterface puntoRitiro = Deserializer.getInstance().deserializzaPuntiRitiro(resultSet).get(0);
         SerializerElimina.getInstance().eliminaPuntoDiRitiro(puntoRitiro.getID());
     }
 
     @Test
     void modificaPuntoRitiro() throws SQLException {
-        PuntoRitiro puntoRitiro = new PuntoRitiro("id123456", "usern", "pass", "mail@alice.it", "ragSoc");
+        PuntoRitiroInterface puntoRitiro = new PuntoRitiro("id123456", "usern", "pass", "mail@alice.it", "ragSoc");
         ControllerPuntoRitiro.getInstance().setPuntoRitiro(puntoRitiro);
         ControllerPuntoRitiro.getInstance().modificaPuntoRitiro("usern", "pwd", "mail@alice.it", "ragSoc", "0733633458", "via prova 2");
         assertEquals("pwd", ControllerPuntoRitiro.getInstance().getPuntoRitiro().getPassword());

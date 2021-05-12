@@ -1,12 +1,12 @@
-package it.unicam.cs.ids.c3.javafx.commerciante;
+package it.unicam.cs.ids.c3.javafx;
 
-import it.unicam.cs.ids.c3.javafx.JavaFXController;
+import it.unicam.cs.ids.c3.prodotto.ProdottoInterface;
 import it.unicam.cs.ids.c3.utenti.commerciante.ControllerCommerciante;
+import it.unicam.cs.ids.c3.utenti.corriere.CorriereInterface;
+import it.unicam.cs.ids.c3.utenti.puntoRitiro.PuntoRitiroInterface;
 import it.unicam.cs.ids.c3.utilities.GestoreRicerche;
-import it.unicam.cs.ids.c3.utenti.corriere.Corriere;
-import it.unicam.cs.ids.c3.prodotto.Prodotto;
-import it.unicam.cs.ids.c3.utenti.puntoRitiro.PuntoRitiro;
 import it.unicam.cs.ids.c3.ritiro.TipoConsegna;
+import it.unicam.cs.ids.c3.view.ICommerciante;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -30,24 +30,24 @@ public class PrenotaRitiro implements Initializable, JavaFXController {
     @FXML
     private Button prenotaButton, annullaButton;
     @FXML
-    private ChoiceBox<PuntoRitiro> puntoRitiroChoiceBox;
+    private ChoiceBox<PuntoRitiroInterface> puntoRitiroChoiceBox;
     @FXML
-    private ChoiceBox<Corriere> corriereChoiceBox;
+    private ChoiceBox<CorriereInterface> corriereChoiceBox;
     @FXML
     private TextField destinazioneTextField, IDClienteTextField;
 
     @FXML
-    private TableView<Prodotto> prodottiTableView;
+    private TableView<ProdottoInterface> prodottiTableView;
     @FXML
-    private TableColumn<Prodotto, CheckBox> colonnaCheckBox;
+    private TableColumn<ProdottoInterface, CheckBox> colonnaCheckBox;
     @FXML
-    private TableColumn<Prodotto, String> colonnaID;
+    private TableColumn<ProdottoInterface, String> colonnaID;
     @FXML
-    private TableColumn<Prodotto, String> colonnaNome;
+    private TableColumn<ProdottoInterface, String> colonnaNome;
     @FXML
-    private TableColumn<Prodotto, String> colonnaPrezzo;
+    private TableColumn<ProdottoInterface, String> colonnaPrezzo;
     @FXML
-    private TableColumn<Prodotto, String> colonnaQuantita;
+    private TableColumn<ProdottoInterface, String> colonnaQuantita;
 
 
     private PrenotaRitiro() {
@@ -95,7 +95,7 @@ public class PrenotaRitiro implements Initializable, JavaFXController {
 
     private void riempiCorriereChoiceBox() {
         if (Objects.isNull(corriereChoiceBox.getValue())) {
-            List<Corriere> listaCorriere = GestoreRicerche.getInstance().cercaCorriere(null);
+            List<CorriereInterface> listaCorriere = GestoreRicerche.getInstance().cercaCorriere(null);
             corriereChoiceBox.setItems(FXCollections.observableArrayList(listaCorriere));
         }
     }
@@ -103,7 +103,7 @@ public class PrenotaRitiro implements Initializable, JavaFXController {
     @FXML
     private void riempiPuntoRitiroChoiceBox() {
         if (Objects.isNull(puntoRitiroChoiceBox.getValue())) {
-            List<PuntoRitiro> listaPuntiRitiro = GestoreRicerche.getInstance().cercaPuntoRitiro(null);
+            List<PuntoRitiroInterface> listaPuntiRitiro = GestoreRicerche.getInstance().cercaPuntoRitiro(null);
             puntoRitiroChoiceBox.setItems(FXCollections.observableArrayList(listaPuntiRitiro));
         }
     }

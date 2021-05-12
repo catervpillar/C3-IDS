@@ -63,8 +63,6 @@ public class SerializerElimina {
         PreparedStatement preparedStatement = DBManager.getInstance().getPreparedStatement(sql);
         preparedStatement.setString(1, IDCliente);
         preparedStatement.executeUpdate();
-        //DBManager.getInstance().disconnect(resultSet);
-        //DBManager.getInstance().disconnect(resultSet2);
         DBManager.getInstance().disconnect(preparedStatement);
     }
 

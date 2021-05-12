@@ -1,12 +1,12 @@
 package it.unicam.cs.ids.c3.utenti.commerciante;
 
 import it.unicam.cs.ids.c3.prodotto.GestoreProdotti;
-import it.unicam.cs.ids.c3.prodotto.Prodotto;
+import it.unicam.cs.ids.c3.prodotto.ProdottoInterface;
 import it.unicam.cs.ids.c3.promozione.GestorePromozioni;
+import it.unicam.cs.ids.c3.promozione.PromozioneInterface;
+import it.unicam.cs.ids.c3.ritiro.RitiroInterface;
 import it.unicam.cs.ids.c3.utilities.GestoreRicerche;
-import it.unicam.cs.ids.c3.promozione.Promozione;
 import it.unicam.cs.ids.c3.ritiro.GestoreRitiri;
-import it.unicam.cs.ids.c3.ritiro.Ritiro;
 import it.unicam.cs.ids.c3.ritiro.TipoConsegna;
 import it.unicam.cs.ids.c3.database.*;
 import it.unicam.cs.ids.c3.utilities.Controllore;
@@ -18,35 +18,65 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Questa classe è un sigleton e si occupa di gestire le operazioni che i {@link Commerciante} possono
+ * svolgere, nonché della creazione dei suddetti.
+ */
 public class ControllerCommerciante {
     private static ControllerCommerciante instance;
-    private Commerciante commerciante;
+    private CommercianteInterface commerciante;
 
+    /**
+     * Costruttore privato usato solamente all'interno di questa classe
+     */
     private ControllerCommerciante() {
     }
 
+    /**
+     * Metodo getter per l'attributo instance. Se instance è nulla, viene inizializzata.
+     *
+     * @return l'attributo instance.
+     */
     public static ControllerCommerciante getInstance() {
         if (Objects.isNull(instance)) instance = new ControllerCommerciante();
         return instance;
     }
 
-    public Commerciante getCommerciante() {
+    /**
+     * Metodo getter per l'atttributo commerciante.
+     *
+     * @return l'attributo commerciante.
+     */
+    public CommercianteInterface getCommerciante() {
         return commerciante;
     }
 
-    public void setCommerciante(Commerciante commerciante) {
+    /**
+     * Metodo getter per l'atttributo commerciante.
+     *
+     * @param commerciante - Il nuovo attributo commerciante.
+     */
+    public void setCommerciante(CommercianteInterface commerciante) {
         this.commerciante = commerciante;
     }
 
+    /**
+     * 
+     * @param username
+     * @param password
+     * @param email
+     * @param ragioneSociale
+     * @throws SQLException
+     */
     public void creaCommerciante(String username, String password, String email, String ragioneSociale) throws SQLException {
         Controllore.getInstance().controllaCommerciante(username, password, email, ragioneSociale);
-        Commerciante commerciante = new Commerciante(username, password, email, ragioneSociale);
+        CommercianteInterface commerciante = new Commerciante(username, password, email, ragioneSociale);
         SerializerAggiunta.getInstance().serializzaCommerciante(commerciante);
     }
 
     public void modificaCommerciante(String username, String password, String email, String ragioneSociale, String telefono, String indirizzo) throws SQLException {
         Controllore.getInstance().controllaCommerciante(username, password, email, ragioneSociale);
-        Commerciante commerciante = new Commerciante(this.commerciante.getID(), username, password, email, ragioneSociale);
+        CommercianteInterface commerciante = new Commerciante(this.commerciante.getID(), username, password, email, ragioneSociale);
 
         if (!indirizzo.isBlank()) {
             Controllore.getInstance().controllaIndirizzo(indirizzo);
@@ -77,17 +107,17 @@ public class ControllerCommerciante {
 
         if (resultSet.last()) {
             resultSet.beforeFirst();
-            List<Commerciante> listaCommercianti = Deserializer.getInstance().deserializzaCommercianti(resultSet);
+            List<CommercianteInterface> listaCommercianti = Deserializer.getInstance().deserializzaCommercianti(resultSet);
             this.commerciante = listaCommercianti.get(0);
             return true;
         } else return false;
     }
 
-    public List<Prodotto> getProdotti() throws SQLException {
+    public List<ProdottoInterface> getProdotti() throws SQLException {
         return GestoreRicerche.getInstance().cercaProdotto(null, this.commerciante.getID());
     }
 
-    public List<Ritiro> getRitiri() throws SQLException {
+    public List<RitiroInterface> getRitiri() throws SQLException {
         return GestoreRicerche.getInstance().getRitiri(this.commerciante.getID(), null, null, null);
     }
 
@@ -95,7 +125,7 @@ public class ControllerCommerciante {
         GestoreProdotti.getInstance().creaProdotto(nome, prezzo, quantita, this.commerciante.getID(), URLimmagine);
     }
 
-    public void modificaProdotto(Prodotto prodotto) throws SQLException {
+    public void modificaProdotto(ProdottoInterface prodotto) throws SQLException {
         GestoreProdotti.getInstance().modificaProdotto(prodotto);
     }
 
@@ -111,7 +141,7 @@ public class ControllerCommerciante {
         GestoreRitiri.getInstance().eliminaRitiro(ID);
     }
 
-    public List<Promozione> getPromozioni() throws SQLException {
+    public List<PromozioneInterface> getPromozioni() throws SQLException {
         return GestoreRicerche.getInstance().getPromozioni(this.commerciante.getID());
     }
 

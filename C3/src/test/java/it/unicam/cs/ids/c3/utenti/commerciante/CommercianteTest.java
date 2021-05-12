@@ -1,15 +1,13 @@
 package it.unicam.cs.ids.c3.utenti.commerciante;
 
-import it.unicam.cs.ids.c3.utenti.cliente.Cliente;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class CommercianteTest {
-
     Commerciante commerciante;
+
     @BeforeEach
     void init(){
         commerciante = new Commerciante("12345678", "tommaso99", "pwd", "tommaso99@gmail.com", "tom srl");

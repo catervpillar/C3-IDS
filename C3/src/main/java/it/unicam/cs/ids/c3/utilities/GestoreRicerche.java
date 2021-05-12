@@ -1,14 +1,21 @@
 package it.unicam.cs.ids.c3.utilities;
 
 import it.unicam.cs.ids.c3.prodotto.Prodotto;
+import it.unicam.cs.ids.c3.prodotto.ProdottoInterface;
 import it.unicam.cs.ids.c3.promozione.Promozione;
+import it.unicam.cs.ids.c3.promozione.PromozioneInterface;
 import it.unicam.cs.ids.c3.recensione.Recensione;
+import it.unicam.cs.ids.c3.recensione.RecensioneInterface;
 import it.unicam.cs.ids.c3.ritiro.Ritiro;
+import it.unicam.cs.ids.c3.ritiro.RitiroInterface;
 import it.unicam.cs.ids.c3.utenti.commerciante.Commerciante;
+import it.unicam.cs.ids.c3.utenti.commerciante.CommercianteInterface;
 import it.unicam.cs.ids.c3.utenti.corriere.Corriere;
+import it.unicam.cs.ids.c3.utenti.corriere.CorriereInterface;
 import it.unicam.cs.ids.c3.utenti.puntoRitiro.PuntoRitiro;
 import it.unicam.cs.ids.c3.database.DBManager;
 import it.unicam.cs.ids.c3.database.Deserializer;
+import it.unicam.cs.ids.c3.utenti.puntoRitiro.PuntoRitiroInterface;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,13 +26,13 @@ import java.util.Objects;
 public final class GestoreRicerche {
     private static GestoreRicerche instance;
 
-    private final List<Commerciante> commercianti = new ArrayList<>();
-    private final List<PuntoRitiro> puntiDiRitiro = new ArrayList<>();
-    private final List<Corriere> corrieri = new ArrayList<>();
-    private final List<Prodotto> prodotti = new ArrayList<>();
-    private final List<Promozione> promozioni = new ArrayList<>();
-    private final List<Recensione> recensioni = new ArrayList<>();
-    private final List<Ritiro> ritiri = new ArrayList<>();
+    private final List<CommercianteInterface> commercianti = new ArrayList<>();
+    private final List<PuntoRitiroInterface> puntiDiRitiro = new ArrayList<>();
+    private final List<CorriereInterface> corrieri = new ArrayList<>();
+    private final List<ProdottoInterface> prodotti = new ArrayList<>();
+    private final List<PromozioneInterface> promozioni = new ArrayList<>();
+    private final List<RecensioneInterface> recensioni = new ArrayList<>();
+    private final List<RitiroInterface> ritiri = new ArrayList<>();
 
 
     private GestoreRicerche() {
@@ -37,27 +44,27 @@ public final class GestoreRicerche {
         return instance;
     }
 
-    public List<Commerciante> getCommercianti() {
+    public List<CommercianteInterface> getCommercianti() {
         return commercianti;
     }
 
-    public List<Recensione> getRecensioni() {
+    public List<RecensioneInterface> getRecensioni() {
         return recensioni;
     }
 
-    public List<PuntoRitiro> getPuntiDiRitiro() {
+    public List<PuntoRitiroInterface> getPuntiDiRitiro() {
         return puntiDiRitiro;
     }
 
-    public List<Corriere> getCorrieri() {
+    public List<CorriereInterface> getCorrieri() {
         return corrieri;
     }
 
-    public List<Prodotto> getProdotti() {
+    public List<ProdottoInterface> getProdotti() {
         return prodotti;
     }
 
-    public List<Commerciante> cercaCommerciante(String ragioneSociale) {
+    public List<CommercianteInterface> cercaCommerciante(String ragioneSociale) {
         commercianti.clear();
         try {
             ResultSet resultSet;
@@ -72,7 +79,7 @@ public final class GestoreRicerche {
         return commercianti;
     }
 
-    public List<Corriere> cercaCorriere(String ragioneSociale) {
+    public List<CorriereInterface> cercaCorriere(String ragioneSociale) {
         corrieri.clear();
         try {
             ResultSet resultSet;
@@ -87,7 +94,7 @@ public final class GestoreRicerche {
         return corrieri;
     }
 
-    public List<PuntoRitiro> cercaPuntoRitiro(String ragioneSociale) {
+    public List<PuntoRitiroInterface> cercaPuntoRitiro(String ragioneSociale) {
         puntiDiRitiro.clear();
         try {
             ResultSet resultSet;
@@ -102,7 +109,7 @@ public final class GestoreRicerche {
         return puntiDiRitiro;
     }
 
-    public List<Prodotto> cercaProdotto(String nome, String IDCommerciante) {
+    public List<ProdottoInterface> cercaProdotto(String nome, String IDCommerciante) {
         prodotti.clear();
         try {
             if (!Objects.isNull(nome) && !nome.isBlank()) {
@@ -121,7 +128,7 @@ public final class GestoreRicerche {
         return prodotti;
     }
 
-    public List<Promozione> getPromozioni(String IDCommerciante) {
+    public List<PromozioneInterface> getPromozioni(String IDCommerciante) {
         promozioni.clear();
         try {
             if (!Objects.isNull(IDCommerciante)) {
@@ -138,7 +145,7 @@ public final class GestoreRicerche {
         return promozioni;
     }
 
-    public List<Recensione> getRecensioni(String query) {
+    public List<RecensioneInterface> getRecensioni(String query) {
         recensioni.clear();
         try {
             ResultSet resultSet = DBManager.getInstance().executeQuery(query);
@@ -150,7 +157,7 @@ public final class GestoreRicerche {
         return recensioni;
     }
 
-    public List<Ritiro> getRitiri(String IDCommerciante, String IDCliente, String IDCorriere, String destinazione) {
+    public List<RitiroInterface> getRitiri(String IDCommerciante, String IDCliente, String IDCorriere, String destinazione) {
         ritiri.clear();
         try {
             if (!Objects.isNull(IDCommerciante)) {

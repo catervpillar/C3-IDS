@@ -1,10 +1,7 @@
 package it.unicam.cs.ids.c3.utenti.corriere;
 
+import it.unicam.cs.ids.c3.ritiro.*;
 import it.unicam.cs.ids.c3.utilities.GestoreRicerche;
-import it.unicam.cs.ids.c3.ritiro.GestoreRitiri;
-import it.unicam.cs.ids.c3.ritiro.Ritiro;
-import it.unicam.cs.ids.c3.ritiro.StatoTracking;
-import it.unicam.cs.ids.c3.ritiro.TipoConsegna;
 import it.unicam.cs.ids.c3.database.*;
 import it.unicam.cs.ids.c3.utilities.Controllore;
 
@@ -15,7 +12,7 @@ import java.util.Objects;
 
 public class ControllerCorriere {
     private static ControllerCorriere instance;
-    private Corriere corriere;
+    private CorriereInterface corriere;
 
     private ControllerCorriere() {
     }
@@ -25,13 +22,17 @@ public class ControllerCorriere {
         return instance;
     }
 
-    public Corriere getCorriere() {
+    public CorriereInterface getCorriere() {
         return corriere;
+    }
+
+    public void setCorriere(CorriereInterface corriere) {
+        this.corriere = corriere;
     }
 
     public void creaCorriere(String username, String password, String email, String ragioneSociale) throws SQLException {
         Controllore.getInstance().controllaCorriere(username, password, email, ragioneSociale);
-        Corriere corriere = new Corriere(username, password, email, ragioneSociale);
+        CorriereInterface corriere = new Corriere(username, password, email, ragioneSociale);
         SerializerAggiunta.getInstance().serializzaCorriere(corriere);
     }
 
@@ -41,7 +42,7 @@ public class ControllerCorriere {
 
         if (resultSet.last()) {
             resultSet.beforeFirst();
-            List<Corriere> listaCorrieri = Deserializer.getInstance().deserializzaCorrieri(resultSet);
+            List<CorriereInterface> listaCorrieri = Deserializer.getInstance().deserializzaCorrieri(resultSet);
             this.corriere = listaCorrieri.get(0);
             return true;
         } else return false;
@@ -49,7 +50,7 @@ public class ControllerCorriere {
 
     public void modificaCorriere(String username, String password, String email, String ragioneSociale, String telefono, String indirizzo, StatoCorriere stato) throws SQLException {
         Controllore.getInstance().controllaCorriere(username, password, email, ragioneSociale);
-        Corriere corriere = new Corriere(this.corriere.getID(), username, password, email, ragioneSociale);
+        CorriereInterface corriere = new Corriere(this.corriere.getID(), username, password, email, ragioneSociale);
 
         if (!indirizzo.isBlank()) {
             Controllore.getInstance().controllaIndirizzo(indirizzo);
@@ -76,14 +77,11 @@ public class ControllerCorriere {
         this.corriere = null;
     }
 
-    public List<Ritiro> getRitiri() {
+    public List<RitiroInterface> getRitiri() {
         return GestoreRicerche.getInstance().getRitiri(null, null, this.corriere.getID(), null);
     }
 
     public void aggiornaTracking(String ID, String IDCommerciante, String IDCliente, String destinazione, boolean ritirato, TipoConsegna tipoConsegna, StatoTracking stato) throws SQLException {
         GestoreRitiri.getInstance().modificaRitiro(ID, IDCommerciante, IDCliente, this.corriere.getID(), destinazione, ritirato, tipoConsegna, stato);
-    }
-    public void setCorriere(Corriere corriere){
-        this.corriere = corriere;
     }
 }

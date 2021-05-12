@@ -49,5 +49,4 @@ class ControlloreTest {
         String nome = " ";
         assertThrows(IllegalArgumentException.class, ()->Controllore.getInstance().controllaNome(nome, "errore"));
     }
-
 }

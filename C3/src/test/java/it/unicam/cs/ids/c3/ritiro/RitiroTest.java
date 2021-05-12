@@ -1,9 +1,13 @@
 package it.unicam.cs.ids.c3.ritiro;
 
 import it.unicam.cs.ids.c3.prodotto.Prodotto;
+import it.unicam.cs.ids.c3.prodotto.ProdottoInterface;
 import it.unicam.cs.ids.c3.utenti.cliente.Cliente;
+import it.unicam.cs.ids.c3.utenti.cliente.ClienteInterface;
 import it.unicam.cs.ids.c3.utenti.commerciante.Commerciante;
+import it.unicam.cs.ids.c3.utenti.commerciante.CommercianteInterface;
 import it.unicam.cs.ids.c3.utenti.corriere.Corriere;
+import it.unicam.cs.ids.c3.utenti.corriere.CorriereInterface;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,9 +17,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RitiroTest {
     private Ritiro ritiro;
-    private Commerciante commerciante;
-    private Corriere corriere;
-    private Cliente cliente;
+    private CommercianteInterface commerciante;
+    private CorriereInterface corriere;
+    private ClienteInterface cliente;
 
 
     @BeforeEach
@@ -46,13 +50,13 @@ class RitiroTest {
 
     @Test
     void isRitirato() {
-        assertEquals(false, ritiro.isRitirato());
+        assertFalse(ritiro.isRitirato());
     }
 
     @Test
     void setRitirato() {
         ritiro.setRitirato(true);
-        assertEquals(true, ritiro.isRitirato());
+        assertTrue(ritiro.isRitirato());
     }
 
     @Test
@@ -77,7 +81,7 @@ class RitiroTest {
     @Test
     void getListaIDProdotti() {
         assertEquals(0, ritiro.getListaIDProdotti().size());
-        Prodotto prodotto = new Prodotto("dddddddd", "tv", 399, 52, "bbbbbbbb", null);
+        ProdottoInterface prodotto = new Prodotto("dddddddd", "tv", 399, 52, "bbbbbbbb", null);
         ritiro.getListaIDProdotti().add("dddddddd");
         assertNotNull(ritiro.getListaIDProdotti());
     }

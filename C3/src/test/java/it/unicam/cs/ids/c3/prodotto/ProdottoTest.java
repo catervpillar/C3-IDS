@@ -1,7 +1,9 @@
 package it.unicam.cs.ids.c3.prodotto;
 
 import it.unicam.cs.ids.c3.promozione.Promozione;
+import it.unicam.cs.ids.c3.promozione.PromozioneInterface;
 import it.unicam.cs.ids.c3.utenti.commerciante.Commerciante;
+import it.unicam.cs.ids.c3.utenti.commerciante.CommercianteInterface;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,8 +13,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ProdottoTest {
 
-    private Commerciante commerciante;
-    private Promozione promozione;
+    private CommercianteInterface commerciante;
+    private PromozioneInterface promozione;
     private Prodotto prodotto;
     GregorianCalendar dataInizio, dataScadenza;
 

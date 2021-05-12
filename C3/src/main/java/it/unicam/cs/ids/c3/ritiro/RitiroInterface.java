@@ -4,47 +4,51 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 public interface RitiroInterface {
-    public TipoConsegna getTipoConsegna();
+    String getID();
 
-    public void setTipoConsegna(TipoConsegna tipoConsegna);
+    void setID(String ID);
 
-    public GregorianCalendar getDataConsegna();
+    TipoConsegna getTipoConsegna();
 
-    public void setDataConsegna(GregorianCalendar dataConsegna);
+    void setTipoConsegna(TipoConsegna tipoConsegna);
 
-    public boolean isRitirato();
+    GregorianCalendar getDataConsegna();
 
-    public void setRitirato(boolean ritirato);
+    void setDataConsegna(GregorianCalendar dataConsegna);
 
-    public GregorianCalendar getDataPrenotazione();
+    boolean isRitirato();
 
-    public void setDataPrenotazione(GregorianCalendar dataPrenotazione);
+    void setRitirato(boolean ritirato);
 
-    public List<String> getListaIDProdotti();
+    GregorianCalendar getDataPrenotazione();
 
-    public void setListaIDProdotti(List<String> listaIDProdotti);
+    void setDataPrenotazione(GregorianCalendar dataPrenotazione);
 
-    public String getIDCommerciante();
+    List<String> getListaIDProdotti();
 
-    public void setIDCommerciante(String IDCommerciante);
+    void setListaIDProdotti(List<String> listaIDProdotti);
 
-    public String getIDCliente();
+    String getIDCommerciante();
 
-    public void setIDCliente(String IDCliente);
+    void setIDCommerciante(String IDCommerciante);
 
-    public String getIDCorriere();
+    String getIDCliente();
 
-    public void setIDCorriere(String IDCorriere);
+    void setIDCliente(String IDCliente);
 
-    public String getDestinazione();
+    String getIDCorriere();
 
-    public void setDestinazione(String destinazione);
+    void setIDCorriere(String IDCorriere);
 
-    public String getCodiceRitiro();
+    String getDestinazione();
 
-    public void setCodiceRitiro(String codiceRitiro);
+    void setDestinazione(String destinazione);
 
-    public StatoTracking getStatoTracking();
+    String getCodiceRitiro();
 
-    public void setStatoTracking(StatoTracking statoTracking);
+    void setCodiceRitiro(String codiceRitiro);
+
+    StatoTracking getStatoTracking();
+
+    void setStatoTracking(StatoTracking statoTracking);
 }

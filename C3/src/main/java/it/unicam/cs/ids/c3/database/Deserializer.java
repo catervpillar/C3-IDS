@@ -8,14 +8,18 @@ import it.unicam.cs.ids.c3.ritiro.Ritiro;
 import it.unicam.cs.ids.c3.ritiro.StatoTracking;
 import it.unicam.cs.ids.c3.ritiro.TipoConsegna;
 import it.unicam.cs.ids.c3.utenti.cliente.Cliente;
+import it.unicam.cs.ids.c3.utenti.cliente.ClienteInterface;
 import it.unicam.cs.ids.c3.utenti.cliente.ControllerCliente;
 import it.unicam.cs.ids.c3.utenti.commerciante.Commerciante;
+import it.unicam.cs.ids.c3.utenti.commerciante.CommercianteInterface;
 import it.unicam.cs.ids.c3.utenti.commerciante.ControllerCommerciante;
 import it.unicam.cs.ids.c3.utenti.corriere.ControllerCorriere;
+import it.unicam.cs.ids.c3.utenti.corriere.CorriereInterface;
 import it.unicam.cs.ids.c3.utenti.puntoRitiro.ControllerPuntoRitiro;
 import it.unicam.cs.ids.c3.utenti.corriere.Corriere;
 import it.unicam.cs.ids.c3.utenti.puntoRitiro.PuntoRitiro;
 import it.unicam.cs.ids.c3.utenti.corriere.StatoCorriere;
+import it.unicam.cs.ids.c3.utenti.puntoRitiro.PuntoRitiroInterface;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -61,8 +65,8 @@ public class Deserializer {
         return listaIDProdotti;
     }
 
-    public Cliente deserializzaCliente(ResultSet resultSet) throws SQLException {
-        Cliente cliente = new Cliente(resultSet.getString("ID"),
+    public ClienteInterface deserializzaCliente(ResultSet resultSet) throws SQLException {
+        ClienteInterface cliente = new Cliente(resultSet.getString("ID"),
                 resultSet.getString("username"),
                 resultSet.getString("password"),
                 resultSet.getString("email"),
@@ -75,10 +79,10 @@ public class Deserializer {
         return cliente;
     }
 
-    public List<Commerciante> deserializzaCommercianti(ResultSet resultSet) throws SQLException {
-        List<Commerciante> listaCommercianti = new ArrayList<>();
+    public List<CommercianteInterface> deserializzaCommercianti(ResultSet resultSet) throws SQLException {
+        List<CommercianteInterface> listaCommercianti = new ArrayList<>();
         while (resultSet.next()) {
-            Commerciante commerciante = new Commerciante(resultSet.getString("ID"),
+            CommercianteInterface commerciante = new Commerciante(resultSet.getString("ID"),
                     resultSet.getString("username"),
                     resultSet.getString("password"),
                     resultSet.getString("email"),
@@ -92,10 +96,10 @@ public class Deserializer {
         return listaCommercianti;
     }
 
-    public List<Corriere> deserializzaCorrieri(ResultSet resultSet) throws SQLException {
-        List<Corriere> listaCorriere = new ArrayList<>();
+    public List<CorriereInterface> deserializzaCorrieri(ResultSet resultSet) throws SQLException {
+        List<CorriereInterface> listaCorriere = new ArrayList<>();
         while (resultSet.next()) {
-            Corriere corriere = new Corriere(resultSet.getString("ID"),
+            CorriereInterface corriere = new Corriere(resultSet.getString("ID"),
                     resultSet.getString("username"),
                     resultSet.getString("password"),
                     resultSet.getString("email"),
@@ -110,11 +114,11 @@ public class Deserializer {
         return listaCorriere;
     }
 
-    public List<PuntoRitiro> deserializzaPuntiRitiro(ResultSet resultSet) throws SQLException {
-        List<PuntoRitiro> listaPuntiRitiro = new ArrayList<>();
+    public List<PuntoRitiroInterface> deserializzaPuntiRitiro(ResultSet resultSet) throws SQLException {
+        List<PuntoRitiroInterface> listaPuntiRitiro = new ArrayList<>();
 
         while (resultSet.next()) {
-            PuntoRitiro puntoRitiro = new PuntoRitiro(resultSet.getString("ID"),
+            PuntoRitiroInterface puntoRitiro = new PuntoRitiro(resultSet.getString("ID"),
                     resultSet.getString("username"),
                     resultSet.getString("password"),
                     resultSet.getString("email"),

@@ -1,10 +1,14 @@
 package it.unicam.cs.ids.c3.javafx;
 
 import it.unicam.cs.ids.c3.prodotto.Prodotto;
+import it.unicam.cs.ids.c3.prodotto.ProdottoInterface;
 import it.unicam.cs.ids.c3.promozione.Promozione;
+import it.unicam.cs.ids.c3.promozione.PromozioneInterface;
 import it.unicam.cs.ids.c3.recensione.Recensione;
+import it.unicam.cs.ids.c3.recensione.RecensioneInterface;
 import it.unicam.cs.ids.c3.recensione.VotoRecensioni;
 import it.unicam.cs.ids.c3.ritiro.Ritiro;
+import it.unicam.cs.ids.c3.ritiro.RitiroInterface;
 import it.unicam.cs.ids.c3.ritiro.StatoTracking;
 import javafx.collections.FXCollections;
 import javafx.scene.control.*;
@@ -97,7 +101,7 @@ public class Utils {
         });
     }
 
-    public AnchorPane getProdottoAnchorPane(Prodotto prodotto) {
+    public AnchorPane getProdottoAnchorPane(ProdottoInterface prodotto) {
         AnchorPane anchorPane = new AnchorPane();
 
         ImageView imageView = getImageView(prodotto.getURLImmagine(), 150, 150, 15, 15);
@@ -113,7 +117,7 @@ public class Utils {
         return anchorPane;
     }
 
-    public AnchorPane getRitiroAnchorPaneCliente(Ritiro ritiro) {
+    public AnchorPane getRitiroAnchorPaneCliente(RitiroInterface ritiro) {
         AnchorPane anchorPane = getRitiroAnchorPane(ritiro);
         Label statoTracking = getLabel("Stato tracking: " + ritiro.getStatoTracking().name(), 16, 25, 265);
 
@@ -122,7 +126,7 @@ public class Utils {
         return anchorPane;
     }
 
-    public AnchorPane getRitiroAnchorPaneCorriere(Ritiro ritiro) {
+    public AnchorPane getRitiroAnchorPaneCorriere(RitiroInterface ritiro) {
         AnchorPane anchorPane = getRitiroAnchorPane(ritiro);
         Label statoTracking = getLabel("Stato tracking: ", 16, 25, 265);
         ChoiceBox<StatoTracking> stato = getChoiceBox(Arrays.asList(StatoTracking.values().clone()), ritiro.getStatoTracking(), 140, 265);
@@ -131,7 +135,7 @@ public class Utils {
         return anchorPane;
     }
 
-    public AnchorPane getRitiroAnchorPanePuntoRitiro(Ritiro ritiro) {
+    public AnchorPane getRitiroAnchorPanePuntoRitiro(RitiroInterface ritiro) {
         AnchorPane anchorPane = getRitiroAnchorPane(ritiro);
         ((Label) anchorPane.getChildren().get(6)).setText("Ritirato dal cliente:");
 
@@ -150,7 +154,7 @@ public class Utils {
         return anchorPane;
     }
 
-    private AnchorPane getRitiroAnchorPane(Ritiro ritiro) {
+    private AnchorPane getRitiroAnchorPane(RitiroInterface ritiro) {
         AnchorPane anchorPane = new AnchorPane();
 
         Label IDRitiro = getLabel("ID ritiro: ", 16, 25, 15);
@@ -193,7 +197,7 @@ public class Utils {
         return anchorPane;
     }
 
-    public AnchorPane getPromozioneAnchorPane(Promozione promozione) {
+    public AnchorPane getPromozioneAnchorPane(PromozioneInterface promozione) {
         AnchorPane anchorPane = new AnchorPane();
 
         Label IDPromozione = getLabel("ID promozione: ", 13, 25, 15);
@@ -214,7 +218,7 @@ public class Utils {
         return anchorPane;
     }
 
-    public AnchorPane getRecensioneAnchorPane(Recensione recensione) {
+    public AnchorPane getRecensioneAnchorPane(RecensioneInterface recensione) {
         AnchorPane anchorPane = new AnchorPane();
 
         Label IDRecensione = getLabel("ID recensione: ", 13, 25, 15);

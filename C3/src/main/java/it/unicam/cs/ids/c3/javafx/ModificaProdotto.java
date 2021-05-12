@@ -1,9 +1,9 @@
-package it.unicam.cs.ids.c3.javafx.commerciante;
+package it.unicam.cs.ids.c3.javafx;
 
-import it.unicam.cs.ids.c3.javafx.JavaFXController;
+import it.unicam.cs.ids.c3.prodotto.ProdottoInterface;
 import it.unicam.cs.ids.c3.utenti.commerciante.ControllerCommerciante;
 import it.unicam.cs.ids.c3.utilities.GestoreRicerche;
-import it.unicam.cs.ids.c3.prodotto.Prodotto;
+import it.unicam.cs.ids.c3.view.ICommerciante;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Accordion;
@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 
 public class ModificaProdotto implements Initializable, JavaFXController {
     private static ModificaProdotto instance;
-    private Prodotto prodottoDaModificare;
+    private ProdottoInterface prodottoDaModificare;
 
     @FXML
     private TextField nomeTextField, prezzoTextField, disponibilitaTextField, URLimmagineTextField;
@@ -56,8 +56,8 @@ public class ModificaProdotto implements Initializable, JavaFXController {
         URLimmagineTextField.setText(this.prodottoDaModificare.getURLImmagine());
     }
 
-    private Prodotto getProdotto(String ID) {
-        for (Prodotto p : GestoreRicerche.getInstance().getProdotti()) {
+    private ProdottoInterface getProdotto(String ID) {
+        for (ProdottoInterface p : GestoreRicerche.getInstance().getProdotti()) {
             if (p.getID().equals(ID)) {
                 return p;
             }

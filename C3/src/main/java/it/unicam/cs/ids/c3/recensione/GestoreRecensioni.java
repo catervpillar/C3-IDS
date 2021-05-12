@@ -21,12 +21,12 @@ public final class GestoreRecensioni {
     }
 
     public void creaRecensione(String titolo, String testo, String IDCliente, String IDCommerciante, String IDProdotto, VotoRecensioni votoRecensioni) throws SQLException {
-        Recensione recensione = new Recensione(titolo, testo, IDCliente, IDCommerciante, IDProdotto, votoRecensioni);
+        RecensioneInterface recensione = new Recensione(titolo, testo, IDCliente, IDCommerciante, IDProdotto, votoRecensioni);
         SerializerAggiunta.getInstance().serializzaRecensione(recensione);
     }
 
     public void modificaRecensione(String titolo, String testo, VotoRecensioni votoRecensioni, String IDRecensione) throws SQLException {
-        Recensione recensione = GestoreRicerche.getInstance().getRecensioni().stream().filter(r -> r.getID().equals(IDRecensione)).collect(Collectors.toList()).get(0);
+        RecensioneInterface recensione = GestoreRicerche.getInstance().getRecensioni().stream().filter(r -> r.getID().equals(IDRecensione)).collect(Collectors.toList()).get(0);
         recensione.setTesto(testo);
         recensione.setTitolo(titolo);
         recensione.setVotoRecensioni(votoRecensioni);

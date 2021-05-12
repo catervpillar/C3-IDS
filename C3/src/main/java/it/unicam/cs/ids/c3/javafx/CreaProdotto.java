@@ -1,7 +1,7 @@
-package it.unicam.cs.ids.c3.javafx.commerciante;
+package it.unicam.cs.ids.c3.javafx;
 
-import it.unicam.cs.ids.c3.javafx.JavaFXController;
 import it.unicam.cs.ids.c3.utenti.commerciante.ControllerCommerciante;
+import it.unicam.cs.ids.c3.view.ICommerciante;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;

@@ -1,14 +1,22 @@
 package it.unicam.cs.ids.c3.database;
 
 import it.unicam.cs.ids.c3.prodotto.Prodotto;
+import it.unicam.cs.ids.c3.prodotto.ProdottoInterface;
 import it.unicam.cs.ids.c3.promozione.Promozione;
+import it.unicam.cs.ids.c3.promozione.PromozioneInterface;
 import it.unicam.cs.ids.c3.recensione.Recensione;
+import it.unicam.cs.ids.c3.recensione.RecensioneInterface;
 import it.unicam.cs.ids.c3.ritiro.Ritiro;
+import it.unicam.cs.ids.c3.ritiro.RitiroInterface;
 import it.unicam.cs.ids.c3.ritiro.StatoTracking;
 import it.unicam.cs.ids.c3.utenti.cliente.Cliente;
+import it.unicam.cs.ids.c3.utenti.cliente.ClienteInterface;
 import it.unicam.cs.ids.c3.utenti.commerciante.Commerciante;
+import it.unicam.cs.ids.c3.utenti.commerciante.CommercianteInterface;
 import it.unicam.cs.ids.c3.utenti.corriere.Corriere;
+import it.unicam.cs.ids.c3.utenti.corriere.CorriereInterface;
 import it.unicam.cs.ids.c3.utenti.puntoRitiro.PuntoRitiro;
+import it.unicam.cs.ids.c3.utenti.puntoRitiro.PuntoRitiroInterface;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -27,7 +35,7 @@ public class SerializerModifica {
         return instance;
     }
 
-    public void modificaProdotto(Prodotto prodotto) throws SQLException {
+    public void modificaProdotto(ProdottoInterface prodotto) throws SQLException {
         String sql = "UPDATE prodotto SET nome = ?, prezzo = ?, quantita = ?, commerciante_ID = ?, URL_immagine = ? WHERE ID = ?;";
 
         PreparedStatement preparedStatement = DBManager.getInstance().getPreparedStatement(sql);
@@ -41,7 +49,7 @@ public class SerializerModifica {
         DBManager.getInstance().disconnect(preparedStatement);
     }
 
-    public void modificaCliente(Cliente cliente) throws SQLException {
+    public void modificaCliente(ClienteInterface cliente) throws SQLException {
         String sql = "UPDATE cliente SET nome = ?, cognome = ?, username = ?, password = ?, indirizzo = ?, email = ?, telefono = ? WHERE ID = ?;";
 
         PreparedStatement preparedStatement = DBManager.getInstance().getPreparedStatement(sql);
@@ -57,7 +65,7 @@ public class SerializerModifica {
         DBManager.getInstance().disconnect(preparedStatement);
     }
 
-    public void modificaCommerciante(Commerciante commerciante) throws SQLException {
+    public void modificaCommerciante(CommercianteInterface commerciante) throws SQLException {
         String sql = "UPDATE commerciante SET username = ?, password = ?, indirizzo = ?, email = ?, telefono = ?, ragioneSociale = ? WHERE ID = ?;";
 
         PreparedStatement preparedStatement = DBManager.getInstance().getPreparedStatement(sql);
@@ -72,7 +80,7 @@ public class SerializerModifica {
         DBManager.getInstance().disconnect(preparedStatement);
     }
 
-    public void modificaCorriere(Corriere corriere) throws SQLException {
+    public void modificaCorriere(CorriereInterface corriere) throws SQLException {
         String sql = "UPDATE corriere SET username = ?, password = ?, telefono = ?, email = ?, indirizzo = ?, ragioneSociale = ?, stato = ? WHERE ID = ?;";
 
         PreparedStatement preparedStatement = DBManager.getInstance().getPreparedStatement(sql);
@@ -88,7 +96,7 @@ public class SerializerModifica {
         DBManager.getInstance().disconnect(preparedStatement);
     }
 
-    public void modificaPuntoRitiro(PuntoRitiro puntoRitiro) throws SQLException {
+    public void modificaPuntoRitiro(PuntoRitiroInterface puntoRitiro) throws SQLException {
         String sql = "UPDATE punto_ritiro SET username = ?, password = ?, email = ?, indirizzo = ?, telefono = ?, ragione_sociale = ? WHERE ID = ?;";
 
         PreparedStatement preparedStatement = DBManager.getInstance().getPreparedStatement(sql);
@@ -103,7 +111,7 @@ public class SerializerModifica {
         DBManager.getInstance().disconnect(preparedStatement);
     }
 
-    public void modificaPromozione(Promozione promozione) throws SQLException {
+    public void modificaPromozione(PromozioneInterface promozione) throws SQLException {
         String sql = "UPDATE promozione SET nome = ?, descrizione = ?, data_inizio = ?, data_scadenza = ?, commerciante_ID = ? WHERE ID = ?;";
 
         PreparedStatement preparedStatement = DBManager.getInstance().getPreparedStatement(sql);
@@ -117,7 +125,7 @@ public class SerializerModifica {
         DBManager.getInstance().disconnect(preparedStatement);
     }
 
-    public void modificaRecensione(Recensione recensione) throws SQLException {
+    public void modificaRecensione(RecensioneInterface recensione) throws SQLException {
         String sql = "UPDATE recensione SET titolo = ?, testo = ?, voto_recensione = ?, prodottoInVendita_ID = ?, commerciante_ID = ?, cliente_ID = ? WHERE ID = ?;";
 
         PreparedStatement preparedStatement = DBManager.getInstance().getPreparedStatement(sql);
@@ -132,7 +140,7 @@ public class SerializerModifica {
         DBManager.getInstance().disconnect(preparedStatement);
     }
 
-    public void modificaRitiro(Ritiro ritiro) throws SQLException {
+    public void modificaRitiro(RitiroInterface ritiro) throws SQLException {
         String sql = "UPDATE ritiro SET data_consegna = ?, ritirato = ?, stato_tracking = ? WHERE ID = ?;";
 
         PreparedStatement preparedStatement = DBManager.getInstance().getPreparedStatement(sql);

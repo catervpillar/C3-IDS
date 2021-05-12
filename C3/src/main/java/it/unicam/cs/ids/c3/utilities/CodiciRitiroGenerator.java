@@ -7,6 +7,9 @@ public final class CodiciRitiroGenerator {
     private static CodiciRitiroGenerator instance;
     private final List<String> codici = new ArrayList<>();
 
+    private CodiciRitiroGenerator() {
+    }
+
     public static CodiciRitiroGenerator getInstance() {
         if (instance == null)
             instance = new CodiciRitiroGenerator();

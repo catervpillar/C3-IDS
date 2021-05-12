@@ -38,7 +38,7 @@ class ControllerCorriereTest {
         ControllerCorriere.getInstance().creaCorriere("username", "password", "email@gmail.com", "ragSoc");
         ResultSet resultSet = DBManager.getInstance().executeQuery("select * from corriere where username ='username' AND password='password'");
 
-        Corriere corriere = Deserializer.getInstance().deserializzaCorrieri(resultSet).get(0);
+        CorriereInterface corriere = Deserializer.getInstance().deserializzaCorrieri(resultSet).get(0);
         assertNotNull(corriere);
         SerializerElimina.getInstance().eliminaCorriere(corriere.getID());
     }
@@ -48,13 +48,13 @@ class ControllerCorriereTest {
         ControllerCorriere.getInstance().creaCorriere("username", "password", "email@gmail.com", "nome");
         assertTrue(ControllerCorriere.getInstance().loginCorriere("username", "password"));
         ResultSet resultSet = DBManager.getInstance().executeQuery("select * from corriere where username ='username' AND password='password'");
-        Corriere corriere = Deserializer.getInstance().deserializzaCorrieri(resultSet).get(0);
+        CorriereInterface corriere = Deserializer.getInstance().deserializzaCorrieri(resultSet).get(0);
         SerializerElimina.getInstance().eliminaCorriere(corriere.getID());
     }
 
     @Test
     void modificaCorriere() throws SQLException {
-        Corriere corriere = new Corriere("id123456", "usern", "pass", "mail@alice.it", "ragSoc");
+        CorriereInterface corriere = new Corriere("id123456", "usern", "pass", "mail@alice.it", "ragSoc");
         ControllerCorriere.getInstance().setCorriere(corriere);
         ControllerCorriere.getInstance().modificaCorriere("usern", "pwd", "mail@alice.it", "ragSoc", "0733666666", "via prova 2", StatoCorriere.DISPONIBILE);
         assertEquals("pwd", ControllerCorriere.getInstance().getCorriere().getPassword());
@@ -77,5 +77,4 @@ class ControllerCorriereTest {
         ControllerCorriere.getInstance().logout();
         assertNull(ControllerCorriere.getInstance().getCorriere());
     }
-
 }

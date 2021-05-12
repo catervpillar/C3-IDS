@@ -1,17 +1,15 @@
-package it.unicam.cs.ids.c3.javafx.cliente;
+package it.unicam.cs.ids.c3.view;
 
-import it.unicam.cs.ids.c3.javafx.IUtente;
 import it.unicam.cs.ids.c3.javafx.JavaFXController;
 import it.unicam.cs.ids.c3.javafx.LoginC3Controller;
 import it.unicam.cs.ids.c3.javafx.Utils;
-import it.unicam.cs.ids.c3.prodotto.Prodotto;
-import it.unicam.cs.ids.c3.promozione.Promozione;
-import it.unicam.cs.ids.c3.recensione.Recensione;
+import it.unicam.cs.ids.c3.javafx.CreaRecensione;
+import it.unicam.cs.ids.c3.prodotto.ProdottoInterface;
+import it.unicam.cs.ids.c3.promozione.PromozioneInterface;
+import it.unicam.cs.ids.c3.recensione.RecensioneInterface;
 import it.unicam.cs.ids.c3.recensione.VotoRecensioni;
-import it.unicam.cs.ids.c3.ritiro.Ritiro;
+import it.unicam.cs.ids.c3.ritiro.RitiroInterface;
 import it.unicam.cs.ids.c3.utenti.cliente.ControllerCliente;
-import javafx.animation.FadeTransition;
-import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -22,7 +20,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -151,7 +148,7 @@ public class ICliente implements Initializable, JavaFXController, IUtente {
     @FXML
     public void aggiornaListaProdotti() throws SQLException {
         prodottiAccordion.getPanes().clear();
-        List<Prodotto> listaProdotti = ControllerCliente.getInstance().getProdotti(ricercaProdottoTextField.getText());
+        List<ProdottoInterface> listaProdotti = ControllerCliente.getInstance().getProdotti(ricercaProdottoTextField.getText());
         listaProdotti.forEach(prodotto -> {
             prodottiAccordion.getPanes().add(new TitledPane(prodotto.getNome(), Utils.getInstance().getProdottoAnchorPane(prodotto)));
         });
@@ -169,7 +166,7 @@ public class ICliente implements Initializable, JavaFXController, IUtente {
 
     public void aggiornaListaRitiri() throws SQLException {
         ritiriAccordion.getPanes().clear();
-        List<Ritiro> listaRitiri = ControllerCliente.getInstance().getRitiri();
+        List<RitiroInterface> listaRitiri = ControllerCliente.getInstance().getRitiri();
         listaRitiri.forEach(ritiro -> {
             ritiriAccordion.getPanes().add(new TitledPane(ritiro.getID() + " " + ritiro.getDestinazione(),
                     Utils.getInstance().getRitiroAnchorPaneCliente(ritiro)));
@@ -190,7 +187,7 @@ public class ICliente implements Initializable, JavaFXController, IUtente {
 
     public void aggiornaListaPromozioni() throws SQLException {
         promozioniAccordion.getPanes().clear();
-        List<Promozione> listaPromozioni = ControllerCliente.getInstance().getPromozioni();
+        List<PromozioneInterface> listaPromozioni = ControllerCliente.getInstance().getPromozioni();
         listaPromozioni.forEach(promo -> promozioniAccordion.getPanes().add(new TitledPane(promo.getNome(),
                 Utils.getInstance().getPromozioneAnchorPane(promo))));
         if (promozioniAccordion.getPanes().isEmpty())
@@ -209,7 +206,7 @@ public class ICliente implements Initializable, JavaFXController, IUtente {
 
     public void aggiornaListaRecensioni() throws SQLException {
         recensioniAccordion.getPanes().clear();
-        List<Recensione> listaRecensioni = ControllerCliente.getInstance().getRecensioni();
+        List<RecensioneInterface> listaRecensioni = ControllerCliente.getInstance().getRecensioni();
         listaRecensioni.forEach(r -> recensioniAccordion.getPanes().add(new TitledPane(r.getTitolo(),
                 Utils.getInstance().getRecensioneAnchorPane(r))));
         if (recensioniAccordion.getPanes().isEmpty())
@@ -329,6 +326,5 @@ public class ICliente implements Initializable, JavaFXController, IUtente {
         nascondiTutto();
         mostraTransition(impostazioniPane);
     }
-
 }
 

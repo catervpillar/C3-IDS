@@ -20,13 +20,13 @@ public final class GestorePromozioni {
     }
 
     public void creaPromozione(String nome, String IDCommerciante, List<String> listaIDProdotti, String descrizione, GregorianCalendar dataInizio, GregorianCalendar dataScadenza) throws SQLException {
-        Promozione promozione = new Promozione(nome, IDCommerciante, descrizione, dataInizio, dataScadenza);
+        PromozioneInterface promozione = new Promozione(nome, IDCommerciante, descrizione, dataInizio, dataScadenza);
         promozione.getListaIDProdotti().addAll(listaIDProdotti);
         SerializerAggiunta.getInstance().serializzaPromozione(promozione);
     }
 
     public void modificaPromozione(String IDPromozione, String IDCommerciante, String nome, String descrizione, GregorianCalendar dataInizio, GregorianCalendar dataScadenza) throws SQLException {
-        Promozione promozione = new Promozione(IDPromozione, nome, IDCommerciante, descrizione, dataInizio, dataScadenza);
+        PromozioneInterface promozione = new Promozione(IDPromozione, nome, IDCommerciante, descrizione, dataInizio, dataScadenza);
         SerializerModifica.getInstance().modificaPromozione(promozione);
     }
 

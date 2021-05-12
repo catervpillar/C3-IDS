@@ -1,4 +1,4 @@
-package it.unicam.cs.ids.c3.javafx;
+package it.unicam.cs.ids.c3.view;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;

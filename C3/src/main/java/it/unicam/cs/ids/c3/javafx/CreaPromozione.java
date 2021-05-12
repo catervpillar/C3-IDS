@@ -1,9 +1,9 @@
-package it.unicam.cs.ids.c3.javafx.commerciante;
+package it.unicam.cs.ids.c3.javafx;
 
-import it.unicam.cs.ids.c3.javafx.JavaFXController;
+import it.unicam.cs.ids.c3.prodotto.ProdottoInterface;
 import it.unicam.cs.ids.c3.utenti.commerciante.ControllerCommerciante;
-import it.unicam.cs.ids.c3.prodotto.Prodotto;
 import it.unicam.cs.ids.c3.utilities.Controllore;
+import it.unicam.cs.ids.c3.view.ICommerciante;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -31,17 +31,17 @@ public class CreaPromozione implements Initializable, JavaFXController {
     private Button creaButton, annullaButton;
 
     @FXML
-    private TableView<Prodotto> prodottiTableView;
+    private TableView<ProdottoInterface> prodottiTableView;
     @FXML
-    private TableColumn<Prodotto, CheckBox> colonnaCheckBox;
+    private TableColumn<ProdottoInterface, CheckBox> colonnaCheckBox;
     @FXML
-    private TableColumn<Prodotto, String> colonnaID;
+    private TableColumn<ProdottoInterface, String> colonnaID;
     @FXML
-    private TableColumn<Prodotto, String> colonnaNome;
+    private TableColumn<ProdottoInterface, String> colonnaNome;
     @FXML
-    private TableColumn<Prodotto, String> colonnaPrezzo;
+    private TableColumn<ProdottoInterface, String> colonnaPrezzo;
     @FXML
-    private TableColumn<Prodotto, String> colonnaQuantita;
+    private TableColumn<ProdottoInterface, String> colonnaQuantita;
 
     private CreaPromozione() {
     }

@@ -1,23 +1,27 @@
 package it.unicam.cs.ids.c3.prodotto;
 
 public interface ProdottoInterface {
-     String getNome();
+    String getID();
 
-     void setNome(String nome);
+    void setID(String ID);
 
-     String getIDCommerciante();
+    String getNome();
 
-     void setIDCommerciante(String IDCommerciante);
+    void setNome(String nome);
 
-     double getPrezzo();
+    String getIDCommerciante();
 
-     void setPrezzo(double prezzo);
+    void setIDCommerciante(String IDCommerciante);
 
-     int getQuantita();
+    double getPrezzo();
 
-     void setQuantita(int quantita);
+    void setPrezzo(double prezzo);
 
-     String getURLImmagine();
+    int getQuantita();
 
-     void setURLImmagine(String URLImmagine);
+    void setQuantita(int quantita);
+
+    String getURLImmagine();
+
+    void setURLImmagine(String URLImmagine);
 }

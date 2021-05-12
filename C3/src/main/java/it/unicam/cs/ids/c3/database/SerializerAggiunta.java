@@ -2,12 +2,19 @@ package it.unicam.cs.ids.c3.database;
 
 import it.unicam.cs.ids.c3.prodotto.Prodotto;
 import it.unicam.cs.ids.c3.promozione.Promozione;
+import it.unicam.cs.ids.c3.promozione.PromozioneInterface;
 import it.unicam.cs.ids.c3.recensione.Recensione;
+import it.unicam.cs.ids.c3.recensione.RecensioneInterface;
 import it.unicam.cs.ids.c3.ritiro.Ritiro;
+import it.unicam.cs.ids.c3.ritiro.RitiroInterface;
 import it.unicam.cs.ids.c3.utenti.cliente.Cliente;
+import it.unicam.cs.ids.c3.utenti.cliente.ClienteInterface;
 import it.unicam.cs.ids.c3.utenti.commerciante.Commerciante;
+import it.unicam.cs.ids.c3.utenti.commerciante.CommercianteInterface;
 import it.unicam.cs.ids.c3.utenti.corriere.Corriere;
+import it.unicam.cs.ids.c3.utenti.corriere.CorriereInterface;
 import it.unicam.cs.ids.c3.utenti.puntoRitiro.PuntoRitiro;
+import it.unicam.cs.ids.c3.utenti.puntoRitiro.PuntoRitiroInterface;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -38,7 +45,7 @@ public class SerializerAggiunta {
         DBManager.getInstance().disconnect(preparedStatement);
     }
 
-    public void serializzaCliente(Cliente cliente) throws SQLException {
+    public void serializzaCliente(ClienteInterface cliente) throws SQLException {
         String sql = "INSERT INTO cliente VALUES (?,?,?,?,?,?,?,?)";
         PreparedStatement preparedStatement = DBManager.getInstance().getPreparedStatement(sql);
         preparedStatement.setString(1, cliente.getID());
@@ -53,7 +60,7 @@ public class SerializerAggiunta {
         DBManager.getInstance().disconnect(preparedStatement);
     }
 
-    public void serializzaCommerciante(Commerciante commerciante) throws SQLException {
+    public void serializzaCommerciante(CommercianteInterface commerciante) throws SQLException {
         String sql = "INSERT INTO commerciante VALUES (?,?,?,?,?,?,?)";
         PreparedStatement preparedStatement = DBManager.getInstance().getPreparedStatement(sql);
         preparedStatement.setString(1, commerciante.getID());
@@ -67,7 +74,7 @@ public class SerializerAggiunta {
         DBManager.getInstance().disconnect(preparedStatement);
     }
 
-    public void serializzaCorriere(Corriere corriere) throws SQLException {
+    public void serializzaCorriere(CorriereInterface corriere) throws SQLException {
         String sql = "INSERT INTO corriere VALUES (?,?,?,?,?,?,?,?)";
         PreparedStatement preparedStatement = DBManager.getInstance().getPreparedStatement(sql);
         preparedStatement.setString(1, corriere.getID());
@@ -82,7 +89,7 @@ public class SerializerAggiunta {
         DBManager.getInstance().disconnect(preparedStatement);
     }
 
-    public void serializzaPuntoRitiro(PuntoRitiro puntoRitiro) throws SQLException {
+    public void serializzaPuntoRitiro(PuntoRitiroInterface puntoRitiro) throws SQLException {
         String sql = "INSERT INTO punto_ritiro VALUES (?,?,?,?,?,?,?)";
         PreparedStatement preparedStatement = DBManager.getInstance().getPreparedStatement(sql);
         preparedStatement.setString(1, puntoRitiro.getID());
@@ -96,7 +103,7 @@ public class SerializerAggiunta {
         DBManager.getInstance().disconnect(preparedStatement);
     }
 
-    public void serializzaPromozione(Promozione promozione) throws SQLException {
+    public void serializzaPromozione(PromozioneInterface promozione) throws SQLException {
         String sql = "INSERT INTO promozione VALUES (?,?,?,?,?,?)";
         PreparedStatement preparedStatement = DBManager.getInstance().getPreparedStatement(sql);
         preparedStatement.setString(1, promozione.getID());
@@ -119,7 +126,7 @@ public class SerializerAggiunta {
         }
     }
 
-    public void serializzaRecensione(Recensione recensione) throws SQLException {
+    public void serializzaRecensione(RecensioneInterface recensione) throws SQLException {
         String sql = "INSERT INTO recensione VALUES (?,?,?,?,?,?,?)";
         PreparedStatement preparedStatement = DBManager.getInstance().getPreparedStatement(sql);
         preparedStatement.setString(1, recensione.getID());
@@ -133,7 +140,7 @@ public class SerializerAggiunta {
         DBManager.getInstance().disconnect(preparedStatement);
     }
 
-    public void serializzaRitiro(Ritiro ritiro) throws SQLException {
+    public void serializzaRitiro(RitiroInterface ritiro) throws SQLException {
         String sql = "INSERT INTO ritiro VALUES (?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement preparedStatement = DBManager.getInstance().getPreparedStatement(sql);
         preparedStatement.setString(1, ritiro.getID());

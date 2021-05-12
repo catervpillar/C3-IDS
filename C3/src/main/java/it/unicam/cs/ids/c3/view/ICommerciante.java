@@ -1,23 +1,23 @@
-package it.unicam.cs.ids.c3.javafx.commerciante;
+package it.unicam.cs.ids.c3.view;
 
-import it.unicam.cs.ids.c3.javafx.IUtente;
 import it.unicam.cs.ids.c3.javafx.JavaFXController;
 import it.unicam.cs.ids.c3.javafx.LoginC3Controller;
 import it.unicam.cs.ids.c3.javafx.Utils;
+import it.unicam.cs.ids.c3.javafx.CreaProdotto;
+import it.unicam.cs.ids.c3.javafx.CreaPromozione;
+import it.unicam.cs.ids.c3.javafx.ModificaProdotto;
+import it.unicam.cs.ids.c3.javafx.PrenotaRitiro;
+import it.unicam.cs.ids.c3.prodotto.ProdottoInterface;
+import it.unicam.cs.ids.c3.promozione.PromozioneInterface;
+import it.unicam.cs.ids.c3.ritiro.RitiroInterface;
 import it.unicam.cs.ids.c3.utenti.commerciante.ControllerCommerciante;
-import it.unicam.cs.ids.c3.prodotto.Prodotto;
-import it.unicam.cs.ids.c3.promozione.Promozione;
-import it.unicam.cs.ids.c3.ritiro.Ritiro;
 import it.unicam.cs.ids.c3.utilities.Controllore;
-import javafx.animation.FadeTransition;
-import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -166,7 +166,7 @@ public class ICommerciante implements Initializable, JavaFXController, IUtente {
 
     public void aggiornaListaProdotti() throws SQLException {
         prodottiAccordion.getPanes().clear();
-        List<Prodotto> listaProdotti = ControllerCommerciante.getInstance().getProdotti();
+        List<ProdottoInterface> listaProdotti = ControllerCommerciante.getInstance().getProdotti();
         listaProdotti.forEach(prodotto -> {
             prodottiAccordion.getPanes().add(new TitledPane(prodotto.getNome(), Utils.getInstance().getProdottoAnchorPane(prodotto)));
         });
@@ -205,7 +205,7 @@ public class ICommerciante implements Initializable, JavaFXController, IUtente {
 
     public void aggiornaListaRitiri() throws SQLException {
         ritiriAccordion.getPanes().clear();
-        List<Ritiro> listaRitiri = ControllerCommerciante.getInstance().getRitiri();
+        List<RitiroInterface> listaRitiri = ControllerCommerciante.getInstance().getRitiri();
         listaRitiri.forEach(ritiro -> {
             ritiriAccordion.getPanes().add(new TitledPane(ritiro.getID() + " " + ritiro.getDestinazione(),
                     Utils.getInstance().getRitiroAnchorPaneCliente(ritiro)));
@@ -280,7 +280,7 @@ public class ICommerciante implements Initializable, JavaFXController, IUtente {
 
     public void aggiornaListaPromozioni() throws SQLException {
         promozioniAccordion.getPanes().clear();
-        List<Promozione> listaPromozioni = ControllerCommerciante.getInstance().getPromozioni();
+        List<PromozioneInterface> listaPromozioni = ControllerCommerciante.getInstance().getPromozioni();
         listaPromozioni.forEach(promo -> promozioniAccordion.getPanes().add(new TitledPane(promo.getNome(),
                 Utils.getInstance().getPromozioneAnchorPane(promo))));
         if (promozioniAccordion.getPanes().isEmpty())

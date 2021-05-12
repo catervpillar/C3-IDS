@@ -4,6 +4,10 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 public interface PromozioneInterface {
+     String getID();
+
+     void setID(String ID);
+
      String getIDCommerciante();
 
      void setIDCommerciante(String IDCommerciante);

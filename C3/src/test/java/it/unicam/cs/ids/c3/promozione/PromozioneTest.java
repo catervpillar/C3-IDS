@@ -1,12 +1,14 @@
 package it.unicam.cs.ids.c3.promozione;
 
 import it.unicam.cs.ids.c3.prodotto.Prodotto;
+import it.unicam.cs.ids.c3.prodotto.ProdottoInterface;
 import it.unicam.cs.ids.c3.recensione.Recensione;
 import it.unicam.cs.ids.c3.recensione.VotoRecensioni;
 import it.unicam.cs.ids.c3.ritiro.Ritiro;
 import it.unicam.cs.ids.c3.ritiro.TipoConsegna;
 import it.unicam.cs.ids.c3.utenti.cliente.Cliente;
 import it.unicam.cs.ids.c3.utenti.commerciante.Commerciante;
+import it.unicam.cs.ids.c3.utenti.commerciante.CommercianteInterface;
 import it.unicam.cs.ids.c3.utenti.corriere.Corriere;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,9 +20,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PromozioneTest {
 
-    private Commerciante commerciante;
+    private CommercianteInterface commerciante;
     private Promozione promozione;
-    private Prodotto prodotto;
+    private ProdottoInterface prodotto;
     GregorianCalendar dataInizio, dataScadenza;
 
     @BeforeEach
@@ -100,5 +102,4 @@ class PromozioneTest {
         assertEquals(data, promozione.getDataScadenza());
 
     }
-
 }
