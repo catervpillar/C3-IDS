@@ -25,18 +25,37 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
+/**
+ * Questa classe e' un singleton ed ha la responsabilita' di deserializzare i record ottenuti dall'esecuzione
+ * di query nel database.
+ */
 public class Deserializer {
     private static Deserializer instance;
 
+    /**
+     * Costruttore privato usato solamente all'interno di questa classe.
+     */
     private Deserializer() {
     }
 
+    /**
+     * Metodo getter per l'attributo instance. Se instance è nulla, viene inizializzata.
+     *
+     * @return l'attributo instance.
+     */
     public static Deserializer getInstance() {
         if (Objects.isNull(instance))
             instance = new Deserializer();
         return instance;
     }
 
+    /**
+     * Ritorna una lista di prodotti deserializzati a partire da un {@link ResultSet}.
+     *
+     * @param resultSet - Il risultato della query.
+     * @return la lista dei {@link Prodotto} deserializzati.
+     * @throws SQLException in caso di problemi col database.
+     */
     public List<Prodotto> deserializzaProdotti(ResultSet resultSet) throws SQLException {
         List<Prodotto> listaProdotti = new ArrayList<>();
 
@@ -54,6 +73,13 @@ public class Deserializer {
         return listaProdotti;
     }
 
+    /**
+     * Ritorna una lista di ID di prodotti deserializzati a partire da un {@link ResultSet}.
+     *
+     * @param resultSet - Il risultato della query.
+     * @return la lista degli ID di {@link Prodotto} deserializzati.
+     * @throws SQLException in caso di problemi col database.
+     */
     public List<String> deserializzaIDProdotti(ResultSet resultSet) throws SQLException {
         List<String> listaIDProdotti = new ArrayList<>();
 
@@ -65,6 +91,13 @@ public class Deserializer {
         return listaIDProdotti;
     }
 
+    /**
+     * Ritorna un {@link ClienteInterface} deserializzato a partire da un {@link ResultSet}.
+     *
+     * @param resultSet - Il risultato della query.
+     * @return il {@link ClienteInterface} deserializzato.
+     * @throws SQLException in caso di problemi col database.
+     */
     public ClienteInterface deserializzaCliente(ResultSet resultSet) throws SQLException {
         ClienteInterface cliente = new Cliente(resultSet.getString("ID"),
                 resultSet.getString("username"),
@@ -79,6 +112,13 @@ public class Deserializer {
         return cliente;
     }
 
+    /**
+     * Ritorna una lista di commercianti deserializzati a partire da un {@link ResultSet}.
+     *
+     * @param resultSet - Il risultato della query.
+     * @return la lista di commercianti deserializzati.
+     * @throws SQLException in caso di problemi col database.
+     */
     public List<CommercianteInterface> deserializzaCommercianti(ResultSet resultSet) throws SQLException {
         List<CommercianteInterface> listaCommercianti = new ArrayList<>();
         while (resultSet.next()) {
@@ -96,6 +136,13 @@ public class Deserializer {
         return listaCommercianti;
     }
 
+    /**
+     * Ritorna una lista dei corrieri deserializzati a partire da un {@link ResultSet}.
+     *
+     * @param resultSet - Il risultato della query.
+     * @return la lista dei corrieri deserializzati.
+     * @throws SQLException in caso di problemi col database.
+     */
     public List<CorriereInterface> deserializzaCorrieri(ResultSet resultSet) throws SQLException {
         List<CorriereInterface> listaCorriere = new ArrayList<>();
         while (resultSet.next()) {
@@ -114,6 +161,13 @@ public class Deserializer {
         return listaCorriere;
     }
 
+    /**
+     * Ritorna una lista dei punti di ritiro deserializzati a partire da un {@link ResultSet}.
+     *
+     * @param resultSet - Il risultato della query.
+     * @return la lista dei punti di ritiro deserializzati.
+     * @throws SQLException in caso di problemi col database.
+     */
     public List<PuntoRitiroInterface> deserializzaPuntiRitiro(ResultSet resultSet) throws SQLException {
         List<PuntoRitiroInterface> listaPuntiRitiro = new ArrayList<>();
 
@@ -132,7 +186,13 @@ public class Deserializer {
         return listaPuntiRitiro;
     }
 
-
+    /**
+     * Ritorna una lista di promozioni deserializzate a partire da un {@link ResultSet}.
+     *
+     * @param resultSet - Il risultato della query.
+     * @return la lista delle promozioni deserializzate.
+     * @throws SQLException in caso di problemi col database.
+     */
     public List<? extends Promozione> deserializzaPromozioni(ResultSet resultSet) throws SQLException {
         List<Promozione> listaPromozioni = new ArrayList<>();
 
@@ -161,6 +221,13 @@ public class Deserializer {
         return listaPromozioni;
     }
 
+    /**
+     * Ritorna una lista delle recensioni deserializzate a partire da un {@link ResultSet}.
+     *
+     * @param resultSet - Il risultato della query.
+     * @return la lista delle recensioni deserializzate.
+     * @throws SQLException in caso di problemi col database.
+     */
     public List<? extends Recensione> deserializzaRecensioni(ResultSet resultSet) throws SQLException {
         List<Recensione> listaRecensioni = new ArrayList<>();
 
@@ -179,6 +246,13 @@ public class Deserializer {
         return listaRecensioni;
     }
 
+    /**
+     * Ritorna una lista dei ritiri deserializzati a partire da un {@link ResultSet}.
+     *
+     * @param resultSet - Il risultato della query.
+     * @return la lista dei ritiri deserializzati.
+     * @throws SQLException in caso di problemi col database.
+     */
     public List<? extends Ritiro> deserializzaRitiri(ResultSet resultSet) throws SQLException {
         List<Ritiro> listaRitiri = new ArrayList<>();
 
@@ -210,6 +284,14 @@ public class Deserializer {
         return listaRitiri;
     }
 
+    /**
+     * Cerca le credenziali passate in input nel database e ritorna il tipo di utente.
+     *
+     * @param username - L'username da cercare.
+     * @param password - La password da cercare.
+     * @return una stringa con il tipo di utente che intende loggarsi.
+     * @throws SQLException in caso di problemi col database.
+     */
     public String cercaUtente(String username, String password) throws SQLException {
         if (ControllerCliente.getInstance().loginCliente(username, password))
             return "cliente";

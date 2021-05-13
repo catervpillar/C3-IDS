@@ -20,18 +20,35 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Objects;
 
+/**
+ * Questa classe e' un singleton ed ha la responsabilita' di serializzare nuovi oggetti ed aggiungerli nel database.
+ */
 public class SerializerAggiunta {
     private static SerializerAggiunta instance;
 
+    /**
+     * Costruttore privato usato solamente all'interno di questa classe.
+     */
     private SerializerAggiunta() {
     }
 
+    /**
+     * Metodo getter per l'attributo instance. Se instance è nulla, viene inizializzata.
+     *
+     * @return l'attributo instance.
+     */
     public static SerializerAggiunta getInstance() {
         if (Objects.isNull(instance))
             instance = new SerializerAggiunta();
         return instance;
     }
 
+    /**
+     * Serializza un nuovo {@link Prodotto} nel database.
+     *
+     * @param prodotto - Il nuovo {@link Prodotto} da serializzare.
+     * @throws SQLException in caso di problemi col database.
+     */
     public void serializzaProdotto(Prodotto prodotto) throws SQLException {
         String sql = "INSERT INTO prodotto VALUES (?,?,?,?,?,?)";
         PreparedStatement preparedStatement = DBManager.getInstance().getPreparedStatement(sql);
@@ -45,6 +62,12 @@ public class SerializerAggiunta {
         DBManager.getInstance().disconnect(preparedStatement);
     }
 
+    /**
+     * Serializza un nuovo {@link ClienteInterface} nel database.
+     *
+     * @param cliente - Il nuovo {@link ClienteInterface} da serializzare.
+     * @throws SQLException in caso di problemi col database.
+     */
     public void serializzaCliente(ClienteInterface cliente) throws SQLException {
         String sql = "INSERT INTO cliente VALUES (?,?,?,?,?,?,?,?)";
         PreparedStatement preparedStatement = DBManager.getInstance().getPreparedStatement(sql);
@@ -60,6 +83,12 @@ public class SerializerAggiunta {
         DBManager.getInstance().disconnect(preparedStatement);
     }
 
+    /**
+     * Serializza un nuovo {@link CommercianteInterface} nel database.
+     *
+     * @param commerciante - Il nuovo {@link CommercianteInterface} da serializzare.
+     * @throws SQLException in caso di problemi col database.
+     */
     public void serializzaCommerciante(CommercianteInterface commerciante) throws SQLException {
         String sql = "INSERT INTO commerciante VALUES (?,?,?,?,?,?,?)";
         PreparedStatement preparedStatement = DBManager.getInstance().getPreparedStatement(sql);
@@ -74,6 +103,12 @@ public class SerializerAggiunta {
         DBManager.getInstance().disconnect(preparedStatement);
     }
 
+    /**
+     * Serializza un nuovo {@link CorriereInterface} nel database.
+     *
+     * @param corriere - Il nuovo {@link CorriereInterface} da serializzare.
+     * @throws SQLException in caso di problemi col database.
+     */
     public void serializzaCorriere(CorriereInterface corriere) throws SQLException {
         String sql = "INSERT INTO corriere VALUES (?,?,?,?,?,?,?,?)";
         PreparedStatement preparedStatement = DBManager.getInstance().getPreparedStatement(sql);
@@ -89,6 +124,12 @@ public class SerializerAggiunta {
         DBManager.getInstance().disconnect(preparedStatement);
     }
 
+    /**
+     * Serializza un nuovo {@link PuntoRitiroInterface} nel database.
+     *
+     * @param puntoRitiro - Il nuovo {@link PuntoRitiroInterface} da serializzare.
+     * @throws SQLException in caso di problemi col database.
+     */
     public void serializzaPuntoRitiro(PuntoRitiroInterface puntoRitiro) throws SQLException {
         String sql = "INSERT INTO punto_ritiro VALUES (?,?,?,?,?,?,?)";
         PreparedStatement preparedStatement = DBManager.getInstance().getPreparedStatement(sql);
@@ -103,6 +144,12 @@ public class SerializerAggiunta {
         DBManager.getInstance().disconnect(preparedStatement);
     }
 
+    /**
+     * Serializza una nuova {@link PromozioneInterface} nel database.
+     *
+     * @param promozione - La nuova {@link PromozioneInterface} da serializzare.
+     * @throws SQLException in caso di problemi col database.
+     */
     public void serializzaPromozione(PromozioneInterface promozione) throws SQLException {
         String sql = "INSERT INTO promozione VALUES (?,?,?,?,?,?)";
         PreparedStatement preparedStatement = DBManager.getInstance().getPreparedStatement(sql);
@@ -126,6 +173,12 @@ public class SerializerAggiunta {
         }
     }
 
+    /**
+     * Serializza una nuova {@link RecensioneInterface} nel database.
+     *
+     * @param recensione - La nuova {@link RecensioneInterface} da serializzare.
+     * @throws SQLException in caso di problemi col database.
+     */
     public void serializzaRecensione(RecensioneInterface recensione) throws SQLException {
         String sql = "INSERT INTO recensione VALUES (?,?,?,?,?,?,?)";
         PreparedStatement preparedStatement = DBManager.getInstance().getPreparedStatement(sql);
@@ -140,6 +193,12 @@ public class SerializerAggiunta {
         DBManager.getInstance().disconnect(preparedStatement);
     }
 
+    /**
+     * Serializza un nuovo {@link RitiroInterface} nel database.
+     *
+     * @param ritiro - Il nuovo {@link RitiroInterface} da serializzare.
+     * @throws SQLException in caso di problemi col database.
+     */
     public void serializzaRitiro(RitiroInterface ritiro) throws SQLException {
         String sql = "INSERT INTO ritiro VALUES (?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement preparedStatement = DBManager.getInstance().getPreparedStatement(sql);
