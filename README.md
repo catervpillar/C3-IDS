@@ -12,7 +12,7 @@ A tale scopo sono stato identificati quattro attori principali che possono inter
 - Commerciante --> attore che si occupa della vendita della merce. Ha la possibilità di prenotare ritiri, gestire promozioni sui prodotti, gestire i prodotti ecc...
 - Cliente --> colui che effettua acquisti. Ha la possibilità di gestire recensioni, ricercare gli altri attori e prodotti ecc...
 - Corriere --> colui che trasporta la merce a destinazione. Ha la possibilità di gestire il tracking della merce dei ritiri a lui associati.
-- Punto di ritiro --> strutture situate in luoghi strategici preposte a conservare la merce per poi riconsegnarla ai clienti che l'hanno qcquistata.
+- Punto di ritiro --> strutture situate in luoghi strategici preposte a conservare la merce per poi riconsegnarla ai clienti che l'hanno acquistata.
 
 
 Le immagini e le icone utilizzate sono state reperite e scaricate gratuitamente da:
