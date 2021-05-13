@@ -76,9 +76,9 @@ public class Recensione implements HasID, RecensioneInterface {
     }
 
     /**
-     * Metodo setter per l'attributo dell'ID della {@link Promozione}.
+     * Metodo setter per l'attributo dell'ID della {@link Recensione}.
      *
-     * @param ID - il nuovo ID della {@link Promozione}
+     * @param ID - il nuovo ID della {@link Recensione}
      */
     public void setID(String ID) {
         this.ID = ID;
@@ -94,9 +94,9 @@ public class Recensione implements HasID, RecensioneInterface {
     }
 
     /**
-     * Metodo setter per l'attributo del titolo della {@link Promozione}.
+     * Metodo setter per l'attributo del titolo della {@link Recensione}.
      *
-     * @param titolo - il nuovo titolo della {@link Promozione}
+     * @param titolo - il nuovo titolo della {@link Recensione}
      */
     public void setTitolo(String titolo) {
         this.titolo = titolo;
@@ -112,9 +112,9 @@ public class Recensione implements HasID, RecensioneInterface {
     }
 
     /**
-     * Metodo setter per l'attributo del testo della {@link Promozione}.
+     * Metodo setter per l'attributo del testo della {@link Recensione}.
      *
-     * @param testo - il nuovo testo della {@link Promozione}
+     * @param testo - il nuovo testo della {@link Recensione}
      */
     public void setTesto(String testo) {
         this.testo = testo;
@@ -130,9 +130,9 @@ public class Recensione implements HasID, RecensioneInterface {
     }
 
     /**
-     * Metodo setter per l'attributo dell'ID del {@link Cliente} associato {@link Promozione}.
+     * Metodo setter per l'attributo dell'ID del {@link Cliente} associato {@link Recensione}.
      *
-     * @param IDCliente - il nuovo ID del {@link Cliente} associato alla {@link Promozione}
+     * @param IDCliente - il nuovo ID del {@link Cliente} associato alla {@link Recensione}
      */
     public void setIDCliente(String IDCliente) {
         this.IDCliente = IDCliente;
@@ -148,9 +148,9 @@ public class Recensione implements HasID, RecensioneInterface {
     }
 
     /**
-     * Metodo setter per l'attributo dell'ID del {@link Commerciante} associato alla {@link Promozione}.
+     * Metodo setter per l'attributo dell'ID del {@link Commerciante} associato alla {@link Recensione}.
      *
-     * @param IDCommerciante - il nuovo ID del {@link Commerciante} associato alla {@link Promozione}
+     * @param IDCommerciante - il nuovo ID del {@link Commerciante} associato alla {@link Recensione}
      */
     public void setIDCommerciante(String IDCommerciante) {
         this.IDCommerciante = IDCommerciante;
@@ -166,9 +166,9 @@ public class Recensione implements HasID, RecensioneInterface {
     }
 
     /**
-     * Metodo setter per l'attributo dell'ID del {@link Prodotto} associato alla {@link Promozione}.
+     * Metodo setter per l'attributo dell'ID del {@link Prodotto} associato alla {@link Recensione}.
      *
-     * @param IDProdotto - il nuovo ID del {@link Prodotto} associato alla {@link Promozione}
+     * @param IDProdotto - il nuovo ID del {@link Prodotto} associato alla {@link Recensione}
      */
     public void setIDProdotto(String IDProdotto) {
         this.IDProdotto = IDProdotto;
@@ -184,9 +184,9 @@ public class Recensione implements HasID, RecensioneInterface {
     }
 
     /**
-     * Metodo setter per l'attributo della data della {@link Promozione}.
+     * Metodo setter per l'attributo della data della {@link Recensione}.
      *
-     * @param data - la nuova data della {@link Promozione}
+     * @param data - la nuova data della {@link Recensione}
      */
     public void setData(GregorianCalendar data) {
         this.data = data;
@@ -202,9 +202,9 @@ public class Recensione implements HasID, RecensioneInterface {
     }
 
     /**
-     * Metodo setter per l'attributo del voto della {@link Promozione} (da 1 a 5 stelle).
+     * Metodo setter per l'attributo del voto della {@link Recensione} (da 1 a 5 stelle).
      *
-     * @param votoRecensioni - il nuovo voto della {@link Promozione}
+     * @param votoRecensioni - il nuovo voto della {@link Recensione}
      */
     public void setVotoRecensioni(VotoRecensioni votoRecensioni) {
         this.votoRecensioni = votoRecensioni;
@@ -214,7 +214,7 @@ public class Recensione implements HasID, RecensioneInterface {
      * Metodo equals di una {@link Recensione}.
      *
      * @param o - oggetto da confrontare
-     * @return true se le promozioni sono uguali, false altrimenti-
+     * @return true se le promozioni sono uguali, false altrimenti
      */
     @Override
     public boolean equals(Object o) {
